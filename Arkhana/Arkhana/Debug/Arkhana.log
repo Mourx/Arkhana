@@ -1,0 +1,16 @@
+﻿  Arkhana.cpp
+Arkhana.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __thiscall sf::String::String(char const *,class std::locale const &)" (__imp_??0String@sf@@QAE@PBDABVlocale@std@@@Z) referenced in function _main
+Arkhana.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __thiscall sf::String::~String(void)" (__imp_??1String@sf@@QAE@XZ) referenced in function _main
+Arkhana.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __thiscall sf::VideoMode::VideoMode(unsigned int,unsigned int,unsigned int)" (__imp_??0VideoMode@sf@@QAE@III@Z) referenced in function _main
+Arkhana.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __thiscall sf::RenderWindow::RenderWindow(class sf::VideoMode,class sf::String const &,unsigned int,struct sf::ContextSettings const &)" (__imp_??0RenderWindow@sf@@QAE@VVideoMode@1@ABVString@1@IABUContextSettings@1@@Z) referenced in function _main
+Arkhana.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: virtual __thiscall sf::RenderWindow::~RenderWindow(void)" (__imp_??1RenderWindow@sf@@UAE@XZ) referenced in function "public: virtual void * __thiscall sf::RenderWindow::`scalar deleting destructor'(unsigned int)" (??_GRenderWindow@sf@@UAEPAXI@Z)
+Arkhana.obj : error LNK2001: unresolved external symbol "public: virtual class sf::Vector2<unsigned int> __thiscall sf::RenderWindow::getSize(void)const " (?getSize@RenderWindow@sf@@UBE?AV?$Vector2@I@2@XZ)
+Arkhana.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall sf::RenderWindow::onCreate(void)" (?onCreate@RenderWindow@sf@@MAEXXZ)
+Arkhana.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall sf::RenderWindow::onResize(void)" (?onResize@RenderWindow@sf@@MAEXXZ)
+Arkhana.obj : error LNK2001: unresolved external symbol "public: virtual bool __thiscall sf::RenderWindow::setActive(bool)" (?setActive@RenderWindow@sf@@UAE_N_N@Z)
+..\..\SFML-2.5.0\lib\sfml-graphics-d.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+..\..\SFML-2.5.0\lib\sfml-window-d.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+..\..\SFML-2.5.0\lib\sfml-system-d.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+..\..\SFML-2.5.0\lib\sfml-network-d.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+..\..\SFML-2.5.0\lib\sfml-audio-d.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Debug\Arkhana.exe : fatal error LNK1120: 9 unresolved externals
