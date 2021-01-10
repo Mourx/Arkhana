@@ -154,16 +154,24 @@
     <ClCompile Include="Arkhana.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CombatScreen.cpp" />
+    <ClCompile Include="EndTurnButton.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Screen.cpp" />
+    <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="UnitZone.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Card.h" />
     <ClInclude Include="CombatScreen.h" />
+    <ClInclude Include="EndTurnButton.h" />
+    <ClInclude Include="enums.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="headers.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Screen.h" />
+    <ClInclude Include="Unit.h" />
+    <ClInclude Include="UnitZone.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,12 @@
 ﻿  Arkhana.cpp
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Player.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
   CombatScreen.cpp
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Player.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
   Player.cpp
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Player.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Unit.cpp
+  UnitZone.cpp
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\UnitZone.cpp(17,26): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\UnitZone.cpp(25,26): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
   Generating Code...
   Arkhana.vcxproj -> C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\x64\Debug\Arkhana.exe

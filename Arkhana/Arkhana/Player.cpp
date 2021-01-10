@@ -10,11 +10,22 @@ Player::Player(RenderWindow* w) {
 	deck.push_back(new Card(1));
 	deck.push_back(new Card(1));
 	deck.push_back(new Card(1));
-	deck.push_back(new Card(1));
-	deck.push_back(new Card(1));
-	deck.push_back(new Card(1));
-	deck.push_back(new Card(1));
-	deck.push_back(new Card(1));
+
+	// load these based on the selected Arcana
+	physicalArmour = 10;
+	magicArmour = 10;
+	health = 50;
+}
+
+void Player::Update(Time t) {
+
+
+}
+
+void Player::Draw() {
+	for (Card* c : hand) {
+		c->Draw(window);
+	}
 }
 
 void Player::DrawCards(int amount) {
@@ -24,6 +35,14 @@ void Player::DrawCards(int amount) {
 			deck.erase(deck.begin());
 		}
 	}
+}
+
+void Player::UseCard(Card* c) {
+	currentMana -= c->GetCost();
+	discard.push_back(c);
+	hand.erase(remove(hand.begin(), hand.end(), c), hand.end());
+	c->SetHandPos(offScreenPos);
+	SetCardPositions();
 }
 
 void Player::Discard(Card* c) {
@@ -61,12 +80,9 @@ void Player::SetCardPositions() {
 	float cardsAmount = (float)hand.size();
 	float xSpacePerCard = xDiff / (cardsAmount-1);
 	for (int i = 0; i < hand.size(); i++) {
-		hand[i]->SetPosition(Vector2f(cardsStart.x + xSpacePerCard * i,cardsStart.y));
+		hand[i]->SetHandPos(Vector2f(cardsStart.x + xSpacePerCard * i, cardsStart.y));
+		hand[i]->SetPosition(hand[i]->GetHandPos());
+		
 	}
 }
 
-void Player::Draw() {
-	for (Card* c : hand) {
-		c->Draw(window);
-	}
-}

@@ -13,18 +13,33 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Card">
+    <Filter Include="Source Files\GameObject">
+      <UniqueIdentifier>{58e3b3f4-1e49-414a-b013-3801dd0c370b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject\Card">
+      <UniqueIdentifier>{0ccafa8a-1a67-4231-a749-d8d742007281}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject">
+      <UniqueIdentifier>{8f812af8-03d8-4f74-b0c2-7f2d1711967e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject\Card">
       <UniqueIdentifier>{edbae0e9-8fce-40ac-a1ab-fd22efe9f49c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Card">
-      <UniqueIdentifier>{0ccafa8a-1a67-4231-a749-d8d742007281}</UniqueIdentifier>
+    <Filter Include="Header Files\GameObject\UI">
+      <UniqueIdentifier>{830dab2b-e0c0-4438-b293-68e382b75868}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject\UI">
+      <UniqueIdentifier>{7e762170-de36-49e6-9539-c1297c825aca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject\Units">
+      <UniqueIdentifier>{2c671281-5ba3-4be2-aec3-ac32cbb9fbbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject\Units">
+      <UniqueIdentifier>{40492d14-a0db-421e-a255-086696aebafb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Arkhana.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Screen.cpp">
@@ -34,16 +49,25 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Card.cpp">
-      <Filter>Source Files\Card</Filter>
+      <Filter>Source Files\GameObject\Card</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="EndTurnButton.cpp">
+      <Filter>Source Files\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitZone.cpp">
+      <Filter>Source Files\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>Source Files\GameObject\Units</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Screen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -55,6 +79,24 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="enums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EndTurnButton.h">
+      <Filter>Header Files\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitZone.h">
+      <Filter>Header Files\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>Header Files\GameObject\Units</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
