@@ -2,6 +2,6 @@
 
 
 EndTurnButton::EndTurnButton() {
-	texIcon.loadFromFile("Textures/GUI/deck_book.png");
+	texIcon.loadFromFile("Textures/GUI/endTurn.png");
 	icon.setTexture(texIcon);
 }

@@ -155,7 +155,9 @@
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CombatScreen.cpp" />
     <ClCompile Include="EndTurnButton.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Modifier.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Screen.cpp" />
     <ClCompile Include="Unit.cpp" />
@@ -165,9 +167,11 @@
     <ClInclude Include="Card.h" />
     <ClInclude Include="CombatScreen.h" />
     <ClInclude Include="EndTurnButton.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="enums.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="headers.h" />
+    <ClInclude Include="Modifier.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="Unit.h" />

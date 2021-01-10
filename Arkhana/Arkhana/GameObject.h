@@ -13,7 +13,7 @@ public:
 		pos = p;
 		icon.setPosition(pos);
 	}
-	Sprite GetIcon() { return icon; }
+	Sprite* GetIcon() { return &icon; }
 	void SetHover(bool b) { bHover = b; }
 protected:
 	Sprite icon;

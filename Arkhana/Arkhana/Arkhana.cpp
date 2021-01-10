@@ -10,7 +10,7 @@ int main() {
 	CombatScreen* combat = new CombatScreen(window);
 	
 	Screen* currentScreen = new Screen();
-
+	currentScreen = combat;
 	Clock clock;
 	Time elapsed;
 	Event event;
@@ -34,7 +34,8 @@ int main() {
 			
 		}
 		window->clear(Color::Magenta);
-		combat->Draw();
+		currentScreen->Update(elapsed);
+		currentScreen->Draw();
 		window->display();
 	}
 	return 0;

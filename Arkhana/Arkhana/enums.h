@@ -18,8 +18,31 @@ enum COMBAT_TURN {
 	ENEMY = 1
 };
 
-
 enum CARD_TYPE {
-	UNIT,
-	SPELL
+	UNIT = 0,
+	SPELL = 1
+};
+
+enum ZONE_OWNER {
+	Z_PLAYER = 0,
+	Z_ENEMY = 1
+};
+
+enum ZONE_TYPE {
+	Z_ATTACK = 0,
+	Z_BLOCK =1
+};
+
+enum MODIFIER_TYPE {
+	ZONE_MOD = 0,
+	UNIT_MOD = 1,
+	INSTANT_MOD = 2
+};
+
+enum STAT_TYPE {
+	DMG_PHYSICAL,
+	DMG_MAGIC,
+	ARMOUR_PHYSICAL,
+	ARMOUR_MAGIC,
+	HEALTH
 };
