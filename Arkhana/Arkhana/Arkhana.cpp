@@ -1,7 +1,7 @@
 #include "headers.h"
 #include <SFML/Graphics.hpp>
 #include "CombatScreen.h"
-
+#include "UnitList.h"
 using namespace sf;
 using namespace std;
 
@@ -14,7 +14,7 @@ int main() {
 	Clock clock;
 	Time elapsed;
 	Event event;
-
+	BuildUnitLists();
 	while (window->isOpen()) {
 		elapsed = clock.restart();
 		while (window->pollEvent(event))

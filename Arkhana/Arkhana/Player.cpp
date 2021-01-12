@@ -11,8 +11,8 @@ Player::Player(RenderWindow* w) {
 	deck.push_back(new Card(0));
 	deck.push_back(new Card(0));
 	deck.push_back(new Card(1));
-	deck.push_back(new Card(1));
-	deck.push_back(new Card(1));
+	deck.push_back(new Card(2));
+	deck.push_back(new Card(2));
 
 	// load these based on the selected Arcana
 	physicalArmour = 10;

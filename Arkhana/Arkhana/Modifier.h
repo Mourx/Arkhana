@@ -4,7 +4,7 @@
 class Modifier
 {
 public:
-	Modifier();
+	Modifier(int ID);
 	~Modifier() {}
 	int GetValue() { return value; }
 	int GetMultiplier() { return multiplier; }
@@ -12,7 +12,7 @@ public:
 protected:
 	int value = 1;
 	int multiplier = 0;
-	STAT_TYPE sType = DMG_PHYSICAL;
-	MODIFIER_TYPE mType = ZONE_MOD;
+	STAT_TYPE sType = STAT_TYPE::DMG_PHYSICAL;
+	MODIFIER_TYPE mType = MODIFIER_TYPE::ZONE_MOD;
 };
 

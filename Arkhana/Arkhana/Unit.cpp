@@ -1,8 +1,18 @@
 #include "Unit.h"
 
 using namespace std;
-Unit::Unit() {
-	texIcon.loadFromFile("Textures/Units/gnome.png");
+Unit::Unit(int ID) {
+	if (ID == 0) {
+		texIcon.loadFromFile("Textures/Units/gnome.png");
+		basePhys = 1;
+		baseMag = 0;
+	}
+	else {
+		texIcon.loadFromFile("Textures/Units/shrine.png");
+		basePhys = 0;
+		baseMag = 1;
+		auraMods.push_back(new Modifier(1));
+	}
 	icon.setTexture(texIcon);
 	
 	texBackground.loadFromFile("Textures/GUI/unitBackground.png");
@@ -20,8 +30,7 @@ Unit::Unit() {
 	txtMag.setFillColor(Color::Blue);
 
 
-	basePhys = 1;
-	baseMag = 0;
+	
 	physicalPower = basePhys;
 	magicPower = baseMag;
 
@@ -39,6 +48,25 @@ void Unit::UpdateStrings() {
 	tR = txtMag.getLocalBounds();
 	txtMag.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
 	txtMag.setPosition(pos + txtMagPos);
+}
+
+void Unit::UpdateStats() {
+	physicalPower = basePhys;
+	magicPower = baseMag;
+	for (Modifier* mod : unitMods) {
+		ModifyStat(mod->GetStat(), mod->GetValue(), mod->GetMultiplier());
+	}
+	physicalPower += zoneBonusPhys;
+	physicalPower += zoneMultiplierPhys;
+
+	magicPower += zoneBonusMag;
+	magicPower += zoneMultiplierMag;
+	UpdateStrings();
+}
+
+void Unit::AddModifier(Modifier* mod) {
+	unitMods.push_back(mod);
+	UpdateStats();
 }
 
 void Unit::SetPosition(Vector2f p) {
@@ -59,13 +87,13 @@ void Unit::Draw(RenderWindow* w) {
 
 void Unit::ModifyStat(STAT_TYPE stat, int value, int multiplier) {
 	switch (stat) {
-	case DMG_PHYSICAL:
+	case STAT_TYPE::DMG_PHYSICAL:
 		physicalPower += value;
 		if (multiplier != 0) {
 			physicalPower *= multiplier;
 		}
 		break;
-	case DMG_MAGIC:
+	case STAT_TYPE::DMG_MAGIC:
 		magicPower += value;
 		if (multiplier != 0) {
 			magicPower *= multiplier;

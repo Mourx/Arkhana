@@ -110,5 +110,8 @@
     <ClInclude Include="Modifier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="UnitList.h">
+      <Filter>Header Files\GameObject\Units</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

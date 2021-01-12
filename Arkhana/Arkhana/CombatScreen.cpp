@@ -95,10 +95,10 @@ void CombatScreen::Update(Time t) {
 		// Maybe implement an AI controller? thinking how to emulate a player
 		switch (eCard->GetType()) {
 		case UNIT:
-			eCard->Play(enemy->GetZones()[Z_ATTACK]);
+			eCard->Play(enemy->GetZones()[(int)ZONE_TYPE::Z_ATTACK]);
 			break;
 		case SPELL:
-			eCard->Play(enemy->GetZones()[Z_ATTACK]);
+			eCard->Play(enemy->GetZones()[(int)ZONE_TYPE::Z_ATTACK]);
 			break;
 		}
 		SetNextEnemyMove();
@@ -125,11 +125,11 @@ void CombatScreen::CalculateCombat() {
 	vector<UnitZone*> eZones = enemy->GetZones();
 	vector<UnitZone*> pZones = player->GetZones();
 
-	UnitZone* eAttack = eZones[Z_ATTACK];
-	UnitZone* eBlock = eZones[Z_BLOCK];
+	UnitZone* eAttack = eZones[(int)ZONE_TYPE::Z_ATTACK];
+	UnitZone* eBlock = eZones[(int)(ZONE_TYPE::Z_BLOCK)];
 
-	UnitZone* pAttack = pZones[Z_ATTACK];
-	UnitZone* pBlock = pZones[Z_BLOCK];
+	UnitZone* pAttack = pZones[(int)ZONE_TYPE::Z_ATTACK];
+	UnitZone* pBlock = pZones[(int)ZONE_TYPE::Z_BLOCK];
 	int enemyPhysDamage = pAttack->GetCombinedPhysicalPower() - eBlock->GetCombinedPhysicalPower();
 	int enemyMagDamage = pAttack->GetCombinedMagicPower() - eBlock->GetCombinedMagicPower();
 

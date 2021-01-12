@@ -2,7 +2,6 @@
 #include "GameObject.h"
 #include "enums.h"
 #include "UnitZone.h"
-#include "Modifier.h"
 
 class Card :
     public GameObject
@@ -25,6 +24,7 @@ protected:
     Modifier* modifier;
     MODIFIER_TYPE mod;
     int cost = 0;
+    int unitID;
 
     CARD_TYPE type = UNIT;
     ZONE_OWNER zOwner = Z_PLAYER;

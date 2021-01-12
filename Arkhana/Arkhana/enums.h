@@ -28,21 +28,27 @@ enum ZONE_OWNER {
 	Z_ENEMY = 1
 };
 
-enum ZONE_TYPE {
+enum class ZONE_TYPE {
 	Z_ATTACK = 0,
 	Z_BLOCK =1
 };
 
-enum MODIFIER_TYPE {
+enum class MODIFIER_TYPE {
 	ZONE_MOD = 0,
 	UNIT_MOD = 1,
-	INSTANT_MOD = 2
+	INSTANT_MOD = 2,
+	AURA_MOD
 };
 
-enum STAT_TYPE {
+enum class STAT_TYPE {
 	DMG_PHYSICAL,
 	DMG_MAGIC,
 	ARMOUR_PHYSICAL,
 	ARMOUR_MAGIC,
 	HEALTH
+};
+
+enum UNIT_NAME {
+	GOBLIN,
+	SHRINE
 };

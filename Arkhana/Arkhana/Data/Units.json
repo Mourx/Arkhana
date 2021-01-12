@@ -1,0 +1,16 @@
+{
+  "Units": {
+    "Goblin":{
+      "name":"Goblin",
+      "physPower":1,
+      "magPower":0,
+      "filePath":"Textures/Units/goblin.png"
+    },
+    "Shrine":{
+      "name":"Shrine",
+      "physPower":0,
+      "magPower":1,
+      "filePath":"Textures/Units/shrine.png"
+    }
+  }
+}
