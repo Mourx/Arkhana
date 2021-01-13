@@ -1,0 +1,38 @@
+{
+  "Cards": {
+    "Goblin": {
+      "name": "Goblin",
+      "cost": 1,
+      "cardType": "UNIT",
+      "unit": "Goblin",
+      "filePath": "Textures/Cards/Empress/1_Goblin.png",
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Rage": {
+      "name": "Rage",
+      "cost": 2,
+      "cardType": "SPELL",
+      "modifiers": { "modifier": "rage_modifier" },
+      "filePath": "Textures/Cards/Empress/2_Rage.png",
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Shrine": {
+      "name": "Shrine",
+      "cost": 3,
+      "cardType": "UNIT",
+      "unit": "Shrine",
+      "modifiers": { "modifier": "aura_empress_shrine" },
+      "filePath": "Textures/Cards/Empress/3_Shrine.png",
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Ogre": {
+      "name": "Ogre",
+      "cost": 4,
+      "cardType": "UNIT",
+      "unit": "Ogre",
+      "modifiers": { "modifier": "ogre_modifier" },
+      "filePath": "Textures/Cards/Empress/1_Goblin.png",
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    }
+  }
+}

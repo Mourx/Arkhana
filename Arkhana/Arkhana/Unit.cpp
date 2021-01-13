@@ -1,17 +1,21 @@
 #include "Unit.h"
 
 using namespace std;
-Unit::Unit(int ID) {
-	if (ID == 0) {
-		texIcon.loadFromFile("Textures/Units/gnome.png");
-		basePhys = 1;
-		baseMag = 0;
-	}
-	else {
-		texIcon.loadFromFile("Textures/Units/shrine.png");
-		basePhys = 0;
-		baseMag = 1;
-		auraMods.push_back(new Modifier(1));
+Unit::Unit(UnitData data,vector<Modifier*> mods) {
+	basePhys = data.physPower;
+	baseMag = data.magPower;
+	name = data.name;
+	texIcon.loadFromFile(data.filePath);
+	for (Modifier* mod : mods) {
+		switch (mod->GetModType()) {
+		case MODIFIER_TYPE::UNIT_MOD:
+			unitMods.push_back(mod);
+			break;
+		case MODIFIER_TYPE::AURA_MOD:
+			auraMods.push_back(mod);
+			break;
+		}
+		
 	}
 	icon.setTexture(texIcon);
 	

@@ -72,6 +72,9 @@
     <ClCompile Include="Modifier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DataBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Screen.h">
@@ -110,8 +113,8 @@
     <ClInclude Include="Modifier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UnitList.h">
-      <Filter>Header Files\GameObject\Units</Filter>
+    <ClInclude Include="DataBase.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

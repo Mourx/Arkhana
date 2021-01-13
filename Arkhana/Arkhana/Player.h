@@ -4,6 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include <random>
+#include "DataBase.h"
 
 using namespace std;
 
@@ -11,7 +12,7 @@ class Player
 {
 public:
 	Player();
-	Player(RenderWindow* w);
+	Player(RenderWindow* w,DataBase* data);
 	~Player() {}
 	void Setup();
 	void Draw();
@@ -33,7 +34,7 @@ protected:
 	void SetCardPositions();
 	virtual void InitSprites();
 	virtual void UpdateStrings();
-
+	DataBase* database;
 	vector<Card*> deck;
 	vector<Card*> hand;
 	vector<Card*> discard;

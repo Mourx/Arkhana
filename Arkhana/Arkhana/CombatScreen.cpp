@@ -1,12 +1,13 @@
 #include "CombatScreen.h"
 
 
-CombatScreen::CombatScreen(RenderWindow* w) {
+CombatScreen::CombatScreen(RenderWindow* w,DataBase* data) {
+	database = data;
 	window = w;
-	player = new Player(w);
+	player = new Player(w,database);
 	player->Setup();
 
-	enemy = new Enemy(w);
+	enemy = new Enemy(w,database);
 
 	endTurn = new EndTurnButton();
 	endTurn->SetPosition(endTurnPos);

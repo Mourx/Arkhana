@@ -6,7 +6,7 @@ class Enemy :
     public Player
 {
 public:
-    Enemy(RenderWindow* w);
+    Enemy(RenderWindow* w,DataBase* data);
     ~Enemy(){}
     Card* GetNext() { return deck[cardIndex]; }
     Card* PlayNext();

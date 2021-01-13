@@ -1,20 +1,24 @@
 #include "headers.h"
 #include <SFML/Graphics.hpp>
 #include "CombatScreen.h"
-#include "UnitList.h"
+#include "DataBase.h"
 using namespace sf;
 using namespace std;
 
 int main() {
+	DataBase* database = new DataBase();
+	database->BuildModifierLists();
+	database->BuildCardLists();
+	database->BuildUnitLists();
 	RenderWindow* window = new RenderWindow(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Card games or something idk");
-	CombatScreen* combat = new CombatScreen(window);
+	CombatScreen* combat = new CombatScreen(window, database);
 	
 	Screen* currentScreen = new Screen();
 	currentScreen = combat;
 	Clock clock;
 	Time elapsed;
 	Event event;
-	BuildUnitLists();
+
 	while (window->isOpen()) {
 		elapsed = clock.restart();
 		while (window->pollEvent(event))

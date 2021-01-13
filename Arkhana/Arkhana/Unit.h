@@ -9,7 +9,7 @@ class Unit :
     public GameObject
 {
 public:
-    Unit(int ID);
+    Unit(UnitData data, vector<Modifier*> mods);
     ~Unit() {}
     float GetPPower() { return physicalPower; }
     float GetMPower() { return magicPower; }

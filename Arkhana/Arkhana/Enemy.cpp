@@ -1,7 +1,8 @@
 #include "Enemy.h"
 
 
-Enemy::Enemy(RenderWindow* w){
+Enemy::Enemy(RenderWindow* w,DataBase* data){
+	database = data;
 	window = w;
 
 	attackZonePos = Vector2f(800, 0);
@@ -29,8 +30,8 @@ Enemy::Enemy(RenderWindow* w){
 	txtMagArmPos = Vector2f(1500, 200);
 	txtHealthPos = Vector2f(1500, 115);
 
-	deck.push_back(new Card(1));
-	deck.push_back(new Card(0));
+	deck.push_back(new Card(*database->CardList["Goblin"],database));
+	deck.push_back(new Card(*database->CardList["Rage"],database));
 
 	InitSprites();
 	UpdateStrings();

@@ -4,15 +4,15 @@ Player::Player() {
 
 }
 
-Player::Player(RenderWindow* w) {
-
+Player::Player(RenderWindow* w, DataBase* data) {
+	database = data;
 	window = w;
 
-	deck.push_back(new Card(0));
-	deck.push_back(new Card(0));
-	deck.push_back(new Card(1));
-	deck.push_back(new Card(2));
-	deck.push_back(new Card(2));
+	deck.push_back(new Card(*database->CardList["Goblin"],database));
+	deck.push_back(new Card(*database->CardList["Goblin"], database));
+	deck.push_back(new Card(*database->CardList["Ogre"], database));
+	deck.push_back(new Card(*database->CardList["Rage"], database));
+	deck.push_back(new Card(*database->CardList["Shrine"], database));
 
 	// load these based on the selected Arcana
 	physicalArmour = 10;

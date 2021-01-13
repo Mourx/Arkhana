@@ -9,7 +9,7 @@ class CombatScreen :
     public Screen
 {
 public:
-    CombatScreen(RenderWindow* w);
+    CombatScreen(RenderWindow* w, DataBase* data);
     ~CombatScreen() {}
     void Draw();
     void Update(Time t);
@@ -19,7 +19,7 @@ public:
 protected:
     Player* player;
     Enemy* enemy;
-
+    DataBase* database;
     void AdvanceTurn();
     void CalculateCombat();
     void SetNextEnemyMove();

@@ -1,0 +1,28 @@
+{
+  "Modifiers": {
+    "aura_empress_shrine": {
+      "name": "Empress Shrine Aura",
+      "value": 2,
+      "multiplier": 0,
+      "sType": "DMG_PHSICAL",
+      "mType": "AURA_MOD",
+      "text": "Friendly units gain +VALUE\n physical attack"
+    },
+    "rage_modifier": {
+      "name": "Rage Modifier",
+      "value": 2,
+      "multiplier": 0,
+      "sType": "DMG_PHSICAL",
+      "mType": "ZONE_MOD",
+      "text": "Friendly units gain +VALUE\n physical attack"
+    },
+    "ogre_modifier": {
+      "name": "Ogre Modifier",
+      "value": 4,
+      "multiplier": 0,
+      "sType": "DMG_PHSICAL",
+      "mType": "UNIT_MOD",
+      "text": "Ogre gains +VALUE\n physical attack"
+    }
+  }
+}
