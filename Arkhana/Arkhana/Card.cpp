@@ -9,6 +9,9 @@ Card::Card(CardData data,DataBase* dataB) {
 	type = data.cType;
 	icon.setTexture(texIcon);
 	unit = data.unit;
+	cost = data.cost;
+	texCost.loadFromFile(database->costIcons[cost]);
+	costIcon.setTexture(texCost);
 	SetPosition(Vector2f(300, 300));
 	if (type == UNIT) {
 		pPow = database->UnitList[name]->physPower;
@@ -27,6 +30,8 @@ Card::Card(CardData data,DataBase* dataB) {
 
 	texPhys.loadFromFile("Textures/Cards/sword.png");
 	physIcon.setTexture(texPhys);
+
+
 	
 	FloatRect tR = physIcon.getLocalBounds();
 	physIcon.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
@@ -37,6 +42,11 @@ Card::Card(CardData data,DataBase* dataB) {
 	tR = magIcon.getLocalBounds();
 	magIcon.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
 	magIcon.setPosition(pos + magPos);
+
+	tR = costIcon.getLocalBounds();
+	costIcon.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
+	costIcon.setPosition(pos + costIconPos);
+
 
 	txtPhys.setFont(font);
 	txtPhys.setCharacterSize(20);
@@ -56,6 +66,12 @@ Card::Card(CardData data,DataBase* dataB) {
 	txtDesc.setString(txt);
 	txtDesc.setCharacterSize(12);
 	txtDesc.setFillColor(Color::Black);
+
+	if (type == UNIT) {
+		texCardArt.loadFromFile(database->UnitList[unit]->filePath);
+	}
+	cardArt.setTexture(texCardArt);
+	
 	
 }
 
@@ -102,8 +118,10 @@ void Card::Draw(RenderWindow* w) {
 		w->draw(physIcon);
 		w->draw(magIcon);
 	}
+	w->draw(costIcon);
 	w->draw(txtName);
 	w->draw(txtDesc);
+	w->draw(cardArt);
 }
 
 void Card::SetPosition(Vector2f p) {
@@ -130,5 +148,10 @@ void Card::SetPosition(Vector2f p) {
 	tR = txtDesc.getLocalBounds();
 	txtDesc.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
 	txtDesc.setPosition(pos + txtDescPos);
-	
+
+	tR = costIcon.getLocalBounds();
+	costIcon.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
+	costIcon.setPosition(pos + costIconPos);
+
+	cardArt.setPosition(pos + cardArtPos);
 }

@@ -45,12 +45,13 @@ public:
 };
 
 
+
 class DataBase {
 public:
 	map<string, UnitData*> UnitList;
 	map<string, CardData*> CardList;
 	map<string, ModifierData*> modList;
-
+	map<int, string> costIcons;
 
 	MODIFIER_TYPE GetModEnum(string data) {
 		if (data == "ZONE_MOD") return MODIFIER_TYPE::ZONE_MOD;
@@ -79,5 +80,6 @@ public:
 	void BuildUnitLists();
 	void BuildModifierLists();
 	void BuildCardLists();
+	void Init();
 };
 

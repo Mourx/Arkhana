@@ -16,6 +16,7 @@ public:
     void MouseMoved(Vector2f mousePos);
     void MouseClicked(Vector2f mousePos);
     void MouseReleased(Vector2f mousePos);
+    COMBAT_RESULT GetResult() { return result; }
 protected:
     Player* player;
     Enemy* enemy;
@@ -23,6 +24,7 @@ protected:
     void AdvanceTurn();
     void CalculateCombat();
     void SetNextEnemyMove();
+    void CheckDeaths();
 
     float iconOffsetX = 0;
     float iconOffsetY = 0;
@@ -36,5 +38,10 @@ protected:
 
     Vector2f eNextPos = Vector2f(25, 125);
     COMBAT_TURN currentTurn = PLAYER;
+
+    COMBAT_RESULT result = ONGOING;
+
+    Sprite background;
+    Texture texBackground;
 };
 

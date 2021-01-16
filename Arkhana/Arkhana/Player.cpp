@@ -7,7 +7,7 @@ Player::Player() {
 Player::Player(RenderWindow* w, DataBase* data) {
 	database = data;
 	window = w;
-
+	
 	deck.push_back(new Card(*database->CardList["Goblin"],database));
 	deck.push_back(new Card(*database->CardList["Goblin"], database));
 	deck.push_back(new Card(*database->CardList["Ogre"], database));
@@ -80,14 +80,42 @@ void Player::InitSprites() {
 	txtMagArm.setPosition(txtMagArmPos);
 	txtMagArm.setFont(font);
 
-	
+	txtCurMana.setFont(font);
+	txtCurMana.setCharacterSize(60);
+	txtCurMana.setFillColor(Color::Cyan);
+
+	txtDeckSize.setFont(font);
+	txtDiscardSize.setPosition(txtDiscardSizePos);
+	txtBurntSize.setPosition(txtBurntSizePos);
+
+	txtDiscardSize.setFont(font);
+	txtBurntSize.setFont(font);
 }
 
 void Player::UpdateStrings() {
 	txtHealth.setString(to_string(health));
 	txtPhysArm.setString(to_string(physicalArmour));
 	txtMagArm.setString(to_string(magicArmour));
+	txtCurMana.setString(to_string(currentMana));
+	txtDeckSize.setString(to_string(deck.size()));
+	txtDiscardSize.setString(to_string(discard.size()));
+	txtBurntSize.setString(to_string(burnt.size()));
 
+	FloatRect tR = txtCurMana.getLocalBounds();
+	txtCurMana.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
+	txtCurMana.setPosition(txtCurManaPos);
+
+	tR = txtDeckSize.getLocalBounds();
+	txtDeckSize.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
+	txtDeckSize.setPosition(txtDeckSizePos);
+
+	tR = txtDiscardSize.getLocalBounds();
+	txtDiscardSize.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
+	txtDiscardSize.setPosition(txtDiscardSizePos);
+
+	tR = txtBurntSize.getLocalBounds();
+	txtBurntSize.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
+	txtBurntSize.setPosition(txtBurntSizePos);
 }
 
 void Player::Update(Time t) {
@@ -108,9 +136,18 @@ void Player::Draw() {
 	window->draw(txtHealth);
 	window->draw(txtPhysArm);
 	window->draw(txtMagArm);
+	window->draw(txtCurMana);
+	window->draw(txtDeckSize);
+	window->draw(txtDiscardSize);
+	window->draw(txtBurntSize);
 	for (Card* c : hand) {
 		c->Draw(window);
 	}
+}
+
+void Player::NewTurnUpkeep() {
+	DrawCards(1);
+	currentMana = maxMana;
 }
 
 void Player::DrawCards(int amount) {
@@ -119,7 +156,19 @@ void Player::DrawCards(int amount) {
 			hand.push_back(deck[0]);
 			deck.erase(deck.begin());
 		}
+		else if (deck.size() == 0) {
+			for (Card* c : discard) {
+				deck.push_back(c);
+			}
+			discard.clear();
+			random_shuffle(deck.begin(), deck.end());
+			if (deck.size() >= 1) {
+				hand.push_back(deck[0]);
+				deck.erase(deck.begin());
+			}
+		}
 	}
+	SetCardPositions();
 }
 
 void Player::UseCard(Card* c) {
@@ -127,6 +176,7 @@ void Player::UseCard(Card* c) {
 	discard.push_back(c);
 	hand.erase(remove(hand.begin(), hand.end(), c), hand.end());
 	c->SetHandPos(offScreenPos);
+	UpdateStrings();
 	SetCardPositions();
 }
 
@@ -185,6 +235,9 @@ void Player::DamagePhys(int damage) {
 		health -= (damage - physicalArmour);
 		physicalArmour = 0;
 	}
+	if (health <= 0) {
+		health = 0;
+	}
 }
 
 
@@ -195,5 +248,8 @@ void Player::DamageMag(int damage) {
 	else {
 		health -= (damage - magicArmour);
 		magicArmour = 0;
+	}
+	if (health <= 0) {
+		health = 0;
 	}
 }

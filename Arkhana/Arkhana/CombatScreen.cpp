@@ -9,12 +9,17 @@ CombatScreen::CombatScreen(RenderWindow* w,DataBase* data) {
 
 	enemy = new Enemy(w,database);
 
+	texBackground.loadFromFile("Textures/GUI/combatBackground.png");
+	background.setTexture(texBackground);
+	background.setPosition(0, 0);
+
 	endTurn = new EndTurnButton();
 	endTurn->SetPosition(endTurnPos);
 	SetNextEnemyMove();
 }
 
 void CombatScreen::Draw() {
+	window->draw(background);
 	endTurn->Draw(window);
 	enemy->Draw();
 	player->Draw();
@@ -44,8 +49,7 @@ void CombatScreen::MouseReleased(Vector2f mousePos) {
 					player->selectedCard->Play(selectedZone);
 
 					player->UseCard(player->selectedCard);
-					//CheckDeaths();
-					//UpdateStrings();
+
 				}
 			}
 			else {
@@ -104,6 +108,7 @@ void CombatScreen::Update(Time t) {
 		}
 		SetNextEnemyMove();
 		currentTurn = PLAYER;
+		player->NewTurnUpkeep();
 	}
 	player->Update(t);
 	enemy->Update(t);
@@ -118,9 +123,30 @@ void CombatScreen::SetNextEnemyMove() {
 void CombatScreen::AdvanceTurn() {
 
 	CalculateCombat();
+	CheckDeaths();
 	currentTurn = ENEMY;
 }
 
+void CombatScreen::CheckDeaths() {
+	if(player->GetHealth()<= 0){
+		result = LOSS;
+	}
+	else if (enemy->GetHealth() <= 0) {
+		result = WIN;
+	}
+
+	switch (result) {
+	case LOSS:
+		nextScreen = GAME_OVER;
+		break;
+	case WIN:
+		nextScreen = REWARD_SCREEN;
+		break;
+	case ONGOING:
+		nextScreen = NONE;
+		break;
+	}
+}
 
 void CombatScreen::CalculateCombat() {
 	vector<UnitZone*> eZones = enemy->GetZones();

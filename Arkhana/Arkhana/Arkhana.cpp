@@ -1,18 +1,18 @@
 #include "headers.h"
 #include <SFML/Graphics.hpp>
 #include "CombatScreen.h"
+#include "MainMenuScreen.h"
+#include "RewardScreen.h"
 #include "DataBase.h"
 using namespace sf;
 using namespace std;
 
 int main() {
 	DataBase* database = new DataBase();
-	database->BuildModifierLists();
-	database->BuildCardLists();
-	database->BuildUnitLists();
+	database->Init();
 	RenderWindow* window = new RenderWindow(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Card games or something idk");
 	CombatScreen* combat = new CombatScreen(window, database);
-	
+	MainMenuScreen* mainMenu = new MainMenuScreen(window);
 	Screen* currentScreen = new Screen();
 	currentScreen = combat;
 	Clock clock;
@@ -21,6 +21,24 @@ int main() {
 
 	while (window->isOpen()) {
 		elapsed = clock.restart();
+		currentScreen->Update(elapsed);
+		switch (currentScreen->GetNextScreen()) {
+		case MAIN_MENU:
+			currentScreen = new MainMenuScreen(window);
+
+			break;
+		case COMBAT_SCREEN:
+			break;
+		case GAME_OVER:
+			break;
+		case REWARD_SCREEN:
+			currentScreen = new RewardScreen(window);
+			break;
+		case PATH_SCREEN:
+			break;
+		case NONE:
+			break;
+		}
 		while (window->pollEvent(event))
 		{
 			if (event.type == Event::Closed) window->close();
@@ -38,7 +56,7 @@ int main() {
 			
 		}
 		window->clear(Color::Magenta);
-		currentScreen->Update(elapsed);
+
 		currentScreen->Draw();
 		window->display();
 	}

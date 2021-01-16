@@ -19,11 +19,12 @@ public:
 	void Update(Time t);
 
 	vector<Card*> GetHand() { return hand; }
-
+	int GetHealth() { return health; }
 	Card* selectedCard = NULL;
 	void UseCard(Card* c);
 	int GetCurrentMana() { return currentMana; }
 	vector<UnitZone*> GetZones() { return zones; }
+	void NewTurnUpkeep();
 	void DamagePhys(int damage);
 	void DamageMag(int damage);
 protected:
@@ -53,8 +54,11 @@ protected:
 	int physicalArmour = 20;
 	int health = 10;
 
-	int maxMana = 0;
-	int currentMana = 0;
+	int maxMana = 3;
+	int currentMana = 3;
+
+	Text txtCurMana;
+	Vector2f txtCurManaPos = Vector2f(100,700);
 
 	UnitZone* attackZone;
 	UnitZone* blockZone;
@@ -62,6 +66,15 @@ protected:
 	Sprite deckIcon;
 	Texture texDeck;
 	Vector2f deckPos = Vector2f(50, 780);
+
+	Text txtDeckSize;
+	Vector2f txtDeckSizePos = Vector2f(100, 830);
+
+	Text txtDiscardSize;
+	Vector2f txtDiscardSizePos = Vector2f(1490, 840);
+
+	Text txtBurntSize;
+	Vector2f txtBurntSizePos = Vector2f(1490, 750);
 
 	Sprite gemIcon;
 	Texture texGem;

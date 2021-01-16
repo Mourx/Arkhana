@@ -27,7 +27,7 @@ void DataBase::BuildModifierLists() {
 		string str(ListItr->name.GetString());
 		modList.insert({ str,mod });
 	}
-	
+	fclose(fp);
 }
 
 void DataBase::BuildCardLists() {
@@ -65,7 +65,7 @@ void DataBase::BuildCardLists() {
 		card->shaderPath = ListItr->value["shaderPath"].GetString();
 		CardList.insert({ name,card });
 	}
-
+	fclose(fp);
 }
 
 void DataBase::BuildUnitLists() {
@@ -88,4 +88,15 @@ void DataBase::BuildUnitLists() {
 
 		UnitList.insert({ name,unit });
 	}
+	fclose(fp);
+}
+
+void DataBase::Init() {
+	for (int i = 1; i < 11; i++) {
+		string path = "Textures/GUI/ManaCosts/" + to_string(i) + ".png";
+		costIcons.insert({ i,path });
+	}
+	BuildModifierLists();
+	BuildCardLists();
+	BuildUnitLists();
 }

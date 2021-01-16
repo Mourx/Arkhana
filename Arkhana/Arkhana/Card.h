@@ -40,9 +40,6 @@ protected:
     Sprite costIcon;
     Texture texCost;
 
-    Sprite cardArt;
-    Texture texArt;
-
     Text txtName;
     Text txtPhys;
     Text txtMag;
@@ -57,6 +54,9 @@ protected:
     Sprite magIcon;
     Texture texMag;
 
+    Sprite cardArt;
+    Texture texCardArt;
+
     Font font;
 
     Vector2f txtNamePos = Vector2f(75, 20);
@@ -65,6 +65,8 @@ protected:
     Vector2f txtMagPos = Vector2f(70, 175);
     Vector2f magPos = Vector2f(90, 175);
     Vector2f txtDescPos = Vector2f(75, 140);
+    Vector2f cardArtPos = Vector2f(55, 50);
+    Vector2f costIconPos = Vector2f(15, 15);
 
 
     CARD_TYPE type = UNIT;

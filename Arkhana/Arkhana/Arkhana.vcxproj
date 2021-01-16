@@ -157,8 +157,10 @@
     <ClCompile Include="EndTurnButton.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="MainMenuScreen.cpp" />
     <ClCompile Include="Modifier.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RewardScreen.cpp" />
     <ClCompile Include="Screen.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="DataBase.cpp" />
@@ -172,8 +174,10 @@
     <ClInclude Include="enums.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="headers.h" />
+    <ClInclude Include="MainMenuScreen.h" />
     <ClInclude Include="Modifier.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="RewardScreen.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="DataBase.h" />

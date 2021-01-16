@@ -6,7 +6,7 @@
       "multiplier": 0,
       "sType": "DMG_PHSICAL",
       "mType": "AURA_MOD",
-      "text": "Friendly units gain +VALUE\n physical attack"
+      "text": "AURA: Friendly units gain\n\t +VALUE physical attack"
     },
     "rage_modifier": {
       "name": "Rage Modifier",
@@ -14,7 +14,7 @@
       "multiplier": 0,
       "sType": "DMG_PHSICAL",
       "mType": "ZONE_MOD",
-      "text": "Friendly units gain +VALUE\n physical attack"
+      "text": "Friendly units gain +VALUE\n\t physical attack"
     },
     "ogre_modifier": {
       "name": "Ogre Modifier",
