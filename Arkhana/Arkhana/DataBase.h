@@ -44,6 +44,13 @@ public:
 	MODIFIER_TYPE mType;
 };
 
+struct EncounterData {
+public:
+	string name;
+	vector<string> decklist;
+	vector<string> startingPlay;
+	int level;
+};
 
 
 class DataBase {
@@ -51,6 +58,8 @@ public:
 	map<string, UnitData*> UnitList;
 	map<string, CardData*> CardList;
 	map<string, ModifierData*> modList;
+	vector<map<string, EncounterData*>> encounters;
+	vector<vector<string>> encounterNames;
 	map<int, string> costIcons;
 
 	MODIFIER_TYPE GetModEnum(string data) {
@@ -80,6 +89,7 @@ public:
 	void BuildUnitLists();
 	void BuildModifierLists();
 	void BuildCardLists();
+	void BuildEncounterLists();
 	void Init();
 };
 

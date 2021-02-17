@@ -3,6 +3,7 @@
 #include "CombatScreen.h"
 #include "MainMenuScreen.h"
 #include "RewardScreen.h"
+#include "PathScreen.h"
 #include "DataBase.h"
 using namespace sf;
 using namespace std;
@@ -10,11 +11,16 @@ using namespace std;
 int main() {
 	DataBase* database = new DataBase();
 	database->Init();
+	
 	RenderWindow* window = new RenderWindow(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Card games or something idk");
-	CombatScreen* combat = new CombatScreen(window, database);
+	
+	
+	Player* player = new Player(window, database);
+	//CombatScreen* combat = new CombatScreen(window, database,player,new Encounter(database,0));
 	MainMenuScreen* mainMenu = new MainMenuScreen(window);
+	PathScreen* pathScreen = new PathScreen(window, database, player);
 	Screen* currentScreen = new Screen();
-	currentScreen = combat;
+	currentScreen = new CombatScreen(window, database, player, pathScreen->GetEncounter());
 	Clock clock;
 	Time elapsed;
 	Event event;
@@ -28,13 +34,15 @@ int main() {
 
 			break;
 		case COMBAT_SCREEN:
+			currentScreen = new CombatScreen(window, database, player, pathScreen->GetEncounter());
 			break;
 		case GAME_OVER:
 			break;
 		case REWARD_SCREEN:
-			currentScreen = new RewardScreen(window);
+			currentScreen = new RewardScreen(window,database);
 			break;
 		case PATH_SCREEN:
+			currentScreen = pathScreen;
 			break;
 		case NONE:
 			break;

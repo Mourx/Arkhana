@@ -154,6 +154,7 @@
     <ClCompile Include="Arkhana.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CombatScreen.cpp" />
+    <ClCompile Include="Encounter.cpp" />
     <ClCompile Include="EndTurnButton.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -162,6 +163,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RewardScreen.cpp" />
     <ClCompile Include="Screen.cpp" />
+    <ClCompile Include="PathScreen.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="DataBase.cpp" />
     <ClCompile Include="UnitZone.cpp" />
@@ -169,6 +171,7 @@
   <ItemGroup>
     <ClInclude Include="Card.h" />
     <ClInclude Include="CombatScreen.h" />
+    <ClInclude Include="Encounter.h" />
     <ClInclude Include="EndTurnButton.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="enums.h" />
@@ -179,6 +182,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="RewardScreen.h" />
     <ClInclude Include="Screen.h" />
+    <ClInclude Include="PathScreen.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="DataBase.h" />
     <ClInclude Include="UnitZone.h" />

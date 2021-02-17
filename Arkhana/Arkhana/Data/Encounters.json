@@ -1,0 +1,17 @@
+{
+  "Encounters": {
+    "goblins": {
+      "name": "goblins",
+      "decklist": [ "Goblin", "Rage" ],
+      "startingPlay": [ "Goblin" ],
+      "level": 0
+    },
+    "ogres": {
+      "name": "ogres",
+      "decklist": [ "Ogre", "Goblin" ],
+      "startingPlay": [ "Ogre" ],
+      "level": 1
+    }
+
+  }
+}

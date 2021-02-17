@@ -4,12 +4,13 @@
 #include "Player.h"
 #include "EndTurnButton.h"
 #include "Enemy.h"
+#include "Encounter.h"
 
 class CombatScreen :
     public Screen
 {
 public:
-    CombatScreen(RenderWindow* w, DataBase* data);
+    CombatScreen(RenderWindow* w, DataBase* data,Player* p,Encounter* enc);
     ~CombatScreen() {}
     void Draw();
     void Update(Time t);
@@ -20,6 +21,8 @@ public:
 protected:
     Player* player;
     Enemy* enemy;
+    Encounter* encounter;
+
     DataBase* database;
     void AdvanceTurn();
     void CalculateCombat();

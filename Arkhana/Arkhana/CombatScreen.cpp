@@ -1,10 +1,11 @@
 #include "CombatScreen.h"
 
 
-CombatScreen::CombatScreen(RenderWindow* w,DataBase* data) {
+CombatScreen::CombatScreen(RenderWindow* w,DataBase* data,Player* p,Encounter* enc) {
 	database = data;
 	window = w;
-	player = new Player(w,database);
+	player = p;
+	encounter = enc;
 	player->Setup();
 
 	enemy = new Enemy(w,database);
@@ -140,7 +141,7 @@ void CombatScreen::CheckDeaths() {
 		nextScreen = GAME_OVER;
 		break;
 	case WIN:
-		nextScreen = REWARD_SCREEN;
+		nextScreen = PATH_SCREEN;
 		break;
 	case ONGOING:
 		nextScreen = NONE;

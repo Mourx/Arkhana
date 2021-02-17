@@ -37,15 +37,15 @@
     <Filter Include="Source Files\GameObject\Units">
       <UniqueIdentifier>{40492d14-a0db-421e-a255-086696aebafb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Screen">
+      <UniqueIdentifier>{d96e0691-5ed2-433c-8975-79e2c57693de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Screen">
+      <UniqueIdentifier>{b98697ff-780b-4333-a788-1051aaf8afd7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Arkhana.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Screen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CombatScreen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Card.cpp">
@@ -75,20 +75,26 @@
     <ClCompile Include="DataBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MainMenuScreen.cpp">
+    <ClCompile Include="Encounter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CombatScreen.cpp">
+      <Filter>Source Files\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuScreen.cpp">
+      <Filter>Source Files\Screen</Filter>
+    </ClCompile>
     <ClCompile Include="RewardScreen.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="PathScreen.cpp">
+      <Filter>Source Files\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="Screen.cpp">
+      <Filter>Source Files\Screen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Screen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CombatScreen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -122,11 +128,23 @@
     <ClInclude Include="DataBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MainMenuScreen.h">
+    <ClInclude Include="Encounter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CombatScreen.h">
+      <Filter>Header Files\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuScreen.h">
+      <Filter>Header Files\Screen</Filter>
+    </ClInclude>
     <ClInclude Include="RewardScreen.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="PathScreen.h">
+      <Filter>Header Files\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="Screen.h">
+      <Filter>Header Files\Screen</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

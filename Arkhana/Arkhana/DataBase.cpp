@@ -91,6 +91,44 @@ void DataBase::BuildUnitLists() {
 	fclose(fp);
 }
 
+void DataBase::BuildEncounterLists() {
+	FILE* fp;
+	fopen_s(&fp, "Data/Encounters.json", "rb");
+
+	char readBuffer[16384];
+	FileReadStream is(fp, readBuffer, sizeof(readBuffer));
+
+	Document d;
+	d.ParseStream(is);
+
+	for (int i = 0; i < 10; i++) {
+		map<string, EncounterData*> en;
+		vector<string> names;
+		encounters.push_back(en);
+		encounterNames.push_back(names);
+	}
+
+	for (Value::ConstMemberIterator ListItr = d["Encounters"].MemberBegin(); ListItr != d["Encounters"].MemberEnd(); ListItr++) {
+		string name = ListItr->name.GetString();
+		EncounterData* encounter = new EncounterData();
+		encounter->name = ListItr->value["name"].GetString();
+		rapidjson::GenericArray<true,rapidjson::Value> arr = ListItr->value["decklist"].GetArray();
+		for (int i = 0; i < arr.Size(); i++) {
+			encounter->decklist.push_back(arr[i].GetString());
+		}
+		rapidjson::GenericArray<true, rapidjson::Value> ar = ListItr->value["startingPlay"].GetArray();
+		for (int i = 0; i < ar.Size(); i++) {
+			encounter->startingPlay.push_back(ar[i].GetString());
+		}
+		encounter->level = ListItr->value["level"].GetInt();
+		int level = encounter->level;
+		encounters[level].insert({ name,encounter });
+
+		encounterNames[level].push_back(name);
+	}
+	fclose(fp);
+}
+
 void DataBase::Init() {
 	for (int i = 1; i < 11; i++) {
 		string path = "Textures/GUI/ManaCosts/" + to_string(i) + ".png";
@@ -99,4 +137,5 @@ void DataBase::Init() {
 	BuildModifierLists();
 	BuildCardLists();
 	BuildUnitLists();
+	BuildEncounterLists();
 }

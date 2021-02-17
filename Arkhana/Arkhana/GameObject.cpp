@@ -2,9 +2,16 @@
 
 GameObject::GameObject() {
 
+
+	shaderHover.loadFromFile("Textures/Shaders/hover.vert", Shader::Vertex);
 }
 
 void GameObject::Draw(RenderWindow* w) {
-	w->draw(icon);
+	if (bHover) {
+		w->draw(icon, &shaderHover);
+	}
+	else {
+		w->draw(icon);
+	}
 }
 

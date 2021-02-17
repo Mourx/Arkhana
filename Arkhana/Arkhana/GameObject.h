@@ -19,7 +19,7 @@ protected:
 	Sprite icon;
 	Texture texIcon;
 	Vector2f pos;
-
+	Shader shaderHover;
 	bool bHover = false;
 };
 
