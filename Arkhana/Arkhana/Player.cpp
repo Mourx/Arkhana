@@ -205,6 +205,8 @@ void Player::Setup() {
 	}
 	hand.clear();
 	discard.clear();
+	attackZone->ClearUnits();
+	blockZone->ClearUnits();
 	shuffle(begin(deck), end(deck), random);
 	DrawInitialHand();
 	SetCardPositions();

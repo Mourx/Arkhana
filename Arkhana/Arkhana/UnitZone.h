@@ -18,6 +18,7 @@ public:
     int GetCombinedPhysicalPower();
     int GetCombinedMagicPower();
     void AddUnit(Unit* u);
+    void ClearUnits() { unitList.clear(); }
     ZONE_OWNER GetOwner() { return type; }
     void ModifyUnits(Modifier* mod);
 protected:

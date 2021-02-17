@@ -20,7 +20,7 @@ int main() {
 	MainMenuScreen* mainMenu = new MainMenuScreen(window);
 	PathScreen* pathScreen = new PathScreen(window, database, player);
 	Screen* currentScreen = new Screen();
-	currentScreen = new CombatScreen(window, database, player, pathScreen->GetEncounter());
+	currentScreen = pathScreen;
 	Clock clock;
 	Time elapsed;
 	Event event;
@@ -42,6 +42,7 @@ int main() {
 			currentScreen = new RewardScreen(window,database);
 			break;
 		case PATH_SCREEN:
+			pathScreen->ResetDetails(WIN);
 			currentScreen = pathScreen;
 			break;
 		case NONE:

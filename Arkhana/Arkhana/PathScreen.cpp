@@ -12,6 +12,14 @@ PathScreen::PathScreen(RenderWindow* w, DataBase* db, Player* p) {
 	InitEncounters();
 }
 
+void PathScreen::ResetDetails(COMBAT_RESULT res) {
+	if (res == WIN) {
+		currentEncounter->SetComplete(true);
+	}
+	currentEncounter = NULL;
+	nextScreen = NONE;
+}
+
 void PathScreen::Draw() {
 	window->draw(background);
 	for (Encounter* e : encounters) {
@@ -21,16 +29,38 @@ void PathScreen::Draw() {
 
 void PathScreen::Update(Time t) {
 	player->Update(t);
-	Vector2f mpos = window->mapPixelToCoords(Mouse::getPosition(*window));
+	
+}
+
+void PathScreen::MouseMoved(Vector2f mousePos) {
+	
+	bool bAny = false;
 	for (Encounter* e : encounters) {
-		FloatRect bounds = e->GetIcon()->getGlobalBounds();
-		if (bounds.contains(mpos)) {
-			e->SetHover(true);
-		}
-		else {
-			e->SetHover(false);
+		if (e->GetComplete() == false) {
+			FloatRect bounds = e->GetIcon()->getGlobalBounds();
+			if (bounds.contains(mousePos)) {
+				e->SetHover(true);
+				currentEncounter = e;
+				bAny = true;
+			}
+			else {
+				e->SetHover(false);
+			}
 		}
 	}
+	if (bAny == false) {
+		currentEncounter = NULL;
+	}
+}
+
+void PathScreen::MouseClicked(Vector2f mousePos) {
+	if (currentEncounter != NULL) {
+		nextScreen = COMBAT_SCREEN;
+	}
+}
+
+void PathScreen::MouseReleased(Vector2f mousePos) {
+
 }
 
 void PathScreen::InitEncounters() {

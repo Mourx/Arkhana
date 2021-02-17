@@ -11,6 +11,10 @@ public:
     void Draw();
     void Update(Time t);
     Encounter* GetEncounter() { return currentEncounter; }
+    void MouseMoved(Vector2f mousePos);
+    void MouseClicked(Vector2f mousePos);
+    void MouseReleased(Vector2f mousePos);
+    void ResetDetails(COMBAT_RESULT res);
 protected:
     void InitEncounters();
 
@@ -18,7 +22,7 @@ protected:
     DataBase* database;
     Player* player;
 
-    Encounter* currentEncounter;
+    Encounter* currentEncounter = NULL;
     vector<Encounter*> encounters;
 
     vector<int> encounterAmounts = { 3,2,1 };
