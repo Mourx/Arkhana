@@ -24,9 +24,13 @@ public:
 	void UseCard(Card* c);
 	int GetCurrentMana() { return currentMana; }
 	vector<UnitZone*> GetZones() { return zones; }
-	void NewTurnUpkeep();
+	virtual void NewTurnUpkeep();
 	void DamagePhys(int damage);
-	void DamageMag(int damage);
+	void EndTurnUpkeep();
+	void ResetMana() { currentMana = maxMana; }
+	void AnimateAttack();
+	bool GetAttacking() { return bAttacking; }
+	bool HasAttacked() { return bHasAttacked; }
 protected:
 	void DrawCards(int amount);
 	void Discard(Card* card);
@@ -50,8 +54,8 @@ protected:
 
 	int CARDS_PER_TURN = 5;
 
-	int magicArmour = 30;
-	int physicalArmour = 20;
+	int maxArmour = 20;
+	int armour = maxArmour;
 	int health = 10;
 
 	int maxMana = 3;
@@ -92,13 +96,19 @@ protected:
 	Texture texPhysArm;
 	Vector2f physArmPos = Vector2f(1410, 350);
 
-	Sprite magArmIcon;
-	Texture texMagArm;
-	Vector2f magArmPos = Vector2f(1410, 435);
-
 	Sprite healthIcon;
 	Texture texHealth;
 	Vector2f healthPos = Vector2f(1410, 520);
+
+	float attackDuration = 2;
+	float attackTimer = 0;
+	float attackDirection = -1;
+	bool bAttacking = false;
+	bool bHasAttacked = false;
+
+	float playDuration = 2;
+	float playTimer = 0;
+	bool bPlayingCard = false;
 
 
 	Font font;
@@ -106,12 +116,9 @@ protected:
 
 	Text txtHealth;
 	Text txtPhysArm;
-	Text txtMagArm;
 
 	Vector2f txtHealthPos = Vector2f(1500, 540);
 	Vector2f txtPhysArmPos = Vector2f(1500, 370);
-	Vector2f txtMagArmPos = Vector2f(1500, 455);
-
 
 	Vector2f attackZonePos = Vector2f(200, 350);
 	Vector2f blockZonePos = Vector2f(800, 350);

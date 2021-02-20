@@ -3,7 +3,7 @@
 using namespace std;
 Unit::Unit(UnitData data,vector<Modifier*> mods) {
 	basePhys = data.physPower;
-	baseMag = data.magPower;
+	baseStamina = data.stamina;
 	name = data.name;
 	texIcon.loadFromFile(data.filePath);
 	for (Modifier* mod : mods) {
@@ -36,14 +36,14 @@ Unit::Unit(UnitData data,vector<Modifier*> mods) {
 
 	
 	physicalPower = basePhys;
-	magicPower = baseMag;
+	stamina = baseStamina;
 
 	UpdateStrings();
 }
 
 void Unit::UpdateStrings() {
 	txtPhys.setString(to_string((int)physicalPower));
-	txtMag.setString(to_string((int)magicPower));
+	txtMag.setString(to_string((int)stamina));
 
 	FloatRect tR = txtPhys.getLocalBounds();
 	txtPhys.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
@@ -56,15 +56,15 @@ void Unit::UpdateStrings() {
 
 void Unit::UpdateStats() {
 	physicalPower = basePhys;
-	magicPower = baseMag;
+	stamina = baseStamina;
 	for (Modifier* mod : unitMods) {
 		ModifyStat(mod->GetStat(), mod->GetValue(), mod->GetMultiplier());
 	}
 	physicalPower += zoneBonusPhys;
 	physicalPower += zoneMultiplierPhys;
 
-	magicPower += zoneBonusMag;
-	magicPower += zoneMultiplierMag;
+	stamina += zoneBonusMag;
+	stamina += zoneMultiplierMag;
 	UpdateStrings();
 }
 
@@ -97,10 +97,10 @@ void Unit::ModifyStat(STAT_TYPE stat, int value, int multiplier) {
 			physicalPower *= multiplier;
 		}
 		break;
-	case STAT_TYPE::DMG_MAGIC:
-		magicPower += value;
+	case STAT_TYPE::STAMINA:
+		stamina += value;
 		if (multiplier != 0) {
-			magicPower *= multiplier;
+			stamina *= multiplier;
 		}
 		break;
 	default:
@@ -108,4 +108,8 @@ void Unit::ModifyStat(STAT_TYPE stat, int value, int multiplier) {
 	}
 	
 
+}
+
+void Unit::Move(Vector2f offset) {
+	SetPosition(icon.getPosition() + offset);
 }

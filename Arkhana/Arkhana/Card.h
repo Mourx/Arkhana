@@ -32,7 +32,7 @@ protected:
     int cost = 0;
     int unitID;
 
-    int mPow;
+    int stamina;
     int pPow;
 
     Shader cardShader;

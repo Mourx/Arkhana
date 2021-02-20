@@ -15,8 +15,7 @@ Player::Player(RenderWindow* w, DataBase* data) {
 	deck.push_back(new Card(*database->CardList["Shrine"], database));
 
 	// load these based on the selected Arcana
-	physicalArmour = 10;
-	magicArmour = 10;
+	armour = 10;
 	health = 50;
 
 	attackZone = new UnitZone(0,Z_PLAYER);
@@ -59,11 +58,7 @@ void Player::InitSprites() {
 	physArmIcon.setPosition(physArmPos);
 	physArmIcon.setScale(2, 2);
 
-	texMagArm.loadFromFile("Textures/GUI/armourMagic.png");
-	magArmIcon.setTexture(texMagArm);
-	magArmIcon.setPosition(magArmPos);
-	magArmIcon.setScale(2, 2);
-
+	
 	texHealth.loadFromFile("Textures/GUI/health.png");
 	healthIcon.setTexture(texHealth);
 	healthIcon.setPosition(healthPos);
@@ -71,14 +66,11 @@ void Player::InitSprites() {
 
 	font.loadFromFile("Fonts/Arial/arial.ttf");
 
-	
 	txtHealth.setPosition(txtHealthPos);
 	txtHealth.setFont(font);
 	
 	txtPhysArm.setPosition(txtPhysArmPos);
 	txtPhysArm.setFont(font);
-	txtMagArm.setPosition(txtMagArmPos);
-	txtMagArm.setFont(font);
 
 	txtCurMana.setFont(font);
 	txtCurMana.setCharacterSize(60);
@@ -94,8 +86,7 @@ void Player::InitSprites() {
 
 void Player::UpdateStrings() {
 	txtHealth.setString(to_string(health));
-	txtPhysArm.setString(to_string(physicalArmour));
-	txtMagArm.setString(to_string(magicArmour));
+	txtPhysArm.setString(to_string(armour));
 	txtCurMana.setString(to_string(currentMana));
 	txtDeckSize.setString(to_string(deck.size()));
 	txtDiscardSize.setString(to_string(discard.size()));
@@ -119,8 +110,23 @@ void Player::UpdateStrings() {
 }
 
 void Player::Update(Time t) {
-
-	UpdateStrings();
+	if (bAttacking) {
+		if (attackTimer < attackDuration) {
+			attackTimer += t.asSeconds();
+			for (Unit* u : attackZone->GetUnits()) {
+				float xdir = 0;
+				float ydir = 0.1 * attackDirection;
+				u->Move(Vector2f(xdir, ydir));
+			}
+		}
+		else {
+			attackTimer = 0;
+			bAttacking = false;
+		}
+	}
+	else {
+		UpdateStrings();
+	}
 }
 
 void Player::Draw() {
@@ -131,11 +137,9 @@ void Player::Draw() {
 	window->draw(discardIcon);
 	window->draw(burntIcon);
 	window->draw(physArmIcon);
-	window->draw(magArmIcon);
 	window->draw(healthIcon);
 	window->draw(txtHealth);
 	window->draw(txtPhysArm);
-	window->draw(txtMagArm);
 	window->draw(txtCurMana);
 	window->draw(txtDeckSize);
 	window->draw(txtDiscardSize);
@@ -147,7 +151,21 @@ void Player::Draw() {
 
 void Player::NewTurnUpkeep() {
 	DrawCards(1);
-	currentMana = maxMana;
+	ResetMana();
+	bHasAttacked = false;
+}
+
+void Player::EndTurnUpkeep() {
+	for (Unit* u : attackZone->GetUnits()) {
+		u->AddModifier(new Modifier(*database->modList["eot_stamina"]));
+	}
+	
+	for (Unit* u : blockZone->GetUnits()) {
+		u->AddModifier(new Modifier(*database->modList["eot_stamina"]));
+	}
+
+	attackZone->EndTurnUpkeep();
+	blockZone->EndTurnUpkeep();
 }
 
 void Player::DrawCards(int amount) {
@@ -205,11 +223,13 @@ void Player::Setup() {
 	}
 	hand.clear();
 	discard.clear();
+	armour = maxArmour;
 	attackZone->ClearUnits();
 	blockZone->ClearUnits();
 	shuffle(begin(deck), end(deck), random);
 	DrawInitialHand();
 	SetCardPositions();
+	bHasAttacked = false;
 }
 
 void Player::SetCardPositions() {
@@ -230,28 +250,22 @@ void Player::SetCardPositions() {
 }
 
 void Player::DamagePhys(int damage) {
-	if (physicalArmour >= damage) {
-		physicalArmour -= damage;
+	if (armour >= damage) {
+		armour -= damage;
 	}
 	else {
-		health -= (damage - physicalArmour);
-		physicalArmour = 0;
+		health -= (damage - armour);
+		armour = 0;
 	}
 	if (health <= 0) {
 		health = 0;
 	}
 }
 
-
-void Player::DamageMag(int damage) {
-	if (magicArmour >= damage) {
-		magicArmour -= damage;
+void Player::AnimateAttack() {
+	if (attackZone->GetUnits().size() != 0) {
+		bAttacking = true;
+		attackTimer = 0;
 	}
-	else {
-		health -= (damage - magicArmour);
-		magicArmour = 0;
-	}
-	if (health <= 0) {
-		health = 0;
-	}
+	bHasAttacked = true;
 }

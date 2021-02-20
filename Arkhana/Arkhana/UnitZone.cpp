@@ -28,13 +28,6 @@ int UnitZone::GetCombinedPhysicalPower() {
 	return power;
 }
 
-int UnitZone::GetCombinedMagicPower() {
-	int power = 0;
-	for (Unit* u : unitList) {
-		power += u->GetMPower();
-	}
-	return power;
-}
 
 void UnitZone::AddUnit(Unit* u) {
 	int count = unitList.size();
@@ -45,10 +38,8 @@ void UnitZone::AddUnit(Unit* u) {
 
 void UnitZone::UpdateStatMods() {
 	zoneBonusPhys = 0;
-	zoneBonusMag = 0;
 
 	zoneMultiplierPhys = 0;
-	zoneMultiplierMag = 0;
 
 	for (Unit* u : unitList) {
 		vector<Modifier*> auras = u->GetAuras();
@@ -58,9 +49,8 @@ void UnitZone::UpdateStatMods() {
 				zoneBonusPhys += mod->GetValue();
 				zoneMultiplierPhys += mod->GetMultiplier();
 				break;
-			case STAT_TYPE::DMG_MAGIC:
-				zoneBonusMag += mod->GetValue();
-				zoneMultiplierMag += mod->GetMultiplier();
+			case STAT_TYPE::STAMINA:
+				
 				break;
 			default:
 				break;
@@ -68,7 +58,19 @@ void UnitZone::UpdateStatMods() {
 		}
 	}
 	for (Unit* u : unitList) {
-		u->SetZoneBonuses(zoneBonusPhys, zoneMultiplierPhys, zoneBonusMag, zoneMultiplierMag);
+		u->SetZoneBonuses(zoneBonusPhys, zoneMultiplierPhys);
+	}
+}
+
+void UnitZone::EndTurnUpkeep() {
+	for (int i = 0; i < unitList.size();i++) {
+		if (unitList[i]->GetStamina() <= 0) {
+			unitList.erase(unitList.begin() + i);
+			i--;
+		}
+	}
+	for (int i = 0; i < unitList.size(); i++) {
+		unitList[i]->SetPosition(this->GetIcon()->getPosition() + Vector2f(15 + (i % 10) * 45, 5 + (i / 10) * 70));
 	}
 }
 

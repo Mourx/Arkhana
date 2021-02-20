@@ -1,5 +1,13 @@
 {
   "Modifiers": {
+    "eot_stamina": {
+      "name": "Stamina Reduced",
+      "value": -1,
+      "multiplier": 0,
+      "sType": "STAMINA",
+      "mType": "UNIT_MOD",
+      "text": "Stamina reduced at end of turn."
+    },
     "aura_empress_shrine": {
       "name": "Empress Shrine Aura",
       "value": 2,

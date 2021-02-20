@@ -17,7 +17,7 @@ struct UnitData {
 public:
 	string name;
 	int physPower;
-	int magPower;
+	int stamina;
 	string filePath;
 };
 
@@ -26,8 +26,6 @@ public:
 	string name;
 	int cost;
 	CARD_TYPE cType;
-	int pPow;
-	int mPow;
 	string unit;
 	string filePath;
 	string shaderPath;
@@ -47,9 +45,12 @@ public:
 struct EncounterData {
 public:
 	string name;
+	int health;
+	int armour;
 	vector<string> decklist;
 	vector<string> startingPlay;
 	int level;
+	int actionCount;
 };
 
 
@@ -72,9 +73,8 @@ public:
 
 	STAT_TYPE GetStatEnum(string data) {
 		if (data == "DMG_PHYSICAL") return STAT_TYPE::DMG_PHYSICAL;
-		else if (data == "DMG_MAGIC") return STAT_TYPE::DMG_MAGIC;
+		else if (data == "STAMINA") return STAT_TYPE::STAMINA;
 		else if (data == "ARMOUR_PHYSICAL") return STAT_TYPE::ARMOUR_PHYSICAL;
-		else if (data == "ARMOUR_MAGIC") return STAT_TYPE::ARMOUR_MAGIC;
 		else if (data == "HEALTH") return STAT_TYPE::HEALTH;
 		else return STAT_TYPE::DMG_PHYSICAL;
 	}

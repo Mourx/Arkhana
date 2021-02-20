@@ -24,7 +24,7 @@ protected:
     Encounter* encounter;
 
     DataBase* database;
-    void AdvanceTurn();
+    void AdvanceTurn(COMBAT_TURN turn);
     void CalculateCombat();
     void SetNextEnemyMove();
     void CheckDeaths();

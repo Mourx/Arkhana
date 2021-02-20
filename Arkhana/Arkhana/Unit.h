@@ -12,26 +12,25 @@ public:
     Unit(UnitData data, vector<Modifier*> mods);
     ~Unit() {}
     float GetPPower() { return physicalPower; }
-    float GetMPower() { return magicPower; }
+    float GetStamina() { return stamina; }
     void SetPosition(Vector2f pos);
     void Draw(RenderWindow* w);
     void UpdateStats();
     void AddModifier(Modifier* mod);
-    void SetZoneBonuses(float phys, float physM, float mag, float magM) { 
+    void SetZoneBonuses(float phys, float physM) { 
         zoneBonusPhys = phys;
-        zoneBonusMag = mag;
         zoneMultiplierPhys = physM;
-        zoneMultiplierMag = magM;
         UpdateStats();
         
     }
     void UpdateStrings();
     vector<Modifier*> GetAuras() { return auraMods; }
+    void Move(Vector2f offset);
 protected:
     void ModifyStat(STAT_TYPE stat, int value, int multiplier);
     
     float physicalPower = 0;
-    float magicPower = 0;
+    float stamina = 0;
 
     float zoneBonusPhys = 0;
     float zoneBonusMag = 0;
@@ -40,7 +39,7 @@ protected:
 
 
     float basePhys = 0;
-    float baseMag = 0;
+    float baseStamina = 0;
     String name = "";
 
     Sprite unitBackground;

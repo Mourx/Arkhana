@@ -15,7 +15,7 @@ Card::Card(CardData data,DataBase* dataB) {
 	SetPosition(Vector2f(300, 300));
 	if (type == UNIT) {
 		pPow = database->UnitList[name]->physPower;
-		mPow = database->UnitList[name]->magPower;
+		stamina = database->UnitList[name]->stamina;
 	}
 	cardShader.loadFromFile(data.shaderPath, Shader::Vertex);
 
@@ -55,7 +55,7 @@ Card::Card(CardData data,DataBase* dataB) {
 	
 	txtMag.setFont(font);
 	txtMag.setCharacterSize(20);
-	txtMag.setString(to_string(mPow));
+	txtMag.setString(to_string(stamina));
 	txtMag.setFillColor(Color::Black);
 
 	string txt;

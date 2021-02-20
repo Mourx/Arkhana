@@ -8,7 +8,7 @@ CombatScreen::CombatScreen(RenderWindow* w,DataBase* data,Player* p,Encounter* e
 	encounter = enc;
 	player->Setup();
 
-	enemy = new Enemy(w,database);
+	enemy = encounter->GetEnemy();
 
 	texBackground.loadFromFile("Textures/GUI/combatBackground.png");
 	background.setTexture(texBackground);
@@ -62,7 +62,7 @@ void CombatScreen::MouseReleased(Vector2f mousePos) {
 		//end turn button functionality
 		FloatRect bounds = endTurn->GetIcon()->getGlobalBounds();
 		if (bounds.contains(mousePos)) {
-			AdvanceTurn();
+			player->AnimateAttack();
 		}
 	}
 }
@@ -97,20 +97,40 @@ void CombatScreen::MouseMoved(Vector2f mousePos) {
 
 void CombatScreen::Update(Time t) {
 	if (currentTurn == ENEMY) {
-		Card* eCard = enemy->PlayNext();
-		// Maybe implement an AI controller? thinking how to emulate a player
-		switch (eCard->GetType()) {
-		case UNIT:
-			eCard->Play(enemy->GetZones()[(int)ZONE_TYPE::Z_ATTACK]);
-			break;
-		case SPELL:
-			eCard->Play(enemy->GetZones()[(int)ZONE_TYPE::Z_ATTACK]);
-			break;
+		if (enemy->HasAttacked() == false) {
+			if (enemy->GetCurrentMana() >= 1) {
+				Card* eCard = enemy->PlayNext();
+				// Maybe implement an AI controller? thinking how to emulate a player
+				switch (eCard->GetType()) {
+				case UNIT:
+					eCard->Play(enemy->GetZones()[(int)ZONE_TYPE::Z_ATTACK]);
+					break;
+				case SPELL:
+					eCard->Play(enemy->GetZones()[(int)ZONE_TYPE::Z_ATTACK]);
+					break;
+				}
+				SetNextEnemyMove();
+			}
+			else {
+				enemy->AnimateAttack();
+			}
 		}
-		SetNextEnemyMove();
-		currentTurn = PLAYER;
-		player->NewTurnUpkeep();
+		else {
+			if (enemy->GetAttacking() == false) {
+				AdvanceTurn(PLAYER);
+			}
+		}
 	}
+	else if (currentTurn == PLAYER) {
+		if (player->HasAttacked() == false) {
+		}
+		else {
+			if (player->GetAttacking() == false) {
+				AdvanceTurn(ENEMY);
+			}
+		}
+	}
+
 	player->Update(t);
 	enemy->Update(t);
 
@@ -121,11 +141,21 @@ void CombatScreen::SetNextEnemyMove() {
 	eNext->SetPosition(eNextPos);
 }
 
-void CombatScreen::AdvanceTurn() {
+void CombatScreen::AdvanceTurn(COMBAT_TURN nextTurn) {
 
 	CalculateCombat();
 	CheckDeaths();
-	currentTurn = ENEMY;
+	switch (currentTurn) {
+	case PLAYER:
+		player->EndTurnUpkeep();
+		enemy->NewTurnUpkeep();
+		break;
+	case ENEMY:
+		enemy->EndTurnUpkeep();
+		player->NewTurnUpkeep();
+		break;
+	}
+	currentTurn = nextTurn;
 }
 
 void CombatScreen::CheckDeaths() {
@@ -150,6 +180,7 @@ void CombatScreen::CheckDeaths() {
 }
 
 void CombatScreen::CalculateCombat() {
+
 	vector<UnitZone*> eZones = enemy->GetZones();
 	vector<UnitZone*> pZones = player->GetZones();
 
@@ -158,21 +189,14 @@ void CombatScreen::CalculateCombat() {
 
 	UnitZone* pAttack = pZones[(int)ZONE_TYPE::Z_ATTACK];
 	UnitZone* pBlock = pZones[(int)ZONE_TYPE::Z_BLOCK];
-	int enemyPhysDamage = pAttack->GetCombinedPhysicalPower() - eBlock->GetCombinedPhysicalPower();
-	int enemyMagDamage = pAttack->GetCombinedMagicPower() - eBlock->GetCombinedMagicPower();
 
+	int enemyPhysDamage = pAttack->GetCombinedPhysicalPower() - eBlock->GetCombinedPhysicalPower();
 	int playerPhysDamage = eAttack->GetCombinedPhysicalPower() - pBlock->GetCombinedPhysicalPower();
-	int playerMagDamage = eAttack->GetCombinedMagicPower() - pBlock->GetCombinedMagicPower();
 
 	if (playerPhysDamage <= 0) playerPhysDamage = 0;
-	if (playerMagDamage <= 0) playerMagDamage = 0;
-
 	if (enemyPhysDamage <= 0) enemyPhysDamage = 0;
-	if (enemyMagDamage <= 0) enemyMagDamage = 0;
 
 	player->DamagePhys(playerPhysDamage);
-	player->DamageMag(playerMagDamage);
-
 	enemy->DamagePhys(enemyPhysDamage);
-	enemy->DamageMag(enemyMagDamage);
+
 }

@@ -51,12 +51,6 @@ void DataBase::BuildCardLists() {
 				card->modifiers.push_back(new Modifier(*modList[str]));
 			}
 		}
-		if (ListItr->value.HasMember("pPow")) {
-			card->pPow = ListItr->value["pPow"].GetInt();
-		}
-		if (ListItr->value.HasMember("mPow")) {
-			card->mPow = ListItr->value["mPow"].GetInt();
-		}
 		card->cost = ListItr->value["cost"].GetInt();
 		card->cType = GetCardEnum(ListItr->value["cardType"].GetString());
 	
@@ -83,7 +77,7 @@ void DataBase::BuildUnitLists() {
 		UnitData* unit = new UnitData();
 		unit->name= ListItr->value["name"].GetString();
 		unit->physPower = ListItr->value["physPower"].GetInt();
-		unit->magPower = ListItr->value["magPower"].GetInt();
+		unit->stamina = ListItr->value["stamina"].GetInt();
 		unit->filePath = ListItr->value["filePath"].GetString();
 
 		UnitList.insert({ name,unit });
@@ -112,6 +106,10 @@ void DataBase::BuildEncounterLists() {
 		string name = ListItr->name.GetString();
 		EncounterData* encounter = new EncounterData();
 		encounter->name = ListItr->value["name"].GetString();
+
+		encounter->health = ListItr->value["health"].GetInt();
+		encounter->armour = ListItr->value["armour"].GetInt();
+
 		rapidjson::GenericArray<true,rapidjson::Value> arr = ListItr->value["decklist"].GetArray();
 		for (int i = 0; i < arr.Size(); i++) {
 			encounter->decklist.push_back(arr[i].GetString());
@@ -124,6 +122,7 @@ void DataBase::BuildEncounterLists() {
 		int level = encounter->level;
 		encounters[level].insert({ name,encounter });
 
+		encounter->actionCount = ListItr->value["actionCount"].GetInt();
 		encounterNames[level].push_back(name);
 	}
 	fclose(fp);

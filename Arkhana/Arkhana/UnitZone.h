@@ -16,19 +16,17 @@ public:
     vector<Unit*> GetUnits() { return unitList; }
     void Draw(RenderWindow* w);
     int GetCombinedPhysicalPower();
-    int GetCombinedMagicPower();
     void AddUnit(Unit* u);
     void ClearUnits() { unitList.clear(); }
     ZONE_OWNER GetOwner() { return type; }
     void ModifyUnits(Modifier* mod);
+    void EndTurnUpkeep();
 protected:
     void UpdateStatMods();
 
     float zoneBonusPhys = 0;
-    float zoneBonusMag = 0;
 
     float zoneMultiplierPhys = 0;
-    float zoneMultiplierMag = 0;
 
     vector<Unit*> unitList;
     ZONE_OWNER type;

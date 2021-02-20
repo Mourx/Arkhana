@@ -8,10 +8,6 @@ Enemy::Enemy(RenderWindow* w,DataBase* data){
 	attackZonePos = Vector2f(800, 0);
 	blockZonePos = Vector2f(200, 0);
 
-	physicalArmour = 10;
-	magicArmour = 0;
-	health = 10;
-
 	attackZone = new UnitZone(0,Z_ENEMY);
 	attackZone->SetPosition(attackZonePos);
 
@@ -22,12 +18,10 @@ Enemy::Enemy(RenderWindow* w,DataBase* data){
 	zones.push_back(blockZone);
 
 	physArmPos = Vector2f(1410, 265);
-	magArmPos = Vector2f(1410, 180);
 	healthPos = Vector2f(1410, 95);
-
+	attackDirection = 1;
 	
 	txtPhysArmPos = Vector2f(1500, 285);
-	txtMagArmPos = Vector2f(1500, 200);
 	txtHealthPos = Vector2f(1500, 115);
 
 	deck.push_back(new Card(*database->CardList["Goblin"],database));
@@ -44,10 +38,8 @@ void Enemy::InitSprites() {
 	physArmIcon.setPosition(physArmPos);
 	physArmIcon.setScale(2, 2);
 
-	texMagArm.loadFromFile("Textures/GUI/armourMagic.png");
-	magArmIcon.setTexture(texMagArm);
-	magArmIcon.setPosition(magArmPos);
-	magArmIcon.setScale(2, 2);
+
+
 
 	texHealth.loadFromFile("Textures/GUI/health.png");
 	healthIcon.setTexture(texHealth);
@@ -62,8 +54,7 @@ void Enemy::InitSprites() {
 	txtPhysArm.setPosition(txtPhysArmPos);
 	txtPhysArm.setFont(font);
 
-	txtMagArm.setPosition(txtMagArmPos);
-	txtMagArm.setFont(font);
+
 
 }
 
@@ -72,6 +63,7 @@ Card* Enemy::PlayNext() {
 	if (cardIndex >= deck.size()) {
 		cardIndex = 0;
 	}
+	currentMana--;
 	return c;
 }
 
@@ -79,10 +71,37 @@ void Enemy::Draw() {
 	attackZone->Draw(window);
 	blockZone->Draw(window);
 	window->draw(physArmIcon);
-	window->draw(magArmIcon);
+
 	window->draw(healthIcon);
 	window->draw(txtHealth);
 	window->draw(txtPhysArm);
-	window->draw(txtMagArm);
+
 	deck[cardIndex]->Draw(window);
+}
+
+void Enemy::NewTurnUpkeep() {
+	ResetMana();
+	bHasAttacked = false;
+}
+
+void Enemy::SetDetails(EncounterData* data, vector<Card*> startPlay, vector<Card*> decklist) {
+
+	health = data->health;
+	armour = data->armour;
+	maxMana = data->actionCount;
+	startingPlay = startPlay;
+	deck = decklist;
+
+	for (Card* c : startingPlay) {
+		// Maybe implement an AI controller? thinking how to emulate a player
+		switch (c->GetType()) {
+		case UNIT:
+			c->Play(this->GetZones()[(int)ZONE_TYPE::Z_ATTACK]);
+			break;
+		case SPELL:
+			c->Play(this->GetZones()[(int)ZONE_TYPE::Z_ATTACK]);
+			break;
+		}
+	}
+	UpdateStrings();
 }
