@@ -15,7 +15,8 @@ public:
 	Player(RenderWindow* w,DataBase* data);
 	~Player() {}
 	void Setup();
-	void Draw();
+	void DrawBackground();
+	void DrawForeground();
 	void Update(Time t);
 
 	vector<Card*> GetHand() { return hand; }
@@ -31,6 +32,7 @@ public:
 	void AnimateAttack();
 	bool GetAttacking() { return bAttacking; }
 	bool HasAttacked() { return bHasAttacked; }
+	vector<Card*> GetDeckList() { return decklist; }
 protected:
 	void DrawCards(int amount);
 	void Discard(Card* card);
@@ -40,6 +42,7 @@ protected:
 	virtual void InitSprites();
 	virtual void UpdateStrings();
 	DataBase* database;
+	vector<Card*> decklist;
 	vector<Card*> deck;
 	vector<Card*> hand;
 	vector<Card*> discard;

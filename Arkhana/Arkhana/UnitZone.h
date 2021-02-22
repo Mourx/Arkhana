@@ -15,6 +15,7 @@ public:
     ~UnitZone() {}
     vector<Unit*> GetUnits() { return unitList; }
     void Draw(RenderWindow* w);
+    void DrawUnits(RenderWindow* w);
     int GetCombinedPhysicalPower();
     void AddUnit(Unit* u);
     void ClearUnits() { unitList.clear(); }

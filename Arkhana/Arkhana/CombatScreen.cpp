@@ -22,9 +22,16 @@ CombatScreen::CombatScreen(RenderWindow* w,DataBase* data,Player* p,Encounter* e
 void CombatScreen::Draw() {
 	window->draw(background);
 	endTurn->Draw(window);
-	enemy->Draw();
-	player->Draw();
-	
+	enemy->DrawBackground();
+	player->DrawBackground();
+
+	enemy->DrawForeground();
+	player->DrawForeground();
+
+	enemy->DrawActions();
+	if (eNext != NULL) {
+		eNext->Draw(window);
+	}
 }
 
 void CombatScreen::MouseClicked(Vector2f mousePos) {
@@ -93,23 +100,38 @@ void CombatScreen::MouseMoved(Vector2f mousePos) {
 			c->SetHover(false);
 		}
 	}
+	eNext = NULL;
+	vector<Card*> list = enemy->GetDeckList();
+	for (int i = list.size() - 1; i >= 0; i--) {
+		FloatRect bounds = list[i]->GetIcon()->getGlobalBounds();
+		if (bounds.contains(mousePos)) {
+			eNext = list[i];
+		}
+	}
 }
 
 void CombatScreen::Update(Time t) {
 	if (currentTurn == ENEMY) {
+		
 		if (enemy->HasAttacked() == false) {
 			if (enemy->GetCurrentMana() >= 1) {
-				Card* eCard = enemy->PlayNext();
-				// Maybe implement an AI controller? thinking how to emulate a player
-				switch (eCard->GetType()) {
-				case UNIT:
-					eCard->Play(enemy->GetZones()[(int)ZONE_TYPE::Z_ATTACK]);
-					break;
-				case SPELL:
-					eCard->Play(enemy->GetZones()[(int)ZONE_TYPE::Z_ATTACK]);
-					break;
+				Card* eCard = enemy->GetNext();
+				if (eCard->IsAtTarget()) {
+					// Maybe implement an AI controller? thinking how to emulate a player
+					switch (eCard->GetType()) {
+					case UNIT:
+						eCard->Play(enemy->GetZones()[(int)ZONE_TYPE::Z_ATTACK]);
+						break;
+					case SPELL:
+						eCard->Play(enemy->GetZones()[(int)ZONE_TYPE::Z_ATTACK]);
+						break;
+					}
+					eCard->SetPosition(Vector2f(-200, -200));
+					enemy->PlayNext();
 				}
-				SetNextEnemyMove();
+				else if(eCard->IsMoving() == false) {
+					eCard->SetTarget(enemy->GetZones()[(int)ZONE_TYPE::Z_ATTACK]->GetIcon()->getPosition());
+				}
 			}
 			else {
 				enemy->AnimateAttack();
@@ -137,8 +159,11 @@ void CombatScreen::Update(Time t) {
 }
 
 void CombatScreen::SetNextEnemyMove() {
-	eNext = enemy->GetNext();
-	eNext->SetPosition(eNextPos);
+	vector<Card*> cardList = enemy->GetDeckList();
+	for (int i = 0; i < cardList.size();i++) {
+		cardList[i]->SetPosition(eNextPos + Vector2f(0,-40*i));
+	}
+	
 }
 
 void CombatScreen::AdvanceTurn(COMBAT_TURN nextTurn) {

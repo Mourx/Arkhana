@@ -8,11 +8,11 @@ Player::Player(RenderWindow* w, DataBase* data) {
 	database = data;
 	window = w;
 	
-	deck.push_back(new Card(*database->CardList["Goblin"],database));
-	deck.push_back(new Card(*database->CardList["Goblin"], database));
-	deck.push_back(new Card(*database->CardList["Ogre"], database));
-	deck.push_back(new Card(*database->CardList["Rage"], database));
-	deck.push_back(new Card(*database->CardList["Shrine"], database));
+	decklist.push_back(new Card(*database->CardList["Goblin"],database));
+	decklist.push_back(new Card(*database->CardList["Goblin"], database));
+	decklist.push_back(new Card(*database->CardList["Ogre"], database));
+	decklist.push_back(new Card(*database->CardList["Rage"], database));
+	decklist.push_back(new Card(*database->CardList["Shrine"], database));
 
 	// load these based on the selected Arcana
 	armour = 10;
@@ -129,7 +129,7 @@ void Player::Update(Time t) {
 	}
 }
 
-void Player::Draw() {
+void Player::DrawBackground() {
 	attackZone->Draw(window);
 	blockZone->Draw(window);
 	window->draw(deckIcon);
@@ -147,6 +147,11 @@ void Player::Draw() {
 	for (Card* c : hand) {
 		c->Draw(window);
 	}
+}
+
+void Player::DrawForeground() {
+	attackZone->DrawUnits(window);
+	blockZone->DrawUnits(window);
 }
 
 void Player::NewTurnUpkeep() {
@@ -215,12 +220,14 @@ void Player::DrawInitialHand() {
 }
 
 void Player::Setup() {
-	for (Card* c : hand) {
+	deck.clear();
+	hand.clear();
+	discard.clear();
+	burnt.clear();
+	for (Card* c : decklist) {
 		deck.push_back(c);
 	}
-	for (Card* c : discard) {
-		deck.push_back(c);
-	}
+	
 	hand.clear();
 	discard.clear();
 	armour = maxArmour;

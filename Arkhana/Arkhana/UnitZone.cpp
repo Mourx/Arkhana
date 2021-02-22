@@ -15,6 +15,10 @@ UnitZone::UnitZone(int zoneType, ZONE_OWNER zPlayer) {
 
 void UnitZone::Draw(RenderWindow* w) {
 	w->draw(icon);
+	
+}
+
+void UnitZone::DrawUnits(RenderWindow* w) {
 	for (Unit* u : unitList) {
 		u->Draw(w);
 	}

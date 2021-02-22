@@ -15,3 +15,16 @@ void GameObject::Draw(RenderWindow* w) {
 	}
 }
 
+void GameObject::Update(Time t) {
+	if (bMoving) {
+
+		icon.move(Vector2f(xdir, ydir) * t.asSeconds());
+		SetPosition(icon.getPosition());
+		if (abs(pos.x - targetPos.x) <= 1 && abs(pos.y - targetPos.y) <= 1) {
+			bMoving = false;
+			SetPosition(targetPos);
+			bAtTarget = true;
+		}
+	}
+}
+

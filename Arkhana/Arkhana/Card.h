@@ -19,6 +19,7 @@ public:
     void Draw(RenderWindow* w);
     CARD_TYPE GetType() { return type; }
     ZONE_OWNER GetZones() { return zOwner; }
+
 protected:
     
     virtual void ApplyModifier(UnitZone*);
@@ -34,6 +35,8 @@ protected:
 
     int stamina;
     int pPow;
+
+
 
     Shader cardShader;
 

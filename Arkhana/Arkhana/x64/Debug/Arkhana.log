@@ -1,4 +1,4 @@
-﻿  DataBase.cpp
-C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\DataBase.cpp(114,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\DataBase.cpp(118,21): warning C4018: '<': signed/unsigned mismatch
+﻿  Enemy.cpp
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Enemy.cpp(72,2): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Enemy.cpp(89,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   Arkhana.vcxproj -> C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\x64\Debug\Arkhana.exe

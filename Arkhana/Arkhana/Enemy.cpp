@@ -24,8 +24,8 @@ Enemy::Enemy(RenderWindow* w,DataBase* data){
 	txtPhysArmPos = Vector2f(1500, 285);
 	txtHealthPos = Vector2f(1500, 115);
 
-	deck.push_back(new Card(*database->CardList["Goblin"],database));
-	deck.push_back(new Card(*database->CardList["Rage"],database));
+	decklist.push_back(new Card(*database->CardList["Goblin"],database));
+	decklist.push_back(new Card(*database->CardList["Rage"],database));
 
 	InitSprites();
 	UpdateStrings();
@@ -67,16 +67,12 @@ Card* Enemy::PlayNext() {
 	return c;
 }
 
-void Enemy::Draw() {
-	attackZone->Draw(window);
-	blockZone->Draw(window);
-	window->draw(physArmIcon);
+void Enemy::DrawActions() {
 
-	window->draw(healthIcon);
-	window->draw(txtHealth);
-	window->draw(txtPhysArm);
-
-	deck[cardIndex]->Draw(window);
+	for (int i = decklist.size() - 1; i >= 0; i--) {
+		decklist[i]->Draw(window);
+	}
+	
 }
 
 void Enemy::NewTurnUpkeep() {
@@ -84,14 +80,37 @@ void Enemy::NewTurnUpkeep() {
 	bHasAttacked = false;
 }
 
-void Enemy::SetDetails(EncounterData* data, vector<Card*> startPlay, vector<Card*> decklist) {
+void Enemy::Update(Time t) {
+	if (bAttacking) {
+		if (attackTimer < attackDuration) {
+			attackTimer += t.asSeconds();
+			for (Unit* u : attackZone->GetUnits()) {
+				float xdir = 0;
+				float ydir = 0.1 * attackDirection;
+				u->Move(Vector2f(xdir, ydir));
+			}
+		}
+		else {
+			attackTimer = 0;
+			bAttacking = false;
+		}
+	}
+	else {
+		for (Card* c : decklist) {
+			c->Update(t);
+		}
+		UpdateStrings();
+	}
+}
+
+void Enemy::SetDetails(EncounterData* data, vector<Card*> startPlay, vector<Card*> dl) {
 
 	health = data->health;
 	armour = data->armour;
 	maxMana = data->actionCount;
 	startingPlay = startPlay;
+	decklist = dl;
 	deck = decklist;
-
 	for (Card* c : startingPlay) {
 		// Maybe implement an AI controller? thinking how to emulate a player
 		switch (c->GetType()) {

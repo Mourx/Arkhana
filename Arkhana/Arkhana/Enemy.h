@@ -10,9 +10,10 @@ public:
     ~Enemy(){}
     Card* GetNext() { return deck[cardIndex]; }
     Card* PlayNext();
-    void Draw();
+    void DrawActions();
     void NewTurnUpkeep();
     void SetDetails(EncounterData* data, vector<Card*> startPlay, vector<Card*> decklist);
+    void Update(Time t);
 protected:
 
     void InitSprites();

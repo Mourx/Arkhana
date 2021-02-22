@@ -29,6 +29,8 @@ protected:
     void SetNextEnemyMove();
     void CheckDeaths();
 
+    Card* ePlayedCard = NULL;
+
     float iconOffsetX = 0;
     float iconOffsetY = 0;
     Vector2f iconSnapPos;
