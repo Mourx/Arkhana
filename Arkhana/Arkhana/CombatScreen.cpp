@@ -10,6 +10,21 @@ CombatScreen::CombatScreen(RenderWindow* w,DataBase* data,Player* p,Encounter* e
 
 	enemy = encounter->GetEnemy();
 
+
+	AI = new AIController(enemy, player);
+
+	for (Card* c : enemy->GetStartingPlay()) {
+		c->SetTarget(AI->GetTarget(c));
+		switch (c->GetType()) {
+		case UNIT:
+			c->Play();
+			break;
+		case SPELL:
+			c->Play();
+			break;
+		}
+	}
+
 	texBackground.loadFromFile("Textures/GUI/combatBackground.png");
 	background.setTexture(texBackground);
 	background.setPosition(0, 0);
@@ -48,23 +63,34 @@ void CombatScreen::MouseClicked(Vector2f mousePos) {
 
 void CombatScreen::MouseReleased(Vector2f mousePos) {
 	if (currentTurn == PLAYER) {
-		if (player->selectedCard != NULL) {
-			if (selectedZone != NULL && selectedZone->GetOwner() == player->selectedCard->GetZones()) {
-				if (player->GetCurrentMana() < player->selectedCard->GetCost()) {
-					player->selectedCard->SetPosition(player->selectedCard->GetHandPos());
+		if (player->selectedCard != NULL){
+			Card* selCard = player->selectedCard;
+			if (selectedZone != NULL) {
+				if (selCard->GetZoneType() == ZONE_TYPE::Z_ANY || (selCard->GetZoneType() == selectedZone->GetType())) {
+					if (selectedZone->GetOwner() == selCard->GetZoneOwner()) {
+						if (player->GetCurrentMana() < selCard->GetCost()) {
+							selCard->SetPosition(player->selectedCard->GetHandPos());
+						}
+						else {
+							selCard->Play(selectedZone);
+							player->UseCard(selCard);
+
+						}
+					}
+					else {
+						selCard->SetPosition(player->selectedCard->GetHandPos());
+					}
+					player->selectedCard = NULL;
 				}
 				else {
-					player->selectedCard->Play(selectedZone);
-
-					player->UseCard(player->selectedCard);
-
+					selCard->SetPosition(player->selectedCard->GetHandPos());
+					player->selectedCard = NULL;
 				}
 			}
 			else {
-				player->selectedCard->SetPosition(player->selectedCard->GetHandPos());
+				selCard->SetPosition(player->selectedCard->GetHandPos());
+				player->selectedCard = NULL;
 			}
-			player->selectedCard = NULL;
-
 		}
 		//end turn button functionality
 		FloatRect bounds = endTurn->GetIcon()->getGlobalBounds();
@@ -120,17 +146,17 @@ void CombatScreen::Update(Time t) {
 					// Maybe implement an AI controller? thinking how to emulate a player
 					switch (eCard->GetType()) {
 					case UNIT:
-						eCard->Play(enemy->GetZones()[(int)ZONE_TYPE::Z_ATTACK]);
+						eCard->Play();
 						break;
 					case SPELL:
-						eCard->Play(enemy->GetZones()[(int)ZONE_TYPE::Z_ATTACK]);
+						eCard->Play();
 						break;
 					}
 					eCard->SetPosition(Vector2f(-200, -200));
 					enemy->PlayNext();
 				}
 				else if(eCard->IsMoving() == false) {
-					eCard->SetTarget(enemy->GetZones()[(int)ZONE_TYPE::Z_ATTACK]->GetIcon()->getPosition());
+					eCard->SetTarget(AI->GetTarget(eCard));
 				}
 			}
 			else {
@@ -159,10 +185,8 @@ void CombatScreen::Update(Time t) {
 }
 
 void CombatScreen::SetNextEnemyMove() {
-	vector<Card*> cardList = enemy->GetDeckList();
-	for (int i = 0; i < cardList.size();i++) {
-		cardList[i]->SetPosition(eNextPos + Vector2f(0,-40*i));
-	}
+	enemy->SetNextMove();
+
 	
 }
 

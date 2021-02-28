@@ -11,7 +11,7 @@ class UnitZone :
     public GameObject
 {
 public:
-    UnitZone(int zoneType, ZONE_OWNER zPlayer);
+    UnitZone(int zoneType, ZONE_OWNER zPlayer, ZONE_TYPE t);
     ~UnitZone() {}
     vector<Unit*> GetUnits() { return unitList; }
     void Draw(RenderWindow* w);
@@ -19,19 +19,31 @@ public:
     int GetCombinedPhysicalPower();
     void AddUnit(Unit* u);
     void ClearUnits() { unitList.clear(); }
-    ZONE_OWNER GetOwner() { return type; }
+    ZONE_OWNER GetOwner() { return owner; }
     void ModifyUnits(Modifier* mod);
-    void EndTurnUpkeep();
+    void LowerStamina();
+    ZONE_TYPE GetType() { return type; }
+    Vector2f GetAnimationPoint() { return icon.getPosition() + animationPos; }
 protected:
     void UpdateStatMods();
-
+    void UpdatePositions() {
+        int offset = 0;
+        if (this->owner == ENEMY) {
+            offset = 270;
+        }
+        for (int i = 0; i < unitList.size(); i++) {
+            unitList[i]->SetPosition(this->GetIcon()->getPosition() + Vector2f(10 + (i % 10) * 50, 10 + offset + (i / 10) * 75));
+        }
+    }
     float zoneBonusPhys = 0;
 
     float zoneMultiplierPhys = 0;
 
     vector<Unit*> unitList;
-    ZONE_OWNER type;
+    ZONE_OWNER owner;
     Vector2f unitOffset = Vector2f(20, 20);
+    Vector2f animationPos = Vector2f(50, 50);
     vector<Modifier*> zoneMods;
+    ZONE_TYPE type;
 };
 

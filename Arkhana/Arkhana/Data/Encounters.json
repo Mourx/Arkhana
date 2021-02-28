@@ -2,9 +2,13 @@
   "Encounters": {
     "goblins": {
       "name": "goblins",
-      "health": 2,
+      "health": 40,
       "armour": 0,
-      "decklist": [ "Goblin", "Rage" ],
+      "decklist": [
+        [ "Goblin", "Goblin" ],
+        [ "Two Gnomes" ],
+        [ "Jelly", "Rage"]
+      ],
       "startingPlay": [ "Goblin" ],
       "level": 0,
       "actionCount" : 2
@@ -13,7 +17,7 @@
       "name": "ogres",
       "health": 40,
       "armour": 10,
-      "decklist": [ "Ogre", "Goblin" ],
+      "decklist": [ [ "Ogre", "Goblin" ] ],
       "startingPlay": [ "Ogre" ],
       "level": 1,
       "actionCount": 1

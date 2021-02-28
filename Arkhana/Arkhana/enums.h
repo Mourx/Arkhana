@@ -39,8 +39,17 @@ enum ZONE_OWNER {
 };
 
 enum class ZONE_TYPE {
+	Z_ANY = 3,
 	Z_ATTACK = 0,
 	Z_BLOCK =1
+};
+
+enum AI_TAG {
+	AI_RANDOM,
+	AI_ATTACK,
+	AI_BLOCK,
+	AI_MOST_UNITS_AI,
+	AI_MOST_UNITS_PLAYER
 };
 
 enum class MODIFIER_TYPE {

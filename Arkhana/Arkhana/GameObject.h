@@ -16,7 +16,7 @@ public:
 	Sprite* GetIcon() { return &icon; }
 	virtual void Update(Time t);
 	bool IsMoving() { return bMoving; }
-	void SetTarget(Vector2f tPos) { 
+	virtual void SetTarget(Vector2f tPos) { 
 		targetPos = tPos;
 		bMoving = true;
 		xdir = (targetPos.x - pos.x) / moveDuration;
@@ -25,6 +25,7 @@ public:
 	}
 	void SetHover(bool b) { bHover = b; }
 	bool IsAtTarget() { return bAtTarget; }
+	void ResetTarget() { bAtTarget = false; }
 protected:
 	Sprite icon;
 	Texture texIcon;
@@ -36,7 +37,7 @@ protected:
 
 	float xdir = 0;
 	float ydir = 0;
-	float moveDuration = 2;
+	float moveDuration = 0.7;
 	float moveTimer = 0;
 	bool bAtTarget = false;
 };

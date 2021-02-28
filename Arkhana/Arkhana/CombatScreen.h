@@ -5,6 +5,7 @@
 #include "EndTurnButton.h"
 #include "Enemy.h"
 #include "Encounter.h"
+#include "AIController.h"
 
 class CombatScreen :
     public Screen
@@ -22,7 +23,7 @@ protected:
     Player* player;
     Enemy* enemy;
     Encounter* encounter;
-
+    AIController* AI;
     DataBase* database;
     void AdvanceTurn(COMBAT_TURN turn);
     void CalculateCombat();
@@ -41,7 +42,6 @@ protected:
     UnitZone* selectedZone = NULL;
     Card* eNext = NULL;
 
-    Vector2f eNextPos = Vector2f(25, 125);
     COMBAT_TURN currentTurn = PLAYER;
 
     COMBAT_RESULT result = ONGOING;

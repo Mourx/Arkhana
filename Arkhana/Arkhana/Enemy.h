@@ -8,20 +8,26 @@ class Enemy :
 public:
     Enemy(RenderWindow* w,DataBase* data);
     ~Enemy(){}
-    Card* GetNext() { return deck[cardIndex]; }
+    Card* GetNext() { return decklist[cardIndex]; }
     Card* PlayNext();
     void DrawActions();
     void NewTurnUpkeep();
-    void SetDetails(EncounterData* data, vector<Card*> startPlay, vector<Card*> decklist);
+    void EndTurnUpkeep();
+    void SetDetails(EncounterData* data, vector<Card*> startPlay, vector<vector<Card*>> dl);
     void Update(Time t);
+    void SetNextMove();
+    vector<Card*> GetStartingPlay() { return startingPlay; }
 protected:
 
     void InitSprites();
 
     int maxArmour = 0;
     int cardIndex = 0;
+    vector<vector<Card*>> decklists;
     vector<Card*> deck;
     vector<Card*> startingPlay;
+
+    Vector2f eNextPos = Vector2f(25, 125);
 
 };
 

@@ -20,7 +20,7 @@ void GameObject::Update(Time t) {
 
 		icon.move(Vector2f(xdir, ydir) * t.asSeconds());
 		SetPosition(icon.getPosition());
-		if (abs(pos.x - targetPos.x) <= 1 && abs(pos.y - targetPos.y) <= 1) {
+		if (abs(pos.x - targetPos.x) <= 5 && abs(pos.y - targetPos.y) <= 5) {
 			bMoving = false;
 			SetPosition(targetPos);
 			bAtTarget = true;

@@ -8,20 +8,23 @@ Player::Player(RenderWindow* w, DataBase* data) {
 	database = data;
 	window = w;
 	
-	decklist.push_back(new Card(*database->CardList["Goblin"],database));
-	decklist.push_back(new Card(*database->CardList["Goblin"], database));
-	decklist.push_back(new Card(*database->CardList["Ogre"], database));
+	decklist.push_back(new Card(*database->CardList["Frog"],database));
+	decklist.push_back(new Card(*database->CardList["Frog"], database));
+	decklist.push_back(new Card(*database->CardList["Frog"], database));
+	decklist.push_back(new Card(*database->CardList["Jelly"], database));
+	decklist.push_back(new Card(*database->CardList["Jelly"], database));
+	decklist.push_back(new Card(*database->CardList["Jelly"], database));
 	decklist.push_back(new Card(*database->CardList["Rage"], database));
-	decklist.push_back(new Card(*database->CardList["Shrine"], database));
+	decklist.push_back(new Card(*database->CardList["Rage"], database));
 
 	// load these based on the selected Arcana
 	armour = 10;
 	health = 50;
 
-	attackZone = new UnitZone(0,Z_PLAYER);
+	attackZone = new UnitZone(0,Z_PLAYER,ZONE_TYPE::Z_ATTACK);
 	attackZone->SetPosition(attackZonePos);
 
-	blockZone = new UnitZone(1,Z_PLAYER);
+	blockZone = new UnitZone(1,Z_PLAYER,ZONE_TYPE::Z_BLOCK);
 	blockZone->SetPosition(blockZonePos);
 
 	zones.push_back(attackZone);
@@ -115,7 +118,7 @@ void Player::Update(Time t) {
 			attackTimer += t.asSeconds();
 			for (Unit* u : attackZone->GetUnits()) {
 				float xdir = 0;
-				float ydir = 0.1 * attackDirection;
+				float ydir = ((250*attackDirection) / attackDuration) * t.asSeconds();
 				u->Move(Vector2f(xdir, ydir));
 			}
 		}
@@ -155,9 +158,13 @@ void Player::DrawForeground() {
 }
 
 void Player::NewTurnUpkeep() {
-	DrawCards(1);
+	DrawCards(CARDS_PER_TURN);
 	ResetMana();
 	bHasAttacked = false;
+	for (Unit* u : blockZone->GetUnits()) {
+		u->AddModifier(new Modifier(*database->modList["eot_stamina"]));
+	}
+	blockZone->LowerStamina();
 }
 
 void Player::EndTurnUpkeep() {
@@ -165,12 +172,10 @@ void Player::EndTurnUpkeep() {
 		u->AddModifier(new Modifier(*database->modList["eot_stamina"]));
 	}
 	
-	for (Unit* u : blockZone->GetUnits()) {
-		u->AddModifier(new Modifier(*database->modList["eot_stamina"]));
-	}
 
-	attackZone->EndTurnUpkeep();
-	blockZone->EndTurnUpkeep();
+	attackZone->LowerStamina();
+	DiscardHand();
+	
 }
 
 void Player::DrawCards(int amount) {
@@ -203,6 +208,13 @@ void Player::UseCard(Card* c) {
 	SetCardPositions();
 }
 
+void Player::DiscardHand() {
+	for (Card* c : hand) {
+		discard.push_back(c);
+	}
+	hand.clear();
+}
+
 void Player::Discard(Card* c) {
 
 
@@ -216,10 +228,11 @@ void Player::Discard(int index) {
 }
 
 void Player::DrawInitialHand() {
-	DrawCards(CARDS_PER_TURN);
+	DrawCards(CARDS_START);
 }
 
 void Player::Setup() {
+	ResetMana();
 	deck.clear();
 	hand.clear();
 	discard.clear();

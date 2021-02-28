@@ -1,7 +1,7 @@
 #include "UnitZone.h"
 
 
-UnitZone::UnitZone(int zoneType, ZONE_OWNER zPlayer) {
+UnitZone::UnitZone(int zoneType, ZONE_OWNER zPlayer, ZONE_TYPE t) {
 	if (zoneType == 0) {
 		texIcon.loadFromFile("Textures/GUI/attackZone.png");
 	}
@@ -10,7 +10,8 @@ UnitZone::UnitZone(int zoneType, ZONE_OWNER zPlayer) {
 	}
 	icon.setTexture(texIcon);
 
-	type = zPlayer;
+	owner = zPlayer;
+	type = t;
 }
 
 void UnitZone::Draw(RenderWindow* w) {
@@ -35,8 +36,8 @@ int UnitZone::GetCombinedPhysicalPower() {
 
 void UnitZone::AddUnit(Unit* u) {
 	int count = unitList.size();
-	u->SetPosition(this->GetIcon()->getPosition()+Vector2f(15 + (count%10)*45,5 + (count/10)*70));
 	unitList.push_back(u);
+	UpdatePositions();
 	UpdateStatMods();
 }
 
@@ -66,16 +67,15 @@ void UnitZone::UpdateStatMods() {
 	}
 }
 
-void UnitZone::EndTurnUpkeep() {
+void UnitZone::LowerStamina() {
+
 	for (int i = 0; i < unitList.size();i++) {
 		if (unitList[i]->GetStamina() <= 0) {
 			unitList.erase(unitList.begin() + i);
 			i--;
 		}
 	}
-	for (int i = 0; i < unitList.size(); i++) {
-		unitList[i]->SetPosition(this->GetIcon()->getPosition() + Vector2f(15 + (i % 10) * 45, 5 + (i / 10) * 70));
-	}
+	UpdatePositions();
 }
 
 void UnitZone::ModifyUnits(Modifier* mod) {

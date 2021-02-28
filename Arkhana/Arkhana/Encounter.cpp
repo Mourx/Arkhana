@@ -21,8 +21,12 @@ void Encounter::GenerateEncounter() {
 	for (string s : encData->startingPlay) {
 		startingPlay.push_back(new Card(*database->CardList[s],database));
 	}
-	for (string s : encData->decklist) {
-		encounterDeck.push_back(new Card(*database->CardList[s], database));
+	for (vector<string> v : encData->decklists) {
+		vector<Card*> deck;
+		for (string s : v) {
+			deck.push_back(new Card(*database->CardList[s], database));
+		}
+		encounterDecks.push_back(deck);
 	}
-	enemy->SetDetails(encData, startingPlay, encounterDeck);
+	enemy->SetDetails(encData, startingPlay, encounterDecks);
 }

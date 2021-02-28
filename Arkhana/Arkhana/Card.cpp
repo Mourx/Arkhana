@@ -11,6 +11,9 @@ Card::Card(CardData data,DataBase* dataB) {
 	unit = data.unit;
 	cost = data.cost;
 	texCost.loadFromFile(database->costIcons[cost]);
+	zTag = data.zTag;
+	zType = database->GetZoneEnum(zTag);
+	AITag = data.AITag;
 	costIcon.setTexture(texCost);
 	SetPosition(Vector2f(300, 300));
 	if (type == UNIT) {
@@ -62,6 +65,7 @@ Card::Card(CardData data,DataBase* dataB) {
 	for (Modifier* m : modifiers) {
 		txt = txt +"\n"+ m->GetText();
 	}
+	txt = txt + "\n " + zTag;
 	txtDesc.setFont(font);
 	txtDesc.setString(txt);
 	txtDesc.setCharacterSize(12);
@@ -75,19 +79,28 @@ Card::Card(CardData data,DataBase* dataB) {
 	
 }
 
-void Card::Play(UnitZone* zone) {
+
+void Card::Play() {
 	Unit* u;
 	switch (type) {
 	case UNIT:
 		u = new Unit(*database->UnitList[unit], modifiers);
-		zone->AddUnit(u);
+		targetZone->AddUnit(u);
 		
 		break;
 	case SPELL:
-		ApplyModifier(zone);
+		ApplyModifier(targetZone);
 		break;
 	}
+	bHasTargetZone = false;
+	targetZone = NULL;
 }
+
+void Card::Play(UnitZone* zone) {
+	targetZone = zone;
+	Play();
+}
+
 
 void Card::ApplyModifier(UnitZone* zone) {
 	for (Modifier* modifier : modifiers) {

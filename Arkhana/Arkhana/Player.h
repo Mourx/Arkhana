@@ -26,14 +26,15 @@ public:
 	int GetCurrentMana() { return currentMana; }
 	vector<UnitZone*> GetZones() { return zones; }
 	virtual void NewTurnUpkeep();
+	virtual void EndTurnUpkeep();
 	void DamagePhys(int damage);
-	void EndTurnUpkeep();
 	void ResetMana() { currentMana = maxMana; }
 	void AnimateAttack();
 	bool GetAttacking() { return bAttacking; }
 	bool HasAttacked() { return bHasAttacked; }
 	vector<Card*> GetDeckList() { return decklist; }
 protected:
+	void DiscardHand();
 	void DrawCards(int amount);
 	void Discard(Card* card);
 	void Discard(int index);
@@ -56,6 +57,7 @@ protected:
 	RenderWindow* window;
 
 	int CARDS_PER_TURN = 5;
+	int CARDS_START = 6;
 
 	int maxArmour = 20;
 	int armour = maxArmour;
@@ -103,7 +105,7 @@ protected:
 	Texture texHealth;
 	Vector2f healthPos = Vector2f(1410, 520);
 
-	float attackDuration = 2;
+	float attackDuration = 1;
 	float attackTimer = 0;
 	float attackDirection = -1;
 	bool bAttacking = false;

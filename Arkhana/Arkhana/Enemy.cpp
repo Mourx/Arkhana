@@ -8,10 +8,10 @@ Enemy::Enemy(RenderWindow* w,DataBase* data){
 	attackZonePos = Vector2f(800, 0);
 	blockZonePos = Vector2f(200, 0);
 
-	attackZone = new UnitZone(0,Z_ENEMY);
+	attackZone = new UnitZone(0,Z_ENEMY,ZONE_TYPE::Z_ATTACK);
 	attackZone->SetPosition(attackZonePos);
 
-	blockZone = new UnitZone(1, Z_ENEMY);
+	blockZone = new UnitZone(1, Z_ENEMY,ZONE_TYPE::Z_BLOCK);
 	blockZone->SetPosition(blockZonePos);
 
 	zones.push_back(attackZone);
@@ -59,11 +59,13 @@ void Enemy::InitSprites() {
 }
 
 Card* Enemy::PlayNext() {
-	Card* c = deck[cardIndex++];
-	if (cardIndex >= deck.size()) {
-		cardIndex = 0;
-	}
+	Card* c = decklist[cardIndex++];
 	currentMana--;
+
+	if (cardIndex >= decklist.size()) {
+		cardIndex = 0;
+		currentMana = 0;
+	}
 	return c;
 }
 
@@ -77,7 +79,20 @@ void Enemy::DrawActions() {
 
 void Enemy::NewTurnUpkeep() {
 	ResetMana();
+
+	for (Unit* u : blockZone->GetUnits()) {
+		u->AddModifier(new Modifier(*database->modList["eot_stamina"]));
+	}
+	blockZone->LowerStamina();
 	bHasAttacked = false;
+}
+
+void Enemy::EndTurnUpkeep() {
+	SetNextMove();
+	for (Unit* u : attackZone->GetUnits()) {
+		u->AddModifier(new Modifier(*database->modList["eot_stamina"]));
+	}
+	attackZone->LowerStamina();
 }
 
 void Enemy::Update(Time t) {
@@ -103,24 +118,29 @@ void Enemy::Update(Time t) {
 	}
 }
 
-void Enemy::SetDetails(EncounterData* data, vector<Card*> startPlay, vector<Card*> dl) {
+void Enemy::SetDetails(EncounterData* data, vector<Card*> startPlay, vector<vector<Card*>> dl) {
 
 	health = data->health;
 	armour = data->armour;
 	maxMana = data->actionCount;
 	startingPlay = startPlay;
-	decklist = dl;
-	deck = decklist;
-	for (Card* c : startingPlay) {
-		// Maybe implement an AI controller? thinking how to emulate a player
-		switch (c->GetType()) {
-		case UNIT:
-			c->Play(this->GetZones()[(int)ZONE_TYPE::Z_ATTACK]);
-			break;
-		case SPELL:
-			c->Play(this->GetZones()[(int)ZONE_TYPE::Z_ATTACK]);
-			break;
-		}
-	}
+	decklists = dl;
+	decklist = decklist;
+
 	UpdateStrings();
+}
+
+void Enemy::SetNextMove() {
+	decklist = decklists[rand() % decklists.size()];
+	for (Card* c : decklist) {
+		c->SetPosition(Vector2f(-200, -200));
+		c->ResetTarget();
+	}
+	for (int i = 0; i < maxMana; i++) {
+		int index = cardIndex + i;
+		if (index >= decklist.size()) {
+			index = 0;
+		}
+		decklist[index]->SetPosition(eNextPos + Vector2f(0, -40 * i));
+	}
 }

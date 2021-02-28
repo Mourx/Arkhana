@@ -5,15 +5,44 @@
       "cost": 1,
       "cardType": "UNIT",
       "unit": "Goblin",
-      "filePath": "Textures/Cards/Empress/1_Goblin.png",
+      "zTag": "",
+      "AITag": "AI_RANDOM",
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Frog": {
+      "name": "Frog",
+      "cost": 1,
+      "cardType": "UNIT",
+      "unit": "Frog",
+      "zTag": "",
+      "AITag": "AI_RANDOM",
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Jelly": {
+      "name": "Jelly",
+      "cost": 1,
+      "cardType": "UNIT",
+      "unit": "Jelly",
+      "zTag": "DEFENSIVE",
+      "AITag": "AI_BLOCK",
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Two Gnomes": {
+      "name": "Two Gnomes",
+      "cost": 2,
+      "cardType": "UNIT",
+      "unit": "Two Gnomes",
+      "zTag": "",
+      "AITag": "AI_RANDOM",
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
     "Rage": {
       "name": "Rage",
       "cost": 2,
       "cardType": "SPELL",
+      "zTag": "",
+      "AITag": "AI_MOST_UNITS_AI",
       "modifiers": { "modifier": "rage_modifier" },
-      "filePath": "Textures/Cards/Empress/2_Rage.png",
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
     "Shrine": {
@@ -21,8 +50,9 @@
       "cost": 3,
       "cardType": "UNIT",
       "unit": "Shrine",
+      "zTag": "",
+      "AITag": "AI_MOST_UNITS",
       "modifiers": { "modifier": "aura_empress_shrine" },
-      "filePath": "Textures/Cards/Empress/3_Shrine.png",
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
     "Ogre": {
@@ -30,8 +60,9 @@
       "cost": 4,
       "cardType": "UNIT",
       "unit": "Ogre",
+      "zTag": "AGGRESSIVE",
+      "AITag": "AI_ATTACK",
       "modifiers": { "modifier": "ogre_modifier" },
-      "filePath": "Textures/Cards/Empress/1_Goblin.png",
       "shaderPath": "Textures/Shaders/Empress.vert"
     }
   }

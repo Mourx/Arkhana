@@ -53,9 +53,10 @@ void DataBase::BuildCardLists() {
 		}
 		card->cost = ListItr->value["cost"].GetInt();
 		card->cType = GetCardEnum(ListItr->value["cardType"].GetString());
-	
+		
 		if(ListItr->value.HasMember("unit")) card->unit = ListItr->value["unit"].GetString();
-		card->filePath = ListItr->value["filePath"].GetString();
+		card->zTag = ListItr->value["zTag"].GetString();
+		card->AITag = GetAITag(ListItr->value["AITag"].GetString());
 		card->shaderPath = ListItr->value["shaderPath"].GetString();
 		CardList.insert({ name,card });
 	}
@@ -112,7 +113,12 @@ void DataBase::BuildEncounterLists() {
 
 		rapidjson::GenericArray<true,rapidjson::Value> arr = ListItr->value["decklist"].GetArray();
 		for (int i = 0; i < arr.Size(); i++) {
-			encounter->decklist.push_back(arr[i].GetString());
+			rapidjson::GenericArray<true, rapidjson::Value> ar2 = arr[i].GetArray();
+			vector<string> list;
+			for (int j = 0; j < ar2.Size(); j++) {
+				list.push_back(ar2[j].GetString());
+			}
+			encounter->decklists.push_back(list);
 		}
 		rapidjson::GenericArray<true, rapidjson::Value> ar = ListItr->value["startingPlay"].GetArray();
 		for (int i = 0; i < ar.Size(); i++) {

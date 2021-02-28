@@ -27,8 +27,9 @@ public:
 	int cost;
 	CARD_TYPE cType;
 	string unit;
-	string filePath;
+	string zTag;
 	string shaderPath;
+	AI_TAG AITag;
 	vector<Modifier*> modifiers;
 };
 
@@ -47,7 +48,7 @@ public:
 	string name;
 	int health;
 	int armour;
-	vector<string> decklist;
+	vector<vector<string>> decklists;
 	vector<string> startingPlay;
 	int level;
 	int actionCount;
@@ -84,6 +85,21 @@ public:
 		else if (data == "SPELL") return SPELL;
 		
 		else return UNIT;
+	}
+
+	ZONE_TYPE GetZoneEnum(string data) {
+		if (data == "AGGRESSIVE") return ZONE_TYPE::Z_ATTACK;
+		else if (data == "DEFENSIVE") return ZONE_TYPE::Z_BLOCK;
+		else return ZONE_TYPE::Z_ANY;
+	}
+
+	AI_TAG GetAITag(string data) {
+		if (data == "AI_RANDOM") return AI_RANDOM;
+		else if (data == "AI_ATTACK") return AI_ATTACK;
+		else if (data == "AI_BLOCK") return AI_BLOCK;
+		else if (data == "AI_MOST_UNITS_AI") return AI_MOST_UNITS_AI;
+		else if (data == "AI_MOST_UNITS_PLAYER") return AI_MOST_UNITS_PLAYER;
+		else return AI_RANDOM;
 	}
 
 	void BuildUnitLists();

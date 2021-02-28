@@ -9,7 +9,7 @@ class Encounter :
 public:
     Encounter(RenderWindow* w, DataBase* db, int lvl);
     ~Encounter() {}
-    vector<Card*> GetDeck() { return encounterDeck; }
+    vector<vector<Card*>> GetDecks() { return encounterDecks; }
     vector<Card*> GetStartingPlay() { return startingPlay; }
     void SetComplete(bool b) { bComplete = b; }
     bool GetComplete() { return bComplete; }
@@ -17,7 +17,7 @@ public:
 protected:
     void GenerateEncounter();
     DataBase* database;
-    vector<Card*> encounterDeck;
+    vector<vector<Card*>> encounterDecks;
     vector<Card*> startingPlay;
     int level = 0;
     bool bComplete = false;

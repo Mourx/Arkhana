@@ -1,4 +1,3 @@
-﻿  Enemy.cpp
-C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Enemy.cpp(72,2): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Enemy.cpp(89,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+﻿  GameObject.cpp
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\GameObject.h(40,21): warning C4305: 'initializing': truncation from 'double' to 'float'
   Arkhana.vcxproj -> C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\x64\Debug\Arkhana.exe

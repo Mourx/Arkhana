@@ -93,6 +93,9 @@
     <ClCompile Include="Screen.cpp">
       <Filter>Source Files\Screen</Filter>
     </ClCompile>
+    <ClCompile Include="AIController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -145,6 +148,9 @@
     </ClInclude>
     <ClInclude Include="Screen.h">
       <Filter>Header Files\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="AIController.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
