@@ -7,7 +7,7 @@ Encounter::Encounter(RenderWindow* w, DataBase* db, int lvl) {
 
 	texIcon.loadFromFile("Textures/GUI/fire.png");
 	icon.setTexture(texIcon);
-
+	cardList = database->CardListEnemy;
 	enemy = new Enemy(w, database);
 	GenerateEncounter();
 }
@@ -19,12 +19,12 @@ void Encounter::GenerateEncounter() {
 	encData = database->encounters[level][name];
 
 	for (string s : encData->startingPlay) {
-		startingPlay.push_back(new Card(*database->CardList[s],database));
+		startingPlay.push_back(new Card(*cardList[s],database));
 	}
 	for (vector<string> v : encData->decklists) {
 		vector<Card*> deck;
 		for (string s : v) {
-			deck.push_back(new Card(*database->CardList[s], database));
+			deck.push_back(new Card(*cardList[s], database));
 		}
 		encounterDecks.push_back(deck);
 	}

@@ -16,10 +16,10 @@ CombatScreen::CombatScreen(RenderWindow* w,DataBase* data,Player* p,Encounter* e
 	for (Card* c : enemy->GetStartingPlay()) {
 		c->SetTarget(AI->GetTarget(c));
 		switch (c->GetType()) {
-		case UNIT:
+		case CREATE_UNIT:
 			c->Play();
 			break;
-		case SPELL:
+		case APPLY_ZONE_MOD:
 			c->Play();
 			break;
 		}
@@ -67,7 +67,7 @@ void CombatScreen::MouseReleased(Vector2f mousePos) {
 			Card* selCard = player->selectedCard;
 			if (selectedZone != NULL) {
 				if (selCard->GetZoneType() == ZONE_TYPE::Z_ANY || (selCard->GetZoneType() == selectedZone->GetType())) {
-					if (selectedZone->GetOwner() == selCard->GetZoneOwner()) {
+					if (selCard->GetZoneOwner() == Z_EITHER || selectedZone->GetOwnerType() == selCard->GetZoneOwner()) {
 						if (player->GetCurrentMana() < selCard->GetCost()) {
 							selCard->SetPosition(player->selectedCard->GetHandPos());
 						}
@@ -144,14 +144,7 @@ void CombatScreen::Update(Time t) {
 				Card* eCard = enemy->GetNext();
 				if (eCard->IsAtTarget()) {
 					// Maybe implement an AI controller? thinking how to emulate a player
-					switch (eCard->GetType()) {
-					case UNIT:
-						eCard->Play();
-						break;
-					case SPELL:
-						eCard->Play();
-						break;
-					}
+					eCard->Play();
 					eCard->SetPosition(Vector2f(-200, -200));
 					enemy->PlayNext();
 				}
@@ -220,7 +213,7 @@ void CombatScreen::CheckDeaths() {
 		nextScreen = GAME_OVER;
 		break;
 	case WIN:
-		nextScreen = PATH_SCREEN;
+		nextScreen = REWARD_SCREEN;
 		break;
 	case ONGOING:
 		nextScreen = NONE;

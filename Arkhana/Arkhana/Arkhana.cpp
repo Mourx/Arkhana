@@ -39,7 +39,7 @@ int main() {
 		case GAME_OVER:
 			break;
 		case REWARD_SCREEN:
-			currentScreen = new RewardScreen(window,database);
+			currentScreen = new RewardScreen(window,database,player);
 			break;
 		case PATH_SCREEN:
 			pathScreen->ResetDetails(WIN);

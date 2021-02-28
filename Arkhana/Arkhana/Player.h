@@ -33,6 +33,9 @@ public:
 	bool GetAttacking() { return bAttacking; }
 	bool HasAttacked() { return bHasAttacked; }
 	vector<Card*> GetDeckList() { return decklist; }
+	void ModifyArmour(int val) { armour += val; }
+	map<string, CardData*> GetCardLists() { return cardList; }
+	void AddCard(Card* c) { decklist.push_back(c); }
 protected:
 	void DiscardHand();
 	void DrawCards(int amount);
@@ -129,5 +132,6 @@ protected:
 	Vector2f blockZonePos = Vector2f(800, 350);
 
 	vector<UnitZone*> zones;
+	map<string,CardData*> cardList;
 };
 

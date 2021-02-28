@@ -1,7 +1,7 @@
 #include "UnitZone.h"
 
 
-UnitZone::UnitZone(int zoneType, ZONE_OWNER zPlayer, ZONE_TYPE t) {
+UnitZone::UnitZone(int zoneType,Player* p, ZONE_OWNER zPlayer, ZONE_TYPE t) {
 	if (zoneType == 0) {
 		texIcon.loadFromFile("Textures/GUI/attackZone.png");
 	}
@@ -10,7 +10,8 @@ UnitZone::UnitZone(int zoneType, ZONE_OWNER zPlayer, ZONE_TYPE t) {
 	}
 	icon.setTexture(texIcon);
 
-	owner = zPlayer;
+	owner = p;
+	ownerType = zPlayer;
 	type = t;
 }
 
@@ -67,7 +68,33 @@ void UnitZone::UpdateStatMods() {
 	}
 }
 
-void UnitZone::LowerStamina() {
+void UnitZone::EndTurnUpkeep(DataBase* database) {
+	
+	for (Unit* u : unitList) {
+		if (type == ZONE_TYPE::Z_ATTACK) {
+			u->AddModifier(new Modifier(*database->modList["eot_stamina"]));
+		}
+		for (Modifier* mod : u->GetModifiers()) {
+			mod->ApplyEOT();
+		}
+		u->UpdateStats();
+	}
+	CheckStamina();
+}
+
+
+void UnitZone::NewTurnUpkeep(DataBase* database) {
+	for (Unit* u : unitList) {
+		if (type == ZONE_TYPE::Z_BLOCK) {
+			u->AddModifier(new Modifier(*database->modList["eot_stamina"]));
+			u->UpdateStats();
+		}
+	}
+	
+	CheckStamina();
+}
+
+void UnitZone::CheckStamina() {
 
 	for (int i = 0; i < unitList.size();i++) {
 		if (unitList[i]->GetStamina() <= 0) {

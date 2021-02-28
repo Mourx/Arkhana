@@ -4,6 +4,8 @@
 #include "UnitZone.h"
 #include "DataBase.h"
 
+class Player;
+
 class Card :
     public GameObject
 {
@@ -33,8 +35,9 @@ public:
     bool HasTargetZone() { return bHasTargetZone; }
     UnitZone* GetTargetZone() { return targetZone; }
 protected:
-    
+    void DoEffect();
     virtual void ApplyModifier(UnitZone*);
+    virtual void ApplyModifier(Unit*);
     void UpdatePositions();
     DataBase* database;
     Vector2f handPos;
@@ -86,7 +89,8 @@ protected:
 
     string zTag;
     AI_TAG AITag;
-    CARD_TYPE type = UNIT;
+    EffectData* effect = NULL;
+    CARD_TYPE type = CREATE_UNIT;
     ZONE_OWNER zOwner = Z_PLAYER;
     ZONE_TYPE zType = ZONE_TYPE::Z_ANY;
 };

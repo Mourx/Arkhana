@@ -26,11 +26,20 @@ public:
 	string name;
 	int cost;
 	CARD_TYPE cType;
+	string effect;
 	string unit;
 	string zTag;
+	ZONE_OWNER zOTag;
 	string shaderPath;
 	AI_TAG AITag;
 	vector<Modifier*> modifiers;
+};
+
+struct EffectData {
+	string name;
+	EFFECT_TYPE effect;
+	int value;
+	string text;
 };
 
 struct ModifierData {
@@ -40,6 +49,7 @@ public:
 	int multiplier;
 	STAT_TYPE sType;
 	string text;
+	int EOTChange = 0;
 	MODIFIER_TYPE mType;
 };
 
@@ -58,8 +68,10 @@ public:
 class DataBase {
 public:
 	map<string, UnitData*> UnitList;
-	map<string, CardData*> CardList;
+	map<string, CardData*> CardListRed;
+	map<string, CardData*> CardListEnemy;
 	map<string, ModifierData*> modList;
+	map<string, EffectData*> effectList;
 	vector<map<string, EncounterData*>> encounters;
 	vector<vector<string>> encounterNames;
 	map<int, string> costIcons;
@@ -81,10 +93,12 @@ public:
 	}
 
 	CARD_TYPE GetCardEnum(string data) {
-		if (data == "UNIT") return UNIT;
-		else if (data == "SPELL") return SPELL;
+		if (data == "CREATE_UNIT") return CREATE_UNIT;
+		else if (data == "APPLY_ZONE_MOD") return APPLY_ZONE_MOD;
+		else if (data == "TARGET_STRONGEST") return TARGET_STRONGEST;
+		else if (data == "EFFECT") return EFFECT;
 		
-		else return UNIT;
+		else return CREATE_UNIT;
 	}
 
 	ZONE_TYPE GetZoneEnum(string data) {
@@ -93,19 +107,33 @@ public:
 		else return ZONE_TYPE::Z_ANY;
 	}
 
+	ZONE_OWNER GetZoneOwnerEnum(string data) {
+		if (data == "Z_PLAYER") return ZONE_OWNER::Z_PLAYER;
+		else if (data == "Z_ENEMY") return ZONE_OWNER::Z_ENEMY;
+		else return ZONE_OWNER::Z_EITHER;
+	}
+
 	AI_TAG GetAITag(string data) {
 		if (data == "AI_RANDOM") return AI_RANDOM;
 		else if (data == "AI_ATTACK") return AI_ATTACK;
 		else if (data == "AI_BLOCK") return AI_BLOCK;
 		else if (data == "AI_MOST_UNITS_AI") return AI_MOST_UNITS_AI;
 		else if (data == "AI_MOST_UNITS_PLAYER") return AI_MOST_UNITS_PLAYER;
+		else if (data == "AI_STRONGEST_UNIT_PLAYER") return AI_STRONGEST_UNIT_PLAYER;
 		else return AI_RANDOM;
+	}
+
+	EFFECT_TYPE GetEffectEnum(string data) {
+		if (data == "AMOUR_MOD") return EFFECT_TYPE::ARMOUR_MOD;
+		else return EFFECT_TYPE::ARMOUR_MOD;
 	}
 
 	void BuildUnitLists();
 	void BuildModifierLists();
-	void BuildCardLists();
+	void BuildCardListsRed();
+	void BuildCardListsEnemy();
 	void BuildEncounterLists();
+	void BuildEffectLists();
 	void Init();
 };
 

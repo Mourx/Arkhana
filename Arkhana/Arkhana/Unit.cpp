@@ -9,10 +9,10 @@ Unit::Unit(UnitData data,vector<Modifier*> mods) {
 	for (Modifier* mod : mods) {
 		switch (mod->GetModType()) {
 		case MODIFIER_TYPE::UNIT_MOD:
-			unitMods.push_back(mod);
+			unitMods.push_back(new Modifier(mod));
 			break;
 		case MODIFIER_TYPE::AURA_MOD:
-			auraMods.push_back(mod);
+			auraMods.push_back(new Modifier(mod));
 			break;
 		}
 		

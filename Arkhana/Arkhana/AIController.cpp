@@ -32,5 +32,10 @@ UnitZone* AIController::GetTarget(Card* c) {
 			return PlayerAttackZone;
 		}
 		else return PlayerBlockZone;
+	case AI_STRONGEST_UNIT_PLAYER:
+		if (PlayerBlockZone->GetStrongestPower() > PlayerAttackZone->GetStrongestPower()) {
+			return PlayerBlockZone;
+		}
+		else return PlayerAttackZone;
 	}
 }

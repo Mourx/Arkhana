@@ -17,10 +17,14 @@ void DataBase::BuildModifierLists() {
 		mod->multiplier = ListItr->value["multiplier"].GetInt();
 		mod->sType = GetStatEnum(ListItr->value["sType"].GetString());
 		mod->mType = GetModEnum(ListItr->value["mType"].GetString());
+		if (ListItr->value.HasMember("EOTChange")) mod->EOTChange = ListItr->value["EOTChange"].GetInt();
 		if (ListItr->value.HasMember("text")) {
 			string text = ListItr->value["text"].GetString();
 			while (text.find("VALUE") != string::npos) {
 				text.replace(text.find("VALUE"), 5, to_string(mod->value));
+			}
+			while (text.find("EOTCHANGE") != string::npos) {
+				text.replace(text.find("EOTCHANGE"), 9, to_string(mod->EOTChange));
 			}
 			mod->text = text;
 		}
@@ -30,9 +34,37 @@ void DataBase::BuildModifierLists() {
 	fclose(fp);
 }
 
-void DataBase::BuildCardLists() {
+void DataBase::BuildEffectLists() {
 	FILE* fp;
-	fopen_s(&fp, "Data/Empress/Cards.json", "rb");
+	fopen_s(&fp, "Data/Effects.json", "rb");
+
+	char readBuffer[16384];
+	FileReadStream is(fp, readBuffer, sizeof(readBuffer));
+
+	Document d;
+	d.ParseStream(is);
+
+	for (Value::ConstMemberIterator ListItr = d["Effects"].MemberBegin(); ListItr != d["Effects"].MemberEnd(); ListItr++) {
+		EffectData* effect = new EffectData();
+		effect->name = ListItr->value["name"].GetString();
+		effect->value = ListItr->value["value"].GetInt();
+		effect->effect = GetEffectEnum(ListItr->value["type"].GetString());
+		if (ListItr->value.HasMember("text")) {
+			string text = ListItr->value["text"].GetString();
+			while (text.find("VALUE") != string::npos) {
+				text.replace(text.find("VALUE"), 5, to_string(effect->value));
+			}
+			effect->text = text;
+		}
+		string str(ListItr->name.GetString());
+		effectList.insert({ str,effect });
+	}
+	fclose(fp);
+}
+
+void DataBase::BuildCardListsRed() {
+	FILE* fp;
+	fopen_s(&fp, "Data/Red/Cards.json", "rb");
 
 	char readBuffer[16384];
 	FileReadStream is(fp, readBuffer, sizeof(readBuffer));
@@ -53,19 +85,54 @@ void DataBase::BuildCardLists() {
 		}
 		card->cost = ListItr->value["cost"].GetInt();
 		card->cType = GetCardEnum(ListItr->value["cardType"].GetString());
-		
+		if (ListItr->value.HasMember("effect")) card->effect = ListItr->value["effect"].GetString();
 		if(ListItr->value.HasMember("unit")) card->unit = ListItr->value["unit"].GetString();
 		card->zTag = ListItr->value["zTag"].GetString();
+		card->zOTag = GetZoneOwnerEnum(ListItr->value["zOTag"].GetString());
 		card->AITag = GetAITag(ListItr->value["AITag"].GetString());
 		card->shaderPath = ListItr->value["shaderPath"].GetString();
-		CardList.insert({ name,card });
+		CardListRed.insert({ name,card });
+	}
+	fclose(fp);
+}
+
+void DataBase::BuildCardListsEnemy() {
+	FILE* fp;
+	fopen_s(&fp, "Data/Enemy/Cards.json", "rb");
+
+	char readBuffer[16384];
+	FileReadStream is(fp, readBuffer, sizeof(readBuffer));
+
+	Document d;
+	d.ParseStream(is);
+
+	for (Value::ConstMemberIterator ListItr = d["Cards"].MemberBegin(); ListItr != d["Cards"].MemberEnd(); ListItr++) {
+		string name = ListItr->name.GetString();
+		CardData* card = new CardData();
+		card->name = ListItr->value["name"].GetString();
+		card->cost = ListItr->value["cost"].GetInt();
+		if (ListItr->value.HasMember("modifiers")) {
+			for (Value::ConstMemberIterator modifiersItr = ListItr->value["modifiers"].MemberBegin(); modifiersItr != ListItr->value["modifiers"].MemberEnd(); modifiersItr++) {
+				string str = modifiersItr->value.GetString();
+				card->modifiers.push_back(new Modifier(*modList[str]));
+			}
+		}
+		card->cost = ListItr->value["cost"].GetInt();
+		card->cType = GetCardEnum(ListItr->value["cardType"].GetString());
+		if (ListItr->value.HasMember("effect")) card->effect = ListItr->value["effect"].GetString();
+		if (ListItr->value.HasMember("unit")) card->unit = ListItr->value["unit"].GetString();
+		card->zTag = ListItr->value["zTag"].GetString();
+		card->zOTag = GetZoneOwnerEnum(ListItr->value["zOTag"].GetString());
+		card->AITag = GetAITag(ListItr->value["AITag"].GetString());
+		card->shaderPath = ListItr->value["shaderPath"].GetString();
+		CardListEnemy.insert({ name,card });
 	}
 	fclose(fp);
 }
 
 void DataBase::BuildUnitLists() {
 	FILE* fp;
-	fopen_s(&fp, "Data/Empress/Units.json", "rb");
+	fopen_s(&fp, "Data/Units.json", "rb");
 
 	char readBuffer[16384];
 	FileReadStream is(fp, readBuffer, sizeof(readBuffer));
@@ -140,7 +207,9 @@ void DataBase::Init() {
 		costIcons.insert({ i,path });
 	}
 	BuildModifierLists();
-	BuildCardLists();
+	BuildCardListsRed();
+	BuildCardListsEnemy();
 	BuildUnitLists();
 	BuildEncounterLists();
+	BuildEffectLists();
 }

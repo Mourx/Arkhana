@@ -8,10 +8,10 @@ Enemy::Enemy(RenderWindow* w,DataBase* data){
 	attackZonePos = Vector2f(800, 0);
 	blockZonePos = Vector2f(200, 0);
 
-	attackZone = new UnitZone(0,Z_ENEMY,ZONE_TYPE::Z_ATTACK);
+	attackZone = new UnitZone(0,this, Z_ENEMY,ZONE_TYPE::Z_ATTACK);
 	attackZone->SetPosition(attackZonePos);
 
-	blockZone = new UnitZone(1, Z_ENEMY,ZONE_TYPE::Z_BLOCK);
+	blockZone = new UnitZone(1,this, Z_ENEMY,ZONE_TYPE::Z_BLOCK);
 	blockZone->SetPosition(blockZonePos);
 
 	zones.push_back(attackZone);
@@ -24,8 +24,10 @@ Enemy::Enemy(RenderWindow* w,DataBase* data){
 	txtPhysArmPos = Vector2f(1500, 285);
 	txtHealthPos = Vector2f(1500, 115);
 
-	decklist.push_back(new Card(*database->CardList["Goblin"],database));
-	decklist.push_back(new Card(*database->CardList["Rage"],database));
+	cardList = database->CardListEnemy;
+
+	decklist.push_back(new Card(*cardList["Goblin"],database));
+	decklist.push_back(new Card(*cardList["Rage"],database));
 
 	InitSprites();
 	UpdateStrings();
@@ -80,19 +82,15 @@ void Enemy::DrawActions() {
 void Enemy::NewTurnUpkeep() {
 	ResetMana();
 
-	for (Unit* u : blockZone->GetUnits()) {
-		u->AddModifier(new Modifier(*database->modList["eot_stamina"]));
-	}
-	blockZone->LowerStamina();
+	attackZone->NewTurnUpkeep(database);
+	blockZone->NewTurnUpkeep(database);
 	bHasAttacked = false;
 }
 
 void Enemy::EndTurnUpkeep() {
 	SetNextMove();
-	for (Unit* u : attackZone->GetUnits()) {
-		u->AddModifier(new Modifier(*database->modList["eot_stamina"]));
-	}
-	attackZone->LowerStamina();
+	attackZone->EndTurnUpkeep(database);
+	blockZone->EndTurnUpkeep(database);
 }
 
 void Enemy::Update(Time t) {

@@ -26,6 +26,7 @@ public:
     void UpdateStrings();
     vector<Modifier*> GetAuras() { return auraMods; }
     void Move(Vector2f offset);
+    vector<Modifier*> GetModifiers() { return unitMods; }
 protected:
     void ModifyStat(STAT_TYPE stat, int value, int multiplier);
     

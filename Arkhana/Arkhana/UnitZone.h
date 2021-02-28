@@ -6,12 +6,12 @@
 #include <vector>
 
 using namespace std;
-
+class Player;
 class UnitZone :
     public GameObject
 {
 public:
-    UnitZone(int zoneType, ZONE_OWNER zPlayer, ZONE_TYPE t);
+    UnitZone(int zoneType, Player* own, ZONE_OWNER zPlayer, ZONE_TYPE t);
     ~UnitZone() {}
     vector<Unit*> GetUnits() { return unitList; }
     void Draw(RenderWindow* w);
@@ -19,16 +19,28 @@ public:
     int GetCombinedPhysicalPower();
     void AddUnit(Unit* u);
     void ClearUnits() { unitList.clear(); }
-    ZONE_OWNER GetOwner() { return owner; }
+    ZONE_OWNER GetOwnerType() { return ownerType; }
+    Player* GetOwner() { return owner; }
     void ModifyUnits(Modifier* mod);
-    void LowerStamina();
+    void CheckStamina();
+    int GetStrongestPower() {
+        int power = -999;
+        for (Unit* u : unitList) {
+            if (u->GetPPower() > power) {
+                power = u->GetPPower();
+            }
+        }
+        return power;
+    }
     ZONE_TYPE GetType() { return type; }
     Vector2f GetAnimationPoint() { return icon.getPosition() + animationPos; }
+    void EndTurnUpkeep(DataBase* database);
+    void NewTurnUpkeep(DataBase* database);
 protected:
     void UpdateStatMods();
     void UpdatePositions() {
         int offset = 0;
-        if (this->owner == ENEMY) {
+        if (this->ownerType == ENEMY) {
             offset = 270;
         }
         for (int i = 0; i < unitList.size(); i++) {
@@ -40,7 +52,8 @@ protected:
     float zoneMultiplierPhys = 0;
 
     vector<Unit*> unitList;
-    ZONE_OWNER owner;
+    ZONE_OWNER ownerType;
+    Player* owner;
     Vector2f unitOffset = Vector2f(20, 20);
     Vector2f animationPos = Vector2f(50, 50);
     vector<Modifier*> zoneMods;

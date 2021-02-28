@@ -24,13 +24,22 @@
       "mType": "ZONE_MOD",
       "text": "Friendly units gain +VALUE\n\t physical attack"
     },
+    "rot_modifier": {
+      "name": "Rot Modifier",
+      "value": -999999999,
+      "multiplier": 0,
+      "sType": "STAMINA",
+      "mType": "UNIT_MOD",
+      "text": "Reduce the strongest\n unit's stamina to 0"
+    },
     "ogre_modifier": {
       "name": "Ogre Modifier",
-      "value": 4,
+      "value": 0,
       "multiplier": 0,
       "sType": "DMG_PHSICAL",
       "mType": "UNIT_MOD",
-      "text": "Ogre gains +VALUE\n physical attack"
+      "EOTChange" :  4,
+      "text": "Ogre gains +EOTCHANGE attack\n\t each turn"
     }
   }
 }

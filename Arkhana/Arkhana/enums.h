@@ -29,13 +29,16 @@ enum COMBAT_TURN {
 };
 
 enum CARD_TYPE {
-	UNIT = 0,
-	SPELL = 1
+	CREATE_UNIT = 0,
+	APPLY_ZONE_MOD = 1,
+	TARGET_STRONGEST = 2,
+	EFFECT = 3
 };
 
 enum ZONE_OWNER {
 	Z_PLAYER = 0,
-	Z_ENEMY = 1
+	Z_ENEMY = 1,
+	Z_EITHER = 2
 };
 
 enum class ZONE_TYPE {
@@ -49,14 +52,19 @@ enum AI_TAG {
 	AI_ATTACK,
 	AI_BLOCK,
 	AI_MOST_UNITS_AI,
-	AI_MOST_UNITS_PLAYER
+	AI_MOST_UNITS_PLAYER,
+	AI_STRONGEST_UNIT_PLAYER
 };
 
 enum class MODIFIER_TYPE {
 	ZONE_MOD = 0,
 	UNIT_MOD = 1,
 	INSTANT_MOD = 2,
-	AURA_MOD
+	AURA_MOD = 3
+};
+
+enum class EFFECT_TYPE {
+	ARMOUR_MOD
 };
 
 enum class STAT_TYPE {

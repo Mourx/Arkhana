@@ -1,5 +1,5 @@
 #include "Card.h"
-
+#include "Player.h"
 
 Card::Card(CardData data,DataBase* dataB) {
 	database = dataB;
@@ -13,10 +13,12 @@ Card::Card(CardData data,DataBase* dataB) {
 	texCost.loadFromFile(database->costIcons[cost]);
 	zTag = data.zTag;
 	zType = database->GetZoneEnum(zTag);
+	zOwner = data.zOTag;
 	AITag = data.AITag;
+	if(data.effect != "") effect = database->effectList[data.effect];
 	costIcon.setTexture(texCost);
 	SetPosition(Vector2f(300, 300));
-	if (type == UNIT) {
+	if (type == CREATE_UNIT) {
 		pPow = database->UnitList[name]->physPower;
 		stamina = database->UnitList[name]->stamina;
 	}
@@ -62,6 +64,7 @@ Card::Card(CardData data,DataBase* dataB) {
 	txtMag.setFillColor(Color::Black);
 
 	string txt;
+	if(effect != NULL) txt = txt + effect->text;
 	for (Modifier* m : modifiers) {
 		txt = txt +"\n"+ m->GetText();
 	}
@@ -71,7 +74,7 @@ Card::Card(CardData data,DataBase* dataB) {
 	txtDesc.setCharacterSize(12);
 	txtDesc.setFillColor(Color::Black);
 
-	if (type == UNIT) {
+	if (type == CREATE_UNIT) {
 		texCardArt.loadFromFile(database->UnitList[unit]->filePath);
 	}
 	cardArt.setTexture(texCardArt);
@@ -82,17 +85,36 @@ Card::Card(CardData data,DataBase* dataB) {
 
 void Card::Play() {
 	Unit* u;
+	Unit* targUnit;
 	switch (type) {
-	case UNIT:
+	case CREATE_UNIT:
 		u = new Unit(*database->UnitList[unit], modifiers);
 		targetZone->AddUnit(u);
-		
 		break;
-	case SPELL:
+	case APPLY_ZONE_MOD:
 		ApplyModifier(targetZone);
 		break;
+	case TARGET_STRONGEST:
+		targUnit = NULL;
+		for (Unit* u : targetZone->GetUnits()) {
+			if (targUnit == NULL) targUnit = u;
+			else if (targUnit->GetPPower() < u->GetPPower()) {
+				targUnit = u;
+			}
+			else if (targUnit->GetPPower() == u->GetPPower()) {
+				if (targUnit->GetStamina() < u->GetStamina()) {
+					targUnit = u;
+				}
+			}
+		
+		}
+
+		if(targUnit != NULL) ApplyModifier(targUnit);
+		break;
 	}
+	if(effect != NULL) DoEffect();
 	bHasTargetZone = false;
+	targetZone->CheckStamina();
 	targetZone = NULL;
 }
 
@@ -102,18 +124,16 @@ void Card::Play(UnitZone* zone) {
 }
 
 
+void Card::ApplyModifier(Unit* u) {
+	for (Modifier* m : modifiers) {
+		u->AddModifier(m);
+	}
+}
+
 void Card::ApplyModifier(UnitZone* zone) {
 	for (Modifier* modifier : modifiers) {
-		mod = modifier->GetModType();
-		switch (mod) {
-		case MODIFIER_TYPE::ZONE_MOD:
-			zone->ModifyUnits(modifier);
-			break;
-		case MODIFIER_TYPE::UNIT_MOD:
-			break;
-		case MODIFIER_TYPE::INSTANT_MOD:
-			break;
-		}
+		zone->ModifyUnits(modifier);
+
 	}
 }
 
@@ -123,9 +143,17 @@ void Card::UpdatePositions() {
 	
 }
 
+void Card::DoEffect() {
+	switch (effect->effect) {
+	case EFFECT_TYPE::ARMOUR_MOD:
+		Player* p = targetZone->GetOwner();
+		p->ModifyArmour(effect->value);
+	}
+}
+
 void Card::Draw(RenderWindow* w) {
 	w->draw(icon, &cardShader);
-	if (type == UNIT) {
+	if (type == CREATE_UNIT) {
 		w->draw(txtPhys);
 		w->draw(txtMag);
 		w->draw(physIcon);

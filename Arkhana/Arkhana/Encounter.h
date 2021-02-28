@@ -24,5 +24,6 @@ protected:
     EncounterData* encData = new EncounterData();
 
     Enemy* enemy;
+    map<string, CardData*> cardList;
 };
 

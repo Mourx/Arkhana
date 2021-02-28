@@ -1,0 +1,11 @@
+{
+  "Effects": {
+    "Big Armour": {
+      "name": "Big Armour",
+      "type": "ARMOUR_MOD",
+      "value": 5,
+      "text" : "Increases Armour by VALUE",
+      "filePath": "Textures/Units/gnome.png"
+    }
+  }
+}

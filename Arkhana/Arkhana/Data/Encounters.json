@@ -2,7 +2,7 @@
   "Encounters": {
     "goblins": {
       "name": "goblins",
-      "health": 40,
+      "health": 1,
       "armour": 0,
       "decklist": [
         [ "Goblin", "Goblin" ],
@@ -17,10 +17,20 @@
       "name": "ogres",
       "health": 40,
       "armour": 10,
-      "decklist": [ [ "Ogre", "Goblin" ] ],
-      "startingPlay": [ "Ogre" ],
-      "level": 1,
-      "actionCount": 1
+      "decklist": [
+        [ "Ogre" ],
+        [ "Sudden Rot" ],
+        [ "Goblin" ]
+      ],
+        "startingPlay"
+        :
+        [ "Ogre" ],
+        "level"
+        :
+        1,
+        "actionCount"
+        :
+        1
     }
 
   }

@@ -8,23 +8,25 @@ Player::Player(RenderWindow* w, DataBase* data) {
 	database = data;
 	window = w;
 	
-	decklist.push_back(new Card(*database->CardList["Frog"],database));
-	decklist.push_back(new Card(*database->CardList["Frog"], database));
-	decklist.push_back(new Card(*database->CardList["Frog"], database));
-	decklist.push_back(new Card(*database->CardList["Jelly"], database));
-	decklist.push_back(new Card(*database->CardList["Jelly"], database));
-	decklist.push_back(new Card(*database->CardList["Jelly"], database));
-	decklist.push_back(new Card(*database->CardList["Rage"], database));
-	decklist.push_back(new Card(*database->CardList["Rage"], database));
+	cardList = database->CardListRed;
+
+	decklist.push_back(new Card(*cardList["Frog"],database));
+	decklist.push_back(new Card(*cardList["Frog"], database));
+	decklist.push_back(new Card(*cardList["Big Armour"], database));
+	decklist.push_back(new Card(*cardList["Sudden Rot"], database));
+	decklist.push_back(new Card(*cardList["Jelly"], database));
+	decklist.push_back(new Card(*cardList["Big Armour"], database));
+	decklist.push_back(new Card(*cardList["Big Armour"], database));
+	decklist.push_back(new Card(*cardList["Big Armour"], database));
 
 	// load these based on the selected Arcana
 	armour = 10;
 	health = 50;
 
-	attackZone = new UnitZone(0,Z_PLAYER,ZONE_TYPE::Z_ATTACK);
+	attackZone = new UnitZone(0,this,Z_PLAYER,ZONE_TYPE::Z_ATTACK);
 	attackZone->SetPosition(attackZonePos);
 
-	blockZone = new UnitZone(1,Z_PLAYER,ZONE_TYPE::Z_BLOCK);
+	blockZone = new UnitZone(1,this,Z_PLAYER,ZONE_TYPE::Z_BLOCK);
 	blockZone->SetPosition(blockZonePos);
 
 	zones.push_back(attackZone);
@@ -161,19 +163,15 @@ void Player::NewTurnUpkeep() {
 	DrawCards(CARDS_PER_TURN);
 	ResetMana();
 	bHasAttacked = false;
-	for (Unit* u : blockZone->GetUnits()) {
-		u->AddModifier(new Modifier(*database->modList["eot_stamina"]));
-	}
-	blockZone->LowerStamina();
+	attackZone->NewTurnUpkeep(database);
+	blockZone->NewTurnUpkeep(database);
+	blockZone->CheckStamina();
 }
 
 void Player::EndTurnUpkeep() {
-	for (Unit* u : attackZone->GetUnits()) {
-		u->AddModifier(new Modifier(*database->modList["eot_stamina"]));
-	}
-	
 
-	attackZone->LowerStamina();
+	attackZone->EndTurnUpkeep(database);
+	blockZone->EndTurnUpkeep(database);
 	DiscardHand();
 	
 }

@@ -1,0 +1,86 @@
+{
+  "Cards": {
+    "Goblin": {
+      "name": "Goblin",
+      "cost": 1,
+      "cardType": "CREATE_UNIT",
+      "unit": "Goblin",
+      "zTag": "",
+      "zOTag": "Z_PLAYER",
+      "AITag": "AI_RANDOM",
+      "shaderPath": "Textures/Shaders/enemyGoblin.vert"
+    },
+    "Jelly": {
+      "name": "Jelly",
+      "cost": 1,
+      "cardType": "CREATE_UNIT",
+      "unit": "Jelly",
+      "zTag": "DEFENSIVE",
+      "zOTag": "Z_PLAYER",
+      "AITag": "AI_BLOCK",
+      "shaderPath": "Textures/Shaders/enemyGoblin.vert"
+    },
+    "Big Armour": {
+      "name": "Big Armour",
+      "cost": 1,
+      "cardType": "EFFECT",
+      "effect": "Big Armour",
+      "zTag": "",
+      "zOTag": "Z_PLAYER",
+      "AITag": "AI_BLOCK",
+      "shaderPath": "Textures/Shaders/enemyGoblin.vert"
+    },
+    "Two Gnomes": {
+      "name": "Two Gnomes",
+      "cost": 2,
+      "cardType": "CREATE_UNIT",
+      "unit": "Two Gnomes",
+      "zTag": "",
+      "zOTag": "Z_PLAYER",
+      "AITag": "AI_RANDOM",
+      "shaderPath": "Textures/Shaders/enemyGoblin.vert"
+    },
+    "Rage": {
+      "name": "Rage",
+      "cost": 2,
+      "cardType": "APPLY_ZONE_MOD",
+      "zTag": "",
+      "zOTag": "Z_PLAYER",
+      "AITag": "AI_MOST_UNITS_AI",
+      "modifiers": { "modifier": "rage_modifier" },
+      "shaderPath": "Textures/Shaders/enemyGoblin.vert"
+    },
+    "Sudden Rot": {
+      "name": "Sudden Rot",
+      "cost": 2,
+      "cardType": "TARGET_STRONGEST",
+      "zTag": "",
+      "zOTag": "Z_ENEMY",
+      "AITag": "AI_STRONGEST_UNIT_PLAYER",
+      "modifiers": { "modifier": "rot_modifier" },
+      "shaderPath": "Textures/Shaders/enemyGoblin.vert"
+    },
+    "Shrine": {
+      "name": "Shrine",
+      "cost": 3,
+      "cardType": "CREATE_UNIT",
+      "unit": "Shrine",
+      "zTag": "",
+      "zOTag": "Z_PLAYER",
+      "AITag": "AI_MOST_UNITS",
+      "modifiers": { "modifier": "aura_empress_shrine" },
+      "shaderPath": "Textures/Shaders/enemyGoblin.vert"
+    },
+    "Ogre": {
+      "name": "Ogre",
+      "cost": 4,
+      "cardType": "CREATE_UNIT",
+      "unit": "Ogre",
+      "zOTag": "Z_PLAYER",
+      "zTag": "AGGRESSIVE",
+      "AITag": "AI_ATTACK",
+      "modifiers": { "modifier": "ogre_modifier" },
+      "shaderPath": "Textures/Shaders/enemyGoblin.vert"
+    }
+  }
+}
