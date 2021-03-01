@@ -37,6 +37,10 @@ Player::Player(RenderWindow* w, DataBase* data) {
 }
 
 void Player::InitSprites() {
+	texPlayerBar.loadFromFile("Textures/GUI/playerBar.png");
+	playerBarIcon.setTexture(texPlayerBar);
+	playerBarIcon.setPosition(playerBarPos);
+
 	texDeck.loadFromFile("Textures/GUI/deck_book.png");
 	deckIcon.setTexture(texDeck);
 	deckIcon.setPosition(deckPos);
@@ -133,10 +137,14 @@ void Player::Update(Time t) {
 		UpdateStrings();
 	}
 }
+void Player::DrawPlayerBar() {
+	window->draw(playerBarIcon);
+}
 
 void Player::DrawBackground() {
 	attackZone->Draw(window);
 	blockZone->Draw(window);
+	
 	window->draw(deckIcon);
 	window->draw(gemIcon);
 	window->draw(discardIcon);

@@ -12,11 +12,9 @@ int main() {
 	DataBase* database = new DataBase();
 	database->Init();
 	
-	RenderWindow* window = new RenderWindow(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Card games or something idk");
-	
+	RenderWindow* window = new RenderWindow(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Card games or something idk",Style::Fullscreen);
 	
 	Player* player = new Player(window, database);
-	//CombatScreen* combat = new CombatScreen(window, database,player,new Encounter(database,0));
 	MainMenuScreen* mainMenu = new MainMenuScreen(window);
 	PathScreen* pathScreen = new PathScreen(window, database, player);
 	Screen* currentScreen = new Screen();
@@ -65,7 +63,7 @@ int main() {
 			
 		}
 		window->clear(Color::Magenta);
-
+		player->DrawPlayerBar();
 		currentScreen->Draw();
 		window->display();
 	}

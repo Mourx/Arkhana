@@ -5,8 +5,8 @@ Enemy::Enemy(RenderWindow* w,DataBase* data){
 	database = data;
 	window = w;
 
-	attackZonePos = Vector2f(800, 0);
-	blockZonePos = Vector2f(200, 0);
+	attackZonePos = Vector2f(800, 180);
+	blockZonePos = Vector2f(200, 180);
 
 	attackZone = new UnitZone(0,this, Z_ENEMY,ZONE_TYPE::Z_ATTACK);
 	attackZone->SetPosition(attackZonePos);
@@ -17,12 +17,12 @@ Enemy::Enemy(RenderWindow* w,DataBase* data){
 	zones.push_back(attackZone);
 	zones.push_back(blockZone);
 
-	physArmPos = Vector2f(1410, 265);
-	healthPos = Vector2f(1410, 95);
+	physArmPos = Vector2f(1410, 445);
+	healthPos = Vector2f(1410, 275);
 	attackDirection = 1;
 	
-	txtPhysArmPos = Vector2f(1500, 285);
-	txtHealthPos = Vector2f(1500, 115);
+	txtPhysArmPos = Vector2f(1500, 465);
+	txtHealthPos = Vector2f(1500, 295);
 
 	cardList = database->CardListEnemy;
 

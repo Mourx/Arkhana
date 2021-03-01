@@ -8,7 +8,7 @@ PathScreen::PathScreen(RenderWindow* w, DataBase* db, Player* p) {
 	srand(time(NULL));
 	texBackground.loadFromFile("Textures/GUI/pathBackground.png");
 	background.setTexture(texBackground);
-	background.setPosition(0, 0);
+	background.setPosition(0, 180);
 	InitEncounters();
 }
 

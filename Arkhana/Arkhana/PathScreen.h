@@ -27,7 +27,7 @@ protected:
 
     vector<int> encounterAmounts = { 3,2,0 };
 
-    vector<Vector2f> encPos = { Vector2f(200, 150),Vector2f(700, 200),Vector2f(1100, 400) };
+    vector<Vector2f> encPos = { Vector2f(200, 330),Vector2f(700, 380),Vector2f(1100, 580) };
 
     Sprite background;
     Texture texBackground;

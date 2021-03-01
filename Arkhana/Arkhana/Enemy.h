@@ -27,7 +27,7 @@ protected:
     vector<Card*> deck;
     vector<Card*> startingPlay;
 
-    Vector2f eNextPos = Vector2f(25, 125);
+    Vector2f eNextPos = Vector2f(25, 305);
 
 };
 

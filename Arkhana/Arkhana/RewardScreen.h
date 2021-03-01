@@ -23,6 +23,6 @@ protected:
     int moneyReward = 0;
     int optionsAmount = 3;
     Player* player;
-    Vector2f optionPos = Vector2f(500, 200);
+    Vector2f optionPos = Vector2f(500, 380);
 };
 

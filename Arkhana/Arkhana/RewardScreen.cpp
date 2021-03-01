@@ -8,7 +8,7 @@ RewardScreen::RewardScreen(RenderWindow* w,DataBase* db, Player* p) {
 
 	texBackground.loadFromFile("Textures/GUI/rewardBackground.png");
 	background.setTexture(texBackground);
-	background.setPosition(0, 0);
+	background.setPosition(0, 180);
 	GenerateOptions();
 }
 

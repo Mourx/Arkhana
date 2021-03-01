@@ -17,6 +17,7 @@ public:
 	void Setup();
 	void DrawBackground();
 	void DrawForeground();
+	void DrawPlayerBar();
 	void Update(Time t);
 
 	vector<Card*> GetHand() { return hand; }
@@ -53,8 +54,8 @@ protected:
 	vector<Card*> burnt;
 	random_device random;
 
-	Vector2f cardsStart = Vector2f(200, 700);
-	Vector2f cardsEnd = Vector2f(1250, 700);
+	Vector2f cardsStart = Vector2f(200, 880);
+	Vector2f cardsEnd = Vector2f(1250, 880);
 	Vector2f offScreenPos = Vector2f(-200, -200);
 
 	RenderWindow* window;
@@ -70,43 +71,47 @@ protected:
 	int currentMana = 3;
 
 	Text txtCurMana;
-	Vector2f txtCurManaPos = Vector2f(100,700);
+	Vector2f txtCurManaPos = Vector2f(100,880);
 
 	UnitZone* attackZone;
 	UnitZone* blockZone;
 
 	Sprite deckIcon;
 	Texture texDeck;
-	Vector2f deckPos = Vector2f(50, 780);
+	Vector2f deckPos = Vector2f(50, 960);
 
 	Text txtDeckSize;
-	Vector2f txtDeckSizePos = Vector2f(100, 830);
+	Vector2f txtDeckSizePos = Vector2f(100, 1010);
 
 	Text txtDiscardSize;
-	Vector2f txtDiscardSizePos = Vector2f(1490, 840);
+	Vector2f txtDiscardSizePos = Vector2f(1490, 1020);
 
 	Text txtBurntSize;
-	Vector2f txtBurntSizePos = Vector2f(1490, 750);
+	Vector2f txtBurntSizePos = Vector2f(1490, 930);
 
 	Sprite gemIcon;
 	Texture texGem;
-	Vector2f gemPos = Vector2f(50, 620);
+	Vector2f gemPos = Vector2f(50, 800);
 
 	Sprite discardIcon;
 	Texture texDiscard;
-	Vector2f discardPos = Vector2f(1450, 790);
+	Vector2f discardPos = Vector2f(1450, 970);
 
 	Sprite burntIcon;
 	Texture texBurnt;
-	Vector2f burntPos = Vector2f(1450, 710);
+	Vector2f burntPos = Vector2f(1450, 890);
+
+	Sprite playerBarIcon;
+	Texture texPlayerBar;
+	Vector2f playerBarPos = Vector2f(0, 0);
 
 	Sprite physArmIcon;
 	Texture texPhysArm;
-	Vector2f physArmPos = Vector2f(1410, 350);
+	Vector2f physArmPos = Vector2f(1410, 530);
 
 	Sprite healthIcon;
 	Texture texHealth;
-	Vector2f healthPos = Vector2f(1410, 520);
+	Vector2f healthPos = Vector2f(1410, 700);
 
 	float attackDuration = 1;
 	float attackTimer = 0;
@@ -125,11 +130,11 @@ protected:
 	Text txtHealth;
 	Text txtPhysArm;
 
-	Vector2f txtHealthPos = Vector2f(1500, 540);
-	Vector2f txtPhysArmPos = Vector2f(1500, 370);
+	Vector2f txtHealthPos = Vector2f(1500, 720);
+	Vector2f txtPhysArmPos = Vector2f(1500, 550);
 
-	Vector2f attackZonePos = Vector2f(200, 350);
-	Vector2f blockZonePos = Vector2f(800, 350);
+	Vector2f attackZonePos = Vector2f(200, 530);
+	Vector2f blockZonePos = Vector2f(800, 530);
 
 	vector<UnitZone*> zones;
 	map<string,CardData*> cardList;

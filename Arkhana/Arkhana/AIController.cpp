@@ -23,12 +23,12 @@ UnitZone* AIController::GetTarget(Card* c) {
 		if (r <= 1) return AIAttackZone;
 		else return AIBlockZone;
 	case AI_MOST_UNITS_AI:
-		if (AIAttackZone->GetUnits() >= AIBlockZone->GetUnits()) {
+		if (AIAttackZone->GetUnits().size() >= AIBlockZone->GetUnits().size()) {
 			return AIAttackZone;
 		}
 		else return AIBlockZone;
 	case AI_MOST_UNITS_PLAYER:
-		if (PlayerAttackZone->GetUnits() >= PlayerBlockZone->GetUnits()) {
+		if (PlayerAttackZone->GetUnits().size() >= PlayerBlockZone->GetUnits().size()) {
 			return PlayerAttackZone;
 		}
 		else return PlayerBlockZone;
