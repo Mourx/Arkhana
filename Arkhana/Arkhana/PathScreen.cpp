@@ -10,10 +10,11 @@ PathScreen::PathScreen(RenderWindow* w, DataBase* db, Player* p) {
 	background.setTexture(texBackground);
 	background.setPosition(0, 180);
 	InitEncounters();
+	type = PATH_SCREEN;
 }
 
 void PathScreen::ResetDetails(COMBAT_RESULT res) {
-	if (res == WIN) {
+	if (res == WIN && currentEncounter != NULL) {
 		currentEncounter->SetComplete(true);
 	}
 	currentEncounter = NULL;

@@ -7,7 +7,7 @@ CombatScreen::CombatScreen(RenderWindow* w,DataBase* data,Player* p,Encounter* e
 	player = p;
 	encounter = enc;
 	player->Setup();
-
+	type = COMBAT_SCREEN;
 	enemy = encounter->GetEnemy();
 
 

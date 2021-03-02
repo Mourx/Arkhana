@@ -37,6 +37,7 @@ public:
 	void ModifyArmour(int val) { armour += val; }
 	map<string, CardData*> GetCardLists() { return cardList; }
 	void AddCard(Card* c) { decklist.push_back(c); }
+	void SetFaction();
 protected:
 	void DiscardHand();
 	void DrawCards(int amount);
@@ -66,9 +67,12 @@ protected:
 	int maxArmour = 20;
 	int armour = maxArmour;
 	int health = 10;
+	int maxHealth = 50;
 
 	int maxMana = 3;
 	int currentMana = 3;
+
+	int currentGold = 30;
 
 	Text txtCurMana;
 	Vector2f txtCurManaPos = Vector2f(100,880);
@@ -105,13 +109,24 @@ protected:
 	Texture texPlayerBar;
 	Vector2f playerBarPos = Vector2f(0, 0);
 
+	Sprite playerGoldIcon;
+	Texture texPlayerGold;
+	Vector2f playerGoldPos = Vector2f(400, 50);
+	Text txtPlayerGold;
+	Vector2f txtPlayerGoldPos = playerGoldPos + Vector2f(85, 20);
+
+	Sprite deckSizeIcon;
+	Vector2f deckSizePos = Vector2f(600, 40);
+	Text txtDeckTotalSize;
+	Vector2f txtDeckTotalSizePos = deckSizePos + Vector2f(110, 50);
+
 	Sprite physArmIcon;
 	Texture texPhysArm;
 	Vector2f physArmPos = Vector2f(1410, 530);
 
 	Sprite healthIcon;
 	Texture texHealth;
-	Vector2f healthPos = Vector2f(1410, 700);
+	Vector2f healthPos = Vector2f(200, 50);
 
 	float attackDuration = 1;
 	float attackTimer = 0;
@@ -130,8 +145,8 @@ protected:
 	Text txtHealth;
 	Text txtPhysArm;
 
-	Vector2f txtHealthPos = Vector2f(1500, 720);
-	Vector2f txtPhysArmPos = Vector2f(1500, 550);
+	Vector2f txtHealthPos = healthPos + Vector2f(85, 20);
+	Vector2f txtPhysArmPos = physArmPos + Vector2f(70, 150);
 
 	Vector2f attackZonePos = Vector2f(200, 530);
 	Vector2f blockZonePos = Vector2f(800, 530);

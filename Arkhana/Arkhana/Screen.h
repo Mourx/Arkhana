@@ -15,9 +15,10 @@ public:
 	virtual void MouseClicked(Vector2f mousePos) {}
 	virtual void MouseReleased(Vector2f mousePos) {}
 	NEXT_SCREEN GetNextScreen() { return nextScreen; }
+	NEXT_SCREEN GetType() { return type; }
 protected:
 	RenderWindow* window;
 	NEXT_SCREEN nextScreen = NONE;
-
+	NEXT_SCREEN type = NONE;
 };
 

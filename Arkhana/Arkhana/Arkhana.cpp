@@ -15,10 +15,10 @@ int main() {
 	RenderWindow* window = new RenderWindow(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Card games or something idk",Style::Fullscreen);
 	
 	Player* player = new Player(window, database);
-	MainMenuScreen* mainMenu = new MainMenuScreen(window);
+	MainMenuScreen* mainMenu = new MainMenuScreen(window,player);
 	PathScreen* pathScreen = new PathScreen(window, database, player);
 	Screen* currentScreen = new Screen();
-	currentScreen = pathScreen;
+	currentScreen = mainMenu;
 	Clock clock;
 	Time elapsed;
 	Event event;
@@ -28,7 +28,7 @@ int main() {
 		currentScreen->Update(elapsed);
 		switch (currentScreen->GetNextScreen()) {
 		case MAIN_MENU:
-			currentScreen = new MainMenuScreen(window);
+			currentScreen = new MainMenuScreen(window,player);
 
 			break;
 		case COMBAT_SCREEN:
@@ -63,7 +63,7 @@ int main() {
 			
 		}
 		window->clear(Color::Magenta);
-		player->DrawPlayerBar();
+		if(currentScreen->GetType() != MAIN_MENU) player->DrawPlayerBar();
 		currentScreen->Draw();
 		window->display();
 	}

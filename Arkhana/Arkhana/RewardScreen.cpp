@@ -6,6 +6,7 @@ RewardScreen::RewardScreen(RenderWindow* w,DataBase* db, Player* p) {
 	database = db;
 	player = p;
 
+	type = REWARD_SCREEN;
 	texBackground.loadFromFile("Textures/GUI/rewardBackground.png");
 	background.setTexture(texBackground);
 	background.setPosition(0, 180);
@@ -14,10 +15,20 @@ RewardScreen::RewardScreen(RenderWindow* w,DataBase* db, Player* p) {
 
 
 void RewardScreen::GenerateOptions() {
-	map<string,CardData*> cardList = player->GetCardLists();
+	selCard = NULL;
+	map<string, CardData*> cardList = player->GetCardLists();
+
+	vector<int> cIns;
 	for (int i = 0; i < optionsAmount; i++) {
+		int r = rand() % cardList.size();
+		while (!(count(cIns.begin(), cIns.end(), r)==0)) {
+			r = rand() % cardList.size();
+		}
+		cIns.push_back(r);
+	}
+	for (int i = 0; i < cIns.size(); i++) {
 		map<string, CardData*>::iterator it = cardList.begin();
-		advance(it, rand() % cardList.size());
+		advance(it, cIns[i]);
 		CardData* data = it->second;
 		Card* c = new Card(*data, database);
 		c->SetPosition(optionPos + Vector2f(i * 160, 0));
@@ -44,8 +55,10 @@ void RewardScreen::MouseMoved(Vector2f mousePos) {
 }
 
 void RewardScreen::MouseClicked(Vector2f mousePos) {
-	player->AddCard(selCard);
-	options.clear();
+	if (selCard != NULL) {
+		player->AddCard(selCard);
+		options.clear();
 
-	nextScreen = PATH_SCREEN;
+		nextScreen = PATH_SCREEN;
+	}
 }

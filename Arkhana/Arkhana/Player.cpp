@@ -8,20 +8,11 @@ Player::Player(RenderWindow* w, DataBase* data) {
 	database = data;
 	window = w;
 	
-	cardList = database->CardListRed;
-
-	decklist.push_back(new Card(*cardList["Frog"],database));
-	decklist.push_back(new Card(*cardList["Frog"], database));
-	decklist.push_back(new Card(*cardList["Big Armour"], database));
-	decklist.push_back(new Card(*cardList["Sudden Rot"], database));
-	decklist.push_back(new Card(*cardList["Jelly"], database));
-	decklist.push_back(new Card(*cardList["Big Armour"], database));
-	decklist.push_back(new Card(*cardList["Big Armour"], database));
-	decklist.push_back(new Card(*cardList["Big Armour"], database));
+	
 
 	// load these based on the selected Arcana
 	armour = 10;
-	health = 50;
+	health = maxHealth;
 
 	attackZone = new UnitZone(0,this,Z_PLAYER,ZONE_TYPE::Z_ATTACK);
 	attackZone->SetPosition(attackZonePos);
@@ -41,10 +32,19 @@ void Player::InitSprites() {
 	playerBarIcon.setTexture(texPlayerBar);
 	playerBarIcon.setPosition(playerBarPos);
 
+	texPlayerGold.loadFromFile("Textures/GUI/gold.png");
+	playerGoldIcon.setTexture(texPlayerGold);
+	playerGoldIcon.setPosition(playerGoldPos);
+
 	texDeck.loadFromFile("Textures/GUI/deck_book.png");
 	deckIcon.setTexture(texDeck);
 	deckIcon.setPosition(deckPos);
 	deckIcon.setScale(2, 2);
+
+	deckSizeIcon.setTexture(texDeck);
+	deckSizeIcon.setPosition(deckSizePos);
+	deckSizeIcon.setScale(2, 2);
+
 
 	texGem.loadFromFile("Textures/Cards/gem.png");
 	gemIcon.setTexture(texGem);
@@ -65,7 +65,7 @@ void Player::InitSprites() {
 	texPhysArm.loadFromFile("Textures/GUI/armourPhysical.png");
 	physArmIcon.setTexture(texPhysArm);
 	physArmIcon.setPosition(physArmPos);
-	physArmIcon.setScale(2, 2);
+	physArmIcon.setScale(4, 4);
 
 	
 	texHealth.loadFromFile("Textures/GUI/health.png");
@@ -74,6 +74,9 @@ void Player::InitSprites() {
 	healthIcon.setScale(2, 2);
 
 	font.loadFromFile("Fonts/Arial/arial.ttf");
+
+	txtPlayerGold.setPosition(txtPlayerGoldPos);
+	txtPlayerGold.setFont(font);
 
 	txtHealth.setPosition(txtHealthPos);
 	txtHealth.setFont(font);
@@ -85,6 +88,9 @@ void Player::InitSprites() {
 	txtCurMana.setCharacterSize(60);
 	txtCurMana.setFillColor(Color::Cyan);
 
+	txtDeckTotalSize.setFont(font);
+	txtDeckTotalSize.setPosition(txtDeckTotalSizePos);
+
 	txtDeckSize.setFont(font);
 	txtDiscardSize.setPosition(txtDiscardSizePos);
 	txtBurntSize.setPosition(txtBurntSizePos);
@@ -94,12 +100,14 @@ void Player::InitSprites() {
 }
 
 void Player::UpdateStrings() {
-	txtHealth.setString(to_string(health));
+	txtHealth.setString(to_string(health) + "/" + to_string(maxHealth));
+	txtDeckTotalSize.setString(to_string(decklist.size()));
 	txtPhysArm.setString(to_string(armour));
 	txtCurMana.setString(to_string(currentMana));
 	txtDeckSize.setString(to_string(deck.size()));
 	txtDiscardSize.setString(to_string(discard.size()));
 	txtBurntSize.setString(to_string(burnt.size()));
+	txtPlayerGold.setString(to_string(currentGold));
 
 	FloatRect tR = txtCurMana.getLocalBounds();
 	txtCurMana.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
@@ -109,6 +117,10 @@ void Player::UpdateStrings() {
 	txtDeckSize.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
 	txtDeckSize.setPosition(txtDeckSizePos);
 
+	tR = txtDeckTotalSize.getLocalBounds();
+	txtDeckTotalSize.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
+	txtDeckTotalSize.setPosition(txtDeckTotalSizePos);
+
 	tR = txtDiscardSize.getLocalBounds();
 	txtDiscardSize.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
 	txtDiscardSize.setPosition(txtDiscardSizePos);
@@ -116,6 +128,20 @@ void Player::UpdateStrings() {
 	tR = txtBurntSize.getLocalBounds();
 	txtBurntSize.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
 	txtBurntSize.setPosition(txtBurntSizePos);
+}
+
+void Player::SetFaction() {
+	decklist.clear();
+	cardList = database->CardListRed;
+
+	decklist.push_back(new Card(*cardList["Frog"], database));
+	decklist.push_back(new Card(*cardList["Frog"], database));
+	decklist.push_back(new Card(*cardList["Big Armour"], database));
+	decklist.push_back(new Card(*cardList["Sudden Rot"], database));
+	decklist.push_back(new Card(*cardList["Jelly"], database));
+	decklist.push_back(new Card(*cardList["Big Armour"], database));
+	decklist.push_back(new Card(*cardList["Big Armour"], database));
+	decklist.push_back(new Card(*cardList["Big Armour"], database));
 }
 
 void Player::Update(Time t) {
@@ -139,19 +165,25 @@ void Player::Update(Time t) {
 }
 void Player::DrawPlayerBar() {
 	window->draw(playerBarIcon);
+	window->draw(playerGoldIcon);
+	window->draw(txtPlayerGold);
+	window->draw(healthIcon);
+	window->draw(txtHealth);
+	window->draw(deckSizeIcon);
+	window->draw(txtDeckTotalSize);
 }
 
 void Player::DrawBackground() {
 	attackZone->Draw(window);
 	blockZone->Draw(window);
-	
+	window->draw(healthIcon);
+	window->draw(txtHealth);
 	window->draw(deckIcon);
 	window->draw(gemIcon);
 	window->draw(discardIcon);
 	window->draw(burntIcon);
 	window->draw(physArmIcon);
-	window->draw(healthIcon);
-	window->draw(txtHealth);
+	
 	window->draw(txtPhysArm);
 	window->draw(txtCurMana);
 	window->draw(txtDeckSize);

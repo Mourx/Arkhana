@@ -17,12 +17,12 @@ Enemy::Enemy(RenderWindow* w,DataBase* data){
 	zones.push_back(attackZone);
 	zones.push_back(blockZone);
 
-	physArmPos = Vector2f(1410, 445);
-	healthPos = Vector2f(1410, 275);
+	physArmPos = Vector2f(1410, 525);
+	healthPos = Vector2f(1410, 185);
 	attackDirection = 1;
 	
-	txtPhysArmPos = Vector2f(1500, 465);
-	txtHealthPos = Vector2f(1500, 295);
+	txtPhysArmPos = Vector2f(1490, 325);
+	txtHealthPos = Vector2f(1500, 185);
 
 	cardList = database->CardListEnemy;
 
@@ -38,7 +38,7 @@ void Enemy::InitSprites() {
 	texPhysArm.loadFromFile("Textures/GUI/armourPhysical.png");
 	physArmIcon.setTexture(texPhysArm);
 	physArmIcon.setPosition(physArmPos);
-	physArmIcon.setScale(2, 2);
+	physArmIcon.setScale(4, -4);
 
 
 
@@ -118,7 +118,8 @@ void Enemy::Update(Time t) {
 
 void Enemy::SetDetails(EncounterData* data, vector<Card*> startPlay, vector<vector<Card*>> dl) {
 
-	health = data->health;
+	maxHealth = data->health;
+	health = maxHealth;
 	armour = data->armour;
 	maxMana = data->actionCount;
 	startingPlay = startPlay;

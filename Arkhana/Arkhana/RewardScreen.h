@@ -12,7 +12,7 @@ public:
     void MouseClicked(Vector2f mousePos);
 protected:
     void GenerateOptions();
-    
+
     Sprite background;
     Texture texBackground;
 
