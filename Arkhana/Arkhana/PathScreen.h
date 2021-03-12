@@ -2,6 +2,7 @@
 #include "Screen.h"
 #include "Player.h"
 #include "Encounter.h"
+#include "ForgeScreen.h"
 class PathScreen :
     public Screen
 {       
@@ -15,13 +16,14 @@ public:
     void MouseClicked(Vector2f mousePos);
     void MouseReleased(Vector2f mousePos);
     void ResetDetails(COMBAT_RESULT res);
+    ForgeScreen* GetForge() { return forge; }
 protected:
     void InitEncounters();
 
     RenderWindow* window;
     DataBase* database;
     Player* player;
-
+    ForgeScreen* forge;
     Encounter* currentEncounter = NULL;
     vector<Encounter*> encounters;
 

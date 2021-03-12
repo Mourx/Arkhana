@@ -16,6 +16,7 @@ Card::Card(CardData data,DataBase* dataB) {
 	zOwner = data.zOTag;
 	AITag = data.AITag;
 	if(data.effect != "") effect = database->effectList[data.effect];
+	goldCost = 80 + rand() % 32;
 	costIcon.setTexture(texCost);
 	SetPosition(Vector2f(300, 300));
 	if (type == CREATE_UNIT) {

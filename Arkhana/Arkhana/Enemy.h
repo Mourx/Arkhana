@@ -6,6 +6,7 @@ class Enemy :
     public Player
 {
 public:
+    Enemy() {}
     Enemy(RenderWindow* w,DataBase* data);
     ~Enemy(){}
     Card* GetNext() { return decklist[cardIndex]; }
@@ -23,6 +24,8 @@ protected:
 
     int maxArmour = 0;
     int cardIndex = 0;
+    int goldReward = 0;
+    int level = 0;
     vector<vector<Card*>> decklists;
     vector<Card*> deck;
     vector<Card*> startingPlay;

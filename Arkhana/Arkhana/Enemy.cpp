@@ -124,6 +124,8 @@ void Enemy::SetDetails(EncounterData* data, vector<Card*> startPlay, vector<vect
 	maxMana = data->actionCount;
 	startingPlay = startPlay;
 	decklists = dl;
+	level = data->level;
+	goldReward = level * 13 - (rand() % 22);
 	decklist = decklist;
 
 	UpdateStrings();

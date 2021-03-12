@@ -4,6 +4,7 @@
 #include "MainMenuScreen.h"
 #include "RewardScreen.h"
 #include "PathScreen.h"
+#include "ForgeScreen.h"
 #include "DataBase.h"
 using namespace sf;
 using namespace std;
@@ -13,12 +14,17 @@ int main() {
 	database->Init();
 	
 	RenderWindow* window = new RenderWindow(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Card games or something idk",Style::Fullscreen);
-	
+	CombatScreen* combat;
 	Player* player = new Player(window, database);
+	//TAKE THIS OUT
+	player->SetFaction();
+	//TAKE THIS OUT
+	Enemy* enemy = new Enemy();
 	MainMenuScreen* mainMenu = new MainMenuScreen(window,player);
 	PathScreen* pathScreen = new PathScreen(window, database, player);
 	Screen* currentScreen = new Screen();
-	currentScreen = mainMenu;
+
+	currentScreen = pathScreen->GetForge();
 	Clock clock;
 	Time elapsed;
 	Event event;
@@ -32,16 +38,22 @@ int main() {
 
 			break;
 		case COMBAT_SCREEN:
-			currentScreen = new CombatScreen(window, database, player, pathScreen->GetEncounter());
+			combat = new CombatScreen(window, database, player, pathScreen->GetEncounter());
+			enemy = combat->GetEnemy();
+			currentScreen = combat;
 			break;
 		case GAME_OVER:
 			break;
 		case REWARD_SCREEN:
-			currentScreen = new RewardScreen(window,database,player);
+			currentScreen = new RewardScreen(window,database,player,enemy);
 			break;
 		case PATH_SCREEN:
 			pathScreen->ResetDetails(WIN);
 			currentScreen = pathScreen;
+			break;
+		case FORGE_SCREEN:
+
+			currentScreen = pathScreen->GetForge();
 			break;
 		case NONE:
 			break;
@@ -63,8 +75,9 @@ int main() {
 			
 		}
 		window->clear(Color::Magenta);
-		if(currentScreen->GetType() != MAIN_MENU) player->DrawPlayerBar();
+
 		currentScreen->Draw();
+		if (currentScreen->GetType() != MAIN_MENU) player->DrawPlayerBar();
 		window->display();
 	}
 	return 0;

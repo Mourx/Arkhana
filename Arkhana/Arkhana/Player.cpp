@@ -142,6 +142,8 @@ void Player::SetFaction() {
 	decklist.push_back(new Card(*cardList["Big Armour"], database));
 	decklist.push_back(new Card(*cardList["Big Armour"], database));
 	decklist.push_back(new Card(*cardList["Big Armour"], database));
+
+	UpdateStrings();
 }
 
 void Player::Update(Time t) {

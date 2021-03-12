@@ -19,6 +19,7 @@ public:
     void MouseClicked(Vector2f mousePos);
     void MouseReleased(Vector2f mousePos);
     COMBAT_RESULT GetResult() { return result; }
+    Enemy* GetEnemy() { return enemy; }
 protected:
     Player* player;
     Enemy* enemy;

@@ -34,6 +34,7 @@ public:
     }
     bool HasTargetZone() { return bHasTargetZone; }
     UnitZone* GetTargetZone() { return targetZone; }
+    int GetGoldCost() { return goldCost; }
 protected:
     void DoEffect();
     virtual void ApplyModifier(UnitZone*);
@@ -50,6 +51,8 @@ protected:
 
     int stamina;
     int pPow;
+
+    int goldCost = 0;
 
     bool bHasTargetZone = false;
     UnitZone* targetZone;

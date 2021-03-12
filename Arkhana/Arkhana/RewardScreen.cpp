@@ -1,11 +1,11 @@
 #include "RewardScreen.h"
 #include "Player.h"
 
-RewardScreen::RewardScreen(RenderWindow* w,DataBase* db, Player* p) {
+RewardScreen::RewardScreen(RenderWindow* w,DataBase* db, Player* p,Enemy* e) {
 	window = w;
 	database = db;
 	player = p;
-
+	enemy = e;
 	type = REWARD_SCREEN;
 	texBackground.loadFromFile("Textures/GUI/rewardBackground.png");
 	background.setTexture(texBackground);

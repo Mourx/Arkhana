@@ -11,6 +11,7 @@ PathScreen::PathScreen(RenderWindow* w, DataBase* db, Player* p) {
 	background.setPosition(0, 180);
 	InitEncounters();
 	type = PATH_SCREEN;
+	forge = new ForgeScreen(window, database, player);
 }
 
 void PathScreen::ResetDetails(COMBAT_RESULT res) {

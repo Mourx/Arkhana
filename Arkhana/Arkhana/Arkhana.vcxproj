@@ -158,6 +158,7 @@
     <ClCompile Include="Encounter.cpp" />
     <ClCompile Include="EndTurnButton.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="ForgeScreen.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="MainMenuScreen.cpp" />
     <ClCompile Include="Modifier.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="EndTurnButton.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="enums.h" />
+    <ClInclude Include="ForgeScreen.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="headers.h" />
     <ClInclude Include="MainMenuScreen.h" />
