@@ -12,6 +12,12 @@ PathScreen::PathScreen(RenderWindow* w, DataBase* db, Player* p) {
 	InitEncounters();
 	type = PATH_SCREEN;
 	forge = new ForgeScreen(window, database, player);
+
+	texForgeIcon.loadFromFile("Textures/GUI/forgeIcon.png");
+	forgeIcon = new GameObject();
+	forgeIcon->GetIcon()->setTexture(texForgeIcon);
+	forgeIcon->GetIcon()->setPosition(forgeIconPos);
+
 }
 
 void PathScreen::ResetDetails(COMBAT_RESULT res) {
@@ -20,10 +26,12 @@ void PathScreen::ResetDetails(COMBAT_RESULT res) {
 	}
 	currentEncounter = NULL;
 	nextScreen = NONE;
+	forge->ResetNextScreen();
 }
 
 void PathScreen::Draw() {
 	window->draw(background);
+	forgeIcon->Draw(window);
 	for (Encounter* e : encounters) {
 		e->Draw(window);
 	}
@@ -53,11 +61,21 @@ void PathScreen::MouseMoved(Vector2f mousePos) {
 	if (bAny == false) {
 		currentEncounter = NULL;
 	}
+	FloatRect bounds = forgeIcon->GetIcon()->getGlobalBounds();
+	if (bounds.contains(mousePos)) {
+		forgeIcon->SetHover(true);
+	}
+	else {
+		forgeIcon->SetHover(false);
+	}
 }
 
 void PathScreen::MouseClicked(Vector2f mousePos) {
 	if (currentEncounter != NULL) {
 		nextScreen = COMBAT_SCREEN;
+	}
+	if (forgeIcon->GetHover()) {
+		nextScreen = FORGE_SCREEN;
 	}
 }
 

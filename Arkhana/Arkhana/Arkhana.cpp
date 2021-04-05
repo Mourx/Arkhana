@@ -24,7 +24,7 @@ int main() {
 	PathScreen* pathScreen = new PathScreen(window, database, player);
 	Screen* currentScreen = new Screen();
 
-	currentScreen = pathScreen->GetForge();
+	currentScreen = pathScreen;
 	Clock clock;
 	Time elapsed;
 	Event event;
@@ -48,11 +48,12 @@ int main() {
 			currentScreen = new RewardScreen(window,database,player,enemy);
 			break;
 		case PATH_SCREEN:
+
 			pathScreen->ResetDetails(WIN);
 			currentScreen = pathScreen;
 			break;
 		case FORGE_SCREEN:
-
+			pathScreen->ResetDetails(ONGOING);
 			currentScreen = pathScreen->GetForge();
 			break;
 		case NONE:

@@ -1,7 +1,7 @@
 {
   "Effects": {
-    "Big Armour": {
-      "name": "Big Armour",
+    "Frog Armour": {
+      "name": "Frog Armour",
       "type": "ARMOUR_MOD",
       "value": 5,
       "text" : "Increases Armour by VALUE",

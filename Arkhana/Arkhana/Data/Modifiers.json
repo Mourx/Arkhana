@@ -24,8 +24,8 @@
       "mType": "ZONE_MOD",
       "text": "Friendly units gain +VALUE\n\t physical attack"
     },
-    "rot_modifier": {
-      "name": "Rot Modifier",
+    "remove_stamina_modifier": {
+      "name": "Remove Stamina Modifier",
       "value": -999999999,
       "multiplier": 0,
       "sType": "STAMINA",
@@ -38,7 +38,7 @@
       "multiplier": 0,
       "sType": "DMG_PHSICAL",
       "mType": "UNIT_MOD",
-      "EOTChange" :  4,
+      "EOTChange": 4,
       "text": "Ogre gains +EOTCHANGE attack\n\t each turn"
     }
   }

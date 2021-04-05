@@ -1,15 +1,5 @@
 {
   "Cards": {
-    "Goblin": {
-      "name": "Goblin",
-      "cost": 1,
-      "cardType": "CREATE_UNIT",
-      "unit": "Goblin",
-      "zTag": "",
-      "zOTag": "Z_PLAYER",
-      "AITag": "AI_RANDOM",
-      "shaderPath": "Textures/Shaders/Empress.vert"
-    },
     "Frog": {
       "name": "Frog",
       "cost": 1,
@@ -20,21 +10,21 @@
       "AITag": "AI_RANDOM",
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
-    "Jelly": {
-      "name": "Jelly",
+    "Shield Frog": {
+      "name": "Shield Frog",
       "cost": 1,
       "cardType": "CREATE_UNIT",
-      "unit": "Jelly",
+      "unit": "Shield Frog",
       "zTag": "DEFENSIVE",
       "zOTag": "Z_PLAYER",
       "AITag": "AI_BLOCK",
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
-    "Big Armour": {
-      "name": "Big Armour",
+    "Frog Armour": {
+      "name": "Frog Armour",
       "cost": 1,
       "cardType": "EFFECT",
-      "effect": "Big Armour",
+      "effect": "Frog Armour",
       "zTag": "",
       "zOTag": "Z_PLAYER",
       "AITag": "AI_BLOCK",
@@ -60,14 +50,14 @@
       "modifiers": { "modifier": "rage_modifier" },
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
-    "Sudden Rot": {
-      "name": "Sudden Rot",
+    "Sap Spirit": {
+      "name": "Sap Spirit",
       "cost": 2,
       "cardType": "TARGET_STRONGEST",
       "zTag": "",
       "zOTag": "Z_ENEMY",
       "AITag": "AI_STRONGEST_UNIT_PLAYER",
-      "modifiers": { "modifier": "rot_modifier" },
+      "modifiers": { "modifier": "remove_stamina_modifier" },
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
     "Shrine": {

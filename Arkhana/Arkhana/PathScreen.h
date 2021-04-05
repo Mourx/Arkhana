@@ -23,7 +23,12 @@ protected:
     RenderWindow* window;
     DataBase* database;
     Player* player;
+    
     ForgeScreen* forge;
+    GameObject* forgeIcon;
+    Texture texForgeIcon;
+    Vector2f forgeIconPos = Vector2f(15, 600);
+
     Encounter* currentEncounter = NULL;
     vector<Encounter*> encounters;
 

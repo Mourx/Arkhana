@@ -50,14 +50,14 @@
       "modifiers": { "modifier": "rage_modifier" },
       "shaderPath": "Textures/Shaders/enemyGoblin.vert"
     },
-    "Sudden Rot": {
-      "name": "Sudden Rot",
+    "Sap Spirit": {
+      "name": "Sap Spirit",
       "cost": 2,
       "cardType": "TARGET_STRONGEST",
       "zTag": "",
       "zOTag": "Z_ENEMY",
       "AITag": "AI_STRONGEST_UNIT_PLAYER",
-      "modifiers": { "modifier": "rot_modifier" },
+      "modifiers": { "modifier": "remove_stamina_modifier" },
       "shaderPath": "Textures/Shaders/enemyGoblin.vert"
     },
     "Shrine": {

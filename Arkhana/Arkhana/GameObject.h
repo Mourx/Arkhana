@@ -24,6 +24,7 @@ public:
 
 	}
 	void SetHover(bool b) { bHover = b; }
+	bool GetHover() { return bHover; }
 	bool IsAtTarget() { return bAtTarget; }
 	void ResetTarget() { bAtTarget = false; }
 protected:

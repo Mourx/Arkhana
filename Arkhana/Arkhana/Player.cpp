@@ -136,12 +136,12 @@ void Player::SetFaction() {
 
 	decklist.push_back(new Card(*cardList["Frog"], database));
 	decklist.push_back(new Card(*cardList["Frog"], database));
-	decklist.push_back(new Card(*cardList["Big Armour"], database));
-	decklist.push_back(new Card(*cardList["Sudden Rot"], database));
-	decklist.push_back(new Card(*cardList["Jelly"], database));
-	decklist.push_back(new Card(*cardList["Big Armour"], database));
-	decklist.push_back(new Card(*cardList["Big Armour"], database));
-	decklist.push_back(new Card(*cardList["Big Armour"], database));
+	decklist.push_back(new Card(*cardList["Frog Armour"], database));
+	decklist.push_back(new Card(*cardList["Sap Spirit"], database));
+	decklist.push_back(new Card(*cardList["Shield Frog"], database));
+	decklist.push_back(new Card(*cardList["Frog Armour"], database));
+	decklist.push_back(new Card(*cardList["Frog Armour"], database));
+	decklist.push_back(new Card(*cardList["Frog Armour"], database));
 
 	UpdateStrings();
 }

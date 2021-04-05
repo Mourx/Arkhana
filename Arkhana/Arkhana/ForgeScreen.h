@@ -10,8 +10,13 @@ public:
     void Draw();
     void MouseMoved(Vector2f mousePos);
     void MouseClicked(Vector2f mousePos);
+    void ResetNextScreen() { nextScreen = NONE; }
 protected:
     void GenerateOptions();
+    void CreateDeckGrid();
+
+    bool bUpgrading = false;
+
     Card* selCard;
     
     Player* player;
@@ -27,6 +32,18 @@ protected:
     };
     vector<Text> optionCostsTxt;
     Font font;
+
+    GameObject* pathIcon;
+    Texture texPathIcon;
+
+    GameObject* upgradeIcon;
+    Texture texUpgradeIcon;
+    Vector2f upgradeIconPos = Vector2f(1200, 550);
+
+    Sprite screenShade;
+    Texture texScreenShade;
+
+    Vector2f upgradePos = Vector2f(400, 250);
 
     Sprite background;
     Texture texBackground;

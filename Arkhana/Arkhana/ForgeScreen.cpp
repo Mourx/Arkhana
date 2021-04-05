@@ -10,11 +10,26 @@ ForgeScreen::ForgeScreen(RenderWindow* w, DataBase* db, Player* p) {
 	background.setTexture(texBackground);
 	font.loadFromFile("Fonts/Arial/arial.ttf");
 
+	texPathIcon.loadFromFile("Textures/GUI/backArrow.png");
+	pathIcon = new GameObject();
+	pathIcon->GetIcon()->setTexture(texPathIcon);
+	pathIcon->GetIcon()->setPosition(850, 900);
+
+	texScreenShade.loadFromFile("Textures/GUI/screenShade.png");
+	screenShade.setTexture(texScreenShade);
+	screenShade.setPosition(0, 0);
+
+	texUpgradeIcon.loadFromFile("Textures/GUI/forgeIcon.png");
+	upgradeIcon = new GameObject();
+	upgradeIcon->GetIcon()->setTexture(texUpgradeIcon);
+	upgradeIcon->GetIcon()->setPosition(upgradeIconPos);
 }
 
 
 void ForgeScreen::Draw() {
 	window->draw(background);
+	pathIcon->Draw(window);
+	upgradeIcon->Draw(window);
 	for (Card* c : options) {
 		c->Draw(window);
 	}
@@ -24,17 +39,42 @@ void ForgeScreen::Draw() {
 
 		window->draw(t);
 	}
+	if (bUpgrading) {
+		window->draw(screenShade);
+		for (Card* c : player->GetDeckList()) {
+			c->Draw(window);
+		}
+	}
 
 }
 
 void ForgeScreen::MouseMoved(Vector2f mousePos) {
 
-
+	FloatRect bounds = pathIcon->GetIcon()->getGlobalBounds();
+	if (bounds.contains(mousePos)) {
+		pathIcon->SetHover(true);
+	}
+	else {
+		pathIcon->SetHover(false);
+	}
+	bounds = upgradeIcon->GetIcon()->getGlobalBounds();
+	if (bounds.contains(mousePos)) {
+		upgradeIcon->SetHover(true);
+	}
+	else {
+		upgradeIcon->SetHover(false);
+	}
 }
 
 void ForgeScreen::MouseClicked(Vector2f mousePos) {
 
-
+	if (pathIcon->GetHover()) {
+		nextScreen = PATH_SCREEN;
+	}
+	if (upgradeIcon->GetHover()) {
+		bUpgrading = true;
+		CreateDeckGrid();
+	}
 }
 
 void ForgeScreen::GenerateOptions() {
@@ -65,5 +105,13 @@ void ForgeScreen::GenerateOptions() {
 
 		options.push_back(c);
 		optionCostsTxt.push_back(t);
+	}
+}
+
+void ForgeScreen::CreateDeckGrid() {
+	int count = 0;
+	for (Card* c : player->GetDeckList()) {
+		c->SetPosition(upgradePos + Vector2f((count%5) * 180,(count/5)*210));
+		count++;
 	}
 }

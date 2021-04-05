@@ -12,6 +12,12 @@
       "stamina": 1,
       "filePath": "Textures/Units/frog.png"
     },
+    "Shield Frog": {
+      "name": "Shield Frog",
+      "physPower": 2,
+      "stamina": 3,
+      "filePath": "Textures/Units/frog.png"
+    },
     "Jelly": {
       "name": "Jelly",
       "physPower": 1,
