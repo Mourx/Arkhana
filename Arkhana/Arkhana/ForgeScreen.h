@@ -16,7 +16,9 @@ protected:
     void CreateDeckGrid();
 
     bool bUpgrading = false;
+    bool bSelectUpgrade = false;
 
+    Card* selUpgCard;
     Card* selCard;
     
     Player* player;
@@ -40,10 +42,20 @@ protected:
     Texture texUpgradeIcon;
     Vector2f upgradeIconPos = Vector2f(1200, 550);
 
+    GameObject* upgAttack;
+    Texture texUpgAttack;
+    Vector2f upgAttackPos = Vector2f(550, 250);
+
+    GameObject* upgStamina;
+    Texture texUpgStamina;
+    Vector2f upgStaminaPos = Vector2f(950, 250);
+
     Sprite screenShade;
     Texture texScreenShade;
 
     Vector2f upgradePos = Vector2f(400, 250);
+
+    int upgradeCost = 75;
 
     Sprite background;
     Texture texBackground;

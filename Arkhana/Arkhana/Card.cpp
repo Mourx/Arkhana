@@ -83,6 +83,11 @@ Card::Card(CardData data,DataBase* dataB) {
 	
 }
 
+void Card::UpdateStrings() {
+	txtPhys.setString(to_string(pPow));
+	txtMag.setString(to_string(stamina));
+
+}
 
 void Card::Play() {
 	Unit* u;

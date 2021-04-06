@@ -1,5 +1,21 @@
 {
   "Modifiers": {
+    "upgrade_attack": {
+      "name": "Upgrade Attack",
+      "value": 3,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "UNIT_MOD",
+      "text": ""
+    },
+    "upgrade_stamina": {
+      "name": "Upgrade Stamina",
+      "value": 1,
+      "multiplier": 0,
+      "sType": "STAMINA",
+      "mType": "UNIT_MOD",
+      "text": ""
+    },
     "eot_stamina": {
       "name": "Stamina Reduced",
       "value": -1,
@@ -12,7 +28,7 @@
       "name": "Empress Shrine Aura",
       "value": 2,
       "multiplier": 0,
-      "sType": "DMG_PHSICAL",
+      "sType": "DMG_PHYSICAL",
       "mType": "AURA_MOD",
       "text": "AURA: Friendly units gain\n\t +VALUE physical attack"
     },
@@ -20,7 +36,7 @@
       "name": "Rage Modifier",
       "value": 2,
       "multiplier": 0,
-      "sType": "DMG_PHSICAL",
+      "sType": "DMG_PHYSICAL",
       "mType": "ZONE_MOD",
       "text": "Friendly units gain +VALUE\n\t physical attack"
     },
@@ -36,7 +52,7 @@
       "name": "Ogre Modifier",
       "value": 0,
       "multiplier": 0,
-      "sType": "DMG_PHSICAL",
+      "sType": "DMG_PHYSICAL",
       "mType": "UNIT_MOD",
       "EOTChange": 4,
       "text": "Ogre gains +EOTCHANGE attack\n\t each turn"

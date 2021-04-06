@@ -35,11 +35,22 @@ public:
     bool HasTargetZone() { return bHasTargetZone; }
     UnitZone* GetTargetZone() { return targetZone; }
     int GetGoldCost() { return goldCost; }
+    void AddModifier(Modifier* mod) { modifiers.push_back(mod); }
+    void IncreaseStat(STAT_TYPE s, int val) {
+        if (s == STAT_TYPE::DMG_PHYSICAL) {
+            pPow += val;
+        }
+        if (s == STAT_TYPE::STAMINA) {
+            stamina += val;
+        }
+        UpdateStrings();
+    }
 protected:
     void DoEffect();
     virtual void ApplyModifier(UnitZone*);
     virtual void ApplyModifier(Unit*);
     void UpdatePositions();
+    void UpdateStrings();
     DataBase* database;
     Vector2f handPos;
     string name;
