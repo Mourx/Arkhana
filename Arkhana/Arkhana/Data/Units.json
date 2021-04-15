@@ -30,6 +30,12 @@
       "stamina": 3,
       "filePath": "Textures/Units/shrine.png"
     },
+    "Two Frogs": {
+      "name": "Two Frogs",
+      "physPower": 7,
+      "stamina": 2,
+      "filePath": "Textures/Units/twoFrogs.png"
+    },
     "Two Gnomes": {
       "name": "Two Gnomes",
       "physPower": 7,

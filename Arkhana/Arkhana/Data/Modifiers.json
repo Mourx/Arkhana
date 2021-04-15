@@ -42,11 +42,11 @@
     },
     "remove_stamina_modifier": {
       "name": "Remove Stamina Modifier",
-      "value": -999999999,
+      "value": -999,
       "multiplier": 0,
       "sType": "STAMINA",
       "mType": "UNIT_MOD",
-      "text": "Reduce the strongest\n unit's stamina to 0"
+      "text": "Reduce the highest attack\n unit's stamina by 999"
     },
     "ogre_modifier": {
       "name": "Ogre Modifier",

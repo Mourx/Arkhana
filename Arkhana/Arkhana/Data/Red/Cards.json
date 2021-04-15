@@ -30,18 +30,18 @@
       "AITag": "AI_BLOCK",
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
-    "Two Gnomes": {
-      "name": "Two Gnomes",
+    "Two Frogs": {
+      "name": "Two Frogs",
       "cost": 2,
       "cardType": "CREATE_UNIT",
-      "unit": "Two Gnomes",
+      "unit": "Two Frogs",
       "zTag": "",
       "zOTag": "Z_PLAYER",
       "AITag": "AI_RANDOM",
-      "shaderPath": "Textures/Shaders/Empress.vert"
+      "shaderPath": "Textures/Shaders/enemyGoblin.vert"
     },
-    "Rage": {
-      "name": "Rage",
+    "Froggy Rage": {
+      "name": "Froggy Rage",
       "cost": 2,
       "cardType": "APPLY_ZONE_MOD",
       "zTag": "",
@@ -60,8 +60,8 @@
       "modifiers": { "modifier": "remove_stamina_modifier" },
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
-    "Shrine": {
-      "name": "Shrine",
+    "Frog Shrine": {
+      "name": "Frog Shrine",
       "cost": 3,
       "cardType": "CREATE_UNIT",
       "unit": "Shrine",

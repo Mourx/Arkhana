@@ -20,8 +20,8 @@ Card::Card(CardData data,DataBase* dataB) {
 	costIcon.setTexture(texCost);
 	SetPosition(Vector2f(300, 300));
 	if (type == CREATE_UNIT) {
-		pPow = database->UnitList[name]->physPower;
-		stamina = database->UnitList[name]->stamina;
+		pPow = database->UnitList[unit]->physPower;
+		stamina = database->UnitList[unit]->stamina;
 	}
 	cardShader.loadFromFile(data.shaderPath, Shader::Vertex);
 
