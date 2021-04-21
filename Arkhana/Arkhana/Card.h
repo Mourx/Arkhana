@@ -45,6 +45,9 @@ public:
         }
         UpdateStrings();
     }
+    void SetHover(bool b) {
+        bHover = b;
+    }
 protected:
     void DoEffect();
     virtual void ApplyModifier(UnitZone*);
@@ -89,6 +92,9 @@ protected:
 
     Sprite cardArt;
     Texture texCardArt;
+
+    Sprite cardBorder;
+    Texture texCardBorder;
 
     Font font;
 

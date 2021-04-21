@@ -48,7 +48,11 @@ void RewardScreen::MouseMoved(Vector2f mousePos) {
 	for (Card* c : options) {
 		FloatRect bounds = c->GetIcon()->getGlobalBounds();
 		if (bounds.contains(mousePos)) {
+			c->SetHover(true);
 			selCard = c;
+		}
+		else {
+			c->SetHover(false);
 		}
 	}
 

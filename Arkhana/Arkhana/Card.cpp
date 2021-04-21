@@ -37,7 +37,9 @@ Card::Card(CardData data,DataBase* dataB) {
 	texPhys.loadFromFile("Textures/Cards/sword.png");
 	physIcon.setTexture(texPhys);
 
-
+	texCardBorder.loadFromFile("Textures/Cards/CardBorder.png");
+	cardBorder.setTexture(texCardBorder);
+	cardBorder.setPosition(pos);
 	
 	FloatRect tR = physIcon.getLocalBounds();
 	physIcon.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
@@ -169,6 +171,9 @@ void Card::Draw(RenderWindow* w) {
 	w->draw(txtName);
 	w->draw(txtDesc);
 	w->draw(cardArt);
+	if (bHover) {
+		w->draw(cardBorder);
+	}
 }
 
 void Card::SetPosition(Vector2f p) {
@@ -178,7 +183,7 @@ void Card::SetPosition(Vector2f p) {
 	physIcon.setPosition(pos+physPos);
 
 	magIcon.setPosition(pos+magPos);
-
+	cardBorder.setPosition(pos);
 
 	FloatRect tR = txtPhys.getLocalBounds();
 	txtPhys.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);

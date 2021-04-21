@@ -6,6 +6,7 @@
 #include "PathScreen.h"
 #include "ForgeScreen.h"
 #include "DataBase.h"
+#include "InfoPane.h"
 using namespace sf;
 using namespace std;
 
@@ -23,6 +24,7 @@ int main() {
 	MainMenuScreen* mainMenu = new MainMenuScreen(window,player);
 	PathScreen* pathScreen = new PathScreen(window, database, player);
 	Screen* currentScreen = new Screen();
+	InfoPane* info = new InfoPane();
 
 	currentScreen = pathScreen;
 	Clock clock;
@@ -79,6 +81,7 @@ int main() {
 
 		currentScreen->Draw();
 		if (currentScreen->GetType() != MAIN_MENU) player->DrawPlayerBar();
+		if (currentScreen->GetType() == PATH_SCREEN || currentScreen->GetType() == COMBAT_SCREEN) info->Draw(window);
 		window->display();
 	}
 	return 0;

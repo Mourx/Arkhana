@@ -40,7 +40,7 @@ protected:
 
     GameObject* upgradeIcon;
     Texture texUpgradeIcon;
-    Vector2f upgradeIconPos = Vector2f(1200, 550);
+    Vector2f upgradeIconPos = Vector2f(1300, 200);
 
     GameObject* upgAttack;
     Texture texUpgAttack;
@@ -54,6 +54,9 @@ protected:
     Texture texScreenShade;
 
     Vector2f upgradePos = Vector2f(400, 250);
+    
+    Text txtUpgradeCost;
+    Vector2f txtUpgradeCostPos = upgradeIconPos + Vector2f(100, 200);
 
     int upgradeCost = 75;
 

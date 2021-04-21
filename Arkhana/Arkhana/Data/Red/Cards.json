@@ -38,7 +38,7 @@
       "zTag": "",
       "zOTag": "Z_PLAYER",
       "AITag": "AI_RANDOM",
-      "shaderPath": "Textures/Shaders/enemyGoblin.vert"
+      "shaderPath": "Textures/Shaders/Empress.vert"
     },
     "Froggy Rage": {
       "name": "Froggy Rage",
