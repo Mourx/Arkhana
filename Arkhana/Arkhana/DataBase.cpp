@@ -196,6 +196,8 @@ void DataBase::BuildEncounterLists() {
 		encounters[level].insert({ name,encounter });
 
 		encounter->actionCount = ListItr->value["actionCount"].GetInt();
+		encounter->description = ListItr->value["description"].GetString();
+		encounter->type = GetEncType(ListItr->value["type"].GetString());
 		encounterNames[level].push_back(name);
 	}
 	fclose(fp);

@@ -14,6 +14,10 @@ public:
     void SetComplete(bool b) { bComplete = b; }
     bool GetComplete() { return bComplete; }
     Enemy* GetEnemy() { return enemy; }
+    String GetEncDescription() { return desc; }
+    String GetCombatDescription() { return combatDesc; }
+    String GetTypeDesc() { return typeDesc; }
+    String GetTypeTitle() { return typeTitle; }
 protected:
     void GenerateEncounter();
     DataBase* database;
@@ -22,7 +26,10 @@ protected:
     int level = 0;
     bool bComplete = false;
     EncounterData* encData = new EncounterData();
-
+    String desc = "An encounter with \nenemies.";
+    String combatDesc = "enemies lol";
+    String typeDesc = "A fight against\nregular enemies";
+    String typeTitle = "Normal Combat";
     Enemy* enemy;
     map<string, CardData*> cardList;
 };

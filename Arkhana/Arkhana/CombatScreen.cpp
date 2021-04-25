@@ -32,6 +32,8 @@ CombatScreen::CombatScreen(RenderWindow* w,DataBase* data,Player* p,Encounter* e
 	endTurn = new EndTurnButton();
 	endTurn->SetPosition(endTurnPos);
 	SetNextEnemyMove();
+
+	description = enc->GetCombatDescription();
 }
 
 void CombatScreen::Draw() {
@@ -241,4 +243,9 @@ void CombatScreen::CalculateCombat() {
 	player->DamagePhys(playerPhysDamage);
 	enemy->DamagePhys(enemyPhysDamage);
 
+}
+
+void CombatScreen::SetInfo(InfoPane* info) {
+	info->SetDescription(description);
+	info->SetScreenTitle("Combat!");
 }

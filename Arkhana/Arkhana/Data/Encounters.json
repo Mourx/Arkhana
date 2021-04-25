@@ -11,7 +11,9 @@
       ],
       "startingPlay": [ "Goblin" ],
       "level": 0,
-      "actionCount" : 2
+      "actionCount": 2,
+      "description": "A band of goblins\nfrom the east!\n\nGoblins tend to\ntry and swarm the\nememy.",
+      "type": "E_COMBAT"
     },
     "ogres": {
       "name": "ogres",
@@ -22,15 +24,11 @@
         [ "Sap Spirit" ],
         [ "Goblin" ]
       ],
-        "startingPlay"
-        :
-        [ "Ogre" ],
-        "level"
-        :
-        1,
-        "actionCount"
-        :
-        1
+      "startingPlay": [ "Ogre" ],
+      "level": 1,
+      "actionCount": 1,
+      "description": "An Ogre! and his\ngoblin friends.\n\nKeep an eye on\nthe power of\nthe ogre.",
+      "type": "E_COMBAT"
     }
 
   }

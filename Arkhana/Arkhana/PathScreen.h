@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Encounter.h"
 #include "ForgeScreen.h"
+
 class PathScreen :
     public Screen
 {       
@@ -17,6 +18,7 @@ public:
     void MouseReleased(Vector2f mousePos);
     void ResetDetails(COMBAT_RESULT res);
     ForgeScreen* GetForge() { return forge; }
+    void SetInfo(InfoPane* info);
 protected:
     void InitEncounters();
 

@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "enums.h"
+#include "InfoPane.h"
 
 using namespace sf;
 
@@ -16,9 +17,11 @@ public:
 	virtual void MouseReleased(Vector2f mousePos) {}
 	NEXT_SCREEN GetNextScreen() { return nextScreen; }
 	NEXT_SCREEN GetType() { return type; }
+	virtual void SetInfo(InfoPane* info) {}
 protected:
 	RenderWindow* window;
 	NEXT_SCREEN nextScreen = NONE;
 	NEXT_SCREEN type = NONE;
+	String description = "";
 };
 

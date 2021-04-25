@@ -99,18 +99,7 @@ void ForgeScreen::MouseMoved(Vector2f mousePos) {
 			}
 		}
 	}
-	else if (bUpgrading) {
-		for (Card* c : player->GetDeckList()) {
-			FloatRect bounds = c->GetIcon()->getGlobalBounds();
-			if (bounds.contains(mousePos)) {
-				c->SetHover(true);
-			}
-			else {
-				c->SetHover(false);
-			}
-		}
-	}
-	if (bSelectUpgrade) {
+	else if (bSelectUpgrade) {
 		FloatRect bounds = upgAttack->GetIcon()->getGlobalBounds();
 		if (bounds.contains(mousePos)) {
 			upgAttack->SetHover(true);
@@ -125,8 +114,20 @@ void ForgeScreen::MouseMoved(Vector2f mousePos) {
 		else {
 			upgStamina->SetHover(false);
 		}
-		
+
 	}
+	else if (bUpgrading) {
+		for (Card* c : player->GetDeckList()) {
+			FloatRect bounds = c->GetIcon()->getGlobalBounds();
+			if (bounds.contains(mousePos)) {
+				c->SetHover(true);
+			}
+			else {
+				c->SetHover(false);
+			}
+		}
+	}
+	
 }
 
 void ForgeScreen::MouseClicked(Vector2f mousePos) {

@@ -78,7 +78,7 @@ int main() {
 			
 		}
 		window->clear(Color::Magenta);
-
+		currentScreen->SetInfo(info);
 		currentScreen->Draw();
 		if (currentScreen->GetType() != MAIN_MENU) player->DrawPlayerBar();
 		if (currentScreen->GetType() == PATH_SCREEN || currentScreen->GetType() == COMBAT_SCREEN) info->Draw(window);

@@ -18,6 +18,7 @@ PathScreen::PathScreen(RenderWindow* w, DataBase* db, Player* p) {
 	forgeIcon->GetIcon()->setTexture(texForgeIcon);
 	forgeIcon->GetIcon()->setPosition(forgeIconPos);
 
+	description = "Clear each encounter\nto unlock the forge\nand move to the\nnext tier.";
 }
 
 void PathScreen::ResetDetails(COMBAT_RESULT res) {
@@ -92,4 +93,24 @@ void PathScreen::InitEncounters() {
 
 		}
 	}
+}
+
+void PathScreen::SetInfo(InfoPane* info) {
+	info->SetDescription(description);
+	info->SetScreenTitle("Select Encounter");
+
+	
+	if (currentEncounter != NULL) {
+		info->SetHoverDescription(currentEncounter->GetTypeDesc());
+		info->SetHoverTitle(currentEncounter->GetTypeTitle());
+	}
+	else {
+		info->SetHoverTitle("");
+		info->SetHoverDescription("");
+	}
+	if (forgeIcon->GetHover()) {
+		info->SetHoverTitle("Forge");
+		info->SetHoverDescription("Available after clearing\nall encounters in\na tier");
+	}
+
 }

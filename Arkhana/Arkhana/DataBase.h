@@ -62,6 +62,8 @@ public:
 	vector<string> startingPlay;
 	int level;
 	int actionCount;
+	string description;
+	ENCOUNTER_TYPE type;
 };
 
 
@@ -126,6 +128,14 @@ public:
 	EFFECT_TYPE GetEffectEnum(string data) {
 		if (data == "AMOUR_MOD") return EFFECT_TYPE::ARMOUR_MOD;
 		else return EFFECT_TYPE::ARMOUR_MOD;
+	}
+
+	ENCOUNTER_TYPE GetEncType(string data) {
+		if (data == "E_COMBAT") return E_COMBAT;
+		else if (data == "E_GIFT") return E_GIFT;
+		else if (data == "E_EVENT") return E_EVENT;
+		else if (data == "E_ELITE") return E_ELITE;
+		else if (data == "E_BOSS") return E_BOSS;
 	}
 
 	void BuildUnitLists();

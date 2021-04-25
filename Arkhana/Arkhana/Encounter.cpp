@@ -17,7 +17,7 @@ void Encounter::GenerateEncounter() {
 	int r =  rand() %(database->encounterNames[level].size());
 	name = database->encounterNames[level][r];
 	encData = database->encounters[level][name];
-
+	combatDesc = encData->description;
 	for (string s : encData->startingPlay) {
 		startingPlay.push_back(new Card(*cardList[s],database));
 	}

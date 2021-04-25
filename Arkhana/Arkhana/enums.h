@@ -75,7 +75,10 @@ enum class STAT_TYPE {
 	HEALTH
 };
 
-enum UNIT_NAME {
-	GOBLIN,
-	SHRINE
+enum ENCOUNTER_TYPE {
+	E_COMBAT,
+	E_GIFT,
+	E_EVENT,
+	E_ELITE,
+	E_BOSS
 };
