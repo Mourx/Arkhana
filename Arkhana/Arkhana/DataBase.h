@@ -78,6 +78,8 @@ public:
 	vector<vector<string>> encounterNames;
 	map<int, string> costIcons;
 
+	bool bDebugMode = true;
+
 	MODIFIER_TYPE GetModEnum(string data) {
 		if (data == "ZONE_MOD") return MODIFIER_TYPE::ZONE_MOD;
 		else if (data == "UNIT_MOD") return MODIFIER_TYPE::UNIT_MOD;

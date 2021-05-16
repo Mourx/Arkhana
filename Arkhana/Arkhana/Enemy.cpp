@@ -117,15 +117,19 @@ void Enemy::Update(Time t) {
 }
 
 void Enemy::SetDetails(EncounterData* data, vector<Card*> startPlay, vector<vector<Card*>> dl) {
-
-	maxHealth = data->health;
+	if (database->bDebugMode) {
+		maxHealth = 1;
+		armour = 1;
+	}
+	else {
+		maxHealth = data->health;
+		armour = data->armour;
+	}
 	health = maxHealth;
-	armour = data->armour;
 	maxMana = data->actionCount;
 	startingPlay = startPlay;
 	decklists = dl;
 	level = data->level;
-	goldReward = level * 13 - (rand() % 22);
 	decklist = decklist;
 
 	UpdateStrings();

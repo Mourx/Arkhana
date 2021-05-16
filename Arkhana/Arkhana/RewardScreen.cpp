@@ -10,6 +10,15 @@ RewardScreen::RewardScreen(RenderWindow* w,DataBase* db, Player* p,Enemy* e) {
 	texBackground.loadFromFile("Textures/GUI/rewardBackground.png");
 	background.setTexture(texBackground);
 	background.setPosition(0, 180);
+
+	texGoldIcon.loadFromFile("Textures/GUI/gold.png");
+	goldIcon.setTexture(texGoldIcon);
+	goldIcon.setPosition(goldIconPos);
+
+	font.loadFromFile("Fonts/ManaSpace/manaspc.ttf");
+	txtGold.setFont(font);
+	txtGold.setPosition(goldTxtPos);
+
 	GenerateOptions();
 }
 
@@ -34,6 +43,8 @@ void RewardScreen::GenerateOptions() {
 		c->SetPosition(optionPos + Vector2f(i * 160, 0));
 		options.push_back(c);
 	}
+	moneyReward = (enemy->GetLevel()+1) * 22 + rand()%15;	
+	txtGold.setString("+ " + to_string(moneyReward));
 }
 
 void RewardScreen::Draw(){
@@ -41,6 +52,8 @@ void RewardScreen::Draw(){
 	for (Card* c : options) {
 		c->Draw(window);
 	}
+	window->draw(goldIcon);
+	window->draw(txtGold);
 }
 
 void RewardScreen::MouseMoved(Vector2f mousePos) {
@@ -61,6 +74,7 @@ void RewardScreen::MouseMoved(Vector2f mousePos) {
 void RewardScreen::MouseClicked(Vector2f mousePos) {
 	if (selCard != NULL) {
 		player->AddCard(selCard);
+		player->AddGold(moneyReward);
 		options.clear();
 
 		nextScreen = PATH_SCREEN;

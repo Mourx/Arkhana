@@ -18,13 +18,13 @@ public:
     void Update(Time t);
     void SetNextMove();
     vector<Card*> GetStartingPlay() { return startingPlay; }
+    int GetLevel() { return level; }
 protected:
 
     void InitSprites();
 
     int maxArmour = 0;
     int cardIndex = 0;
-    int goldReward = 0;
     int level = 0;
     vector<vector<Card*>> decklists;
     vector<Card*> deck;

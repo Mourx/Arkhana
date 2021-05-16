@@ -7,7 +7,7 @@
       "decklist": [
         [ "Goblin", "Goblin" ],
         [ "Two Gnomes" ],
-        [ "Jelly", "Rage"]
+        [ "Jelly", "Rage" ]
       ],
       "startingPlay": [ "Goblin" ],
       "level": 0,
@@ -28,6 +28,21 @@
       "level": 1,
       "actionCount": 1,
       "description": "An Ogre! and his\ngoblin friends.\n\nKeep an eye on\nthe power of\nthe ogre.",
+      "type": "E_COMBAT"
+    },
+    "several gnomes": {
+      "name": "several gnomes",
+      "health": 60,
+      "armour": 0,
+      "decklist": [
+        [ "Two Gnomes" ],
+        [ "Rage", "Rage" ],
+        [ "Goblin", "Shrine" ]
+      ],
+      "startingPlay": [ "Two Gnomes" ],
+      "level": 2,
+      "actionCount": 2,
+      "description": "Uh oh! Several gnomes!",
       "type": "E_COMBAT"
     }
 

@@ -34,7 +34,7 @@ protected:
     Encounter* currentEncounter = NULL;
     vector<Encounter*> encounters;
 
-    vector<int> encounterAmounts = { 3,2,0 };
+    vector<int> encounterAmounts = { 3,2,1 };
 
     vector<Vector2f> encPos = { Vector2f(200, 330),Vector2f(525, 380),Vector2f(850, 580) };
 

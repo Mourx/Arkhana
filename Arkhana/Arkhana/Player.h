@@ -37,6 +37,7 @@ public:
 	void ModifyArmour(int val) { armour += val; }
 	map<string, CardData*> GetCardLists() { return cardList; }
 	void AddCard(Card* c) { decklist.push_back(c); }
+	void AddGold(int m) { currentGold += m; }
 	void SetFaction();
 protected:
 	void DiscardHand();
