@@ -28,6 +28,20 @@ InfoPane::InfoPane() {
 	txtHoverTitle.setCharacterSize(26);
 	txtScreenTitle.setStyle(Text::Bold);
 	txtHoverTitle.setPosition(hoverTitlePos);
+
+	txtCardInfo.setFont(font);
+	txtCardInfo.setCharacterSize(18);
+	txtCardInfo.setPosition(cardInfoPos);
+
+	txtCardInfoName.setFont(font);
+	txtCardInfoName.setCharacterSize(18);
+	txtCardInfoName.setPosition(cardInfoNamePos);
+
+	txtCardInfoTitle.setFont(font);
+	txtCardInfoTitle.setCharacterSize(26);
+	txtCardInfoTitle.setString(cardInfoTitle);
+	txtCardInfoTitle.setStyle(Text::Bold);
+	txtCardInfoTitle.setPosition(cardInfoTitlePos);
 }
 
 void InfoPane::Draw(RenderWindow* w) {
@@ -36,4 +50,7 @@ void InfoPane::Draw(RenderWindow* w) {
 	w->draw(txtHoverDescription);
 	w->draw(txtHoverTitle);
 	w->draw(txtScreenTitle);
+	w->draw(txtCardInfo);
+	w->draw(txtCardInfoTitle);
+	w->draw(txtCardInfoName);
 }

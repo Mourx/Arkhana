@@ -18,6 +18,7 @@ public:
     String GetCombatDescription() { return combatDesc; }
     String GetTypeDesc() { return typeDesc; }
     String GetTypeTitle() { return typeTitle; }
+    int GetLevel() { return level; }
 protected:
     void GenerateEncounter();
     DataBase* database;

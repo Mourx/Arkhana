@@ -2,14 +2,17 @@
 #include "GameObject.h"
 #include "Modifier.h"
 #include "enums.h"
+
 #include <vector>
 using namespace std;
+
+class Card;
 
 class Unit :
     public GameObject
 {
 public:
-    Unit(UnitData data, vector<Modifier*> mods);
+    Unit(UnitData data, vector<Modifier*> mods,Card* c);
     ~Unit() {}
     float GetPPower() { return physicalPower; }
     float GetStamina() { return stamina; }
@@ -27,6 +30,9 @@ public:
     vector<Modifier*> GetAuras() { return auraMods; }
     void Move(Vector2f offset);
     vector<Modifier*> GetModifiers() { return unitMods; }
+    Card* GetCard() {
+        return card;
+    }
 protected:
     void ModifyStat(STAT_TYPE stat, int value, int multiplier);
     
@@ -38,7 +44,7 @@ protected:
     float zoneMultiplierPhys = 0;
     float zoneMultiplierMag = 0;
 
-
+    Card* card;
     float basePhys = 0;
     float baseStamina = 0;
     String name = "";

@@ -33,6 +33,7 @@ protected:
     void CheckDeaths();
 
     Card* ePlayedCard = NULL;
+    Card* hoverCard = NULL;
 
     float iconOffsetX = 0;
     float iconOffsetY = 0;

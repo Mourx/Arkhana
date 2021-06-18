@@ -112,17 +112,31 @@ void CombatScreen::MouseMoved(Vector2f mousePos) {
 		if (bounds.contains(mousePos)) {
 			selectedZone = u;
 		}
+		for (Unit* unit : u->GetUnits()) {
+			bounds = unit->GetIcon()->getGlobalBounds();
+			if (bounds.contains(mousePos)) {
+				hoverCard = unit->GetCard();
+			}
+		}
 	}
 	for (UnitZone* u : enemy->GetZones()) {
 		FloatRect bounds = u->GetIcon()->getGlobalBounds();
 		if (bounds.contains(mousePos)) {
 			selectedZone = u;
 		}
+		for (Unit* unit : u->GetUnits()) {
+			bounds = unit->GetIcon()->getGlobalBounds();
+			if (bounds.contains(mousePos)) {
+				hoverCard = unit->GetCard();
+			}
+		}
 	}
 	for (Card* c : player->GetHand()) {
 		FloatRect bounds = c->GetIcon()->getGlobalBounds();
 		if (bounds.contains(mousePos)) {
 			c->SetHover(true);
+			hoverCard = c;
+			
 		}
 		else {
 			c->SetHover(false);
@@ -134,6 +148,7 @@ void CombatScreen::MouseMoved(Vector2f mousePos) {
 		FloatRect bounds = list[i]->GetIcon()->getGlobalBounds();
 		if (bounds.contains(mousePos)) {
 			eNext = list[i];
+			hoverCard = eNext;
 		}
 	}
 }
@@ -248,4 +263,7 @@ void CombatScreen::CalculateCombat() {
 void CombatScreen::SetInfo(InfoPane* info) {
 	info->SetDescription(description);
 	info->SetScreenTitle("Combat!");
+	if (hoverCard != NULL) {
+		info->SetCardInfo(hoverCard->GetDesc(), hoverCard->GetName());
+	}
 }

@@ -81,7 +81,7 @@ Card::Card(CardData data,DataBase* dataB) {
 		texCardArt.loadFromFile(database->UnitList[unit]->filePath);
 	}
 	cardArt.setTexture(texCardArt);
-	
+	cardArt.setScale(2, 2);
 	
 }
 
@@ -96,7 +96,7 @@ void Card::Play() {
 	Unit* targUnit;
 	switch (type) {
 	case CREATE_UNIT:
-		u = new Unit(*database->UnitList[unit], modifiers);
+		u = new Unit(*database->UnitList[unit], modifiers,this);
 		targetZone->AddUnit(u);
 		break;
 	case APPLY_ZONE_MOD:
@@ -169,7 +169,7 @@ void Card::Draw(RenderWindow* w) {
 	}
 	w->draw(costIcon);
 	w->draw(txtName);
-	w->draw(txtDesc);
+	//w->draw(txtDesc);
 	w->draw(cardArt);
 	if (bHover) {
 		w->draw(cardBorder);

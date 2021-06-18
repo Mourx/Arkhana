@@ -48,6 +48,12 @@ public:
     void SetHover(bool b) {
         bHover = b;
     }
+    String GetDesc() {
+        return txtDesc.getString();
+    }
+    String GetName() {
+        return txtName.getString();
+    }
 protected:
     void DoEffect();
     virtual void ApplyModifier(UnitZone*);
@@ -104,7 +110,7 @@ protected:
     Vector2f txtMagPos = Vector2f(90, 175);
     Vector2f magPos = Vector2f(110, 175);
     Vector2f txtDescPos = Vector2f(75, 140);
-    Vector2f cardArtPos = Vector2f(55, 50);
+    Vector2f cardArtPos = Vector2f(35, 50);
     Vector2f costIconPos = Vector2f(15, 15);
 
     string zTag;

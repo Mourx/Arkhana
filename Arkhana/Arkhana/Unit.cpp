@@ -1,11 +1,12 @@
 #include "Unit.h"
 
 using namespace std;
-Unit::Unit(UnitData data,vector<Modifier*> mods) {
+Unit::Unit(UnitData data,vector<Modifier*> mods,Card* c) {
 	basePhys = data.physPower;
 	baseStamina = data.stamina;
 	name = data.name;
 	texIcon.loadFromFile(data.filePath);
+	card = c;
 	for (Modifier* mod : mods) {
 		switch (mod->GetModType()) {
 		case MODIFIER_TYPE::UNIT_MOD:

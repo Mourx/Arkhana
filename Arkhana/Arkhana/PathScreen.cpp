@@ -49,7 +49,7 @@ void PathScreen::MouseMoved(Vector2f mousePos) {
 	for (Encounter* e : encounters) {
 		if (e->GetComplete() == false) {
 			FloatRect bounds = e->GetIcon()->getGlobalBounds();
-			if (bounds.contains(mousePos)) {
+			if (bounds.contains(mousePos) && e->GetLevel()) {
 				e->SetHover(true);
 				currentEncounter = e;
 				bAny = true;
