@@ -80,3 +80,14 @@ void RewardScreen::MouseClicked(Vector2f mousePos) {
 		nextScreen = PATH_SCREEN;
 	}
 }
+
+void RewardScreen::SetInfo(InfoPane* info) {
+
+	info->SetScreenTitle("Rewards!");
+	info->SetDescription("You have earned:\n-One Card\n-Gold\n\n");
+	info->SetHoverTitle("");
+	info->SetHoverDescription("");
+	if (selCard != NULL) {
+		info->SetCardInfo(selCard->GetDesc(), selCard->GetName());
+	}
+}

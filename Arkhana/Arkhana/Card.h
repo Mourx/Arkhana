@@ -3,6 +3,7 @@
 #include "enums.h"
 #include "UnitZone.h"
 #include "DataBase.h"
+#include <SFML/Audio.hpp>
 
 class Player;
 
@@ -20,6 +21,7 @@ public:
     virtual void Play(UnitZone* zone);
     void SetPosition(Vector2f pos);
     void Draw(RenderWindow* w);
+    void DrawCost(RenderWindow* w);
     CARD_TYPE GetType() { return type; }
     ZONE_OWNER GetZoneOwner() { return zOwner; }
     ZONE_TYPE GetZoneType() { return zType; }
@@ -45,9 +47,7 @@ public:
         }
         UpdateStrings();
     }
-    void SetHover(bool b) {
-        bHover = b;
-    }
+    void SetHover(bool b);
     String GetDesc() {
         return txtDesc.getString();
     }
@@ -73,7 +73,6 @@ protected:
     int pPow;
 
     int goldCost = 0;
-
     bool bHasTargetZone = false;
     UnitZone* targetZone;
 
@@ -86,6 +85,7 @@ protected:
     Text txtPhys;
     Text txtMag;
     Text txtDesc;
+    Text txtGoldCost;
 
     Sprite arcanaSymbol;
     Texture texArcanaSymbol;
@@ -112,6 +112,7 @@ protected:
     Vector2f txtDescPos = Vector2f(75, 140);
     Vector2f cardArtPos = Vector2f(35, 50);
     Vector2f costIconPos = Vector2f(15, 15);
+    Vector2f goldCostPos = Vector2f(75, 220);
 
     string zTag;
     AI_TAG AITag;

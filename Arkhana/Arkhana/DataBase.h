@@ -9,10 +9,12 @@
 #include <rapidjson/filereadstream.h>
 #include <cstdio>
 #include <iostream>
+#include <SFML/Audio.hpp>
+
 class Modifier;
 using namespace rapidjson;
 using namespace std;
-
+using namespace sf;
 struct UnitData {
 public:
 	string name;
@@ -147,5 +149,10 @@ public:
 	void BuildEncounterLists();
 	void BuildEffectLists();
 	void Init();
+
+
+
+	Sound sound;
+	SoundBuffer rollover;
 };
 

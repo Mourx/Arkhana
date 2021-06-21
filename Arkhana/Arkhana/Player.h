@@ -39,6 +39,7 @@ public:
 	void AddCard(Card* c) { decklist.push_back(c); }
 	void AddGold(int m) { currentGold += m; }
 	void SetFaction();
+	int GetGold() { return currentGold; }
 protected:
 	void DiscardHand();
 	void DrawCards(int amount);

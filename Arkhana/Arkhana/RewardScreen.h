@@ -11,6 +11,7 @@ public:
     void Draw();
     void MouseMoved(Vector2f mousePos);
     void MouseClicked(Vector2f mousePos);
+    void SetInfo(InfoPane* info);
 protected:
     void GenerateOptions();
 

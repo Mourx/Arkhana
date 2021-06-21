@@ -19,6 +19,7 @@ public:
     String GetTypeDesc() { return typeDesc; }
     String GetTypeTitle() { return typeTitle; }
     int GetLevel() { return level; }
+    void SetHover(bool b);
 protected:
     void GenerateEncounter();
     DataBase* database;

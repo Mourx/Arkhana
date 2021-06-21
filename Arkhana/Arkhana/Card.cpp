@@ -1,6 +1,7 @@
 #include "Card.h"
 #include "Player.h"
 
+
 Card::Card(CardData data,DataBase* dataB) {
 	database = dataB;
 	texIcon.loadFromFile("Textures/Cards/CardBasic.png");
@@ -83,6 +84,8 @@ Card::Card(CardData data,DataBase* dataB) {
 	cardArt.setTexture(texCardArt);
 	cardArt.setScale(2, 2);
 	
+	txtGoldCost.setFont(font);
+
 }
 
 void Card::UpdateStrings() {
@@ -176,6 +179,10 @@ void Card::Draw(RenderWindow* w) {
 	}
 }
 
+void Card::DrawCost(RenderWindow* w) {
+	w->draw(txtGoldCost);
+}
+
 void Card::SetPosition(Vector2f p) {
 	pos = p;
 	GameObject::SetPosition(pos);
@@ -206,4 +213,21 @@ void Card::SetPosition(Vector2f p) {
 	costIcon.setPosition(pos + costIconPos);
 
 	cardArt.setPosition(pos + cardArtPos);
+
+
+	txtGoldCost.setString(to_string(GetGoldCost()));
+	tR = txtGoldCost.getLocalBounds();
+	txtGoldCost.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
+	txtGoldCost.setPosition(pos + goldCostPos);
+}
+
+void Card::SetHover(bool b){
+	if (bHover != b && b == true) {
+
+
+		database->sound.setBuffer(database->rollover);
+		database->sound.play();
+	}
+	bHover = b;
+		
 }

@@ -19,6 +19,9 @@ public:
     void ResetDetails(COMBAT_RESULT res);
     ForgeScreen* GetForge() { return forge; }
     void SetInfo(InfoPane* info);
+    void ForgeVisited(bool b) {
+        bForgeVisited = b;
+    }
 protected:
     void InitEncounters();
 
@@ -29,12 +32,22 @@ protected:
     ForgeScreen* forge;
     GameObject* forgeIcon;
     Texture texForgeIcon;
+
+    string forgePrompt;
+    string forgeVisitedPrompt;
+
+    Text txtForgeUnlocks;
+    Font font;
+
     Vector2f forgeIconPos = Vector2f(15, 600);
 
     Encounter* currentEncounter = NULL;
     vector<Encounter*> encounters;
 
     vector<int> encounterAmounts = { 3,2,1 };
+
+    bool bForgeUnlocked = true;
+    bool bForgeVisited = true;
 
     int tier = 0;
     int forgeUnlocks = 0;

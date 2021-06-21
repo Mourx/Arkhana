@@ -40,22 +40,19 @@ ForgeScreen::ForgeScreen(RenderWindow* w, DataBase* db, Player* p) {
 	txtUpgradeCost.setString(to_string(upgradeCost));
 	FloatRect tR = txtUpgradeCost.getLocalBounds();
 	txtUpgradeCost.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
+
+	type = FORGE_SCREEN;
 }
 
 
 void ForgeScreen::Draw() {
 	window->draw(background);
-	pathIcon->Draw(window);
 	upgradeIcon->Draw(window);
 	for (Card* c : options) {
 		c->Draw(window);
+		c->DrawCost(window);
 	}
-	for (Text t : optionCostsTxt) {
-		FloatRect tR = t.getLocalBounds();
-		t.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
-
-		window->draw(t);
-	}
+	
 	
 	window->draw(txtUpgradeCost);
 	if (bUpgrading) {
@@ -70,6 +67,7 @@ void ForgeScreen::Draw() {
 		upgStamina->Draw(window);
 	}
 
+	pathIcon->Draw(window);
 
 }
 
@@ -93,6 +91,7 @@ void ForgeScreen::MouseMoved(Vector2f mousePos) {
 			bounds = c->GetIcon()->getGlobalBounds();
 			if (bounds.contains(mousePos)) {
 				c->SetHover(true);
+				selCard = c;
 			}
 			else {
 				c->SetHover(false);
@@ -127,6 +126,10 @@ void ForgeScreen::MouseMoved(Vector2f mousePos) {
 			}
 		}
 	}
+	FloatRect bounds = pathIcon->GetIcon()->getGlobalBounds();
+	if (bounds.contains(mousePos)) {
+		pathIcon->SetHover(true);
+	}
 	
 }
 
@@ -148,6 +151,9 @@ void ForgeScreen::MouseClicked(Vector2f mousePos) {
 			bUpgrading = false;
 			bSelectUpgrade = false;
 		}
+		if (pathIcon->GetHover()) {
+			bSelectUpgrade = false;
+		}
 	}
 	else if (!bUpgrading) {
 		if (pathIcon->GetHover()) {
@@ -156,6 +162,13 @@ void ForgeScreen::MouseClicked(Vector2f mousePos) {
 		if (upgradeIcon->GetHover()) {
 			bUpgrading = true;
 			CreateDeckGrid();
+		}
+		if (selCard!=NULL && selCard->GetGoldCost() <= player->GetGold()) {
+			player->AddCard(selCard);
+			options.erase(find(options.begin(), options.end(), selCard));
+			player->AddGold(-selCard->GetGoldCost());
+			selCard->SetHover(false);
+			selCard = NULL;
 		}
 	}
 	else if (bUpgrading) {
@@ -166,6 +179,9 @@ void ForgeScreen::MouseClicked(Vector2f mousePos) {
 				//subtract player gold;
 				upgradeCost += 50;
 			}
+		}
+		if (pathIcon->GetHover()) {
+			bUpgrading = false;
 		}
 	}
 	
@@ -213,4 +229,8 @@ void ForgeScreen::CreateDeckGrid() {
 			c->SetPosition(Vector2f(-200, -200));
 		}
 	}
+}
+
+void ForgeScreen::Update(Time t) {
+	player->Update(t);
 }

@@ -11,6 +11,7 @@ public:
     void MouseMoved(Vector2f mousePos);
     void MouseClicked(Vector2f mousePos);
     void ResetNextScreen() { nextScreen = NONE; }
+    void Update(Time t);
 protected:
     void GenerateOptions();
     void CreateDeckGrid();

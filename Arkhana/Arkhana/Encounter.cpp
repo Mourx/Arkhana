@@ -30,3 +30,11 @@ void Encounter::GenerateEncounter() {
 	}
 	enemy->SetDetails(encData, startingPlay, encounterDecks);
 }
+
+void Encounter::SetHover(bool b) {
+	if (bHover != true && b == true) {
+		database->sound.setBuffer(database->rollover);
+		database->sound.play();
+	}
+	bHover = b;
+}

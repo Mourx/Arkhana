@@ -19,11 +19,21 @@ PathScreen::PathScreen(RenderWindow* w, DataBase* db, Player* p) {
 	forgeIcon->GetIcon()->setPosition(forgeIconPos);
 
 	description = "Clear each encounter\nto unlock the forge\nand move to the\nnext tier.";
+	forgePrompt = "Visit the Forge and \nupgrade your deck!";
+	forgeVisitedPrompt = "The Forge will restock\nwhen you clear this tier.";
 }
 
 void PathScreen::ResetDetails(COMBAT_RESULT res) {
 	if (res == WIN && currentEncounter != NULL) {
 		currentEncounter->SetComplete(true);
+		forgeUnlocks++;
+		if (forgeUnlocks >= encounterAmounts[tier]) {
+			bForgeUnlocked = true;
+			bForgeVisited = false;
+			tier++;
+			forgeUnlocks = 0;
+			forge = new ForgeScreen(window,database, player);
+		}
 	}
 	currentEncounter = NULL;
 	nextScreen = NONE;
@@ -49,7 +59,7 @@ void PathScreen::MouseMoved(Vector2f mousePos) {
 	for (Encounter* e : encounters) {
 		if (e->GetComplete() == false) {
 			FloatRect bounds = e->GetIcon()->getGlobalBounds();
-			if (bounds.contains(mousePos) && e->GetLevel()) {
+			if (bounds.contains(mousePos) && e->GetLevel() == tier && bForgeVisited == true) {
 				e->SetHover(true);
 				currentEncounter = e;
 				bAny = true;
@@ -63,7 +73,7 @@ void PathScreen::MouseMoved(Vector2f mousePos) {
 		currentEncounter = NULL;
 	}
 	FloatRect bounds = forgeIcon->GetIcon()->getGlobalBounds();
-	if (bounds.contains(mousePos)) {
+	if (bounds.contains(mousePos) && bForgeUnlocked == true) {
 		forgeIcon->SetHover(true);
 	}
 	else {
@@ -74,6 +84,7 @@ void PathScreen::MouseMoved(Vector2f mousePos) {
 void PathScreen::MouseClicked(Vector2f mousePos) {
 	if (currentEncounter != NULL) {
 		nextScreen = COMBAT_SCREEN;
+		
 	}
 	if (forgeIcon->GetHover()) {
 		nextScreen = FORGE_SCREEN;
@@ -96,7 +107,14 @@ void PathScreen::InitEncounters() {
 }
 
 void PathScreen::SetInfo(InfoPane* info) {
-	info->SetDescription(description);
+	if (bForgeVisited == true) {
+		info->SetDescription(forgeVisitedPrompt);
+	}else if (bForgeUnlocked == true) {
+		info->SetDescription(forgePrompt);
+	}else {
+		info->SetDescription(description);
+	}
+		
 	info->SetScreenTitle("Select Encounter");
 
 	
@@ -110,7 +128,7 @@ void PathScreen::SetInfo(InfoPane* info) {
 	}
 	if (forgeIcon->GetHover()) {
 		info->SetHoverTitle("Forge");
-		info->SetHoverDescription("Available after clearing\nall encounters in\na tier");
+		info->SetHoverDescription("Will restock after \nclearing all encounters \nin a tier");
 	}
 
 }

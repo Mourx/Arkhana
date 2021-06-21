@@ -214,4 +214,6 @@ void DataBase::Init() {
 	BuildUnitLists();
 	BuildEncounterLists();
 	BuildEffectLists();
+
+	rollover.loadFromFile("Sound/UI/rollover1.wav");
 }

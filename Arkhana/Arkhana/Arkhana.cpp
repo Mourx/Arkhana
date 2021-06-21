@@ -1,5 +1,6 @@
 #include "headers.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "CombatScreen.h"
 #include "MainMenuScreen.h"
 #include "RewardScreen.h"
@@ -25,11 +26,30 @@ int main() {
 	PathScreen* pathScreen = new PathScreen(window, database, player);
 	Screen* currentScreen = new Screen();
 	InfoPane* info = new InfoPane();
+	
+	SoundBuffer buffer;
+	//buffer.loadFromFile();
+	Music music;
+	
+	music.openFromFile("Sound/background.wav");
+	music.setVolume(10.f);
+	music.setLoop(true);
+	//music.play();
 
 	currentScreen = pathScreen;
 	Clock clock;
 	Time elapsed;
 	Event event;
+	Texture shaderEffect;
+	shaderEffect.create(1920, 1080);
+	float transitionTime = 1.2f;
+	float transitionTimer = 0.0f;
+	bool bTransition = false;
+
+	Sprite render;
+	Shader shader;
+	shader.loadFromFile("Textures/Shaders/vortex.frag", Shader::Fragment);
+
 
 	while (window->isOpen()) {
 		elapsed = clock.restart();
@@ -37,26 +57,39 @@ int main() {
 		switch (currentScreen->GetNextScreen()) {
 		case MAIN_MENU:
 			currentScreen = new MainMenuScreen(window,player);
-
+			bTransition = true;
+			shaderEffect.update(*window);
 			break;
 		case COMBAT_SCREEN:
 			combat = new CombatScreen(window, database, player, pathScreen->GetEncounter());
 			enemy = combat->GetEnemy();
 			currentScreen = combat;
+			bTransition = true;
+			shaderEffect.update(*window);
 			break;
 		case GAME_OVER:
 			break;
 		case REWARD_SCREEN:
 			currentScreen = new RewardScreen(window,database,player,enemy);
+			bTransition = true;
+			shaderEffect.update(*window);
 			break;
 		case PATH_SCREEN:
-
-			pathScreen->ResetDetails(WIN);
+			if (currentScreen->GetType() == REWARD_SCREEN) {
+				pathScreen->ResetDetails(WIN);
+			}
+			else if (currentScreen->GetType() == FORGE_SCREEN) {
+				pathScreen->ForgeVisited(true);
+			}
 			currentScreen = pathScreen;
+			bTransition = true;
+			shaderEffect.update(*window);
 			break;
 		case FORGE_SCREEN:
 			pathScreen->ResetDetails(ONGOING);
 			currentScreen = pathScreen->GetForge();
+			bTransition = true;
+			shaderEffect.update(*window);
 			break;
 		case NONE:
 			break;
@@ -77,11 +110,34 @@ int main() {
 			
 			
 		}
+
+		if (bTransition) {
+			transitionTimer += elapsed.asSeconds();
+			if (transitionTimer >= transitionTime) {
+				bTransition = false;
+				transitionTimer = 0;
+			}
+		}
 		window->clear(Color::Magenta);
 		currentScreen->SetInfo(info);
 		currentScreen->Draw();
 		if (currentScreen->GetType() != MAIN_MENU) player->DrawPlayerBar();
-		if (currentScreen->GetType() == PATH_SCREEN || currentScreen->GetType() == COMBAT_SCREEN) info->Draw(window);
+		if (currentScreen->GetType() == PATH_SCREEN || currentScreen->GetType() == COMBAT_SCREEN || currentScreen->GetType() == REWARD_SCREEN) info->Draw(window);
+
+		if (bTransition) {
+
+			if (transitionTimer >= transitionTime/2.0) {
+				shaderEffect.update(*window);
+			}
+			float timeVal = (transitionTimer >= transitionTime/2.0) ? timeVal = transitionTime - transitionTimer : timeVal = transitionTimer;
+			timeVal = timeVal / (transitionTime / 2.0);
+			shader.setUniform("centre", Vector2f(0.5, 0.5));
+			shader.setUniform("t", timeVal);
+			shader.setUniform("iResolution", Vector2f(1920, 1080));
+			shader.setUniform("currentTexture", shaderEffect);
+			render.setTexture(shaderEffect);
+			window->draw(render, &shader);
+		}
 		window->display();
 	}
 	return 0;
