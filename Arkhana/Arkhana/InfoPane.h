@@ -6,7 +6,7 @@ class InfoPane :
 public:
     InfoPane();
     ~InfoPane() {}
-    void Draw(RenderWindow* w);
+    void Draw(RenderTexture* w);
     void SetDescription(String s) {
         description = s;
         txtDescription.setString(description);

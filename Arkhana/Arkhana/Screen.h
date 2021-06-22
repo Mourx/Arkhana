@@ -19,7 +19,7 @@ public:
 	NEXT_SCREEN GetType() { return type; }
 	virtual void SetInfo(InfoPane* info) {}
 protected:
-	RenderWindow* window;
+	RenderTexture* window;
 	NEXT_SCREEN nextScreen = NONE;
 	NEXT_SCREEN type = NONE;
 	String description = "";

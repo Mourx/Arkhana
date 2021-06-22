@@ -5,7 +5,7 @@ class MainMenuScreen :
     public Screen
 {
 public:
-    MainMenuScreen(RenderWindow* window,Player* p);
+    MainMenuScreen(RenderTexture* window,Player* p);
     ~MainMenuScreen(){}
     void Draw();
     void MouseMoved(Vector2f mousePos);

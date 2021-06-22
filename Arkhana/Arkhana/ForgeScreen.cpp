@@ -1,7 +1,7 @@
 #include "ForgeScreen.h"
 
 
-ForgeScreen::ForgeScreen(RenderWindow* w, DataBase* db, Player* p) {
+ForgeScreen::ForgeScreen(RenderTexture* w, DataBase* db, Player* p) {
 	player = p;
 	database = db;
 	window = w;
@@ -13,7 +13,7 @@ ForgeScreen::ForgeScreen(RenderWindow* w, DataBase* db, Player* p) {
 	texPathIcon.loadFromFile("Textures/GUI/backArrow.png");
 	pathIcon = new GameObject();
 	pathIcon->GetIcon()->setTexture(texPathIcon);
-	pathIcon->GetIcon()->setPosition(850, 900);
+	pathIcon->GetIcon()->setPosition(850, 720);
 
 	texScreenShade.loadFromFile("Textures/GUI/screenShade.png");
 	screenShade.setTexture(texScreenShade);

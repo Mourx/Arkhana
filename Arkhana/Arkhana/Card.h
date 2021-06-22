@@ -20,8 +20,8 @@ public:
     virtual void Play();
     virtual void Play(UnitZone* zone);
     void SetPosition(Vector2f pos);
-    void Draw(RenderWindow* w);
-    void DrawCost(RenderWindow* w);
+    void Draw(RenderTexture* w);
+    void DrawCost(RenderTexture* w);
     CARD_TYPE GetType() { return type; }
     ZONE_OWNER GetZoneOwner() { return zOwner; }
     ZONE_TYPE GetZoneType() { return zType; }

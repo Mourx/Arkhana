@@ -14,8 +14,8 @@ public:
     UnitZone(int zoneType, Player* own, ZONE_OWNER zPlayer, ZONE_TYPE t);
     ~UnitZone() {}
     vector<Unit*> GetUnits() { return unitList; }
-    void Draw(RenderWindow* w);
-    void DrawUnits(RenderWindow* w);
+    void Draw(RenderTexture* w);
+    void DrawUnits(RenderTexture* w);
     int GetCombinedPhysicalPower();
     void AddUnit(Unit* u);
     void ClearUnits() { unitList.clear(); }

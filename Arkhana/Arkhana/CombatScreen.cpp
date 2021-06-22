@@ -1,7 +1,7 @@
 #include "CombatScreen.h"
 
 
-CombatScreen::CombatScreen(RenderWindow* w,DataBase* data,Player* p,Encounter* enc) {
+CombatScreen::CombatScreen(RenderTexture* w,DataBase* data,Player* p,Encounter* enc) {
 	database = data;
 	window = w;
 	player = p;
@@ -27,7 +27,7 @@ CombatScreen::CombatScreen(RenderWindow* w,DataBase* data,Player* p,Encounter* e
 
 	texBackground.loadFromFile("Textures/GUI/combatBackground.png");
 	background.setTexture(texBackground);
-	background.setPosition(0, 180);
+	background.setPosition(0, 0);
 
 	endTurn = new EndTurnButton();
 	endTurn->SetPosition(endTurnPos);

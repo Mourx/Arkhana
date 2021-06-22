@@ -17,7 +17,7 @@ public:
     float GetPPower() { return physicalPower; }
     float GetStamina() { return stamina; }
     void SetPosition(Vector2f pos);
-    void Draw(RenderWindow* w);
+    void Draw(RenderTexture* w);
     void UpdateStats();
     void AddModifier(Modifier* mod);
     void SetZoneBonuses(float phys, float physM) { 

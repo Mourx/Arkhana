@@ -162,7 +162,7 @@ void Card::DoEffect() {
 	}
 }
 
-void Card::Draw(RenderWindow* w) {
+void Card::Draw(RenderTexture* w) {
 	w->draw(icon, &cardShader);
 	if (type == CREATE_UNIT) {
 		w->draw(txtPhys);
@@ -179,7 +179,7 @@ void Card::Draw(RenderWindow* w) {
 	}
 }
 
-void Card::DrawCost(RenderWindow* w) {
+void Card::DrawCost(RenderTexture* w) {
 	w->draw(txtGoldCost);
 }
 

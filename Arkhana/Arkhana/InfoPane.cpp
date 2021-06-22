@@ -44,7 +44,7 @@ InfoPane::InfoPane() {
 	txtCardInfoTitle.setPosition(cardInfoTitlePos);
 }
 
-void InfoPane::Draw(RenderWindow* w) {
+void InfoPane::Draw(RenderTexture* w) {
 	w->draw(icon);
 	w->draw(txtDescription);
 	w->draw(txtHoverDescription);

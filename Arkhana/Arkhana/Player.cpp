@@ -4,7 +4,7 @@ Player::Player() {
 
 }
 
-Player::Player(RenderWindow* w, DataBase* data) {
+Player::Player(RenderTexture* w, DataBase* data) {
 	database = data;
 	window = w;
 	
@@ -166,13 +166,13 @@ void Player::Update(Time t) {
 	}
 }
 void Player::DrawPlayerBar() {
-	window->draw(playerBarIcon);
-	window->draw(playerGoldIcon);
-	window->draw(txtPlayerGold);
-	window->draw(healthIcon);
-	window->draw(txtHealth);
-	window->draw(deckSizeIcon);
-	window->draw(txtDeckTotalSize);
+	playerBarWindow->draw(playerBarIcon);
+	playerBarWindow->draw(playerGoldIcon);
+	playerBarWindow->draw(txtPlayerGold);
+	playerBarWindow->draw(healthIcon);
+	playerBarWindow->draw(txtHealth);
+	playerBarWindow->draw(deckSizeIcon);
+	playerBarWindow->draw(txtDeckTotalSize);
 }
 
 void Player::DrawBackground() {

@@ -5,7 +5,7 @@ class ForgeScreen :
     public Screen
 {
 public:
-    ForgeScreen(RenderWindow* w, DataBase* db, Player* p);
+    ForgeScreen(RenderTexture* w, DataBase* db, Player* p);
     ~ForgeScreen() {};
     void Draw();
     void MouseMoved(Vector2f mousePos);
@@ -29,9 +29,9 @@ protected:
     int optionsAmount = 6;
 
     vector<Vector2f> optionsPos = {
-        Vector2f(150,200), Vector2f(400,200),
-        Vector2f(150,470), Vector2f(400,470),
-        Vector2f(150,740), Vector2f(400,740),
+        Vector2f(150,20), Vector2f(400,20),
+        Vector2f(150,290), Vector2f(400,290),
+        Vector2f(150,560), Vector2f(400,560),
     };
     vector<Text> optionCostsTxt;
     Font font;
@@ -41,20 +41,20 @@ protected:
 
     GameObject* upgradeIcon;
     Texture texUpgradeIcon;
-    Vector2f upgradeIconPos = Vector2f(1300, 200);
+    Vector2f upgradeIconPos = Vector2f(1300, 20);
 
     GameObject* upgAttack;
     Texture texUpgAttack;
-    Vector2f upgAttackPos = Vector2f(550, 250);
+    Vector2f upgAttackPos = Vector2f(550, 70);
 
     GameObject* upgStamina;
     Texture texUpgStamina;
-    Vector2f upgStaminaPos = Vector2f(950, 250);
+    Vector2f upgStaminaPos = Vector2f(950, 70);
 
     Sprite screenShade;
     Texture texScreenShade;
 
-    Vector2f upgradePos = Vector2f(400, 250);
+    Vector2f upgradePos = Vector2f(400, 70);
     
     Text txtUpgradeCost;
     Vector2f txtUpgradeCostPos = upgradeIconPos + Vector2f(100, 200);

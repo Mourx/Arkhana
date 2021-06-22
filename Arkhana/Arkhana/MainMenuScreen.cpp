@@ -1,7 +1,7 @@
 #include "MainMenuScreen.h"
 #include "Player.h"
 
-MainMenuScreen::MainMenuScreen(RenderWindow* w,Player* p) {
+MainMenuScreen::MainMenuScreen(RenderTexture* w,Player* p) {
 	window = w;
 	player = p;
 	

@@ -7,7 +7,7 @@ class Enemy :
 {
 public:
     Enemy() {}
-    Enemy(RenderWindow* w,DataBase* data);
+    Enemy(RenderTexture* w,DataBase* data);
     ~Enemy(){}
     Card* GetNext() { return decklist[cardIndex]; }
     Card* PlayNext();
@@ -30,7 +30,7 @@ protected:
     vector<Card*> deck;
     vector<Card*> startingPlay;
 
-    Vector2f eNextPos = Vector2f(25, 305);
+    Vector2f eNextPos = Vector2f(25, 125);
 
 };
 

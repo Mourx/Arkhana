@@ -1,7 +1,7 @@
 #include "Encounter.h"
 
 
-Encounter::Encounter(RenderWindow* w, DataBase* db, int lvl) {
+Encounter::Encounter(RenderTexture* w, DataBase* db, int lvl) {
 	database = db;
 	level = lvl;
 

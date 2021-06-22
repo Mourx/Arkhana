@@ -82,7 +82,7 @@ void Unit::SetPosition(Vector2f p) {
 	txtMag.setPosition(pos + txtMagPos);
 }
 
-void Unit::Draw(RenderWindow* w) {
+void Unit::Draw(RenderTexture* w) {
 	
 	w->draw(unitBackground);
 	GameObject::Draw(w);

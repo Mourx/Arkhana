@@ -6,7 +6,7 @@ class RewardScreen :
     public Screen
 {
 public:
-    RewardScreen(RenderWindow* w,DataBase* db, Player* p,Enemy* e);
+    RewardScreen(RenderTexture* w,DataBase* db, Player* p,Enemy* e);
     ~RewardScreen(){}
     void Draw();
     void MouseMoved(Vector2f mousePos);

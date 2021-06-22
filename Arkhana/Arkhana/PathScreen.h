@@ -8,7 +8,7 @@ class PathScreen :
     public Screen
 {       
 public:
-    PathScreen(RenderWindow* w, DataBase* db,Player* p);
+    PathScreen(RenderTexture* w, DataBase* db,Player* p);
     ~PathScreen() {}
     void Draw();
     void Update(Time t);
@@ -25,7 +25,7 @@ public:
 protected:
     void InitEncounters();
 
-    RenderWindow* window;
+    RenderTexture* window;
     DataBase* database;
     Player* player;
     
@@ -39,7 +39,7 @@ protected:
     Text txtForgeUnlocks;
     Font font;
 
-    Vector2f forgeIconPos = Vector2f(15, 600);
+    Vector2f forgeIconPos = Vector2f(15, 420);
 
     Encounter* currentEncounter = NULL;
     vector<Encounter*> encounters;
@@ -52,7 +52,7 @@ protected:
     int tier = 0;
     int forgeUnlocks = 0;
 
-    vector<Vector2f> encPos = { Vector2f(200, 330),Vector2f(525, 380),Vector2f(850, 580) };
+    vector<Vector2f> encPos = { Vector2f(200, 150),Vector2f(525, 200),Vector2f(850, 480) };
 
     Sprite background;
     Texture texBackground;

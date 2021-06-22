@@ -1,7 +1,7 @@
 #include "RewardScreen.h"
 #include "Player.h"
 
-RewardScreen::RewardScreen(RenderWindow* w,DataBase* db, Player* p,Enemy* e) {
+RewardScreen::RewardScreen(RenderTexture* w,DataBase* db, Player* p,Enemy* e) {
 	window = w;
 	database = db;
 	player = p;
@@ -57,6 +57,7 @@ void RewardScreen::Draw(){
 }
 
 void RewardScreen::MouseMoved(Vector2f mousePos) {
+
 	selCard = NULL;
 	for (Card* c : options) {
 		FloatRect bounds = c->GetIcon()->getGlobalBounds();

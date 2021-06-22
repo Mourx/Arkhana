@@ -7,7 +7,7 @@ class Encounter :
     public GameObject
 {
 public:
-    Encounter(RenderWindow* w, DataBase* db, int lvl);
+    Encounter(RenderTexture* w, DataBase* db, int lvl);
     ~Encounter() {}
     vector<vector<Card*>> GetDecks() { return encounterDecks; }
     vector<Card*> GetStartingPlay() { return startingPlay; }

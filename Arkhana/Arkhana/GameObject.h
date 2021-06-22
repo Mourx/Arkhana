@@ -8,7 +8,7 @@ class GameObject
 public:
 	GameObject();
 	~GameObject() {}
-	virtual void Draw(RenderWindow* w);
+	virtual void Draw(RenderTexture* w);
 	virtual void SetPosition(Vector2f p) {
 		pos = p;
 		icon.setPosition(pos);

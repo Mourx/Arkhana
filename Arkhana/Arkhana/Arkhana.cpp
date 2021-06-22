@@ -17,13 +17,21 @@ int main() {
 	
 	RenderWindow* window = new RenderWindow(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Card games or something idk",Style::Fullscreen);
 	CombatScreen* combat;
-	Player* player = new Player(window, database);
+	RenderTexture* screenRender = new RenderTexture();
+	RenderTexture* windowRender = new RenderTexture();
+	
+	windowRender->create(SCREEN_WIDTH, SCREEN_HEIGHT);
+	windowRender->clear();
+	screenRender->create(SCREEN_WIDTH-320, SCREEN_HEIGHT-180);
+	screenRender->clear();
+	Player* player = new Player(screenRender, database);
+	player->SetBarWindow(windowRender);
 	//TAKE THIS OUT
 	player->SetFaction();
 	//TAKE THIS OUT
 	Enemy* enemy = new Enemy();
-	MainMenuScreen* mainMenu = new MainMenuScreen(window,player);
-	PathScreen* pathScreen = new PathScreen(window, database, player);
+	MainMenuScreen* mainMenu = new MainMenuScreen(screenRender,player);
+	PathScreen* pathScreen = new PathScreen(screenRender, database, player);
 	Screen* currentScreen = new Screen();
 	InfoPane* info = new InfoPane();
 	
@@ -34,7 +42,17 @@ int main() {
 	music.openFromFile("Sound/background.wav");
 	music.setVolume(10.f);
 	music.setLoop(true);
-	//music.play();
+	music.play();
+
+
+	Sprite tempScreen;
+
+	Texture preSlide;
+	preSlide.create(1920, 1080);
+	Texture postSlide;
+	postSlide.create(1920,1080);
+	Sprite slideSprite;
+	Sprite staySprite;
 
 	currentScreen = pathScreen;
 	Clock clock;
@@ -56,23 +74,26 @@ int main() {
 		currentScreen->Update(elapsed);
 		switch (currentScreen->GetNextScreen()) {
 		case MAIN_MENU:
-			currentScreen = new MainMenuScreen(window,player);
+			currentScreen = new MainMenuScreen(screenRender,player);
 			bTransition = true;
 			shaderEffect.update(*window);
+			preSlide.update(screenRender->getTexture());
 			break;
 		case COMBAT_SCREEN:
-			combat = new CombatScreen(window, database, player, pathScreen->GetEncounter());
+			combat = new CombatScreen(screenRender, database, player, pathScreen->GetEncounter());
 			enemy = combat->GetEnemy();
 			currentScreen = combat;
 			bTransition = true;
 			shaderEffect.update(*window);
+			preSlide.update(screenRender->getTexture());
 			break;
 		case GAME_OVER:
 			break;
 		case REWARD_SCREEN:
-			currentScreen = new RewardScreen(window,database,player,enemy);
+			currentScreen = new RewardScreen(screenRender,database,player,enemy);
 			bTransition = true;
 			shaderEffect.update(*window);
+			preSlide.update(screenRender->getTexture());
 			break;
 		case PATH_SCREEN:
 			if (currentScreen->GetType() == REWARD_SCREEN) {
@@ -84,12 +105,14 @@ int main() {
 			currentScreen = pathScreen;
 			bTransition = true;
 			shaderEffect.update(*window);
+			preSlide.update(screenRender->getTexture());
 			break;
 		case FORGE_SCREEN:
 			pathScreen->ResetDetails(ONGOING);
 			currentScreen = pathScreen->GetForge();
 			bTransition = true;
 			shaderEffect.update(*window);
+			preSlide.update(screenRender->getTexture());
 			break;
 		case NONE:
 			break;
@@ -97,7 +120,7 @@ int main() {
 		while (window->pollEvent(event))
 		{
 			if (event.type == Event::Closed) window->close();
-			Vector2f m = window->mapPixelToCoords(Mouse::getPosition(*window));
+			Vector2f m = window->mapPixelToCoords(Mouse::getPosition(*window)) + Vector2f(0,-180);
 			if (event.type == Event::MouseMoved) {
 				currentScreen->MouseMoved(m);
 			}
@@ -121,22 +144,46 @@ int main() {
 		window->clear(Color::Magenta);
 		currentScreen->SetInfo(info);
 		currentScreen->Draw();
+		postSlide.update(screenRender->getTexture());
+		
 		if (currentScreen->GetType() != MAIN_MENU) player->DrawPlayerBar();
-		if (currentScreen->GetType() == PATH_SCREEN || currentScreen->GetType() == COMBAT_SCREEN || currentScreen->GetType() == REWARD_SCREEN) info->Draw(window);
+		if (currentScreen->GetType() == PATH_SCREEN || currentScreen->GetType() == COMBAT_SCREEN || currentScreen->GetType() == REWARD_SCREEN) info->Draw(windowRender);
 
+		
+		windowRender->display();
+		screenRender->display();
+		
+		tempScreen = Sprite(screenRender->getTexture());
+		tempScreen.setPosition(0, 180);
+		window->draw(Sprite(windowRender->getTexture()));
+		window->draw(tempScreen);
 		if (bTransition) {
 
-			if (transitionTimer >= transitionTime/2.0) {
-				shaderEffect.update(*window);
+			if (currentScreen->GetType() == COMBAT_SCREEN) {
+				if (transitionTimer >= transitionTime / 2.0) {
+					shaderEffect.update(*window);
+				}
+				float timeVal = (transitionTimer >= transitionTime / 2.0) ? timeVal = transitionTime - transitionTimer : timeVal = transitionTimer;
+				timeVal = timeVal / (transitionTime / 2.0);
+				shader.setUniform("centre", Vector2f(0.5, 0.5));
+				shader.setUniform("t", timeVal);
+				shader.setUniform("iResolution", Vector2f(1920, 1080));
+				shader.setUniform("currentTexture", shaderEffect);
+				render.setTexture(shaderEffect);
+				window->draw(render, &shader);
 			}
-			float timeVal = (transitionTimer >= transitionTime/2.0) ? timeVal = transitionTime - transitionTimer : timeVal = transitionTimer;
-			timeVal = timeVal / (transitionTime / 2.0);
-			shader.setUniform("centre", Vector2f(0.5, 0.5));
-			shader.setUniform("t", timeVal);
-			shader.setUniform("iResolution", Vector2f(1920, 1080));
-			shader.setUniform("currentTexture", shaderEffect);
-			render.setTexture(shaderEffect);
-			window->draw(render, &shader);
+			else {
+				slideSprite.setTexture(postSlide);
+				slideSprite.setPosition(Vector2f(-1600 + 1600 * (transitionTimer / transitionTime), 180));
+
+				staySprite.setTexture(preSlide);
+				staySprite.setPosition(Vector2f(0, 180));
+
+				window->draw(staySprite);
+				window->draw(slideSprite);
+				
+				
+			}
 		}
 		window->display();
 	}

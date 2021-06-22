@@ -1,12 +1,12 @@
 #include "Enemy.h"
 
 
-Enemy::Enemy(RenderWindow* w,DataBase* data){
+Enemy::Enemy(RenderTexture* w,DataBase* data){
 	database = data;
 	window = w;
 
-	attackZonePos = Vector2f(800, 180);
-	blockZonePos = Vector2f(200, 180);
+	attackZonePos = Vector2f(800, 0);
+	blockZonePos = Vector2f(200, 0);
 
 	attackZone = new UnitZone(0,this, Z_ENEMY,ZONE_TYPE::Z_ATTACK);
 	attackZone->SetPosition(attackZonePos);
@@ -17,12 +17,12 @@ Enemy::Enemy(RenderWindow* w,DataBase* data){
 	zones.push_back(attackZone);
 	zones.push_back(blockZone);
 
-	physArmPos = Vector2f(1410, 525);
-	healthPos = Vector2f(1410, 185);
+	physArmPos = Vector2f(1410, 345);
+	healthPos = Vector2f(1410, 5);
 	attackDirection = 1;
 	
-	txtPhysArmPos = Vector2f(1490, 325);
-	txtHealthPos = Vector2f(1500, 185);
+	txtPhysArmPos = Vector2f(1490, 145);
+	txtHealthPos = Vector2f(1500, 5);
 
 	cardList = database->CardListEnemy;
 

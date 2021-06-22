@@ -1,14 +1,14 @@
 #include "PathScreen.h"
 
 
-PathScreen::PathScreen(RenderWindow* w, DataBase* db, Player* p) {
+PathScreen::PathScreen(RenderTexture* w, DataBase* db, Player* p) {
 	window = w;
 	database = db;
 	player = p;
 	srand(time(NULL));
 	texBackground.loadFromFile("Textures/GUI/pathBackground.png");
 	background.setTexture(texBackground);
-	background.setPosition(0, 180);
+	background.setPosition(0, 0);
 	InitEncounters();
 	type = PATH_SCREEN;
 	forge = new ForgeScreen(window, database, player);

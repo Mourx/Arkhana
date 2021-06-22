@@ -11,7 +11,7 @@ class CombatScreen :
     public Screen
 {
 public:
-    CombatScreen(RenderWindow* w, DataBase* data,Player* p,Encounter* enc);
+    CombatScreen(RenderTexture* w, DataBase* data,Player* p,Encounter* enc);
     ~CombatScreen() {}
     void Draw();
     void Update(Time t);
@@ -40,7 +40,7 @@ protected:
     Vector2f iconSnapPos;
 
     EndTurnButton* endTurn;
-    Vector2f endTurnPos = Vector2f(1425, 780);
+    Vector2f endTurnPos = Vector2f(1425, 600);
     
     UnitZone* selectedZone = NULL;
     Card* eNext = NULL;
