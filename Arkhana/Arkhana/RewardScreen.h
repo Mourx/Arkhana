@@ -26,14 +26,14 @@ protected:
     int optionsAmount = 3;
     Player* player;
     Enemy* enemy;
-    Vector2f optionPos = Vector2f(650, 380);
+    Vector2f optionPos = Vector2f(650, 200);
 
     Sprite goldIcon;
     Texture texGoldIcon;
-    Vector2f goldIconPos = Vector2f(700, 630);
+    Vector2f goldIconPos = Vector2f(700, 450);
 
     Text txtGold;
     Font font;
-    Vector2f goldTxtPos = Vector2f(820, 645);
+    Vector2f goldTxtPos = Vector2f(820, 465);
 };
 

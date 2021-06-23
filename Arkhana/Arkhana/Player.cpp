@@ -178,8 +178,7 @@ void Player::DrawPlayerBar() {
 void Player::DrawBackground() {
 	attackZone->Draw(window);
 	blockZone->Draw(window);
-	window->draw(healthIcon);
-	window->draw(txtHealth);
+	
 	window->draw(deckIcon);
 	window->draw(gemIcon);
 	window->draw(discardIcon);

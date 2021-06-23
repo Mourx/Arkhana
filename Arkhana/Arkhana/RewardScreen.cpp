@@ -9,7 +9,7 @@ RewardScreen::RewardScreen(RenderTexture* w,DataBase* db, Player* p,Enemy* e) {
 	type = REWARD_SCREEN;
 	texBackground.loadFromFile("Textures/GUI/rewardBackground.png");
 	background.setTexture(texBackground);
-	background.setPosition(0, 180);
+	background.setPosition(0, 0);
 
 	texGoldIcon.loadFromFile("Textures/GUI/gold.png");
 	goldIcon.setTexture(texGoldIcon);

@@ -46,7 +46,7 @@ int main() {
 
 
 	Sprite tempScreen;
-
+	TRANSITION_TYPE tType = LEFT_ENTER;
 	Texture preSlide;
 	preSlide.create(1920, 1080);
 	Texture postSlide;
@@ -60,7 +60,7 @@ int main() {
 	Event event;
 	Texture shaderEffect;
 	shaderEffect.create(1920, 1080);
-	float transitionTime = 1.2f;
+	float transitionTime = 0.6f;
 	float transitionTimer = 0.0f;
 	bool bTransition = false;
 
@@ -75,7 +75,6 @@ int main() {
 		switch (currentScreen->GetNextScreen()) {
 		case MAIN_MENU:
 			currentScreen = new MainMenuScreen(screenRender,player);
-			bTransition = true;
 			shaderEffect.update(*window);
 			preSlide.update(screenRender->getTexture());
 			break;
@@ -88,12 +87,14 @@ int main() {
 			preSlide.update(screenRender->getTexture());
 			break;
 		case GAME_OVER:
+			tType = DOWN_ENTER;
 			break;
 		case REWARD_SCREEN:
 			currentScreen = new RewardScreen(screenRender,database,player,enemy);
 			bTransition = true;
 			shaderEffect.update(*window);
 			preSlide.update(screenRender->getTexture());
+			tType = DOWN_ENTER;
 			break;
 		case PATH_SCREEN:
 			if (currentScreen->GetType() == REWARD_SCREEN) {
@@ -106,6 +107,7 @@ int main() {
 			bTransition = true;
 			shaderEffect.update(*window);
 			preSlide.update(screenRender->getTexture());
+			tType = DOWN_EXIT;
 			break;
 		case FORGE_SCREEN:
 			pathScreen->ResetDetails(ONGOING);
@@ -113,6 +115,7 @@ int main() {
 			bTransition = true;
 			shaderEffect.update(*window);
 			preSlide.update(screenRender->getTexture());
+			tType = LEFT_ENTER;
 			break;
 		case NONE:
 			break;
@@ -160,6 +163,7 @@ int main() {
 		if (bTransition) {
 
 			if (currentScreen->GetType() == COMBAT_SCREEN) {
+				transitionTime = 1.2f;
 				if (transitionTimer >= transitionTime / 2.0) {
 					shaderEffect.update(*window);
 				}
@@ -173,11 +177,30 @@ int main() {
 				window->draw(render, &shader);
 			}
 			else {
-				slideSprite.setTexture(postSlide);
-				slideSprite.setPosition(Vector2f(-1600 + 1600 * (transitionTimer / transitionTime), 180));
+				transitionTime = 0.6f;
+				switch (tType) {
+				case LEFT_ENTER:
+					slideSprite.setPosition(Vector2f(-1600 + 1600 * (transitionTimer / transitionTime), 180));
+					slideSprite.setTexture(postSlide);
+					staySprite.setTexture(preSlide);
+					staySprite.setPosition(Vector2f(0, 180));
+					break;
+				case DOWN_ENTER:
+					slideSprite.setPosition(Vector2f(0,1080 - 900 * (transitionTimer / transitionTime)));
+					slideSprite.setTexture(postSlide);
+					staySprite.setTexture(preSlide);
+					staySprite.setPosition(Vector2f(0, 180));
+					break;
+				case DOWN_EXIT:
+					slideSprite.setPosition(Vector2f(0, 180 + 1080 * (transitionTimer / transitionTime)));
+					slideSprite.setTexture(preSlide);
+					staySprite.setTexture(postSlide);
+					staySprite.setPosition(Vector2f(0, 180));
+					break;
+				}
+				
 
-				staySprite.setTexture(preSlide);
-				staySprite.setPosition(Vector2f(0, 180));
+				
 
 				window->draw(staySprite);
 				window->draw(slideSprite);
