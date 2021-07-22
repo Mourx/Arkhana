@@ -89,6 +89,6 @@ void RewardScreen::SetInfo(InfoPane* info) {
 	info->SetHoverTitle("");
 	info->SetHoverDescription("");
 	if (selCard != NULL) {
-		info->SetCardInfo(selCard->GetDesc(), selCard->GetName());
+		info->SetCardInfo(selCard);
 	}
 }

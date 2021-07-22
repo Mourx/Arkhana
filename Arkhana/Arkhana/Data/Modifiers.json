@@ -6,7 +6,8 @@
       "multiplier": 0,
       "sType": "DMG_PHYSICAL",
       "mType": "UNIT_MOD",
-      "text": ""
+      "text": "Upgrade: +VALUE power",
+      "mText": "Upgrade: +VALUE power"
     },
     "upgrade_stamina": {
       "name": "Upgrade Stamina",
@@ -14,15 +15,18 @@
       "multiplier": 0,
       "sType": "STAMINA",
       "mType": "UNIT_MOD",
-      "text": ""
+      "text": "Upgrade: +VALUE stamina",
+      "mText": "Upgrade: +VALUE stamina"
     },
     "eot_stamina": {
       "name": "Stamina Reduced",
-      "value": -1,
+      "value": 0,
       "multiplier": 0,
       "sType": "STAMINA",
       "mType": "UNIT_MOD",
-      "text": "Stamina reduced at end of turn."
+      "EOTChange": -1,
+      "text": "Stamina reduced each turn",
+      "mText": "Stamina reduced each turn"
     },
     "aura_empress_shrine": {
       "name": "Empress Shrine Aura",
@@ -30,7 +34,8 @@
       "multiplier": 0,
       "sType": "DMG_PHYSICAL",
       "mType": "AURA_MOD",
-      "text": "AURA: Friendly units gain\n\t +VALUE physical attack"
+      "text": "AURA: Friendly units gain\n\t +VALUE power",
+      "mText": "Shrine: +VALUE power"
     },
     "rage_modifier": {
       "name": "Rage Modifier",
@@ -38,15 +43,17 @@
       "multiplier": 0,
       "sType": "DMG_PHYSICAL",
       "mType": "ZONE_MOD",
-      "text": "Friendly units gain +VALUE\n\t physical attack"
+      "text": "Friendly units gain +VALUE\n\t power",
+      "mText": "Rage: +VALUE power"
     },
     "remove_stamina_modifier": {
       "name": "Remove Stamina Modifier",
-      "value": -999,
+      "value": -9,
       "multiplier": 0,
       "sType": "STAMINA",
       "mType": "UNIT_MOD",
-      "text": "Reduce the highest attack\n unit's stamina by 999"
+      "text": "Reduce the highest power\n unit's stamina by VALUE",
+      "mText": "Sapped: Stamina reduced by VALUE"
     },
     "ogre_modifier": {
       "name": "Ogre Modifier",
@@ -55,7 +62,51 @@
       "sType": "DMG_PHYSICAL",
       "mType": "UNIT_MOD",
       "EOTChange": 4,
-      "text": "Ogre gains +EOTCHANGE attack\n\t each turn"
+      "text": "Ogre gains +EOTCHANGE power\n\t each turn",
+      "mText": "Ogre: +EOTCHANGE power each turn",
+      "modifier": "ogre_buff"
+    },
+    "ogre_buff": {
+      "name": "Ogre Buff",
+      "value": 4,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "UNIT_MOD",
+      "EOTChange": 0,
+      "text": "Ogre gains +EOTCHANGE power\n\t each turn",
+      "mText": "Ogre: +EOTCHANGE power"
+    },
+    "troll_rage": {
+      "name": "Troll Rage",
+      "value": 0,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "AURA_MOD",
+      "EOTChange": 4,
+      "text": "Friendly units gain +EOTCHANGE power\n\t each turn",
+      "mText": "Troll Boss: +EOTCHANGE power\n\t\t\teach turn",
+      "modifier": "troll_buff"
+    },
+    "troll_buff": {
+      "name": "Troll Buff",
+      "value": 4,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "AURA_MOD",
+      "EOTChange": 4,
+      "text": "Friendly units gain +EOTCHANGE power\n\t each turn",
+      "mText": "Troll Boss: +EOTCHANGE power\n\t\t\teach turn"
+      
+    },
+    "boss_resist": {
+      "name": "Boss Resist",
+      "value": 0,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "BOSS_RESIST_MOD",
+      "EOTChange": 0,
+      "text": "Bossy",
+      "mText": "BOSS:No Stamina loss\n\t  each round"
     }
   }
 }

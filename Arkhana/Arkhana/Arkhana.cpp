@@ -70,8 +70,12 @@ int main() {
 
 
 	while (window->isOpen()) {
+		
+		// Update Things
 		elapsed = clock.restart();
 		currentScreen->Update(elapsed);
+
+		// Switch Screens if needed - do appropriate switching tasks
 		switch (currentScreen->GetNextScreen()) {
 		case MAIN_MENU:
 			currentScreen = new MainMenuScreen(screenRender,player);
@@ -120,6 +124,8 @@ int main() {
 		case NONE:
 			break;
 		}
+
+		// Poll Mouse events 
 		while (window->pollEvent(event))
 		{
 			if (event.type == Event::Closed) window->close();
@@ -137,6 +143,7 @@ int main() {
 			
 		}
 
+		// Do Transition Effects
 		if (bTransition) {
 			transitionTimer += elapsed.asSeconds();
 			if (transitionTimer >= transitionTime) {
@@ -149,8 +156,8 @@ int main() {
 		currentScreen->Draw();
 		postSlide.update(screenRender->getTexture());
 		
-		if (currentScreen->GetType() != MAIN_MENU) player->DrawPlayerBar();
-		if (currentScreen->GetType() == PATH_SCREEN || currentScreen->GetType() == COMBAT_SCREEN || currentScreen->GetType() == REWARD_SCREEN) info->Draw(windowRender);
+		player->DrawPlayerBar();
+		info->Draw(windowRender);
 
 		
 		windowRender->display();

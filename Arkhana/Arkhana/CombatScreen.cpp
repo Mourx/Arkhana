@@ -100,6 +100,7 @@ void CombatScreen::MouseReleased(Vector2f mousePos) {
 			player->AnimateAttack();
 		}
 	}
+	selUnit = hoverUnit;
 }
 
 void CombatScreen::MouseMoved(Vector2f mousePos) {
@@ -107,6 +108,8 @@ void CombatScreen::MouseMoved(Vector2f mousePos) {
 		player->selectedCard->SetPosition(Vector2f(mousePos.x - iconOffsetX, mousePos.y - iconOffsetY));
 	}
 	selectedZone = NULL;
+	hoverUnit = NULL;
+	hoverCard = NULL;
 	for (UnitZone* u : player->GetZones()) {
 		FloatRect bounds = u->GetIcon()->getGlobalBounds();
 		if (bounds.contains(mousePos)) {
@@ -115,7 +118,7 @@ void CombatScreen::MouseMoved(Vector2f mousePos) {
 		for (Unit* unit : u->GetUnits()) {
 			bounds = unit->GetIcon()->getGlobalBounds();
 			if (bounds.contains(mousePos)) {
-				hoverCard = unit->GetCard();
+				hoverUnit = unit;
 			}
 		}
 	}
@@ -127,7 +130,7 @@ void CombatScreen::MouseMoved(Vector2f mousePos) {
 		for (Unit* unit : u->GetUnits()) {
 			bounds = unit->GetIcon()->getGlobalBounds();
 			if (bounds.contains(mousePos)) {
-				hoverCard = unit->GetCard();
+				hoverUnit = unit;
 			}
 		}
 	}
@@ -255,15 +258,25 @@ void CombatScreen::CalculateCombat() {
 	if (playerPhysDamage <= 0) playerPhysDamage = 0;
 	if (enemyPhysDamage <= 0) enemyPhysDamage = 0;
 
-	player->DamagePhys(playerPhysDamage);
-	enemy->DamagePhys(enemyPhysDamage);
+	if (currentTurn == PLAYER) {
+		enemy->DamagePhys(enemyPhysDamage);
+	}
+	else {
+		player->DamagePhys(playerPhysDamage);
+	}
+	
 
 }
 
 void CombatScreen::SetInfo(InfoPane* info) {
 	info->SetDescription(description);
 	info->SetScreenTitle("Combat!");
+	if (selUnit != NULL) {
+		info->SetUnitInfo(selUnit);
+	}
 	if (hoverCard != NULL) {
-		info->SetCardInfo(hoverCard->GetDesc(), hoverCard->GetName());
+		info->SetCardInfo(hoverCard);
+	}if (hoverUnit != NULL) {
+		info->SetUnitInfo(hoverUnit);
 	}
 }

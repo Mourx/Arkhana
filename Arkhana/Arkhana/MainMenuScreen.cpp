@@ -19,6 +19,7 @@ MainMenuScreen::MainMenuScreen(RenderTexture* w,Player* p) {
 }
 
 void MainMenuScreen::Draw() {
+	window->clear(Color::Green);
 	window->draw(redFactionIcon,&redShader);
 	window->draw(blueFactionIcon,&blueShader);
 }

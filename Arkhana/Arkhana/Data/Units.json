@@ -47,6 +47,12 @@
       "physPower": 2,
       "stamina": 5,
       "filePath": "Textures/Units/ogre.png"
+    },
+    "Troll Boss": {
+      "name": "Troll Boss",
+      "physPower": 8,
+      "stamina": 30,
+      "filePath": "Textures/Units/ogre.png"
     }
   }
 }

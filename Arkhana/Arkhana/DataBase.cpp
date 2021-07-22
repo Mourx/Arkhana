@@ -28,6 +28,22 @@ void DataBase::BuildModifierLists() {
 			}
 			mod->text = text;
 		}
+		if (ListItr->value.HasMember("mText")) {
+			string mtext = ListItr->value["mText"].GetString();
+			while (mtext.find("VALUE") != string::npos) {
+				mtext.replace(mtext.find("VALUE"), 5, to_string(mod->value));
+			}
+			while (mtext.find("EOTCHANGE") != string::npos) {
+				mtext.replace(mtext.find("EOTCHANGE"), 9, to_string(mod->EOTChange));
+			}
+			mod->mText = mtext;
+		}
+		if (ListItr->value.HasMember("modifiers")) {
+			rapidjson::GenericArray<true, rapidjson::Value> arr = ListItr->value["modifiers"].GetArray();
+			for (int i = 0; i < arr.Size(); i++) {
+				mod->modifiers.push_back(new Modifier(*modList[arr[i].GetString()]));
+			}
+		}
 		string str(ListItr->name.GetString());
 		modList.insert({ str,mod });
 	}
@@ -78,9 +94,9 @@ void DataBase::BuildCardListsRed() {
 		card->name = ListItr->value["name"].GetString();
 		card->cost = ListItr->value["cost"].GetInt();
 		if (ListItr->value.HasMember("modifiers")) {
-			for (Value::ConstMemberIterator modifiersItr = ListItr->value["modifiers"].MemberBegin(); modifiersItr != ListItr->value["modifiers"].MemberEnd(); modifiersItr++) {
-				string str = modifiersItr->value.GetString();
-				card->modifiers.push_back(new Modifier(*modList[str]));
+			rapidjson::GenericArray<true, rapidjson::Value> arr = ListItr->value["modifiers"].GetArray();
+			for (int i = 0; i < arr.Size(); i++) {
+				card->modifiers.push_back(new Modifier(*modList[arr[i].GetString()]));
 			}
 		}
 		card->cost = ListItr->value["cost"].GetInt();
@@ -111,12 +127,15 @@ void DataBase::BuildCardListsEnemy() {
 		CardData* card = new CardData();
 		card->name = ListItr->value["name"].GetString();
 		card->cost = ListItr->value["cost"].GetInt();
+
+		
 		if (ListItr->value.HasMember("modifiers")) {
-			for (Value::ConstMemberIterator modifiersItr = ListItr->value["modifiers"].MemberBegin(); modifiersItr != ListItr->value["modifiers"].MemberEnd(); modifiersItr++) {
-				string str = modifiersItr->value.GetString();
-				card->modifiers.push_back(new Modifier(*modList[str]));
+			rapidjson::GenericArray<true, rapidjson::Value> arr = ListItr->value["modifiers"].GetArray();
+			for (int i = 0; i < arr.Size(); i++) {
+				card->modifiers.push_back(new Modifier(*modList[arr[i].GetString()]));
 			}
 		}
+		
 		card->cost = ListItr->value["cost"].GetInt();
 		card->cType = GetCardEnum(ListItr->value["cardType"].GetString());
 		if (ListItr->value.HasMember("effect")) card->effect = ListItr->value["effect"].GetString();

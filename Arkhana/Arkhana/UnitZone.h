@@ -17,7 +17,7 @@ public:
     void Draw(RenderTexture* w);
     void DrawUnits(RenderTexture* w);
     int GetCombinedPhysicalPower();
-    void AddUnit(Unit* u);
+    void AddUnit(Unit* u,DataBase* database);
     void ClearUnits() { unitList.clear(); }
     ZONE_OWNER GetOwnerType() { return ownerType; }
     Player* GetOwner() { return owner; }
@@ -41,7 +41,7 @@ protected:
     void UpdatePositions() {
         int offset = 0;
         if (this->ownerType == ENEMY) {
-            offset = 270;
+            offset = 250;
         }
         for (int i = 0; i < unitList.size(); i++) {
             unitList[i]->SetPosition(this->GetIcon()->getPosition() + Vector2f(10 + (i % 10) * 50, 10 + offset + (i / 10) * 75));

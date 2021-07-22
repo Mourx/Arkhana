@@ -47,7 +47,7 @@
       "zTag": "",
       "zOTag": "Z_PLAYER",
       "AITag": "AI_MOST_UNITS_AI",
-      "modifiers": { "modifier": "rage_modifier" },
+      "modifiers": [ "rage_modifier" ],
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
     "Sap Spirit": {
@@ -57,7 +57,7 @@
       "zTag": "",
       "zOTag": "Z_ENEMY",
       "AITag": "AI_STRONGEST_UNIT_PLAYER",
-      "modifiers": { "modifier": "remove_stamina_modifier" },
+      "modifiers": [ "remove_stamina_modifier" ],
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
     "Frog Shrine": {
@@ -68,7 +68,7 @@
       "zTag": "",
       "zOTag": "Z_PLAYER",
       "AITag": "AI_MOST_UNITS",
-      "modifiers": { "modifier": "aura_empress_shrine" },
+      "modifiers": [ "aura_empress_shrine" ],
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
     "Ogre": {
@@ -79,7 +79,7 @@
       "zOTag": "Z_PLAYER",
       "zTag": "AGGRESSIVE",
       "AITag": "AI_ATTACK",
-      "modifiers": { "modifier": "ogre_modifier" },
+      "modifiers": [ "ogre_modifier" ],
       "shaderPath": "Textures/Shaders/Empress.vert"
     }
   }

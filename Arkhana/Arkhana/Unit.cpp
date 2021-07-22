@@ -12,6 +12,10 @@ Unit::Unit(UnitData data,vector<Modifier*> mods,Card* c) {
 		case MODIFIER_TYPE::UNIT_MOD:
 			unitMods.push_back(new Modifier(mod));
 			break;
+		case MODIFIER_TYPE::BOSS_RESIST_MOD:
+			bBoss = true;
+			unitMods.push_back(new Modifier(mod));
+			break;
 		case MODIFIER_TYPE::AURA_MOD:
 			auraMods.push_back(new Modifier(mod));
 			break;
@@ -20,7 +24,7 @@ Unit::Unit(UnitData data,vector<Modifier*> mods,Card* c) {
 	}
 	icon.setTexture(texIcon);
 	
-	texBackground.loadFromFile("Textures/GUI/unitBackground.png");
+	texBackground.loadFromFile("Textures/Units/shadow.png");
 	unitBackground.setTexture(texBackground);
 
 	font.loadFromFile("Fonts/Arial/arial.ttf");
@@ -38,6 +42,7 @@ Unit::Unit(UnitData data,vector<Modifier*> mods,Card* c) {
 	
 	physicalPower = basePhys;
 	stamina = baseStamina;
+
 
 	UpdateStrings();
 }
@@ -70,6 +75,9 @@ void Unit::UpdateStats() {
 }
 
 void Unit::AddModifier(Modifier* mod) {
+	if (mod->GetModType() == MODIFIER_TYPE::BOSS_RESIST_MOD) {
+		bBoss = true;
+	}
 	unitMods.push_back(mod);
 	UpdateStats();
 }
@@ -77,7 +85,7 @@ void Unit::AddModifier(Modifier* mod) {
 void Unit::SetPosition(Vector2f p) {
 	pos = p;
 	GameObject::SetPosition(pos);
-	unitBackground.setPosition(pos);
+	unitBackground.setPosition(pos+Vector2f(0,33));
 	txtPhys.setPosition(pos + txtPhysPos);
 	txtMag.setPosition(pos + txtMagPos);
 }
@@ -99,11 +107,16 @@ void Unit::ModifyStat(STAT_TYPE stat, int value, int multiplier) {
 		}
 		break;
 	case STAT_TYPE::STAMINA:
-		stamina += value;
-		if (multiplier != 0) {
-			stamina *= multiplier;
+		if (IsBoss()) {
+			break;
 		}
-		break;
+		else {
+			stamina += value;
+			if (multiplier != 0) {
+				stamina *= multiplier;
+			}
+			break;
+		}
 	default:
 		break;
 	}

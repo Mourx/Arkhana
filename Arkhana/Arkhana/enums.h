@@ -61,7 +61,8 @@ enum class MODIFIER_TYPE {
 	ZONE_MOD = 0,
 	UNIT_MOD = 1,
 	INSTANT_MOD = 2,
-	AURA_MOD = 3
+	AURA_MOD = 3,
+	BOSS_RESIST_MOD = 4
 };
 
 enum class EFFECT_TYPE {

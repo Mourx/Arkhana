@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "Card.h"
 class InfoPane :
     public GameObject
 {
@@ -23,11 +24,33 @@ public:
         hoverTitle = s;
         txtHoverTitle.setString(hoverTitle);
     }
-    void SetCardInfo(String desc,String name) {
-        cardInfo = desc;
-        cardInfoName = name;
+    void SetCardInfo(Card* card) {
+        cardInfo = card->GetDesc();
+        cardInfoName = card->GetName();
+        txtCardInfo.setString(cardInfo);
+        txtUnitPower.setString("");
+        txtUnitStamina.setString("");
+        txtUnitMods.setString("");
+        txtCardInfoName.setString(cardInfoName);
+        unitMods = "";
+    }
+    void SetUnitInfo(Unit* unit) {
+        cardInfo = "";
+        cardInfoName = unit->GetCard()->GetName();
         txtCardInfo.setString(cardInfo);
         txtCardInfoName.setString(cardInfoName);
+        unitPower =   "Power:   " + to_string((int)unit->GetPPower());
+        txtUnitPower.setString(unitPower);
+        unitStamina = "Stamina: " + to_string((int)unit->GetStamina());
+        txtUnitStamina.setString(unitStamina);
+
+        unitMods = "";
+        for (Modifier* mod : unit->GetModifiers()) {
+            unitMods += mod->GetShortText() + "\n";
+        }for (Modifier* mod : unit->GetZoneModifiers()) {
+            unitMods += mod->GetShortText() + "\n";
+        }
+        txtUnitMods.setString(unitMods);
     }
 protected:
     
@@ -55,14 +78,25 @@ protected:
     String cardInfoName;
     Text txtCardInfoName;
 
-    Vector2f screenTitlePos = pos + Vector2f(15, 50);
-    Vector2f descriptionPos = pos + Vector2f(15,100);
-    Vector2f hoverTitlePos = pos + Vector2f(15, 450);
-    Vector2f hoverDescriptionPos = pos + Vector2f(15, 500);
-    Vector2f cardInfoTitlePos = pos + Vector2f(15, 630);
-    Vector2f cardInfoNamePos = pos + Vector2f(15, 660);
-    Vector2f cardInfoPos = pos + Vector2f(15, 690);
-    
+    String unitPower;
+    Text txtUnitPower;
+
+    String unitStamina;
+    Text txtUnitStamina;
+
+    String unitMods;
+    Text txtUnitMods;
+
+    Vector2f screenTitlePos = pos + Vector2f(10, 50);
+    Vector2f descriptionPos = pos + Vector2f(10,100);
+    Vector2f hoverTitlePos = pos + Vector2f(10, 450);
+    Vector2f hoverDescriptionPos = pos + Vector2f(10, 500);
+    Vector2f cardInfoTitlePos = pos + Vector2f(10, 630);
+    Vector2f cardInfoNamePos = pos + Vector2f(10, 660);
+    Vector2f cardInfoPos = pos + Vector2f(10, 735);
+    Vector2f unitPowerPos = pos + Vector2f(10, 690);
+    Vector2f unitStaminaPos = pos + Vector2f(10, 710);
+    Vector2f unitModsPos = pos + Vector2f(10, 735);
 
 };
 

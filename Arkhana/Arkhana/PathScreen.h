@@ -44,15 +44,15 @@ protected:
     Encounter* currentEncounter = NULL;
     vector<Encounter*> encounters;
 
-    vector<int> encounterAmounts = { 3,2,1 };
+    vector<int> encounterAmounts = { 3,3,2,1 };
 
     bool bForgeUnlocked = true;
     bool bForgeVisited = true;
 
-    int tier = 0;
+    int tier = 3;
     int forgeUnlocks = 0;
 
-    vector<Vector2f> encPos = { Vector2f(200, 150),Vector2f(525, 200),Vector2f(850, 480) };
+    vector<Vector2f> encPos = { Vector2f(200, 150),Vector2f(525, 150),Vector2f(850, 200),Vector2f(1150, 480) };
 
     Sprite background;
     Texture texBackground;

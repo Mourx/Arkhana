@@ -34,6 +34,8 @@ protected:
 
     Card* ePlayedCard = NULL;
     Card* hoverCard = NULL;
+    Unit* hoverUnit = NULL;
+    Unit* selUnit = NULL;
 
     float iconOffsetX = 0;
     float iconOffsetY = 0;

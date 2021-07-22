@@ -70,9 +70,10 @@ Card::Card(CardData data,DataBase* dataB) {
 	string txt;
 	if(effect != NULL) txt = txt + effect->text;
 	for (Modifier* m : modifiers) {
-		txt = txt +"\n"+ m->GetText();
+		txt = txt + m->GetText() + "\n";
 	}
-	txt = txt + "\n " + zTag;
+	if (txt == "") txt = zTag;
+	else txt = txt + "\n" + zTag;
 	txtDesc.setFont(font);
 	txtDesc.setString(txt);
 	txtDesc.setCharacterSize(12);
@@ -100,7 +101,7 @@ void Card::Play() {
 	switch (type) {
 	case CREATE_UNIT:
 		u = new Unit(*database->UnitList[unit], modifiers,this);
-		targetZone->AddUnit(u);
+		targetZone->AddUnit(u,database);
 		break;
 	case APPLY_ZONE_MOD:
 		ApplyModifier(targetZone);

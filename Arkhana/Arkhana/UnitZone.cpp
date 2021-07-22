@@ -35,8 +35,13 @@ int UnitZone::GetCombinedPhysicalPower() {
 }
 
 
-void UnitZone::AddUnit(Unit* u) {
+void UnitZone::AddUnit(Unit* u, DataBase* database) {
 	int count = unitList.size();
+	vector<Modifier*> mods = u->GetModifiers();
+	
+	if(!u->IsBoss()) u->AddModifier((new Modifier(*database->modList["eot_stamina"])));
+	
+
 	unitList.push_back(u);
 	UpdatePositions();
 	UpdateStatMods();
@@ -46,10 +51,11 @@ void UnitZone::UpdateStatMods() {
 	zoneBonusPhys = 0;
 
 	zoneMultiplierPhys = 0;
-
+	vector<Modifier*> zMods;
 	for (Unit* u : unitList) {
 		vector<Modifier*> auras = u->GetAuras();
 		for (Modifier* mod : auras) {
+			zMods.push_back(mod);
 			switch (mod->GetStat()) {
 			case STAT_TYPE::DMG_PHYSICAL:
 				zoneBonusPhys += mod->GetValue();
@@ -62,9 +68,10 @@ void UnitZone::UpdateStatMods() {
 				break;
 			}
 		}
+		
 	}
 	for (Unit* u : unitList) {
-		u->SetZoneBonuses(zoneBonusPhys, zoneMultiplierPhys);
+		u->SetZoneBonuses(zoneBonusPhys, zoneMultiplierPhys,zMods);
 	}
 }
 
@@ -72,9 +79,17 @@ void UnitZone::EndTurnUpkeep(DataBase* database) {
 	
 	for (Unit* u : unitList) {
 		if (type == ZONE_TYPE::Z_ATTACK) {
-			u->AddModifier(new Modifier(*database->modList["eot_stamina"]));
 		}
 		for (Modifier* mod : u->GetModifiers()) {
+			mod->ApplyEOT();
+		}
+		for (Modifier* mod : u->GetZoneModifiers()) {
+			mod->ApplyEOT();
+		}
+		for (Modifier* mod : u->GetAuras()) {
+			for (Unit* un : unitList) {
+				//un->AddModifier(mod->GetModifiers()[0]);
+			}
 			mod->ApplyEOT();
 		}
 		u->UpdateStats();
@@ -86,7 +101,6 @@ void UnitZone::EndTurnUpkeep(DataBase* database) {
 void UnitZone::NewTurnUpkeep(DataBase* database) {
 	for (Unit* u : unitList) {
 		if (type == ZONE_TYPE::Z_BLOCK) {
-			u->AddModifier(new Modifier(*database->modList["eot_stamina"]));
 			u->UpdateStats();
 		}
 	}

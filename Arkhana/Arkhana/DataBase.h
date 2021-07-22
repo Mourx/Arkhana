@@ -51,8 +51,10 @@ public:
 	int multiplier;
 	STAT_TYPE sType;
 	string text;
+	string mText;
 	int EOTChange = 0;
 	MODIFIER_TYPE mType;
+	vector<Modifier*> modifiers;
 };
 
 struct EncounterData {
@@ -87,6 +89,7 @@ public:
 		else if (data == "UNIT_MOD") return MODIFIER_TYPE::UNIT_MOD;
 		else if (data == "INSTANT_MOD") return MODIFIER_TYPE::INSTANT_MOD;
 		else if (data == "AURA_MOD") return MODIFIER_TYPE::AURA_MOD;
+		else if (data == "BOSS_RESIST_MOD") return MODIFIER_TYPE::BOSS_RESIST_MOD;
 		else return MODIFIER_TYPE::ZONE_MOD;
 	}
 

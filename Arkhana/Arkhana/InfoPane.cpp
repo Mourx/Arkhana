@@ -37,6 +37,19 @@ InfoPane::InfoPane() {
 	txtCardInfoName.setCharacterSize(18);
 	txtCardInfoName.setPosition(cardInfoNamePos);
 
+
+	txtUnitPower.setFont(font);
+	txtUnitPower.setCharacterSize(18);
+	txtUnitPower.setPosition(unitPowerPos);
+
+	txtUnitStamina.setFont(font);
+	txtUnitStamina.setCharacterSize(18);
+	txtUnitStamina.setPosition(unitStaminaPos);
+
+	txtUnitMods.setFont(font);
+	txtUnitMods.setCharacterSize(18);
+	txtUnitMods.setPosition(unitModsPos);
+
 	txtCardInfoTitle.setFont(font);
 	txtCardInfoTitle.setCharacterSize(26);
 	txtCardInfoTitle.setString(cardInfoTitle);
@@ -53,4 +66,7 @@ void InfoPane::Draw(RenderTexture* w) {
 	w->draw(txtCardInfo);
 	w->draw(txtCardInfoTitle);
 	w->draw(txtCardInfoName);
+	w->draw(txtUnitPower);
+	w->draw(txtUnitStamina);
+	w->draw(txtUnitMods);
 }
