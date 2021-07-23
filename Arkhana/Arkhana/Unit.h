@@ -60,8 +60,8 @@ protected:
     Text txtPhys;
     Text txtMag;
 
-    Vector2f txtPhysPos = Vector2f(9, 60);
-    Vector2f txtMagPos = Vector2f(31, 60);
+    Vector2f txtPhysPos = Vector2f(20, 100);
+    Vector2f txtMagPos = Vector2f(60, 100);
 
     Font font;
 

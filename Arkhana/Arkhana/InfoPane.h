@@ -89,14 +89,14 @@ protected:
 
     Vector2f screenTitlePos = pos + Vector2f(10, 50);
     Vector2f descriptionPos = pos + Vector2f(10,100);
-    Vector2f hoverTitlePos = pos + Vector2f(10, 450);
-    Vector2f hoverDescriptionPos = pos + Vector2f(10, 500);
-    Vector2f cardInfoTitlePos = pos + Vector2f(10, 630);
-    Vector2f cardInfoNamePos = pos + Vector2f(10, 660);
-    Vector2f cardInfoPos = pos + Vector2f(10, 735);
-    Vector2f unitPowerPos = pos + Vector2f(10, 690);
-    Vector2f unitStaminaPos = pos + Vector2f(10, 710);
-    Vector2f unitModsPos = pos + Vector2f(10, 735);
+    Vector2f hoverTitlePos = pos + Vector2f(10, 250);
+    Vector2f hoverDescriptionPos = pos + Vector2f(10, 280);
+    Vector2f cardInfoTitlePos = pos + Vector2f(10, 400);
+    Vector2f cardInfoNamePos = pos + Vector2f(10, 430);
+    Vector2f cardInfoPos = pos + Vector2f(10, 505);
+    Vector2f unitPowerPos = pos + Vector2f(10, 460);
+    Vector2f unitStaminaPos = pos + Vector2f(10, 480);
+    Vector2f unitModsPos = pos + Vector2f(10, 505);
 
 };
 

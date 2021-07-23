@@ -20,7 +20,7 @@ void Modifier::GetData() {
 	text = data.text;
 	mText = data.mText;
 	EOTChange = data.EOTChange;
-	modifiers = data.modifiers;
+	modifier = data.modifier;
 
 	if (sType == STAT_TYPE::DMG_PHYSICAL) {
 		texIcon.loadFromFile("Textures/Cards/sword.png");

@@ -12,11 +12,17 @@ Unit::Unit(UnitData data,vector<Modifier*> mods,Card* c) {
 		case MODIFIER_TYPE::UNIT_MOD:
 			unitMods.push_back(new Modifier(mod));
 			break;
+		case MODIFIER_TYPE::UNIT_EOT_MOD:
+			unitMods.push_back(new Modifier(mod));
+			break;
 		case MODIFIER_TYPE::BOSS_RESIST_MOD:
 			bBoss = true;
 			unitMods.push_back(new Modifier(mod));
 			break;
 		case MODIFIER_TYPE::AURA_MOD:
+			auraMods.push_back(new Modifier(mod));
+			break;
+		case MODIFIER_TYPE::AURA_EOT_MOD:
 			auraMods.push_back(new Modifier(mod));
 			break;
 		}
@@ -31,7 +37,8 @@ Unit::Unit(UnitData data,vector<Modifier*> mods,Card* c) {
 	txtPhys.setFont(font);
 	txtMag.setFont(font);
 	
-
+	icon.setScale(2, 2);
+	unitBackground.setScale(2, 2);
 	txtPhys.setCharacterSize(20);
 	txtMag.setCharacterSize(20);
 
@@ -85,7 +92,7 @@ void Unit::AddModifier(Modifier* mod) {
 void Unit::SetPosition(Vector2f p) {
 	pos = p;
 	GameObject::SetPosition(pos);
-	unitBackground.setPosition(pos+Vector2f(0,33));
+	unitBackground.setPosition(pos+Vector2f(0,60));
 	txtPhys.setPosition(pos + txtPhysPos);
 	txtMag.setPosition(pos + txtMagPos);
 }

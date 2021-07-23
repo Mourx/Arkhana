@@ -5,8 +5,8 @@
       "armour": 0,
       "decklist": [
         [ "Goblin", "Goblin" ],
-        [ "Two Gnomes" ],
-        [ "Jelly", "Rage" ]
+        [ "Doublin" ],
+        [ "Shield Goblin", "Rage" ]
       ],
       "description": "A band of goblins\nfrom the east!\n\nGoblins tend to\ntry and swarm the\nememy.",
       "health": 15,
@@ -30,19 +30,19 @@
       "startingPlay": [ "Ogre" ],
       "type": "E_COMBAT"
     },
-    "several gnomes": {
+    "several goblins": {
       "actionCount": 2,
       "armour": 0,
       "decklist": [
-        [ "Two Gnomes" ],
+        [ "Doublin" ],
         [ "Rage", "Rage" ],
         [ "Goblin", "Shrine" ]
       ],
-      "description": "Uh oh! Several gnomes!",
+      "description": "Uh oh! Several goblins!",
       "health": 60,
       "level": 2,
-      "name": "several gnomes",
-      "startingPlay": [ "Two Gnomes" ],
+      "name": "several goblins",
+      "startingPlay": [ "Doublin","Doublin" ],
       "type": "E_COMBAT"
     },
     "troll boss": {
@@ -51,14 +51,14 @@
       "decklist": [
         [ "Ogre" ],
         [ "Rage", "Rage" ],
-        [ "Two Gnomes", "Shrine" ]
+        [ "Doublin", "Shrine" ]
       ],
       "description": "He's the big boss.\nBe Careful",
       "health": 60,
       "level": 3,
       "name": "Troll Boss",
       "startingPlay": [ "Troll Boss" ],
-      "type": "E_COMBAT"
+      "type": "E_BOSS"
     }
   }
 }

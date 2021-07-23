@@ -81,16 +81,19 @@ void UnitZone::EndTurnUpkeep(DataBase* database) {
 		if (type == ZONE_TYPE::Z_ATTACK) {
 		}
 		for (Modifier* mod : u->GetModifiers()) {
-			mod->ApplyEOT();
-		}
-		for (Modifier* mod : u->GetZoneModifiers()) {
-			mod->ApplyEOT();
-		}
-		for (Modifier* mod : u->GetAuras()) {
-			for (Unit* un : unitList) {
-				//un->AddModifier(mod->GetModifiers()[0]);
+			if (mod->GetModType() == MODIFIER_TYPE::UNIT_EOT_MOD) {
+				u->AddModifier(mod->GetModifier());
 			}
 			mod->ApplyEOT();
+		}
+		
+		for (Modifier* mod : u->GetAuras()) {
+			if (mod->GetModType() == MODIFIER_TYPE::AURA_EOT_MOD) {
+				for (Unit* un : unitList) {
+					un->AddModifier(mod->GetModifier());
+				}
+			}
+			
 		}
 		u->UpdateStats();
 	}

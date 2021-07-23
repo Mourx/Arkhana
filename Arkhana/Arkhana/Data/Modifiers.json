@@ -55,17 +55,6 @@
       "text": "Reduce the highest power\n unit's stamina by VALUE",
       "mText": "Sapped: Stamina reduced by VALUE"
     },
-    "ogre_modifier": {
-      "name": "Ogre Modifier",
-      "value": 0,
-      "multiplier": 0,
-      "sType": "DMG_PHYSICAL",
-      "mType": "UNIT_MOD",
-      "EOTChange": 4,
-      "text": "Ogre gains +EOTCHANGE power\n\t each turn",
-      "mText": "Ogre: +EOTCHANGE power each turn",
-      "modifier": "ogre_buff"
-    },
     "ogre_buff": {
       "name": "Ogre Buff",
       "value": 4,
@@ -73,31 +62,43 @@
       "sType": "DMG_PHYSICAL",
       "mType": "UNIT_MOD",
       "EOTChange": 0,
-      "text": "Ogre gains +EOTCHANGE power\n\t each turn",
-      "mText": "Ogre: +EOTCHANGE power"
+      "text": "Ogre gains +VALUE power\n\t each turn",
+      "mText": "Ogre: +VALUE power"
     },
-    "troll_rage": {
-      "name": "Troll Rage",
+    "ogre_modifier": {
+      "name": "Ogre Modifier",
       "value": 0,
       "multiplier": 0,
       "sType": "DMG_PHYSICAL",
-      "mType": "AURA_MOD",
+      "mType": "UNIT_EOT_MOD",
       "EOTChange": 4,
-      "text": "Friendly units gain +EOTCHANGE power\n\t each turn",
-      "mText": "Troll Boss: +EOTCHANGE power\n\t\t\teach turn",
-      "modifier": "troll_buff"
+      "text": "Ogre gains +EOTCHANGE power\n\t each turn",
+      "mText": "Ogre: +EOTCHANGE power each turn",
+      "modifier": "ogre_buff"
     },
     "troll_buff": {
       "name": "Troll Buff",
       "value": 4,
       "multiplier": 0,
       "sType": "DMG_PHYSICAL",
-      "mType": "AURA_MOD",
+      "mType": "UNIT_MOD",
       "EOTChange": 4,
       "text": "Friendly units gain +EOTCHANGE power\n\t each turn",
-      "mText": "Troll Boss: +EOTCHANGE power\n\t\t\teach turn"
-      
+      "mText": "Troll Boss: +EOTCHANGE power"
+
     },
+    "troll_rage": {
+      "name": "Troll Rage",
+      "value": 0,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "AURA_EOT_MOD",
+      "EOTChange": 4,
+      "text": "Friendly units gain +EOTCHANGE power\n\t each turn",
+      "mText": "Troll Boss: +EOTCHANGE power\n\t\t\teach turn",
+      "modifier": "troll_buff"
+    },
+
     "boss_resist": {
       "name": "Boss Resist",
       "value": 0,

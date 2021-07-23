@@ -10,6 +10,7 @@ Encounter::Encounter(RenderTexture* w, DataBase* db, int lvl) {
 	cardList = database->CardListEnemy;
 	enemy = new Enemy(w, database);
 	GenerateEncounter();
+	
 }
 
 void Encounter::GenerateEncounter() {
@@ -17,6 +18,18 @@ void Encounter::GenerateEncounter() {
 	int r =  rand() %(database->encounterNames[level].size());
 	name = database->encounterNames[level][r];
 	encData = database->encounters[level][name];
+	eType = encData->type;
+
+	switch (eType) {
+	case E_COMBAT:
+		typeDesc = "A fight against\nregular enemies";
+		typeTitle = "Normal Combat";
+		break;
+	case E_BOSS:
+		typeDesc = "A hard fight against\ndeadly enemies";
+		typeTitle = "Boss Combat";
+		break;
+	}
 	combatDesc = encData->description;
 	for (string s : encData->startingPlay) {
 		startingPlay.push_back(new Card(*cardList[s],database));

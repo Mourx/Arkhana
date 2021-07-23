@@ -4,7 +4,7 @@
       "name": "Goblin",
       "physPower": 3,
       "stamina": 2,
-      "filePath": "Textures/Units/gnome.png"
+      "filePath": "Textures/Units/goblin.png"
     },
     "Frog": {
       "name": "Frog",
@@ -18,11 +18,11 @@
       "stamina": 3,
       "filePath": "Textures/Units/frog.png"
     },
-    "Jelly": {
-      "name": "Jelly",
-      "physPower": 1,
-      "stamina": 3,
-      "filePath": "Textures/Units/jelly.png"
+    "Shield Goblin": {
+      "name": "Shield Goblin",
+      "physPower": 2,
+      "stamina": 2,
+      "filePath": "Textures/Units/shieldGoblin.png"
     },
     "Shrine": {
       "name": "Shrine",
@@ -36,11 +36,11 @@
       "stamina": 2,
       "filePath": "Textures/Units/twoFrogs.png"
     },
-    "Two Gnomes": {
-      "name": "Two Gnomes",
+    "Doublin": {
+      "name": "Doublin",
       "physPower": 7,
       "stamina": 2,
-      "filePath": "Textures/Units/twoGnomes.png"
+      "filePath": "Textures/Units/doublin.png"
     },
     "Ogre": {
       "name": "Ogre",

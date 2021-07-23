@@ -40,11 +40,13 @@ protected:
     void UpdateStatMods();
     void UpdatePositions() {
         int offset = 0;
+        int dir = 1;
         if (this->ownerType == ENEMY) {
-            offset = 250;
+            offset = 220;
+            dir = -1;
         }
         for (int i = 0; i < unitList.size(); i++) {
-            unitList[i]->SetPosition(this->GetIcon()->getPosition() + Vector2f(10 + (i % 10) * 50, 10 + offset + (i / 10) * 75));
+            unitList[i]->SetPosition(this->GetIcon()->getPosition() + Vector2f(10 + (i % 10) * 90,10+((i / 10) * 125)*dir + offset));
         }
     }
     float zoneBonusPhys = 0;
@@ -54,7 +56,7 @@ protected:
     vector<Unit*> unitList;
     ZONE_OWNER ownerType;
     Player* owner;
-    Vector2f unitOffset = Vector2f(20, 20);
+    Vector2f unitOffset = Vector2f(20, 40);
     Vector2f animationPos = Vector2f(50, 50);
     vector<Modifier*> zoneMods;
     ZONE_TYPE type;

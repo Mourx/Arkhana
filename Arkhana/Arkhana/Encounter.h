@@ -34,5 +34,6 @@ protected:
     String typeTitle = "Normal Combat";
     Enemy* enemy;
     map<string, CardData*> cardList;
+    ENCOUNTER_TYPE eType;
 };
 

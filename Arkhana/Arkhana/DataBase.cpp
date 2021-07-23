@@ -38,11 +38,10 @@ void DataBase::BuildModifierLists() {
 			}
 			mod->mText = mtext;
 		}
-		if (ListItr->value.HasMember("modifiers")) {
-			rapidjson::GenericArray<true, rapidjson::Value> arr = ListItr->value["modifiers"].GetArray();
-			for (int i = 0; i < arr.Size(); i++) {
-				mod->modifiers.push_back(new Modifier(*modList[arr[i].GetString()]));
-			}
+		if (ListItr->value.HasMember("modifier")) {
+			string str = ListItr->value["modifier"].GetString();
+			mod->modifier = new Modifier(*modList[str]);
+			
 		}
 		string str(ListItr->name.GetString());
 		modList.insert({ str,mod });

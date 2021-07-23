@@ -22,7 +22,7 @@ public:
 	void Draw(RenderTexture* w) {
 		w->draw(icon);
 	}
-	vector<Modifier*> GetModifiers() { return modifiers; }
+	Modifier* GetModifier() { return modifier; }
 protected:
 	
 	void GetData();
@@ -36,7 +36,7 @@ protected:
 	int EOTChange = 0;
 	STAT_TYPE sType = STAT_TYPE::DMG_PHYSICAL;
 	MODIFIER_TYPE mType = MODIFIER_TYPE::ZONE_MOD;
-	vector<Modifier*> modifiers;
+	Modifier* modifier;
 	Sprite icon;
 	Texture texIcon;
 

@@ -10,11 +10,11 @@
       "AITag": "AI_RANDOM",
       "shaderPath": "Textures/Shaders/enemyGoblin.vert"
     },
-    "Jelly": {
-      "name": "Jelly",
+    "Shield Goblin": {
+      "name": "Shield Goblin",
       "cost": 1,
       "cardType": "CREATE_UNIT",
-      "unit": "Jelly",
+      "unit": "Shield Goblin",
       "zTag": "DEFENSIVE",
       "zOTag": "Z_PLAYER",
       "AITag": "AI_BLOCK",
@@ -30,11 +30,11 @@
       "AITag": "AI_BLOCK",
       "shaderPath": "Textures/Shaders/enemyGoblin.vert"
     },
-    "Two Gnomes": {
-      "name": "Two Gnomes",
+    "Doublin": {
+      "name": "Doublin",
       "cost": 2,
       "cardType": "CREATE_UNIT",
-      "unit": "Two Gnomes",
+      "unit": "Doublin",
       "zTag": "",
       "zOTag": "Z_PLAYER",
       "AITag": "AI_RANDOM",
