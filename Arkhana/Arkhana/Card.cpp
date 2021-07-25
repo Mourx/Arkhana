@@ -82,6 +82,9 @@ Card::Card(CardData data,DataBase* dataB) {
 	if (type == CREATE_UNIT) {
 		texCardArt.loadFromFile(database->UnitList[unit]->filePath);
 	}
+	else if(data.filePath!= ""){
+		texCardArt.loadFromFile(data.filePath);
+	}
 	cardArt.setTexture(texCardArt);
 	cardArt.setScale(2, 2);
 	

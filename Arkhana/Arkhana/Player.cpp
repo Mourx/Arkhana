@@ -134,14 +134,14 @@ void Player::SetFaction() {
 	decklist.clear();
 	cardList = database->CardListRed;
 
-	decklist.push_back(new Card(*cardList["Frog"], database));
+	decklist.push_back(new Card(*cardList["Spy Frog"], database));
 	decklist.push_back(new Card(*cardList["Frog"], database));
 	decklist.push_back(new Card(*cardList["Frog Shrine"], database));
 	decklist.push_back(new Card(*cardList["Sap Spirit"], database));
 	decklist.push_back(new Card(*cardList["Shield Frog"], database));
 	decklist.push_back(new Card(*cardList["Frog Shrine"], database));
 	decklist.push_back(new Card(*cardList["Frog Armour"], database));
-	decklist.push_back(new Card(*cardList["Frog Armour"], database));
+	decklist.push_back(new Card(*cardList["Spy Frog"], database));
 
 	UpdateStrings();
 }
@@ -184,7 +184,7 @@ void Player::DrawBackground() {
 	window->draw(discardIcon);
 	window->draw(burntIcon);
 	window->draw(physArmIcon);
-	
+
 	window->draw(txtPhysArm);
 	window->draw(txtCurMana);
 	window->draw(txtDeckSize);

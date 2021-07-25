@@ -22,12 +22,14 @@ public:
     void SetHover(bool b);
 protected:
     void GenerateEncounter();
+    void SetupCombat();
     DataBase* database;
     vector<vector<Card*>> encounterDecks;
     vector<Card*> startingPlay;
     int level = 0;
     bool bComplete = false;
     EncounterData* encData = new EncounterData();
+    RenderTexture* window;
     String desc = "An encounter with \nenemies.";
     String combatDesc = "enemies lol";
     String typeDesc = "A fight against\nregular enemies";

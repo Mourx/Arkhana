@@ -19,6 +19,7 @@ public:
     void SetNextMove();
     vector<Card*> GetStartingPlay() { return startingPlay; }
     int GetLevel() { return level; }
+    void DrawBackground();
 protected:
 
     void InitSprites();

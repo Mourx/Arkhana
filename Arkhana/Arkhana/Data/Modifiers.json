@@ -55,6 +55,48 @@
       "text": "Reduce the highest power\n unit's stamina by VALUE",
       "mText": "Sapped: Stamina reduced by VALUE"
     },
+	"big_frog_buff": {
+      "name": "Big Frog Buff",
+      "value": 1,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "UNIT_MOD",
+      "EOTChange": 0,
+      "text": "Friendly units gain +VALUE\n\tpower each turn",
+      "mText": "Big Frog: +VALUE power"
+    },
+    "big_frog_modifier": {
+      "name": "Big Frog Modifier",
+      "value": 0,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "AURA_EOT_MOD",
+      "EOTChange": 1,
+      "text": "Friendly units gains +EOTCHANGE power\n\t each turn",
+      "mText": "Big Frog: +EOTCHANGE power each turn",
+      "modifier": "big_frog_buff"
+    },
+	"spy_frog_buff": {
+      "name": "Spy Frog Buff",
+      "value": -1,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "UNIT_MOD",
+      "EOTChange": 0,
+      "text": "Zone units lose VALUE\n\tpower each turn",
+      "mText": "Spy Frog: VALUE power"
+    },
+    "spy_frog_modifier": {
+      "name": "Big Frog Modifier",
+      "value": 0,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "AURA_EOT_MOD",
+      "EOTChange": 1,
+      "text": "Zone units gains +EOTCHANGE power\n\t each turn",
+      "mText": "Spy Frog: +EOTCHANGE power each turn",
+      "modifier": "spy_frog_buff"
+    },
     "ogre_buff": {
       "name": "Ogre Buff",
       "value": 4,

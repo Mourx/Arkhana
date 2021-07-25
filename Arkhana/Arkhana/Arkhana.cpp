@@ -15,7 +15,7 @@ int main() {
 	DataBase* database = new DataBase();
 	database->Init();
 	
-	RenderWindow* window = new RenderWindow(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Card games or something idk",Style::Fullscreen);
+	RenderWindow* window = new RenderWindow(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Card games or something idk",Style::Default);
 	CombatScreen* combat;
 	RenderTexture* screenRender = new RenderTexture();
 	RenderTexture* windowRender = new RenderTexture();
@@ -66,7 +66,8 @@ int main() {
 
 	Sprite render;
 	Shader shader;
-	shader.loadFromFile("Textures/Shaders/vortex.frag", Shader::Fragment);
+	bool bVortexLoaded = false;
+	if (shader.loadFromFile("Textures/Shaders/vortex.frag", Shader::Fragment)) bVortexLoaded = true;
 
 
 	while (window->isOpen()) {
@@ -169,7 +170,7 @@ int main() {
 		window->draw(tempScreen);
 		if (bTransition) {
 
-			if (currentScreen->GetType() == COMBAT_SCREEN) {
+			if (currentScreen->GetType() == COMBAT_SCREEN && bVortexLoaded) {
 				transitionTime = 1.2f;
 				if (transitionTimer >= transitionTime / 2.0) {
 					shaderEffect.update(*window);

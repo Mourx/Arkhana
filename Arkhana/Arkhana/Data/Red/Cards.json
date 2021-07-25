@@ -46,6 +46,7 @@
       "cardType": "APPLY_ZONE_MOD",
       "zTag": "",
       "zOTag": "Z_PLAYER",
+	  "filePath" : "Textures/Cards/rage.png",
       "AITag": "AI_MOST_UNITS_AI",
       "modifiers": [ "rage_modifier" ],
       "shaderPath": "Textures/Shaders/Empress.vert"
@@ -56,6 +57,7 @@
       "cardType": "TARGET_STRONGEST",
       "zTag": "",
       "zOTag": "Z_ENEMY",
+	  "filePath": "Textures/Cards/sapSpirit.png",
       "AITag": "AI_STRONGEST_UNIT_PLAYER",
       "modifiers": [ "remove_stamina_modifier" ],
       "shaderPath": "Textures/Shaders/Empress.vert"
@@ -71,15 +73,26 @@
       "modifiers": [ "aura_empress_shrine" ],
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
-    "Ogre": {
-      "name": "Ogre",
-      "cost": 4,
+	"Spy Frog": {
+      "name": "Spy Frog",
+      "cost": 2,
       "cardType": "CREATE_UNIT",
-      "unit": "Ogre",
+      "unit": "Spy Frog",
+      "zTag": "UNDERCOVER",
+      "zOTag": "Z_ENEMY",
+      "AITag": "AI_MOST_UNITS",
+      "modifiers": [ "spy_frog_modifier" ],
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Big Frog": {
+      "name": "Big Frog",
+      "cost": 3,
+      "cardType": "CREATE_UNIT",
+      "unit": "Big Frog",
       "zOTag": "Z_PLAYER",
       "zTag": "AGGRESSIVE",
       "AITag": "AI_ATTACK",
-      "modifiers": [ "ogre_modifier" ],
+      "modifiers": [ "big_frog_modifier" ],
       "shaderPath": "Textures/Shaders/Empress.vert"
     }
   }

@@ -98,6 +98,10 @@ void DataBase::BuildCardListsRed() {
 				card->modifiers.push_back(new Modifier(*modList[arr[i].GetString()]));
 			}
 		}
+		if (ListItr->value.HasMember("filePath")) {
+			string str = ListItr->value["filePath"].GetString();
+			card->filePath = str;
+		}
 		card->cost = ListItr->value["cost"].GetInt();
 		card->cType = GetCardEnum(ListItr->value["cardType"].GetString());
 		if (ListItr->value.HasMember("effect")) card->effect = ListItr->value["effect"].GetString();
@@ -134,7 +138,10 @@ void DataBase::BuildCardListsEnemy() {
 				card->modifiers.push_back(new Modifier(*modList[arr[i].GetString()]));
 			}
 		}
-		
+		if (ListItr->value.HasMember("filePath")) {
+			string str = ListItr->value["filePath"].GetString();
+			card->filePath = str;
+		}
 		card->cost = ListItr->value["cost"].GetInt();
 		card->cType = GetCardEnum(ListItr->value["cardType"].GetString());
 		if (ListItr->value.HasMember("effect")) card->effect = ListItr->value["effect"].GetString();

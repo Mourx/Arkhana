@@ -31,6 +31,7 @@ public:
 	string effect;
 	string unit;
 	string zTag;
+	string filePath ="";
 	ZONE_OWNER zOTag;
 	string shaderPath;
 	AI_TAG AITag;
@@ -107,6 +108,7 @@ public:
 		if (data == "CREATE_UNIT") return CREATE_UNIT;
 		else if (data == "APPLY_ZONE_MOD") return APPLY_ZONE_MOD;
 		else if (data == "TARGET_STRONGEST") return TARGET_STRONGEST;
+		if (data == "CREATE_UNIT_MULTIPLE") return CREATE_UNIT_MULTIPLE;
 		else if (data == "EFFECT") return EFFECT;
 		
 		else return CREATE_UNIT;

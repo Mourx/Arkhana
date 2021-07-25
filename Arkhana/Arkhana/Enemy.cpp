@@ -18,11 +18,11 @@ Enemy::Enemy(RenderTexture* w,DataBase* data){
 	zones.push_back(blockZone);
 
 	physArmPos = Vector2f(1410, 345);
-	healthPos = Vector2f(1410, 5);
+	healthPos = Vector2f(1410, 15);
 	attackDirection = 1;
 	
 	txtPhysArmPos = Vector2f(1490, 145);
-	txtHealthPos = Vector2f(1500, 5);
+	txtHealthPos = Vector2f(1500, 15);
 
 	cardList = database->CardListEnemy;
 
@@ -58,6 +58,28 @@ void Enemy::InitSprites() {
 
 
 
+}
+
+void Enemy::DrawBackground() {
+	attackZone->Draw(window);
+	blockZone->Draw(window);
+
+	window->draw(deckIcon);
+	window->draw(gemIcon);
+	window->draw(discardIcon);
+	window->draw(burntIcon);
+	window->draw(physArmIcon);
+
+	window->draw(healthIcon);
+	window->draw(txtHealth);
+	window->draw(txtPhysArm);
+	window->draw(txtCurMana);
+	window->draw(txtDeckSize);
+	window->draw(txtDiscardSize);
+	window->draw(txtBurntSize);
+	for (Card* c : hand) {
+		c->Draw(window);
+	}
 }
 
 Card* Enemy::PlayNext() {

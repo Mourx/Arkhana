@@ -15,7 +15,7 @@ public:
 	Player(RenderTexture* w,DataBase* data);
 	~Player() {}
 	void Setup();
-	void DrawBackground();
+	virtual void DrawBackground();
 	void DrawForeground();
 	void DrawPlayerBar();
 	void Update(Time t);

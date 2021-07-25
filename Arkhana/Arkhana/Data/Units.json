@@ -36,6 +36,18 @@
       "stamina": 2,
       "filePath": "Textures/Units/twoFrogs.png"
     },
+	"Big Frog": {
+      "name": "Big Frog",
+      "physPower": 3,
+      "stamina": 4,
+      "filePath": "Textures/Units/bigFrog.png"
+    },
+	"Spy Frog": {
+      "name": "Spy Frog",
+      "physPower":-4,
+      "stamina": 3,
+      "filePath": "Textures/Units/spyFrog.png"
+    },
     "Doublin": {
       "name": "Doublin",
       "physPower": 7,
