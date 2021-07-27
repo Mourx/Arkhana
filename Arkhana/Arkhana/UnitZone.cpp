@@ -29,7 +29,7 @@ void UnitZone::DrawUnits(RenderTexture* w) {
 int UnitZone::GetCombinedPhysicalPower() {
 	int power = 0;
 	for (Unit* u : unitList) {
-		power += u->GetPPower();
+		if(!u->IsUndercover()) power += u->GetPPower();
 	}
 	return power;
 }

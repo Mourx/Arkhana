@@ -15,7 +15,7 @@ int main() {
 	DataBase* database = new DataBase();
 	database->Init();
 	
-	RenderWindow* window = new RenderWindow(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Card games or something idk",Style::Default);
+	RenderWindow* window = new RenderWindow(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Card games or something idk",Style::Fullscreen);
 	CombatScreen* combat;
 	RenderTexture* screenRender = new RenderTexture();
 	RenderTexture* windowRender = new RenderTexture();

@@ -36,6 +36,7 @@ public:
         return card;
     }
     bool IsBoss() { return bBoss; }
+    bool IsUndercover();
 protected:
     void ModifyStat(STAT_TYPE stat, int value, int multiplier);
     

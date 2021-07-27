@@ -19,6 +19,12 @@ ForgeScreen::ForgeScreen(RenderTexture* w, DataBase* db, Player* p) {
 	screenShade.setTexture(texScreenShade);
 	screenShade.setPosition(0, 0);
 
+	texRemoveIcon.loadFromFile("Textures/GUI/removeIcon.png");
+	removeIcon = new GameObject();
+	removeIcon->GetIcon()->setTexture(texRemoveIcon);
+	removeIcon->GetIcon()->setPosition(removeIconPos);
+	removeIcon->GetIcon()->setScale(2, 2);
+
 	texUpgradeIcon.loadFromFile("Textures/GUI/forgeIcon.png");
 	upgradeIcon = new GameObject();
 	upgradeIcon->GetIcon()->setTexture(texUpgradeIcon);
@@ -41,6 +47,12 @@ ForgeScreen::ForgeScreen(RenderTexture* w, DataBase* db, Player* p) {
 	FloatRect tR = txtUpgradeCost.getLocalBounds();
 	txtUpgradeCost.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
 
+	txtRemoveCost.setFont(font);
+	txtRemoveCost.setPosition(txtRemoveCostPos);
+	txtRemoveCost.setString(to_string(removeCost));
+	tR = txtUpgradeCost.getLocalBounds();
+	txtRemoveCost.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
+
 	type = FORGE_SCREEN;
 }
 
@@ -48,6 +60,7 @@ ForgeScreen::ForgeScreen(RenderTexture* w, DataBase* db, Player* p) {
 void ForgeScreen::Draw() {
 	window->draw(background);
 	upgradeIcon->Draw(window);
+	removeIcon->Draw(window);
 	for (Card* c : options) {
 		c->Draw(window);
 		c->DrawCost(window);
@@ -55,6 +68,7 @@ void ForgeScreen::Draw() {
 	
 	
 	window->draw(txtUpgradeCost);
+	window->draw(txtRemoveCost);
 	if (bUpgrading) {
 		window->draw(screenShade);
 		for (Card* c : player->GetDeckList()) {
@@ -96,6 +110,13 @@ void ForgeScreen::MouseMoved(Vector2f mousePos) {
 			else {
 				c->SetHover(false);
 			}
+		}
+		bounds = removeIcon->GetIcon()->getGlobalBounds();
+		if (bounds.contains(mousePos)) {
+			removeIcon->SetHover(true);
+		}
+		else {
+			removeIcon->SetHover(false);
 		}
 	}
 	else if (bSelectUpgrade) {
@@ -142,6 +163,7 @@ void ForgeScreen::MouseClicked(Vector2f mousePos) {
 			selUpgCard = NULL;
 			bUpgrading = false;
 			bSelectUpgrade = false;
+			player->AddGold(-upgradeCost);
 		}
 		if (upgStamina->GetHover()) {
 			Modifier* mod = new Modifier(*database->modList["upgrade_stamina"]);
@@ -150,6 +172,7 @@ void ForgeScreen::MouseClicked(Vector2f mousePos) {
 			selUpgCard = NULL;
 			bUpgrading = false;
 			bSelectUpgrade = false;
+			player->AddGold(-upgradeCost);
 		}
 		if (pathIcon->GetHover()) {
 			bSelectUpgrade = false;
@@ -159,9 +182,9 @@ void ForgeScreen::MouseClicked(Vector2f mousePos) {
 		if (pathIcon->GetHover()) {
 			nextScreen = PATH_SCREEN;
 		}
-		if (upgradeIcon->GetHover()) {
+		if (upgradeIcon->GetHover() && upgradeCost <= player->GetGold()) {
 			bUpgrading = true;
-			CreateDeckGrid();
+			CreateDeckGrid(true);
 		}
 		if (selCard!=NULL && selCard->GetGoldCost() <= player->GetGold()) {
 			player->AddCard(selCard);
@@ -218,10 +241,10 @@ void ForgeScreen::GenerateOptions() {
 	}
 }
 
-void ForgeScreen::CreateDeckGrid() {
+void ForgeScreen::CreateDeckGrid(bool bUpgrading) {
 	int count = 0;
 	for (Card* c : player->GetDeckList()) {
-		if (c->GetType() == CARD_TYPE::CREATE_UNIT) {
+		if (bUpgrading && c->GetType() == CARD_TYPE::CREATE_UNIT) {
 			c->SetPosition(upgradePos + Vector2f((count % 5) * 180, (count / 5) * 210));
 			count++;
 		}

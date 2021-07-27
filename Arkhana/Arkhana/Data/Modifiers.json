@@ -92,9 +92,9 @@
       "multiplier": 0,
       "sType": "DMG_PHYSICAL",
       "mType": "AURA_EOT_MOD",
-      "EOTChange": 1,
-      "text": "Zone units gains +EOTCHANGE power\n\t each turn",
-      "mText": "Spy Frog: +EOTCHANGE power each turn",
+      "EOTChange": -1,
+      "text": "Zone units gains EOTCHANGE power\n\t each turn",
+      "mText": "Spy Frog: EOTCHANGE power\n\t\t each turn",
       "modifier": "spy_frog_buff"
     },
     "ogre_buff": {

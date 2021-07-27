@@ -1,4 +1,5 @@
 #include "Unit.h"
+#include "Card.h"
 
 using namespace std;
 Unit::Unit(UnitData data,vector<Modifier*> mods,Card* c) {
@@ -101,8 +102,14 @@ void Unit::Draw(RenderTexture* w) {
 	
 	w->draw(unitBackground);
 	GameObject::Draw(w);
-	w->draw(txtPhys);
+	if (!card->IsUndercover()) {
+		w->draw(txtPhys);
+	}
 	w->draw(txtMag);
+}
+
+bool Unit::IsUndercover() {
+	return card->IsUndercover();
 }
 
 void Unit::ModifyStat(STAT_TYPE stat, int value, int multiplier) {

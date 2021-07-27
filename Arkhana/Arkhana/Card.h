@@ -54,6 +54,7 @@ public:
     String GetName() {
         return txtName.getString();
     }
+    bool IsUndercover() { return bUndercover; }
 protected:
     void DoEffect();
     virtual void ApplyModifier(UnitZone*);
@@ -74,6 +75,8 @@ protected:
 
     int goldCost = 0;
     bool bHasTargetZone = false;
+    bool bUndercover = false;
+    
     UnitZone* targetZone;
 
     Shader cardShader;

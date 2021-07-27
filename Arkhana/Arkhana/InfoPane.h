@@ -39,7 +39,12 @@ public:
         cardInfoName = unit->GetCard()->GetName();
         txtCardInfo.setString(cardInfo);
         txtCardInfoName.setString(cardInfoName);
-        unitPower =   "Power:   " + to_string((int)unit->GetPPower());
+        if (!unit->IsUndercover()) {
+            unitPower = "Power:   " + to_string((int)unit->GetPPower());
+        }
+        else {
+            unitPower = "Power:   0";
+        }
         txtUnitPower.setString(unitPower);
         unitStamina = "Stamina: " + to_string((int)unit->GetStamina());
         txtUnitStamina.setString(unitStamina);

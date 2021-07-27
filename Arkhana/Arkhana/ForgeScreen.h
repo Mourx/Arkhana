@@ -14,7 +14,7 @@ public:
     void Update(Time t);
 protected:
     void GenerateOptions();
-    void CreateDeckGrid();
+    void CreateDeckGrid(bool bUpgrading);
 
     bool bUpgrading = false;
     bool bSelectUpgrade = false;
@@ -39,6 +39,10 @@ protected:
     GameObject* pathIcon;
     Texture texPathIcon;
 
+    GameObject* removeIcon;
+    Texture texRemoveIcon;
+    Vector2f removeIconPos = Vector2f(1300, 600);
+
     GameObject* upgradeIcon;
     Texture texUpgradeIcon;
     Vector2f upgradeIconPos = Vector2f(1300, 20);
@@ -59,7 +63,11 @@ protected:
     Text txtUpgradeCost;
     Vector2f txtUpgradeCostPos = upgradeIconPos + Vector2f(100, 200);
 
+    Text txtRemoveCost;
+    Vector2f txtRemoveCostPos = removeIconPos + Vector2f(100, 200);
+
     int upgradeCost = 75;
+    int removeCost = 75;
 
     Sprite background;
     Texture texBackground;
