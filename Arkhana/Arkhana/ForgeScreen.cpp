@@ -69,7 +69,7 @@ void ForgeScreen::Draw() {
 	
 	window->draw(txtUpgradeCost);
 	window->draw(txtRemoveCost);
-	if (bUpgrading) {
+	if (bUpgrading || bSelectRemove) {
 		window->draw(screenShade);
 		for (Card* c : player->GetDeckList()) {
 			c->Draw(window);
@@ -86,7 +86,19 @@ void ForgeScreen::Draw() {
 }
 
 void ForgeScreen::MouseMoved(Vector2f mousePos) {
-	if (!bUpgrading) {
+	selCard = NULL;
+	if (bSelectRemove || bUpgrading) {
+		for (Card* c : player->GetDeckList()) {
+			FloatRect bounds = c->GetIcon()->getGlobalBounds();
+			if (bounds.contains(mousePos)) {
+				c->SetHover(true);
+			}
+			else {
+				c->SetHover(false);
+			}
+		}
+	}
+	else if (!bUpgrading) {
 		FloatRect bounds = pathIcon->GetIcon()->getGlobalBounds();
 		if (bounds.contains(mousePos)) {
 			pathIcon->SetHover(true);
@@ -136,17 +148,7 @@ void ForgeScreen::MouseMoved(Vector2f mousePos) {
 		}
 
 	}
-	else if (bUpgrading) {
-		for (Card* c : player->GetDeckList()) {
-			FloatRect bounds = c->GetIcon()->getGlobalBounds();
-			if (bounds.contains(mousePos)) {
-				c->SetHover(true);
-			}
-			else {
-				c->SetHover(false);
-			}
-		}
-	}
+	
 	FloatRect bounds = pathIcon->GetIcon()->getGlobalBounds();
 	if (bounds.contains(mousePos)) {
 		pathIcon->SetHover(true);
@@ -178,21 +180,18 @@ void ForgeScreen::MouseClicked(Vector2f mousePos) {
 			bSelectUpgrade = false;
 		}
 	}
-	else if (!bUpgrading) {
-		if (pathIcon->GetHover()) {
-			nextScreen = PATH_SCREEN;
+	else if (bSelectRemove) {
+		Card* cRemove = NULL;
+		for (Card* c : player->GetDeckList()) {
+			if (c->GetHover()) {
+				cRemove = c;
+			}
 		}
-		if (upgradeIcon->GetHover() && upgradeCost <= player->GetGold()) {
-			bUpgrading = true;
-			CreateDeckGrid(true);
-		}
-		if (selCard!=NULL && selCard->GetGoldCost() <= player->GetGold()) {
-			player->AddCard(selCard);
-			options.erase(find(options.begin(), options.end(), selCard));
-			player->AddGold(-selCard->GetGoldCost());
-			selCard->SetHover(false);
-			selCard = NULL;
-		}
+		player->RemoveFromDeck(cRemove);
+		
+		delete cRemove;
+		bSelectRemove = false;
+		player->AddGold(-removeCost);
 	}
 	else if (bUpgrading) {
 		for (Card* c : player->GetDeckList()) {
@@ -207,6 +206,29 @@ void ForgeScreen::MouseClicked(Vector2f mousePos) {
 			bUpgrading = false;
 		}
 	}
+	else if (!bUpgrading) {
+		if (pathIcon->GetHover()) {
+			nextScreen = PATH_SCREEN;
+		}
+		if (upgradeIcon->GetHover() && upgradeCost <= player->GetGold()) {
+			bUpgrading = true;
+			CreateDeckGrid(true);
+			upgradeIcon->SetHover(false);
+		}
+		if (selCard!=NULL && selCard->GetGoldCost() <= player->GetGold()) {
+			player->AddCard(selCard);
+			options.erase(find(options.begin(), options.end(), selCard));
+			player->AddGold(-selCard->GetGoldCost());
+			selCard->SetHover(false);
+			selCard = NULL;
+		}
+		if (removeIcon->GetHover() && removeCost <= player->GetGold()) {
+			bSelectRemove = true;
+			CreateDeckGrid(false);
+			removeIcon->SetHover(false);
+		}
+	}
+	
 	
 }
 
@@ -244,12 +266,18 @@ void ForgeScreen::GenerateOptions() {
 void ForgeScreen::CreateDeckGrid(bool bUpgrading) {
 	int count = 0;
 	for (Card* c : player->GetDeckList()) {
-		if (bUpgrading && c->GetType() == CARD_TYPE::CREATE_UNIT) {
-			c->SetPosition(upgradePos + Vector2f((count % 5) * 180, (count / 5) * 210));
-			count++;
+		if (bUpgrading) {
+			if (c->GetType() == CARD_TYPE::CREATE_UNIT) {
+				c->SetPosition(upgradePos + Vector2f((count % 5) * 180, (count / 5) * 210));
+				count++;
+			}
+			else {
+				c->SetPosition(Vector2f(-200, -200));
+			}
 		}
 		else {
-			c->SetPosition(Vector2f(-200, -200));
+			c->SetPosition(upgradePos + Vector2f((count % 5) * 180, (count / 5) * 210));
+			count++;
 		}
 	}
 }

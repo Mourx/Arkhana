@@ -85,7 +85,7 @@
     },
     "Troll Boss": {
       "name": "Troll Boss",
-      "cost": 4,
+      "cost": 5,
       "cardType": "CREATE_UNIT",
       "unit": "Troll Boss",
       "zOTag": "Z_PLAYER",

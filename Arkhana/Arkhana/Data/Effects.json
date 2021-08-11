@@ -4,7 +4,14 @@
       "name": "Frog Armour",
       "type": "ARMOUR_MOD",
       "value": 5,
-      "text" : "Increases Armour by VALUE",
+      "text": "Increases Armour by VALUE",
+      "filePath": "Textures/Units/gnome.png"
+    },
+    "Big Armour": {
+      "name": "Big Armour",
+      "type": "ARMOUR_MOD",
+      "value": 10,
+      "text": "Increases Armour by VALUE",
       "filePath": "Textures/Units/gnome.png"
     }
   }

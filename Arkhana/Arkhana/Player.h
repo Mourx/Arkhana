@@ -43,6 +43,7 @@ public:
 	void SetBarWindow(RenderTexture* w) {
 		playerBarWindow = w;
 	}
+	void RemoveFromDeck(Card* card);
 protected:
 	void DiscardHand();
 	void DrawCards(int amount);
@@ -77,7 +78,7 @@ protected:
 	int maxMana = 3;
 	int currentMana = 3;
 
-	int currentGold = 30;
+	int currentGold = 3000;
 
 	Text txtCurMana;
 	Vector2f txtCurManaPos = Vector2f(100,700);

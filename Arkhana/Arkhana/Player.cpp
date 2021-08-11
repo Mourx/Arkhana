@@ -254,6 +254,10 @@ void Player::DiscardHand() {
 	hand.clear();
 }
 
+void Player::RemoveFromDeck(Card* c) {
+	decklist.erase(remove(decklist.begin(), decklist.end(), c), decklist.end());
+}
+
 void Player::Discard(Card* c) {
 
 

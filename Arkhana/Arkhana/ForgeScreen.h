@@ -18,6 +18,7 @@ protected:
 
     bool bUpgrading = false;
     bool bSelectUpgrade = false;
+    bool bSelectRemove = false;
 
     Card* selUpgCard;
     Card* selCard;
