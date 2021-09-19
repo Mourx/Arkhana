@@ -110,7 +110,11 @@ void DataBase::BuildCardListsRed() {
 		card->zOTag = GetZoneOwnerEnum(ListItr->value["zOTag"].GetString());
 		card->AITag = GetAITag(ListItr->value["AITag"].GetString());
 		card->shaderPath = ListItr->value["shaderPath"].GetString();
-		CardListRed.insert({ name,card });
+		card->level = ListItr->value["level"].GetInt();
+		if (card->level <= playerLevel) {
+			CardListRedUnlocked.insert({ name,card });
+		}
+		CardListRedAll.insert({ name,card });
 	}
 	fclose(fp);
 }

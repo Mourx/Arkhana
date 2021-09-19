@@ -55,7 +55,7 @@
       "text": "Reduce the highest power\n unit's stamina by VALUE",
       "mText": "Sapped: Stamina reduced by VALUE"
     },
-	"big_frog_buff": {
+    "big_frog_buff": {
       "name": "Big Frog Buff",
       "value": 1,
       "multiplier": 0,
@@ -76,7 +76,7 @@
       "mText": "Big Frog: +EOTCHANGE power each turn",
       "modifier": "big_frog_buff"
     },
-	"spy_frog_buff": {
+    "spy_frog_buff": {
       "name": "Spy Frog Buff",
       "value": -1,
       "multiplier": 0,
@@ -96,6 +96,46 @@
       "text": "Zone units gains EOTCHANGE power\n\t each turn",
       "mText": "Spy Frog: EOTCHANGE power\n\t\t each turn",
       "modifier": "spy_frog_buff"
+    },
+    "guard_frog_modifier": {
+      "name": "Guard Frog Modifier",
+      "value": 0,
+      "multiplier": 0,
+      "sType": "ARMOUR_PHYSICAL",
+      "mType": "PLAYER_EOT_MOD",
+      "EOTChange": 1,
+      "text": "Gain EOTCHANGE Armour each turn.",
+      "mText": "Gain EOTCHANGE Armour each turn."
+    },
+    "mystic_frog_modifier": {
+      "name": "Guard Frog Modifier",
+      "value": 0,
+      "multiplier": 0,
+      "sType": "ARMOUR_PHYSICAL",
+      "mType": "PLAYER_EOT_MOD",
+      "EOTChange": 1,
+      "text": "Gain EOTCHANGE Armour each turn.",
+      "mText": "Gain EOTCHANGE Armour each turn."
+    },
+    "jog_frog_modifier": {
+      "name": "Guard Frog Modifier",
+      "value": 0,
+      "multiplier": 0,
+      "sType": "ARMOUR_PHYSICAL",
+      "mType": "PLAYER_EOT_MOD",
+      "EOTChange": 1,
+      "text": "Gain EOTCHANGE Armour each turn.",
+      "mText": "Gain EOTCHANGE Armour each turn."
+    },
+    "general_frog_modifier": {
+      "name": "Guard Frog Modifier",
+      "value": 0,
+      "multiplier": 0,
+      "sType": "ARMOUR_PHYSICAL",
+      "mType": "PLAYER_EOT_MOD",
+      "EOTChange": 1,
+      "text": "Gain EOTCHANGE Armour each turn.",
+      "mText": "Gain EOTCHANGE Armour each turn."
     },
     "ogre_buff": {
       "name": "Ogre Buff",

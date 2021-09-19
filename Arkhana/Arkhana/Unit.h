@@ -58,6 +58,9 @@ protected:
     Sprite unitBackground;
     Texture texBackground;
 
+    Sprite highlightIcon;
+    Texture texHighlight;
+
     Text txtPhys;
     Text txtMag;
 

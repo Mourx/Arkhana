@@ -119,6 +119,10 @@ void CombatScreen::MouseMoved(Vector2f mousePos) {
 			bounds = unit->GetIcon()->getGlobalBounds();
 			if (bounds.contains(mousePos)) {
 				hoverUnit = unit;
+				unit->SetHover(true);
+			}
+			else {
+				unit->SetHover(false);
 			}
 		}
 	}
@@ -131,6 +135,10 @@ void CombatScreen::MouseMoved(Vector2f mousePos) {
 			bounds = unit->GetIcon()->getGlobalBounds();
 			if (bounds.contains(mousePos)) {
 				hoverUnit = unit;
+				unit->SetHover(true);
+			}
+			else {
+				unit->SetHover(false);
 			}
 		}
 	}
@@ -157,6 +165,7 @@ void CombatScreen::MouseMoved(Vector2f mousePos) {
 }
 
 void CombatScreen::Update(Time t) {
+	
 	if (currentTurn == ENEMY) {
 		
 		if (enemy->HasAttacked() == false) {

@@ -8,6 +8,7 @@
       "zTag": "",
       "zOTag": "Z_PLAYER",
       "AITag": "AI_RANDOM",
+      "level": 0,
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
     "Shield Frog": {
@@ -18,6 +19,7 @@
       "zTag": "DEFENSIVE",
       "zOTag": "Z_PLAYER",
       "AITag": "AI_BLOCK",
+      "level": 0,
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
     "Frog Armour": {
@@ -28,6 +30,7 @@
       "zTag": "",
       "zOTag": "Z_PLAYER",
       "AITag": "AI_BLOCK",
+      "level": 0,
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
     "Two Frogs": {
@@ -38,6 +41,7 @@
       "zTag": "",
       "zOTag": "Z_PLAYER",
       "AITag": "AI_RANDOM",
+      "level": 0,
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
     "Froggy Rage": {
@@ -46,20 +50,22 @@
       "cardType": "APPLY_ZONE_MOD",
       "zTag": "",
       "zOTag": "Z_PLAYER",
-	  "filePath" : "Textures/Cards/rage.png",
+      "filePath": "Textures/Cards/rage.png",
       "AITag": "AI_MOST_UNITS_AI",
       "modifiers": [ "rage_modifier" ],
+      "level": 0,
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
-    "Sap Spirit": {
-      "name": "Sap Spirit",
+    "Tongue Whip": {
+      "name": "Tongue Whip",
       "cost": 2,
       "cardType": "TARGET_STRONGEST",
       "zTag": "",
       "zOTag": "Z_ENEMY",
-	  "filePath": "Textures/Cards/sapSpirit.png",
+      "filePath": "Textures/Cards/sapSpirit.png",
       "AITag": "AI_STRONGEST_UNIT_PLAYER",
       "modifiers": [ "remove_stamina_modifier" ],
+      "level": 0,
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
     "Frog Shrine": {
@@ -71,9 +77,10 @@
       "zOTag": "Z_PLAYER",
       "AITag": "AI_MOST_UNITS",
       "modifiers": [ "aura_empress_shrine" ],
+      "level": 0,
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
-	"Spy Frog": {
+    "Spy Frog": {
       "name": "Spy Frog",
       "cost": 2,
       "cardType": "CREATE_UNIT",
@@ -82,6 +89,7 @@
       "zOTag": "Z_ENEMY",
       "AITag": "AI_MOST_UNITS",
       "modifiers": [ "spy_frog_modifier" ],
+      "level": 0,
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
     "Big Frog": {
@@ -93,7 +101,68 @@
       "zTag": "AGGRESSIVE",
       "AITag": "AI_ATTACK",
       "modifiers": [ "big_frog_modifier" ],
+      "level": 0,
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Guard Frog": {
+      "name": "Guard Frog",
+      "cost": 1,
+      "cardType": "CREATE_UNIT",
+      "unit": "Guard Frog",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "AI_ATTACK",
+      "modifiers": [ "guard_frog_modifier" ],
+      "level": 0,
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Mystic Frog": {
+      "name": "Mystic Frog",
+      "cost": 1,
+      "cardType": "CREATE_UNIT",
+      "unit": "Mystic Frog",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "AI_ATTACK",
+      "modifiers": [ "mystic_frog_modifier" ],
+      "level": 0,
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Jog Frog": {
+      "name": "Jog Frog",
+      "cost": 1,
+      "cardType": "CREATE_UNIT",
+      "unit": "Jog Frog",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "AI_ATTACK",
+      "modifiers": [ "jog_frog_modifier" ],
+      "level": 0,
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "General Frog": {
+      "name": "General Frog",
+      "cost": 1,
+      "cardType": "CREATE_UNIT",
+      "unit": "General Frog",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "AI_ATTACK",
+      "modifiers": [ "general_frog_modifier" ],
+      "level": 0,
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Frog Friends": {
+      "name": "Frog Friends",
+      "cost": 1,
+      "cardType": "TARGET_UNIT_ALLY",
+      "unit": "",
+      "zOTag": "Z_PLAYER",
+      "zTag": "AGGRESSIVE",
+      "AITag": "AI_ATTACK",
+      "level": 0,
       "shaderPath": "Textures/Shaders/Empress.vert"
     }
+
   }
 }

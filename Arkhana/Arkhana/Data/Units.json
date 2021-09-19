@@ -16,7 +16,7 @@
       "name": "Shield Frog",
       "physPower": 2,
       "stamina": 3,
-      "filePath": "Textures/Units/frog.png"
+      "filePath": "Textures/Units/shieldFrog.png"
     },
     "Shield Goblin": {
       "name": "Shield Goblin",
@@ -36,17 +36,41 @@
       "stamina": 2,
       "filePath": "Textures/Units/twoFrogs.png"
     },
-	"Big Frog": {
+    "Big Frog": {
       "name": "Big Frog",
       "physPower": 3,
       "stamina": 4,
       "filePath": "Textures/Units/bigFrog.png"
     },
-	"Spy Frog": {
+    "Spy Frog": {
       "name": "Spy Frog",
-      "physPower":-4,
+      "physPower": -4,
       "stamina": 3,
       "filePath": "Textures/Units/spyFrog.png"
+    },
+    "Guard Frog": {
+      "name": "Guard Frog",
+      "physPower": 1,
+      "stamina": 3,
+      "filePath": "Textures/Units/guardFrog.png"
+    },
+    "Mystic Frog": {
+      "name": "Mystic Frog",
+      "physPower": 0,
+      "stamina": 3,
+      "filePath": "Textures/Units/mysticFrog.png"
+    },
+    "Jog Frog": {
+      "name": "Jog Frog",
+      "physPower": 3,
+      "stamina": 2,
+      "filePath": "Textures/Units/jogFrog.png"
+    },
+    "General Frog": {
+      "name": "General Frog",
+      "physPower": 1,
+      "stamina": 4,
+      "filePath": "Textures/Units/generalFrog.png"
     },
     "Doublin": {
       "name": "Doublin",

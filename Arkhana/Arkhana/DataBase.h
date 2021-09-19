@@ -35,6 +35,7 @@ public:
 	ZONE_OWNER zOTag;
 	string shaderPath;
 	AI_TAG AITag;
+	int level = 0;
 	vector<Modifier*> modifiers;
 };
 
@@ -75,7 +76,8 @@ public:
 class DataBase {
 public:
 	map<string, UnitData*> UnitList;
-	map<string, CardData*> CardListRed;
+	map<string, CardData*> CardListRedUnlocked;
+	map<string, CardData*> CardListRedAll;
 	map<string, CardData*> CardListEnemy;
 	map<string, ModifierData*> modList;
 	map<string, EffectData*> effectList;
@@ -83,6 +85,7 @@ public:
 	vector<vector<string>> encounterNames;
 	map<int, string> costIcons;
 
+	int playerLevel = 1;
 	bool bDebugMode = true;
 
 	MODIFIER_TYPE GetModEnum(string data) {
@@ -93,6 +96,7 @@ public:
 		else if (data == "BOSS_RESIST_MOD") return MODIFIER_TYPE::BOSS_RESIST_MOD;
 		else if (data == "UNIT_EOT_MOD") return MODIFIER_TYPE::UNIT_EOT_MOD;
 		else if (data == "AURA_EOT_MOD") return MODIFIER_TYPE::AURA_EOT_MOD;
+		else if (data == "PLAYER_EOT_MOD") return MODIFIER_TYPE::PLAYER_EOT_MOD;
 		else return MODIFIER_TYPE::ZONE_MOD;
 	}
 
@@ -108,7 +112,8 @@ public:
 		if (data == "CREATE_UNIT") return CREATE_UNIT;
 		else if (data == "APPLY_ZONE_MOD") return APPLY_ZONE_MOD;
 		else if (data == "TARGET_STRONGEST") return TARGET_STRONGEST;
-		if (data == "CREATE_UNIT_MULTIPLE") return CREATE_UNIT_MULTIPLE;
+		else if (data == "TARGET_UNIT_ALLY") return TARGET_UNIT_ALLY;
+		else if (data == "CREATE_UNIT_MULTIPLE") return CREATE_UNIT_MULTIPLE;
 		else if (data == "EFFECT") return EFFECT;
 		
 		else return CREATE_UNIT;

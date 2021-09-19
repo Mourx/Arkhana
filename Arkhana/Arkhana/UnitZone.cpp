@@ -1,5 +1,5 @@
 #include "UnitZone.h"
-
+#include "Player.h"
 
 UnitZone::UnitZone(int zoneType,Player* p, ZONE_OWNER zPlayer, ZONE_TYPE t) {
 	if (zoneType == 0) {
@@ -83,6 +83,10 @@ void UnitZone::EndTurnUpkeep(DataBase* database) {
 		for (Modifier* mod : u->GetModifiers()) {
 			if (mod->GetModType() == MODIFIER_TYPE::UNIT_EOT_MOD) {
 				u->AddModifier(mod->GetModifier());
+			}else if (mod->GetModType() == MODIFIER_TYPE::PLAYER_EOT_MOD) {
+				if (mod->GetStat() == STAT_TYPE::ARMOUR_PHYSICAL) {
+					owner->ModifyArmour(1);
+				}
 			}
 			mod->ApplyEOT();
 		}

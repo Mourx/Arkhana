@@ -26,6 +26,9 @@ Unit::Unit(UnitData data,vector<Modifier*> mods,Card* c) {
 		case MODIFIER_TYPE::AURA_EOT_MOD:
 			auraMods.push_back(new Modifier(mod));
 			break;
+		case MODIFIER_TYPE::PLAYER_EOT_MOD:
+			unitMods.push_back(new Modifier(mod));
+			break;
 		}
 		
 	}
@@ -33,6 +36,8 @@ Unit::Unit(UnitData data,vector<Modifier*> mods,Card* c) {
 	
 	texBackground.loadFromFile("Textures/Units/shadow.png");
 	unitBackground.setTexture(texBackground);
+	texHighlight.loadFromFile("Textures/Units/highlight.png");
+	highlightIcon.setTexture(texHighlight);
 
 	font.loadFromFile("Fonts/Arial/arial.ttf");
 	txtPhys.setFont(font);
@@ -94,6 +99,7 @@ void Unit::SetPosition(Vector2f p) {
 	pos = p;
 	GameObject::SetPosition(pos);
 	unitBackground.setPosition(pos+Vector2f(0,60));
+	highlightIcon.setPosition(pos);
 	txtPhys.setPosition(pos + txtPhysPos);
 	txtMag.setPosition(pos + txtMagPos);
 }
@@ -106,6 +112,9 @@ void Unit::Draw(RenderTexture* w) {
 		w->draw(txtPhys);
 	}
 	w->draw(txtMag);
+	if (bHover) {
+		w->draw(highlightIcon);
+	}
 }
 
 bool Unit::IsUndercover() {

@@ -28,5 +28,8 @@ void Modifier::GetData() {
 	else if (sType == STAT_TYPE::STAMINA) {
 		texIcon.loadFromFile("Textures/Cards/flame.png");
 	}
+	else if (sType == STAT_TYPE::ARMOUR_PHYSICAL) {
+		texIcon.loadFromFile("Textures/GUI/armourPhysical.png");
+	}
 	icon.setTexture(texIcon);
 }

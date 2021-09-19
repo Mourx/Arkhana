@@ -132,16 +132,16 @@ void Player::UpdateStrings() {
 
 void Player::SetFaction() {
 	decklist.clear();
-	cardList = database->CardListRed;
+	cardList = database->CardListRedUnlocked;
 
-	decklist.push_back(new Card(*cardList["Spy Frog"], database));
+	decklist.push_back(new Card(*cardList["Guard Frog"], database));
 	decklist.push_back(new Card(*cardList["Frog"], database));
 	decklist.push_back(new Card(*cardList["Frog Shrine"], database));
-	decklist.push_back(new Card(*cardList["Sap Spirit"], database));
+	decklist.push_back(new Card(*cardList["Tongue Whip"], database));
 	decklist.push_back(new Card(*cardList["Shield Frog"], database));
 	decklist.push_back(new Card(*cardList["Frog Shrine"], database));
 	decklist.push_back(new Card(*cardList["Frog Armour"], database));
-	decklist.push_back(new Card(*cardList["Spy Frog"], database));
+	decklist.push_back(new Card(*cardList["Guard Frog"], database));
 
 	UpdateStrings();
 }
