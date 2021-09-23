@@ -134,3 +134,31 @@ void UnitZone::ModifyUnits(Modifier* mod) {
 
 	}
 }
+
+int UnitZone::GetEffectCostChange() {
+	int total = 0;
+	for (Unit* u : unitList) {
+		for (Modifier* mod : u->GetModifiers()) {
+			if (mod->GetModType() == MODIFIER_TYPE::PLAYER_MOD) {
+				if (mod->GetStat() == STAT_TYPE::EFFECT_COST) {
+					total += mod->GetValue();
+				}
+			}
+		}
+	}
+	return total;
+}
+
+int UnitZone::GetUnitCostChange() {
+	int total = 0;
+	for (Unit* u : unitList) {
+		for (Modifier* mod : u->GetModifiers()) {
+			if (mod->GetModType() == MODIFIER_TYPE::PLAYER_MOD) {
+				if (mod->GetStat() == STAT_TYPE::UNIT_COST) {
+					total += mod->GetValue();
+				}
+			}
+		}
+	}
+	return total;
+}

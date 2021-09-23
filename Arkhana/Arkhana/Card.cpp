@@ -167,6 +167,13 @@ void Card::DoEffect() {
 	}
 }
 
+void Card::SetCostChange(int change) {
+	costChange = change;
+	texCost.loadFromFile(database->costIcons[cost+costChange]);
+	costIcon.setTexture(texCost);
+
+}
+
 void Card::Draw(RenderTexture* w) {
 	w->draw(icon, &cardShader);
 	if (type == CREATE_UNIT) {

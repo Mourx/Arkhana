@@ -36,6 +36,8 @@ public:
     Vector2f GetAnimationPoint() { return icon.getPosition() + animationPos; }
     void EndTurnUpkeep(DataBase* database);
     void NewTurnUpkeep(DataBase* database);
+    int GetEffectCostChange();
+    int GetUnitCostChange();
 protected:
     void UpdateStatMods();
     void UpdatePositions() {

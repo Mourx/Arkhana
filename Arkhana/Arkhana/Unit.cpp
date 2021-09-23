@@ -29,6 +29,9 @@ Unit::Unit(UnitData data,vector<Modifier*> mods,Card* c) {
 		case MODIFIER_TYPE::PLAYER_EOT_MOD:
 			unitMods.push_back(new Modifier(mod));
 			break;
+		case MODIFIER_TYPE::PLAYER_MOD:
+			unitMods.push_back(new Modifier(mod));
+			break;
 		}
 		
 	}

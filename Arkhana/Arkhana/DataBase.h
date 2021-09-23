@@ -97,6 +97,7 @@ public:
 		else if (data == "UNIT_EOT_MOD") return MODIFIER_TYPE::UNIT_EOT_MOD;
 		else if (data == "AURA_EOT_MOD") return MODIFIER_TYPE::AURA_EOT_MOD;
 		else if (data == "PLAYER_EOT_MOD") return MODIFIER_TYPE::PLAYER_EOT_MOD;
+		else if (data == "PLAYER_MOD") return MODIFIER_TYPE::PLAYER_MOD;
 		else return MODIFIER_TYPE::ZONE_MOD;
 	}
 
@@ -105,6 +106,8 @@ public:
 		else if (data == "STAMINA") return STAT_TYPE::STAMINA;
 		else if (data == "ARMOUR_PHYSICAL") return STAT_TYPE::ARMOUR_PHYSICAL;
 		else if (data == "HEALTH") return STAT_TYPE::HEALTH;
+		else if (data == "EFFECT_COST") return STAT_TYPE::EFFECT_COST;
+		else if (data == "UNIT_COST") return STAT_TYPE::UNIT_COST;
 		else return STAT_TYPE::DMG_PHYSICAL;
 	}
 

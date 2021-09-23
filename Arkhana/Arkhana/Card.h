@@ -16,7 +16,13 @@ public:
 
     Vector2f GetHandPos() { return handPos; }
     void SetHandPos(Vector2f p) { handPos = p; }
-    int GetCost() { return cost; }
+    int GetCost() { 
+        int total = cost + costChange;
+        if (total <= 0) {
+            total = 0;
+        }
+        return total; 
+    }
     virtual void Play();
     virtual void Play(UnitZone* zone);
     void SetPosition(Vector2f pos);
@@ -55,6 +61,7 @@ public:
         return txtName.getString();
     }
     bool IsUndercover() { return bUndercover; }
+    void SetCostChange(int change);
 protected:
     void DoEffect();
     virtual void ApplyModifier(UnitZone*);
@@ -68,6 +75,7 @@ protected:
     vector<Modifier*> modifiers;
     MODIFIER_TYPE mod;
     int cost = 0;
+    int costChange = 0;
     int unitID;
 
     int stamina;

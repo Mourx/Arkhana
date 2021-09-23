@@ -134,14 +134,14 @@ void Player::SetFaction() {
 	decklist.clear();
 	cardList = database->CardListRedUnlocked;
 
-	decklist.push_back(new Card(*cardList["Guard Frog"], database));
+	decklist.push_back(new Card(*cardList["Mystic Frog"], database));
 	decklist.push_back(new Card(*cardList["Frog"], database));
 	decklist.push_back(new Card(*cardList["Frog Shrine"], database));
 	decklist.push_back(new Card(*cardList["Tongue Whip"], database));
 	decklist.push_back(new Card(*cardList["Shield Frog"], database));
 	decklist.push_back(new Card(*cardList["Frog Shrine"], database));
 	decklist.push_back(new Card(*cardList["Frog Armour"], database));
-	decklist.push_back(new Card(*cardList["Guard Frog"], database));
+	decklist.push_back(new Card(*cardList["Mystic Frog"], database));
 
 	UpdateStrings();
 }
@@ -204,6 +204,7 @@ void Player::NewTurnUpkeep() {
 	DrawCards(CARDS_PER_TURN);
 	ResetMana();
 	bHasAttacked = false;
+	UpdateCosts();
 	attackZone->NewTurnUpkeep(database);
 	blockZone->NewTurnUpkeep(database);
 	blockZone->CheckStamina();
@@ -243,8 +244,23 @@ void Player::UseCard(Card* c) {
 	discard.push_back(c);
 	hand.erase(remove(hand.begin(), hand.end(), c), hand.end());
 	c->SetHandPos(offScreenPos);
+	UpdateCosts();
 	UpdateStrings();
 	SetCardPositions();
+}
+
+void Player::UpdateCosts() {
+	effectCostChange = attackZone->GetEffectCostChange() + blockZone->GetEffectCostChange();
+	unitCostChange = blockZone->GetUnitCostChange() + blockZone->GetUnitCostChange();
+	for (Card* c : hand) {
+		if (c->GetType() == CARD_TYPE::CREATE_UNIT) {
+			c->SetCostChange(unitCostChange);
+		}
+		else {
+			c->SetCostChange(effectCostChange);
+		}
+		
+	}
 }
 
 void Player::DiscardHand() {

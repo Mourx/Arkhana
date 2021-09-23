@@ -44,6 +44,7 @@ public:
 		playerBarWindow = w;
 	}
 	void RemoveFromDeck(Card* card);
+	void UpdateCosts();
 protected:
 	void DiscardHand();
 	void DrawCards(int amount);
@@ -60,6 +61,11 @@ protected:
 	vector<Card*> discard;
 	vector<Card*> burnt;
 	random_device random;
+
+	vector<Modifier*> mods;
+	int effectCostChange = 0;
+	int unitCostChange = 0;
+
 
 	Vector2f cardsStart = Vector2f(200, 700);
 	Vector2f cardsEnd = Vector2f(1250, 700);

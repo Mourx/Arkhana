@@ -21,20 +21,20 @@ void DataBase::BuildModifierLists() {
 		if (ListItr->value.HasMember("text")) {
 			string text = ListItr->value["text"].GetString();
 			while (text.find("VALUE") != string::npos) {
-				text.replace(text.find("VALUE"), 5, to_string(mod->value));
+				text.replace(text.find("VALUE"), 5, to_string(std::abs(mod->value)));
 			}
 			while (text.find("EOTCHANGE") != string::npos) {
-				text.replace(text.find("EOTCHANGE"), 9, to_string(mod->EOTChange));
+				text.replace(text.find("EOTCHANGE"), 9, to_string(std::abs(mod->EOTChange)));
 			}
 			mod->text = text;
 		}
 		if (ListItr->value.HasMember("mText")) {
 			string mtext = ListItr->value["mText"].GetString();
 			while (mtext.find("VALUE") != string::npos) {
-				mtext.replace(mtext.find("VALUE"), 5, to_string(mod->value));
+				mtext.replace(mtext.find("VALUE"), 5, to_string(std::abs(mod->value)));
 			}
 			while (mtext.find("EOTCHANGE") != string::npos) {
-				mtext.replace(mtext.find("EOTCHANGE"), 9, to_string(mod->EOTChange));
+				mtext.replace(mtext.find("EOTCHANGE"), 9, to_string(std::abs(mod->EOTChange)));
 			}
 			mod->mText = mtext;
 		}
@@ -67,7 +67,7 @@ void DataBase::BuildEffectLists() {
 		if (ListItr->value.HasMember("text")) {
 			string text = ListItr->value["text"].GetString();
 			while (text.find("VALUE") != string::npos) {
-				text.replace(text.find("VALUE"), 5, to_string(effect->value));
+				text.replace(text.find("VALUE"), 5, to_string(std::abs(effect->value)));
 			}
 			effect->text = text;
 		}
@@ -233,7 +233,7 @@ void DataBase::BuildEncounterLists() {
 }
 
 void DataBase::Init() {
-	for (int i = 1; i < 11; i++) {
+	for (int i = 0; i < 11; i++) {
 		string path = "Textures/GUI/ManaCosts/" + to_string(i) + ".png";
 		costIcons.insert({ i,path });
 	}
