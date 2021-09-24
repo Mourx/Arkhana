@@ -11,7 +11,7 @@ class UnitZone :
     public GameObject
 {
 public:
-    UnitZone(int zoneType, Player* own, ZONE_OWNER zPlayer, ZONE_TYPE t);
+    UnitZone(int zoneType, Player* p,Player* enemy, ZONE_OWNER zPlayer, ZONE_TYPE t);
     ~UnitZone() {}
     vector<Unit*> GetUnits() { return unitList; }
     void Draw(RenderTexture* w);
@@ -38,6 +38,7 @@ public:
     void NewTurnUpkeep(DataBase* database);
     int GetEffectCostChange();
     int GetUnitCostChange();
+    void RemoveUnit(Unit* u);
 protected:
     void UpdateStatMods();
     void UpdatePositions() {
@@ -58,6 +59,8 @@ protected:
     vector<Unit*> unitList;
     ZONE_OWNER ownerType;
     Player* owner;
+    Player* player;
+    Player* enemy;
     Vector2f unitOffset = Vector2f(20, 40);
     Vector2f animationPos = Vector2f(50, 50);
     vector<Modifier*> zoneMods;

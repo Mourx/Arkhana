@@ -32,6 +32,10 @@ Unit::Unit(UnitData data,vector<Modifier*> mods,Card* c) {
 		case MODIFIER_TYPE::PLAYER_MOD:
 			unitMods.push_back(new Modifier(mod));
 			break;
+		case MODIFIER_TYPE::SWAP_ZONE:
+			unitMods.push_back(new Modifier(mod));
+			break;
+		
 		}
 		
 	}
@@ -96,6 +100,20 @@ void Unit::AddModifier(Modifier* mod) {
 	}
 	unitMods.push_back(mod);
 	UpdateStats();
+}
+
+void Unit::RemoveUnitMod(Modifier* mod) {
+	unitMods.erase(remove(unitMods.begin(), unitMods.end(), mod), unitMods.end());
+}
+
+
+Modifier* Unit::GetStaminaMod() {
+	for (Modifier* mod : unitMods) {
+		if (mod->GetName() == "Stamina Reduced") {
+			return mod;
+		}
+	}
+	return NULL;
 }
 
 void Unit::SetPosition(Vector2f p) {

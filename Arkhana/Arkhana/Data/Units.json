@@ -72,6 +72,12 @@
       "stamina": 4,
       "filePath": "Textures/Units/generalFrog.png"
     },
+    "Banner Frog": {
+      "name": "Banner Frog",
+      "physPower": 0,
+      "stamina": 3,
+      "filePath": "Textures/Units/bannerFrog.png"
+    },
     "Doublin": {
       "name": "Doublin",
       "physPower": 7,

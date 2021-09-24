@@ -43,8 +43,16 @@ public:
 	void SetBarWindow(RenderTexture* w) {
 		playerBarWindow = w;
 	}
+	void AddMod(Modifier* mod) {
+		mods.push_back(mod);
+	}
+	void RemoveMod(Modifier* mod) {
+		mods.erase(remove(mods.begin(), mods.end(), mod), mods.end());
+	}
 	void RemoveFromDeck(Card* card);
 	void UpdateCosts();
+	void SwapUnits();
+	DataBase* GetDatabase() { return database; }
 protected:
 	void DiscardHand();
 	void DrawCards(int amount);

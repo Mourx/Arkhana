@@ -8,10 +8,10 @@ Enemy::Enemy(RenderTexture* w,DataBase* data){
 	attackZonePos = Vector2f(800, 0);
 	blockZonePos = Vector2f(200, 0);
 
-	attackZone = new UnitZone(0,this, Z_ENEMY,ZONE_TYPE::Z_ATTACK);
+	attackZone = new UnitZone(0,data->player,this, Z_ENEMY,ZONE_TYPE::Z_ATTACK);
 	attackZone->SetPosition(attackZonePos);
 
-	blockZone = new UnitZone(1,this, Z_ENEMY,ZONE_TYPE::Z_BLOCK);
+	blockZone = new UnitZone(1, data->player,this, Z_ENEMY,ZONE_TYPE::Z_BLOCK);
 	blockZone->SetPosition(blockZonePos);
 
 	zones.push_back(attackZone);

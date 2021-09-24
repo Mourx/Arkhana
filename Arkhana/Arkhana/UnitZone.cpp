@@ -1,7 +1,7 @@
 #include "UnitZone.h"
 #include "Player.h"
 
-UnitZone::UnitZone(int zoneType,Player* p, ZONE_OWNER zPlayer, ZONE_TYPE t) {
+UnitZone::UnitZone(int zoneType,Player* p,Player* e, ZONE_OWNER zPlayer, ZONE_TYPE t) {
 	if (zoneType == 0) {
 		texIcon.loadFromFile("Textures/GUI/attackZone.png");
 	}
@@ -9,8 +9,9 @@ UnitZone::UnitZone(int zoneType,Player* p, ZONE_OWNER zPlayer, ZONE_TYPE t) {
 		texIcon.loadFromFile("Textures/GUI/blockZone.png");
 	}
 	icon.setTexture(texIcon);
-
-	owner = p;
+	player = p;
+	enemy = e;
+	owner = zPlayer == ENEMY ? e : p;
 	ownerType = zPlayer;
 	type = t;
 }
@@ -39,12 +40,37 @@ void UnitZone::AddUnit(Unit* u, DataBase* database) {
 	int count = unitList.size();
 	vector<Modifier*> mods = u->GetModifiers();
 	
-	if(!u->IsBoss()) u->AddModifier((new Modifier(*database->modList["eot_stamina"])));
-	
-
+	if(!u->IsBoss() && u->GetStaminaMod()== NULL) u->AddModifier((new Modifier(*database->modList["eot_stamina"])));
 	unitList.push_back(u);
+	for (Modifier* mod : u->GetModifiers()) {
+		switch (mod->GetModType()) {
+		case MODIFIER_TYPE::PLAYER_MOD:
+		case MODIFIER_TYPE::PLAYER_EOT_MOD:
+			player->AddMod(mod);
+			break;
+		default:
+			break;
+		}
+	}
+	
+	
 	UpdatePositions();
 	UpdateStatMods();
+}
+
+void UnitZone::RemoveUnit(Unit* u) {
+	
+	for (Modifier* mod : u->GetModifiers()) {
+		switch (mod->GetModType()) {
+		case MODIFIER_TYPE::PLAYER_MOD:
+		case MODIFIER_TYPE::PLAYER_EOT_MOD:
+			player->RemoveMod(mod);
+			break;
+		default:
+			break;
+		}
+	}
+	unitList.erase(remove(unitList.begin(),unitList.end(),u),unitList.end());
 }
 
 void UnitZone::UpdateStatMods() {
@@ -83,10 +109,6 @@ void UnitZone::EndTurnUpkeep(DataBase* database) {
 		for (Modifier* mod : u->GetModifiers()) {
 			if (mod->GetModType() == MODIFIER_TYPE::UNIT_EOT_MOD) {
 				u->AddModifier(mod->GetModifier());
-			}else if (mod->GetModType() == MODIFIER_TYPE::PLAYER_EOT_MOD) {
-				if (mod->GetStat() == STAT_TYPE::ARMOUR_PHYSICAL) {
-					owner->ModifyArmour(1);
-				}
 			}
 			mod->ApplyEOT();
 		}
@@ -119,7 +141,7 @@ void UnitZone::CheckStamina() {
 
 	for (int i = 0; i < unitList.size();i++) {
 		if (unitList[i]->GetStamina() <= 0) {
-			unitList.erase(unitList.begin() + i);
+			RemoveUnit(unitList[i]);
 			i--;
 		}
 	}

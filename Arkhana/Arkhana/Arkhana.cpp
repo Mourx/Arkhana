@@ -26,10 +26,12 @@ int main() {
 	screenRender->clear();
 	Player* player = new Player(screenRender, database);
 	player->SetBarWindow(windowRender);
+	database->player = player;
 	//TAKE THIS OUT
 	player->SetFaction();
 	//TAKE THIS OUT
 	Enemy* enemy = new Enemy();
+	database->enemy = enemy;
 	MainMenuScreen* mainMenu = new MainMenuScreen(screenRender,player);
 	PathScreen* pathScreen = new PathScreen(screenRender, database, player);
 	Screen* currentScreen = new Screen();

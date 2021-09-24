@@ -152,6 +152,18 @@
       "level": 0,
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
+    "Banner Frog": {
+      "name": "Banner Frog",
+      "cost": 1,
+      "cardType": "CREATE_UNIT",
+      "unit": "Banner Frog",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "AI_ATTACK",
+      "modifiers": [ "banner_frog_modifier" ],
+      "level": 0,
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
     "Frog Friends": {
       "name": "Frog Friends",
       "cost": 1,

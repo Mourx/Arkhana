@@ -118,24 +118,34 @@
       "mText": "Effects cards cost VALUE\nless to play."
     },
     "jog_frog_modifier": {
-      "name": "Guard Frog Modifier",
+      "name": "Jog Frog Modifier",
       "value": 0,
       "multiplier": 0,
       "sType": "ARMOUR_PHYSICAL",
-      "mType": "PLAYER_EOT_MOD",
+      "mType": "SWAP_ZONE",
       "EOTChange": 1,
-      "text": "Gain EOTCHANGE Armour each turn.",
-      "mText": "Gain EOTCHANGE Armour each turn."
+      "text": "Moves to the other zone\nat the end of each turn.",
+      "mText": "Moves to the other zone\nat the end of each turn."
     },
     "general_frog_modifier": {
       "name": "Guard Frog Modifier",
-      "value": 0,
+      "value": 1,
       "multiplier": 0,
-      "sType": "ARMOUR_PHYSICAL",
-      "mType": "PLAYER_EOT_MOD",
+      "sType": "DMG_PHYSICAL",
+      "mType": "ZONE_MOD_ATTACK",
       "EOTChange": 1,
-      "text": "Gain EOTCHANGE Armour each turn.",
-      "mText": "Gain EOTCHANGE Armour each turn."
+      "text": "Units in the Attack Zone\ngain VALUE attack.",
+      "mText": "Units in the Attack Zone\ngain VALUE attack."
+    },
+    "banner_frog_modifier": {
+      "name": "Banner Frog Modifier",
+      "value": -1,
+      "multiplier": 0,
+      "sType": "UNIT_COST",
+      "mType": "PLAYER_MOD",
+      "EOTChange": 0,
+      "text": "Unit cards cost VALUE\nless to play.",
+      "mText": "Unit cards cost VALUE\nless to play."
     },
     "ogre_buff": {
       "name": "Ogre Buff",

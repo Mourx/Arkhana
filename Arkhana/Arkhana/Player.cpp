@@ -14,10 +14,10 @@ Player::Player(RenderTexture* w, DataBase* data) {
 	armour = 10;
 	health = maxHealth;
 
-	attackZone = new UnitZone(0,this,Z_PLAYER,ZONE_TYPE::Z_ATTACK);
+	attackZone = new UnitZone(0,this,data->enemy,Z_PLAYER,ZONE_TYPE::Z_ATTACK);
 	attackZone->SetPosition(attackZonePos);
 
-	blockZone = new UnitZone(1,this,Z_PLAYER,ZONE_TYPE::Z_BLOCK);
+	blockZone = new UnitZone(1,this,data->enemy,Z_PLAYER,ZONE_TYPE::Z_BLOCK);
 	blockZone->SetPosition(blockZonePos);
 
 	zones.push_back(attackZone);
@@ -134,14 +134,14 @@ void Player::SetFaction() {
 	decklist.clear();
 	cardList = database->CardListRedUnlocked;
 
-	decklist.push_back(new Card(*cardList["Mystic Frog"], database));
+	decklist.push_back(new Card(*cardList["Banner Frog"], database));
 	decklist.push_back(new Card(*cardList["Frog"], database));
 	decklist.push_back(new Card(*cardList["Frog Shrine"], database));
 	decklist.push_back(new Card(*cardList["Tongue Whip"], database));
 	decklist.push_back(new Card(*cardList["Shield Frog"], database));
 	decklist.push_back(new Card(*cardList["Frog Shrine"], database));
 	decklist.push_back(new Card(*cardList["Frog Armour"], database));
-	decklist.push_back(new Card(*cardList["Mystic Frog"], database));
+	decklist.push_back(new Card(*cardList["Banner Frog"], database));
 
 	UpdateStrings();
 }
@@ -211,9 +211,16 @@ void Player::NewTurnUpkeep() {
 }
 
 void Player::EndTurnUpkeep() {
-
+	for(Modifier* mod : mods){
+		if (mod->GetModType() == MODIFIER_TYPE::PLAYER_EOT_MOD) {
+			if (mod->GetStat() == STAT_TYPE::ARMOUR_PHYSICAL) {
+				ModifyArmour(mod->GetEOT());
+			}
+		}
+	}
 	attackZone->EndTurnUpkeep(database);
 	blockZone->EndTurnUpkeep(database);
+	SwapUnits();
 	DiscardHand();
 	
 }
@@ -249,9 +256,54 @@ void Player::UseCard(Card* c) {
 	SetCardPositions();
 }
 
+void Player::SwapUnits() {
+	vector<tuple<ZONE_TYPE,Unit*>> swappers;
+	for (Unit* u : attackZone->GetUnits()) {
+		for (Modifier* mod : u->GetModifiers()) {
+			if (mod->GetModType() == MODIFIER_TYPE::SWAP_ZONE) {
+				swappers.push_back(make_tuple(ZONE_TYPE::Z_ATTACK,u));
+			}
+		}
+	}
+	for (Unit* u : blockZone->GetUnits()) {
+		for (Modifier* mod : u->GetModifiers()) {
+			if (mod->GetModType() == MODIFIER_TYPE::SWAP_ZONE) {
+				swappers.push_back(make_tuple(ZONE_TYPE::Z_BLOCK, u));
+			}
+		}
+	}
+	for (tuple<ZONE_TYPE,Unit*> tuple : swappers) {
+		ZONE_TYPE start = get<0>(tuple);
+		Unit* u = get<1>(tuple);
+		if (start == ZONE_TYPE::Z_ATTACK) {
+			attackZone->RemoveUnit(u);
+			blockZone->AddUnit(u,database);
+		}
+		else {
+			blockZone->RemoveUnit(u);
+			attackZone->AddUnit(u, database);
+		}
+	}
+}
+
 void Player::UpdateCosts() {
-	effectCostChange = attackZone->GetEffectCostChange() + blockZone->GetEffectCostChange();
-	unitCostChange = blockZone->GetUnitCostChange() + blockZone->GetUnitCostChange();
+	effectCostChange = 0;
+	unitCostChange = 0;
+	for (Modifier* mod : mods) {
+		if (mod->GetModType() == MODIFIER_TYPE::PLAYER_MOD) {
+			switch (mod->GetStat()) {
+			case STAT_TYPE::EFFECT_COST:
+				effectCostChange += mod->GetValue();
+				break;
+			case STAT_TYPE::UNIT_COST:
+				unitCostChange += mod->GetValue();
+				break;
+			default:
+				break;
+			}
+		}
+	}
+		
 	for (Card* c : hand) {
 		if (c->GetType() == CARD_TYPE::CREATE_UNIT) {
 			c->SetCostChange(unitCostChange);

@@ -12,6 +12,7 @@
 #include <SFML/Audio.hpp>
 
 class Modifier;
+class Player;
 using namespace rapidjson;
 using namespace std;
 using namespace sf;
@@ -98,6 +99,8 @@ public:
 		else if (data == "AURA_EOT_MOD") return MODIFIER_TYPE::AURA_EOT_MOD;
 		else if (data == "PLAYER_EOT_MOD") return MODIFIER_TYPE::PLAYER_EOT_MOD;
 		else if (data == "PLAYER_MOD") return MODIFIER_TYPE::PLAYER_MOD;
+		else if (data == "SWAP_ZONE") return MODIFIER_TYPE::SWAP_ZONE;
+		else if (data == "ZONE_MOD_ATTACK") return MODIFIER_TYPE::ZONE_MOD_ATTACK;
 		else return MODIFIER_TYPE::ZONE_MOD;
 	}
 
@@ -164,8 +167,8 @@ public:
 	void BuildEncounterLists();
 	void BuildEffectLists();
 	void Init();
-
-
+	Player* player;
+	Player* enemy;
 
 	Sound sound;
 	SoundBuffer rollover;

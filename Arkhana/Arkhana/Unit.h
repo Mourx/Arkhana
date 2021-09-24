@@ -37,6 +37,8 @@ public:
     }
     bool IsBoss() { return bBoss; }
     bool IsUndercover();
+    void RemoveUnitMod(Modifier* mod);
+    Modifier* GetStaminaMod();
 protected:
     void ModifyStat(STAT_TYPE stat, int value, int multiplier);
     
