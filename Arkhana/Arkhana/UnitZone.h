@@ -33,12 +33,25 @@ public:
         return power;
     }
     ZONE_TYPE GetType() { return type; }
+    ZONE_TYPE GetOppositeType() { 
+        if (type == ZONE_TYPE::Z_ATTACK) {
+            return ZONE_TYPE::Z_BLOCK;
+        }
+        else {
+            return ZONE_TYPE::Z_ATTACK;
+        }
+    }
     Vector2f GetAnimationPoint() { return icon.getPosition() + animationPos; }
     void EndTurnUpkeep(DataBase* database);
     void NewTurnUpkeep(DataBase* database);
     int GetEffectCostChange();
     int GetUnitCostChange();
     void RemoveUnit(Unit* u);
+    void AddMod(Modifier* mod);
+    void RemoveMod(Modifier* mod);
+    void SetEnemy(Player* e) {
+        enemy = e;
+    }
 protected:
     void UpdateStatMods();
     void UpdatePositions() {

@@ -9,18 +9,18 @@ CombatScreen::CombatScreen(RenderTexture* w,DataBase* data,Player* p,Encounter* 
 	player->Setup();
 	type = COMBAT_SCREEN;
 	enemy = encounter->GetEnemy();
-
-
+	database->enemy = enemy;
+	player->SetEnemy(enemy);
 	AI = new AIController(enemy, player);
 
 	for (Card* c : enemy->GetStartingPlay()) {
 		c->SetTarget(AI->GetTarget(c));
 		switch (c->GetType()) {
 		case CREATE_UNIT:
-			c->Play();
+			c->Play(hoverUnit);
 			break;
 		case APPLY_ZONE_MOD:
-			c->Play();
+			c->Play(hoverUnit);
 			break;
 		}
 	}
@@ -70,11 +70,11 @@ void CombatScreen::MouseReleased(Vector2f mousePos) {
 			if (selectedZone != NULL) {
 				if (selCard->GetZoneType() == ZONE_TYPE::Z_ANY || (selCard->GetZoneType() == selectedZone->GetType())) {
 					if (selCard->GetZoneOwner() == Z_EITHER || selectedZone->GetOwnerType() == selCard->GetZoneOwner()) {
-						if (player->GetCurrentMana() < selCard->GetCost()) {
+						if (player->GetCurrentMana() < selCard->GetCost() || (selCard->GetType() == TARGET_UNIT && hoverUnit == NULL)) {
 							selCard->SetPosition(player->selectedCard->GetHandPos());
 						}
 						else {
-							selCard->Play(selectedZone);
+							selCard->Play(selectedZone,hoverUnit);
 							player->UseCard(selCard);
 
 						}
@@ -166,6 +166,7 @@ void CombatScreen::MouseMoved(Vector2f mousePos) {
 
 void CombatScreen::Update(Time t) {
 	
+
 	if (currentTurn == ENEMY) {
 		
 		if (enemy->HasAttacked() == false) {
@@ -173,7 +174,7 @@ void CombatScreen::Update(Time t) {
 				Card* eCard = enemy->GetNext();
 				if (eCard->IsAtTarget()) {
 					// Maybe implement an AI controller? thinking how to emulate a player
-					eCard->Play();
+					eCard->Play(hoverUnit);
 					eCard->SetPosition(Vector2f(-200, -200));
 					enemy->PlayNext();
 				}
@@ -203,7 +204,7 @@ void CombatScreen::Update(Time t) {
 
 	player->Update(t);
 	enemy->Update(t);
-
+	CheckDeaths();
 }
 
 void CombatScreen::SetNextEnemyMove() {

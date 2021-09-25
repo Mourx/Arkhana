@@ -23,8 +23,8 @@ public:
         }
         return total; 
     }
-    virtual void Play();
-    virtual void Play(UnitZone* zone);
+    virtual void Play(Unit* targUnit);
+    virtual void Play(UnitZone* zone,Unit* targUnit);
     void SetPosition(Vector2f pos);
     void Draw(RenderTexture* w);
     void DrawCost(RenderTexture* w);
@@ -63,7 +63,7 @@ public:
     bool IsUndercover() { return bUndercover; }
     void SetCostChange(int change);
 protected:
-    void DoEffect();
+    void DoEffect(Unit* targUnit);
     virtual void ApplyModifier(UnitZone*);
     virtual void ApplyModifier(Unit*);
     void UpdatePositions();

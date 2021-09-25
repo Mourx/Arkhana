@@ -99,9 +99,8 @@ void Card::UpdateStrings() {
 
 }
 
-void Card::Play() {
+void Card::Play(Unit* targUnit) {
 	Unit* u;
-	Unit* targUnit;
 	switch (type) {
 	case CREATE_UNIT:
 		u = new Unit(*database->UnitList[unit], modifiers,this);
@@ -128,15 +127,15 @@ void Card::Play() {
 		if(targUnit != NULL) ApplyModifier(targUnit);
 		break;
 	}
-	if(effect != NULL) DoEffect();
+	if(effect != NULL) DoEffect(targUnit);
 	bHasTargetZone = false;
 	targetZone->CheckStamina();
 	targetZone = NULL;
 }
 
-void Card::Play(UnitZone* zone) {
+void Card::Play(UnitZone* zone,Unit* targUnit) {
 	targetZone = zone;
-	Play();
+	Play(targUnit);
 }
 
 
@@ -149,7 +148,6 @@ void Card::ApplyModifier(Unit* u) {
 void Card::ApplyModifier(UnitZone* zone) {
 	for (Modifier* modifier : modifiers) {
 		zone->ModifyUnits(modifier);
-
 	}
 }
 
@@ -159,11 +157,39 @@ void Card::UpdatePositions() {
 	
 }
 
-void Card::DoEffect() {
+void Card::DoEffect(Unit* targUnit) {
+	Player* p;
+	int count;
+	Unit* enemy;
 	switch (effect->effect) {
 	case EFFECT_TYPE::ARMOUR_MOD:
-		Player* p = targetZone->GetOwner();
+		p = targetZone->GetOwner();
 		p->ModifyArmour(effect->value);
+		break;
+	case EFFECT_TYPE::FROG_FRIENDS:
+		count = 0;
+		for (Unit* u : targetZone->GetUnits()) {
+			if (u == targUnit) {
+				break;
+			}
+			count++;
+		}
+		targetZone->RemoveUnit(targUnit);
+		
+		enemy = NULL;
+		while (enemy == NULL && count >= 0) {
+			if (database->enemy->GetZones()[(int)targetZone->GetOppositeType()]->GetUnits().size() > count) {
+				enemy = database->enemy->GetZones()[(int)targetZone->GetOppositeType()]->GetUnits()[count];
+				break;
+			}
+			count--;
+		}	
+		if(enemy != NULL) database->enemy->GetZones()[(int)targetZone->GetOppositeType()]->RemoveUnit(enemy);
+		break;
+	case EFFECT_TYPE::POWER_RIBBIT:
+		targUnit->AddModifier(modifiers[0]);
+		database->enemy->DamagePhys(targUnit->GetPPower());
+		break;
 	}
 }
 

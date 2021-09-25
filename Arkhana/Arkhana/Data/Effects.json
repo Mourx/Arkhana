@@ -4,8 +4,8 @@
       "name": "Frog Armour",
       "type": "ARMOUR_MOD",
       "value": 5,
-      "text": "Increases Armour by VALUE",
-      "filePath": "Textures/Units/gnome.png"
+      "text": "Increases Armour by VALUE"
+
     },
     "Big Armour": {
       "name": "Big Armour",
@@ -13,6 +13,19 @@
       "value": 10,
       "text": "Increases Armour by VALUE",
       "filePath": "Textures/Units/gnome.png"
+    },
+    "Frog Friends": {
+      "name": "Frog Friends",
+      "type": "FROG_FRIENDS",
+      "value": 0,
+      "text": "Exhaust target ally and\nits closest opposing unit."
+
+    },
+    "Power Ribbit": {
+      "name": "Power Ribbit",
+      "type": "POWER_RIBBIT",
+      "value": -1,
+      "text": "Deal damage to enemy equal\nto target ally's attack.\nThat unit loses VALUE stamina."
     }
   }
 }

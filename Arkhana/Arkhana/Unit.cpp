@@ -35,7 +35,9 @@ Unit::Unit(UnitData data,vector<Modifier*> mods,Card* c) {
 		case MODIFIER_TYPE::SWAP_ZONE:
 			unitMods.push_back(new Modifier(mod));
 			break;
-		
+		case MODIFIER_TYPE::ZONE_MOD_ATTACK:
+			unitMods.push_back(new Modifier(mod));
+			break;
 		}
 		
 	}
@@ -84,7 +86,15 @@ void Unit::UpdateStats() {
 	physicalPower = basePhys;
 	stamina = baseStamina;
 	for (Modifier* mod : unitMods) {
-		ModifyStat(mod->GetStat(), mod->GetValue(), mod->GetMultiplier());
+		switch (mod->GetModType()) {
+		case MODIFIER_TYPE::ZONE_MOD:
+		case MODIFIER_TYPE::ZONE_MOD_ATTACK:
+			break;
+		default:
+			ModifyStat(mod->GetStat(), mod->GetValue(), mod->GetMultiplier());
+			break;
+		}
+		
 	}
 	physicalPower += zoneBonusPhys;
 	physicalPower += zoneMultiplierPhys;

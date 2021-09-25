@@ -134,14 +134,14 @@ void Player::SetFaction() {
 	decklist.clear();
 	cardList = database->CardListRedUnlocked;
 
-	decklist.push_back(new Card(*cardList["Banner Frog"], database));
+	decklist.push_back(new Card(*cardList["Big Frog"], database));
 	decklist.push_back(new Card(*cardList["Frog"], database));
 	decklist.push_back(new Card(*cardList["Frog Shrine"], database));
 	decklist.push_back(new Card(*cardList["Tongue Whip"], database));
 	decklist.push_back(new Card(*cardList["Shield Frog"], database));
 	decklist.push_back(new Card(*cardList["Frog Shrine"], database));
 	decklist.push_back(new Card(*cardList["Frog Armour"], database));
-	decklist.push_back(new Card(*cardList["Banner Frog"], database));
+	decklist.push_back(new Card(*cardList["Power Ribbit"], database));
 
 	UpdateStrings();
 }
@@ -399,4 +399,9 @@ void Player::AnimateAttack() {
 		attackTimer = 0;
 	}
 	bHasAttacked = true;
+}
+
+void Player::SetEnemy(Player* e) {
+	zones[0]->SetEnemy(e);
+	zones[1]->SetEnemy(e);
 }

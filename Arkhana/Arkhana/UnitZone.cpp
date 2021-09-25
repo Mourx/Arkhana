@@ -36,6 +36,14 @@ int UnitZone::GetCombinedPhysicalPower() {
 }
 
 
+void UnitZone::AddMod(Modifier* mod) {
+	zoneMods.push_back(mod);
+}
+
+void UnitZone::RemoveMod(Modifier* mod) {
+	zoneMods.erase(remove(zoneMods.begin(), zoneMods.end(), mod), zoneMods.end());
+}
+
 void UnitZone::AddUnit(Unit* u, DataBase* database) {
 	int count = unitList.size();
 	vector<Modifier*> mods = u->GetModifiers();
@@ -48,14 +56,21 @@ void UnitZone::AddUnit(Unit* u, DataBase* database) {
 		case MODIFIER_TYPE::PLAYER_EOT_MOD:
 			player->AddMod(mod);
 			break;
+		case MODIFIER_TYPE::ZONE_MOD_ATTACK:
+			owner->GetZones()[0]->AddMod(mod);
+			break;
 		default:
 			break;
 		}
 	}
-	
-	
-	UpdatePositions();
-	UpdateStatMods();
+	player->GetZones()[(int)ZONE_TYPE::Z_ATTACK]->UpdatePositions();
+	player->GetZones()[(int)ZONE_TYPE::Z_ATTACK]->UpdateStatMods();
+	player->GetZones()[(int)ZONE_TYPE::Z_BLOCK]->UpdatePositions();
+	player->GetZones()[(int)ZONE_TYPE::Z_BLOCK]->UpdateStatMods();
+	enemy->GetZones()[0]->UpdatePositions();
+	enemy->GetZones()[0]->UpdateStatMods();
+	enemy->GetZones()[1]->UpdatePositions();
+	enemy->GetZones()[1]->UpdateStatMods();
 }
 
 void UnitZone::RemoveUnit(Unit* u) {
@@ -66,11 +81,23 @@ void UnitZone::RemoveUnit(Unit* u) {
 		case MODIFIER_TYPE::PLAYER_EOT_MOD:
 			player->RemoveMod(mod);
 			break;
+		case MODIFIER_TYPE::ZONE_MOD_ATTACK:
+			owner->GetZones()[0]->RemoveMod(mod);
+			break;
 		default:
 			break;
 		}
 	}
 	unitList.erase(remove(unitList.begin(),unitList.end(),u),unitList.end());
+
+	player->GetZones()[(int)ZONE_TYPE::Z_ATTACK]->UpdatePositions();
+	player->GetZones()[(int)ZONE_TYPE::Z_ATTACK]->UpdateStatMods();
+	player->GetZones()[(int)ZONE_TYPE::Z_BLOCK]->UpdatePositions();
+	player->GetZones()[(int)ZONE_TYPE::Z_BLOCK]->UpdateStatMods();
+	enemy->GetZones()[0]->UpdatePositions();
+	enemy->GetZones()[0]->UpdateStatMods();
+	enemy->GetZones()[1]->UpdatePositions();
+	enemy->GetZones()[1]->UpdateStatMods();
 }
 
 void UnitZone::UpdateStatMods() {
@@ -94,7 +121,20 @@ void UnitZone::UpdateStatMods() {
 				break;
 			}
 		}
-		
+		for (Modifier* mod : zoneMods) {
+			zMods.push_back(mod);
+			switch (mod->GetStat()) {
+			case STAT_TYPE::DMG_PHYSICAL:
+				zoneBonusPhys += mod->GetValue();
+				zoneMultiplierPhys += mod->GetMultiplier();
+				break;
+			case STAT_TYPE::STAMINA:
+
+				break;
+			default:
+				break;
+			}
+		}
 	}
 	for (Unit* u : unitList) {
 		u->SetZoneBonuses(zoneBonusPhys, zoneMultiplierPhys,zMods);

@@ -31,7 +31,8 @@
       "zOTag": "Z_PLAYER",
       "AITag": "AI_BLOCK",
       "level": 0,
-      "shaderPath": "Textures/Shaders/Empress.vert"
+      "shaderPath": "Textures/Shaders/Empress.vert",
+      "filePath": "Textures/Effects/frogArmour.png"
     },
     "Two Frogs": {
       "name": "Two Frogs",
@@ -146,7 +147,7 @@
       "cardType": "CREATE_UNIT",
       "unit": "General Frog",
       "zOTag": "Z_PLAYER",
-      "zTag": "",
+      "zTag": "DEFENSIVE",
       "AITag": "AI_ATTACK",
       "modifiers": [ "general_frog_modifier" ],
       "level": 0,
@@ -167,13 +168,29 @@
     "Frog Friends": {
       "name": "Frog Friends",
       "cost": 1,
-      "cardType": "TARGET_UNIT_ALLY",
+      "cardType": "TARGET_UNIT",
+      "effect": "Frog Friends",
       "unit": "",
       "zOTag": "Z_PLAYER",
-      "zTag": "AGGRESSIVE",
+      "zTag": "",
       "AITag": "AI_ATTACK",
       "level": 0,
-      "shaderPath": "Textures/Shaders/Empress.vert"
+      "shaderPath": "Textures/Shaders/Empress.vert",
+      "filePath": "Textures/Effects/frogFriends.png"
+    },
+    "Power Ribbit": {
+      "name": "Power Ribbit",
+      "cost": 1,
+      "cardType": "TARGET_UNIT",
+      "effect": "Power Ribbit",
+      "unit": "",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "AI_ATTACK",
+      "level": 0,
+      "modifiers": ["power_ribbit_modifier"],
+      "shaderPath": "Textures/Shaders/Empress.vert",
+      "filePath": "Textures/Effects/powerRibbit.png"
     }
 
   }

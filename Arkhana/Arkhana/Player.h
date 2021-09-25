@@ -53,6 +53,7 @@ public:
 	void UpdateCosts();
 	void SwapUnits();
 	DataBase* GetDatabase() { return database; }
+	void SetEnemy(Player* enemy);
 protected:
 	void DiscardHand();
 	void DrawCards(int amount);

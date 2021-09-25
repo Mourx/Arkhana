@@ -118,7 +118,7 @@ public:
 		if (data == "CREATE_UNIT") return CREATE_UNIT;
 		else if (data == "APPLY_ZONE_MOD") return APPLY_ZONE_MOD;
 		else if (data == "TARGET_STRONGEST") return TARGET_STRONGEST;
-		else if (data == "TARGET_UNIT_ALLY") return TARGET_UNIT_ALLY;
+		else if (data == "TARGET_UNIT") return TARGET_UNIT;
 		else if (data == "CREATE_UNIT_MULTIPLE") return CREATE_UNIT_MULTIPLE;
 		else if (data == "EFFECT") return EFFECT;
 		
@@ -149,6 +149,8 @@ public:
 
 	EFFECT_TYPE GetEffectEnum(string data) {
 		if (data == "AMOUR_MOD") return EFFECT_TYPE::ARMOUR_MOD;
+		if (data == "FROG_FRIENDS") return EFFECT_TYPE::FROG_FRIENDS;
+		if (data == "POWER_RIBBIT") return EFFECT_TYPE::POWER_RIBBIT;
 		else return EFFECT_TYPE::ARMOUR_MOD;
 	}
 

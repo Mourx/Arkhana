@@ -42,7 +42,7 @@
       "value": 2,
       "multiplier": 0,
       "sType": "DMG_PHYSICAL",
-      "mType": "ZONE_MOD",
+      "mType": "UNIT_MOD",
       "text": "Friendly units gain +VALUE\n\t power",
       "mText": "Rage: +VALUE power"
     },
@@ -72,7 +72,7 @@
       "sType": "DMG_PHYSICAL",
       "mType": "AURA_EOT_MOD",
       "EOTChange": 1,
-      "text": "Friendly units gains +EOTCHANGE power\n\t each turn",
+      "text": "Friendly units gain\n EOTCHANGE attack each turn",
       "mText": "Big Frog: +EOTCHANGE power each turn",
       "modifier": "big_frog_buff"
     },
@@ -84,7 +84,7 @@
       "mType": "UNIT_MOD",
       "EOTChange": 0,
       "text": "Zone units lose VALUE\n\tpower each turn",
-      "mText": "Spy Frog: VALUE power"
+      "mText": "Spy Frog: Lost VALUE power"
     },
     "spy_frog_modifier": {
       "name": "Big Frog Modifier",
@@ -94,7 +94,7 @@
       "mType": "AURA_EOT_MOD",
       "EOTChange": -1,
       "text": "Zone units lose EOTCHANGE power\n\t each turn",
-      "mText": "Spy Frog: EOTCHANGE power\n\t\t each turn",
+      "mText": "Spy Frog: Lose EOTCHANGE power\n\t\t each turn",
       "modifier": "spy_frog_buff"
     },
     "guard_frog_modifier": {
@@ -133,7 +133,7 @@
       "multiplier": 0,
       "sType": "DMG_PHYSICAL",
       "mType": "ZONE_MOD_ATTACK",
-      "EOTChange": 1,
+      "EOTChange": 0,
       "text": "Units in the Attack Zone\ngain VALUE attack.",
       "mText": "Units in the Attack Zone\ngain VALUE attack."
     },
@@ -146,6 +146,16 @@
       "EOTChange": 0,
       "text": "Unit cards cost VALUE\nless to play.",
       "mText": "Unit cards cost VALUE\nless to play."
+    },
+    "power_ribbit_modifier": {
+      "name": "Power Ribbit Modifier",
+      "value": -1,
+      "multiplier": 0,
+      "sType": "STAMINA",
+      "mType": "UNIT_MOD",
+      "EOTChange": 0,
+      "text": "Power Ribbit: Lost VALUE stamina.",
+      "mText": "Power Ribbit: Lost VALUE stamina."
     },
     "ogre_buff": {
       "name": "Ogre Buff",

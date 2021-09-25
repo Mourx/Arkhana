@@ -47,7 +47,7 @@
       "zTag": "",
       "zOTag": "Z_PLAYER",
       "AITag": "AI_MOST_UNITS_AI",
-	  "filePath": "Textures/Cards/rage.png",
+	    "filePath": "Textures/Cards/rage.png",
       "modifiers": [ "rage_modifier" ],
       "shaderPath": "Textures/Shaders/enemyGoblin.vert"
     },
