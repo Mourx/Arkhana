@@ -52,8 +52,6 @@ public:
     void SetEnemy(Player* e) {
         enemy = e;
     }
-protected:
-    void UpdateStatMods();
     void UpdatePositions() {
         int offset = 0;
         int dir = 1;
@@ -62,9 +60,12 @@ protected:
             dir = -1;
         }
         for (int i = 0; i < unitList.size(); i++) {
-            unitList[i]->SetPosition(this->GetIcon()->getPosition() + Vector2f(10 + (i % 10) * 90,10+((i / 10) * 125)*dir + offset));
+            unitList[i]->SetPosition(this->GetIcon()->getPosition() + Vector2f(10 + (i % 5) * 90, 10 + ((i / 5) * 125) * dir + offset));
         }
     }
+protected:
+    void UpdateStatMods();
+    
     float zoneBonusPhys = 0;
 
     float zoneMultiplierPhys = 0;

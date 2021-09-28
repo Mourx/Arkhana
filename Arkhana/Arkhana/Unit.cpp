@@ -64,7 +64,7 @@ Unit::Unit(UnitData data,vector<Modifier*> mods,Card* c) {
 	
 	physicalPower = basePhys;
 	stamina = baseStamina;
-
+	
 
 	UpdateStrings();
 }
@@ -80,6 +80,16 @@ void Unit::UpdateStrings() {
 	tR = txtMag.getLocalBounds();
 	txtMag.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
 	txtMag.setPosition(pos + txtMagPos);
+}
+
+void Unit::Update(Time t) {
+	GameObject::Update(t);
+	nudgeTimer += t.asSeconds();
+	if (nudgeTimer >= nudgeDelay) {
+		nudgeDir *= -1;
+		icon.setPosition(pos + (Vector2f(0, 3 * nudgeDir)));
+		nudgeTimer = 0;
+	}
 }
 
 void Unit::UpdateStats() {

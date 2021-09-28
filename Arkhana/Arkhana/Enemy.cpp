@@ -20,6 +20,7 @@ Enemy::Enemy(RenderTexture* w,DataBase* data){
 	physArmPos = Vector2f(1410, 345);
 	healthPos = Vector2f(1410, 15);
 	attackDirection = 1;
+	retreatDirection = -1;
 	
 	txtPhysArmPos = Vector2f(1490, 145);
 	txtHealthPos = Vector2f(1500, 15);
@@ -107,6 +108,7 @@ void Enemy::NewTurnUpkeep() {
 	attackZone->NewTurnUpkeep(database);
 	blockZone->NewTurnUpkeep(database);
 	bHasAttacked = false;
+	bHasRetreated = false;
 }
 
 void Enemy::EndTurnUpkeep() {
@@ -116,18 +118,43 @@ void Enemy::EndTurnUpkeep() {
 }
 
 void Enemy::Update(Time t) {
+	for (Unit* u : attackZone->GetUnits()) {
+		u->Update(t);
+	}
+	for (Unit* u : blockZone->GetUnits()) {
+		u->Update(t);
+	}
 	if (bAttacking) {
 		if (attackTimer < attackDuration) {
 			attackTimer += t.asSeconds();
 			for (Unit* u : attackZone->GetUnits()) {
-				float xdir = 0;
-				float ydir = 0.1 * attackDirection;
-				u->Move(Vector2f(xdir, ydir));
+				if (u->GetPPower() > 1) {
+					int flipdir = attackTimer <= attackDuration / 2 ? 1 : -1;
+					float xdir = 0;
+					float ydir = 0.2 * attackDirection * flipdir;
+					u->Move(Vector2f(xdir, ydir));
+				}
 			}
 		}
 		else {
 			attackTimer = 0;
 			bAttacking = false;
+		}
+	}
+	else if (bRetreating) {
+		if (retreatTimer < retreatDuration) {
+			retreatTimer += t.asSeconds();
+			for (Unit* u : attackZone->GetUnits()) {
+				if (u->GetStamina() == 1) {
+					float xdir = 0;
+					float ydir = ((250 * retreatDirection) / retreatDuration) * t.asSeconds();
+					u->Move(Vector2f(xdir, ydir));
+				}
+			}
+		}
+		else {
+			retreatTimer = 0;
+			bRetreating = false;
 		}
 	}
 	else {

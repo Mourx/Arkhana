@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include "Modifier.h"
 #include "enums.h"
-
+#include <time.h>
 #include <vector>
 using namespace std;
 
@@ -18,6 +18,7 @@ public:
     float GetStamina() { return stamina; }
     void SetPosition(Vector2f pos);
     void Draw(RenderTexture* w);
+    void Update(Time t);
     void UpdateStats();
     void AddModifier(Modifier* mod);
     void SetZoneBonuses(float phys, float physM, vector<Modifier*> zMods) {
@@ -44,11 +45,15 @@ protected:
     
     float physicalPower = 0;
     float stamina = 0;
-
+    
     float zoneBonusPhys = 0;
     float zoneBonusMag = 0;
     float zoneMultiplierPhys = 0;
     float zoneMultiplierMag = 0;
+
+    float nudgeTimer = rand() % 32 / 200.f;
+    float nudgeDelay = 0.25;
+    int nudgeDir = 1;
 
     Card* card;
     float basePhys = 0;

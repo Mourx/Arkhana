@@ -134,31 +134,56 @@ void Player::SetFaction() {
 	decklist.clear();
 	cardList = database->CardListRedUnlocked;
 
-	decklist.push_back(new Card(*cardList["Big Frog"], database));
+	decklist.push_back(new Card(*cardList["Banner Frog"], database));
 	decklist.push_back(new Card(*cardList["Frog"], database));
 	decklist.push_back(new Card(*cardList["Frog Shrine"], database));
 	decklist.push_back(new Card(*cardList["Tongue Whip"], database));
 	decklist.push_back(new Card(*cardList["Shield Frog"], database));
 	decklist.push_back(new Card(*cardList["Frog Shrine"], database));
 	decklist.push_back(new Card(*cardList["Frog Armour"], database));
-	decklist.push_back(new Card(*cardList["Power Ribbit"], database));
+	decklist.push_back(new Card(*cardList["Banner Frog"], database));
 
 	UpdateStrings();
 }
 
 void Player::Update(Time t) {
+	for (Unit* u : attackZone->GetUnits()) {
+		u->Update(t);
+	}
+	for (Unit* u : blockZone->GetUnits()) {
+		u->Update(t);
+	}
 	if (bAttacking) {
 		if (attackTimer < attackDuration) {
 			attackTimer += t.asSeconds();
 			for (Unit* u : attackZone->GetUnits()) {
-				float xdir = 0;
-				float ydir = ((250*attackDirection) / attackDuration) * t.asSeconds();
-				u->Move(Vector2f(xdir, ydir));
+				if (u->GetPPower() > 1) {
+					int flipdir = attackTimer <= attackDuration / 2 ? 1 : -1;
+					float xdir = 0;
+					float ydir = 0.2 * attackDirection * flipdir;
+					u->Move(Vector2f(xdir, ydir));
+				}
 			}
 		}
 		else {
 			attackTimer = 0;
 			bAttacking = false;
+		}
+	}
+	else if (bRetreating) {
+		if (retreatTimer < retreatDuration) {
+			retreatTimer += t.asSeconds();
+			for (Unit* u : attackZone->GetUnits()) {
+				if (u->GetStamina() == 1) {
+					float xdir = 0;
+					float ydir = ((250 * retreatDirection) / retreatDuration) * t.asSeconds();
+					u->Move(Vector2f(xdir, ydir));
+				}
+			}
+		}
+		else {
+			retreatTimer = 0;
+			bRetreating = false;
 		}
 	}
 	else {
@@ -204,6 +229,7 @@ void Player::NewTurnUpkeep() {
 	DrawCards(CARDS_PER_TURN);
 	ResetMana();
 	bHasAttacked = false;
+	bHasRetreated = false;
 	UpdateCosts();
 	attackZone->NewTurnUpkeep(database);
 	blockZone->NewTurnUpkeep(database);
@@ -399,6 +425,25 @@ void Player::AnimateAttack() {
 		attackTimer = 0;
 	}
 	bHasAttacked = true;
+}
+
+void Player::AnimateRetreat() {
+	bool bRetreatNeeded = false;
+	for (Unit* u : attackZone->GetUnits()) {
+		if (u->GetStamina() == 1) {
+			bRetreatNeeded = true;
+		}
+	}
+	for (Unit* u : blockZone->GetUnits()) {
+		if (u->GetStamina() == 1) {
+			bRetreatNeeded = true;
+		}
+	}
+	if (bRetreatNeeded) {
+		bRetreating = true;
+		retreatTimer = 0;
+	}
+	bHasRetreated = true;
 }
 
 void Player::SetEnemy(Player* e) {

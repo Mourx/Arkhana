@@ -31,8 +31,11 @@ public:
 	void DamagePhys(int damage);
 	void ResetMana() { currentMana = maxMana; }
 	void AnimateAttack();
+	void AnimateRetreat();
 	bool GetAttacking() { return bAttacking; }
+	bool GetRetreating() { return bRetreating; }
 	bool HasAttacked() { return bHasAttacked; }
+	bool HasRetreated() { return bHasRetreated; }
 	vector<Card*> GetDeckList() { return decklist; }
 	void ModifyArmour(int val) { armour += val; }
 	map<string, CardData*> GetCardLists() { return cardList; }
@@ -149,11 +152,18 @@ protected:
 	Texture texHealth;
 	Vector2f healthPos = Vector2f(200, 50);
 
-	float attackDuration = 1;
+	float attackDuration = 2;
 	float attackTimer = 0;
 	float attackDirection = -1;
 	bool bAttacking = false;
 	bool bHasAttacked = false;
+
+	bool bRetreating = false;
+	bool bHasRetreated = false;
+	float retreatDuration = 1;
+	float retreatTimer = 0;
+	float retreatDirection = 1;
+
 
 	float playDuration = 2;
 	float playTimer = 0;

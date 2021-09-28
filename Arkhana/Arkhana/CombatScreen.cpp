@@ -187,7 +187,10 @@ void CombatScreen::Update(Time t) {
 			}
 		}
 		else {
-			if (enemy->GetAttacking() == false) {
+			if (enemy->GetAttacking() == false && !enemy->HasRetreated()) {
+				enemy->GetZones()[(int)ZONE_TYPE::Z_ATTACK]->UpdatePositions();
+				enemy->AnimateRetreat();
+			}else if (enemy->HasRetreated() && enemy->GetRetreating() == false) {
 				AdvanceTurn(PLAYER);
 			}
 		}
@@ -196,7 +199,10 @@ void CombatScreen::Update(Time t) {
 		if (player->HasAttacked() == false) {
 		}
 		else {
-			if (player->GetAttacking() == false) {
+			if (player->GetAttacking() == false && !player->HasRetreated()) {
+				player->GetZones()[(int)ZONE_TYPE::Z_ATTACK]->UpdatePositions();
+				player->AnimateRetreat();
+			}else if (player->HasRetreated() && player->GetRetreating() == false) {
 				AdvanceTurn(ENEMY);
 			}
 		}
@@ -204,7 +210,9 @@ void CombatScreen::Update(Time t) {
 
 	player->Update(t);
 	enemy->Update(t);
-	CheckDeaths();
+	if (!player->GetRetreating()) {
+		CheckDeaths();
+	}
 }
 
 void CombatScreen::SetNextEnemyMove() {
