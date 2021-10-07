@@ -21,7 +21,7 @@ public:
     void Update(Time t);
     void UpdateStats();
     void AddModifier(Modifier* mod);
-    void SetZoneBonuses(float phys, float physM, vector<Modifier*> zMods) {
+    void SetZoneBonusesPhys(float phys, float physM, vector<Modifier*> zMods) {
         zoneBonusPhys = phys;
         zoneMultiplierPhys = physM;
         zoneMods = zMods;
@@ -40,6 +40,17 @@ public:
     bool IsUndercover();
     void RemoveUnitMod(Modifier* mod);
     Modifier* GetStaminaMod();
+    void Retreat() {
+        bRetreating = true;
+    }
+    void Attack() {
+        bAttacking = true;
+    }
+    bool GetRetreated() { return bHasRetreated; }
+    void SetDirections(int atk, int ret) {
+        retreatDirection = ret;
+        attackDirection = atk;
+    }
 protected:
     void ModifyStat(STAT_TYPE stat, int value, int multiplier);
     
@@ -62,6 +73,19 @@ protected:
 
     bool bBoss = false;
 
+
+    float attackDuration = 2;
+    float attackTimer = 0;
+    float attackDirection = -1;
+    bool bAttacking = false;
+    bool bHasAttacked = false;
+
+    bool bRetreating = false;
+    bool bHasRetreated = false;
+    float retreatDuration = 1;
+    float retreatTimer = 0;
+    float retreatDirection = 1;
+
     Sprite unitBackground;
     Texture texBackground;
 
@@ -79,5 +103,6 @@ protected:
     vector<Modifier*> unitMods;
     vector<Modifier*> zoneMods;
     vector<Modifier*> auraMods;
+
 };
 

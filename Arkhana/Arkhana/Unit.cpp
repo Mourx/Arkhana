@@ -38,6 +38,9 @@ Unit::Unit(UnitData data,vector<Modifier*> mods,Card* c) {
 		case MODIFIER_TYPE::ZONE_MOD_ATTACK:
 			unitMods.push_back(new Modifier(mod));
 			break;
+		case MODIFIER_TYPE::MUSIC_AURA:
+			auraMods.push_back(new Modifier(mod));
+			break;
 		}
 		
 	}
@@ -90,6 +93,33 @@ void Unit::Update(Time t) {
 		icon.setPosition(pos + (Vector2f(0, 3 * nudgeDir)));
 		nudgeTimer = 0;
 	}
+	if (bAttacking) {
+		if (attackTimer < attackDuration) {
+			attackTimer += t.asSeconds();
+			int flipdir = attackTimer <= attackDuration / 2 ? 1 : -1;
+			float xdir = 0;
+			float ydir = 0.2 * attackDirection * flipdir;
+			Move(Vector2f(xdir, ydir));
+		}
+		else {
+			attackTimer = 0;
+			bAttacking = false;
+		}
+	}
+	else if (bRetreating) {
+		if (retreatTimer < retreatDuration) {
+			retreatTimer += t.asSeconds();
+			float xdir = 0;
+			float ydir = ((250 * retreatDirection) / retreatDuration) * t.asSeconds();
+			Move(Vector2f(xdir, ydir));				
+		}
+		else {
+			retreatTimer = 0;
+			bRetreating = false;
+			bHasRetreated = true;
+		}
+	}
+
 }
 
 void Unit::UpdateStats() {

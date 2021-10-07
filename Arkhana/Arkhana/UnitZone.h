@@ -16,6 +16,7 @@ public:
     vector<Unit*> GetUnits() { return unitList; }
     void Draw(RenderTexture* w);
     void DrawUnits(RenderTexture* w);
+    void Update(Time t);
     int GetCombinedPhysicalPower();
     void AddUnit(Unit* u,DataBase* database);
     void ClearUnits() { unitList.clear(); }

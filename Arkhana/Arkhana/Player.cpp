@@ -134,56 +134,56 @@ void Player::SetFaction() {
 	decklist.clear();
 	cardList = database->CardListRedUnlocked;
 
-	decklist.push_back(new Card(*cardList["Banner Frog"], database));
-	decklist.push_back(new Card(*cardList["Frog"], database));
+	decklist.push_back(new Card(*cardList["Flute Frog"], database));
+	decklist.push_back(new Card(*cardList["Drum Frog"], database));
 	decklist.push_back(new Card(*cardList["Frog Shrine"], database));
 	decklist.push_back(new Card(*cardList["Tongue Whip"], database));
-	decklist.push_back(new Card(*cardList["Shield Frog"], database));
+	decklist.push_back(new Card(*cardList["Tuba Frog"], database));
 	decklist.push_back(new Card(*cardList["Frog Shrine"], database));
 	decklist.push_back(new Card(*cardList["Frog Armour"], database));
-	decklist.push_back(new Card(*cardList["Banner Frog"], database));
+	decklist.push_back(new Card(*cardList["Horn Frog"], database));
 
 	UpdateStrings();
 }
 
 void Player::Update(Time t) {
-	for (Unit* u : attackZone->GetUnits()) {
-		u->Update(t);
-	}
-	for (Unit* u : blockZone->GetUnits()) {
-		u->Update(t);
-	}
+	attackZone->Update(t);
+	blockZone->Update(t);
 	if (bAttacking) {
-		if (attackTimer < attackDuration) {
+		if (attackTimer == 0) {
 			attackTimer += t.asSeconds();
 			for (Unit* u : attackZone->GetUnits()) {
 				if (u->GetPPower() > 1) {
-					int flipdir = attackTimer <= attackDuration / 2 ? 1 : -1;
-					float xdir = 0;
-					float ydir = 0.2 * attackDirection * flipdir;
-					u->Move(Vector2f(xdir, ydir));
+					u->Attack();
 				}
 			}
 		}
 		else {
-			attackTimer = 0;
-			bAttacking = false;
+			attackTimer += t.asSeconds();
+			if (attackTimer >= attackDuration) {
+				bAttacking = false;
+			}
 		}
 	}
 	else if (bRetreating) {
-		if (retreatTimer < retreatDuration) {
+		if (retreatTimer == 0) {
 			retreatTimer += t.asSeconds();
 			for (Unit* u : attackZone->GetUnits()) {
 				if (u->GetStamina() == 1) {
-					float xdir = 0;
-					float ydir = ((250 * retreatDirection) / retreatDuration) * t.asSeconds();
-					u->Move(Vector2f(xdir, ydir));
+					u->Retreat();
+				}
+			}
+			for (Unit* u : blockZone->GetUnits()) {
+				if (u->GetStamina() == 1) {
+					u->Retreat();
 				}
 			}
 		}
 		else {
-			retreatTimer = 0;
-			bRetreating = false;
+			retreatTimer += t.asSeconds();
+			if (retreatTimer >= retreatDuration) {
+				bRetreating = false;
+			}
 		}
 	}
 	else {

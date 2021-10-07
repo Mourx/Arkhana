@@ -47,7 +47,9 @@ void UnitZone::RemoveMod(Modifier* mod) {
 void UnitZone::AddUnit(Unit* u, DataBase* database) {
 	int count = unitList.size();
 	vector<Modifier*> mods = u->GetModifiers();
-	
+	if (ownerType == ENEMY) {
+		u->SetDirections(1, -1);
+	}
 	if(!u->IsBoss() && u->GetStaminaMod()== NULL) u->AddModifier((new Modifier(*database->modList["eot_stamina"])));
 	unitList.push_back(u);
 	for (Modifier* mod : u->GetModifiers()) {
@@ -59,6 +61,7 @@ void UnitZone::AddUnit(Unit* u, DataBase* database) {
 		case MODIFIER_TYPE::ZONE_MOD_ATTACK:
 			owner->GetZones()[0]->AddMod(mod);
 			break;
+		
 		default:
 			break;
 		}
@@ -102,23 +105,30 @@ void UnitZone::RemoveUnit(Unit* u) {
 
 void UnitZone::UpdateStatMods() {
 	zoneBonusPhys = 0;
-
+	int musicBonusPhys = 0;
+	int musicMultiplierPhys = 0;
 	zoneMultiplierPhys = 0;
 	vector<Modifier*> zMods;
 	for (Unit* u : unitList) {
 		vector<Modifier*> auras = u->GetAuras();
 		for (Modifier* mod : auras) {
 			zMods.push_back(mod);
-			switch (mod->GetStat()) {
-			case STAT_TYPE::DMG_PHYSICAL:
-				zoneBonusPhys += mod->GetValue();
-				zoneMultiplierPhys += mod->GetMultiplier();
-				break;
-			case STAT_TYPE::STAMINA:
-				
-				break;
-			default:
-				break;
+			if (mod->GetModType() == MODIFIER_TYPE::MUSIC_AURA) {
+				musicBonusPhys += mod->GetValue();
+				musicMultiplierPhys += mod->GetMultiplier();
+			}
+			else {
+				switch (mod->GetStat()) {
+				case STAT_TYPE::DMG_PHYSICAL:
+					zoneBonusPhys += mod->GetValue();
+					zoneMultiplierPhys += mod->GetMultiplier();
+					break;
+				case STAT_TYPE::STAMINA:
+
+					break;
+				default:
+					break;
+				}
 			}
 		}
 		for (Modifier* mod : zoneMods) {
@@ -137,7 +147,17 @@ void UnitZone::UpdateStatMods() {
 		}
 	}
 	for (Unit* u : unitList) {
-		u->SetZoneBonuses(zoneBonusPhys, zoneMultiplierPhys,zMods);
+		bool bMusical = false;
+		
+		for (Modifier* mod : u->GetModifiers()) {
+			if (mod->GetName() == "Musical Modifier") {
+				u->SetZoneBonusesPhys(zoneBonusPhys+musicBonusPhys, zoneMultiplierPhys+musicMultiplierPhys, zMods);
+				bMusical = true;
+			}
+		}
+		if (bMusical == false) {
+			u->SetZoneBonusesPhys(zoneBonusPhys, zoneMultiplierPhys, zMods);
+		}
 	}
 }
 
@@ -164,6 +184,7 @@ void UnitZone::EndTurnUpkeep(DataBase* database) {
 		u->UpdateStats();
 	}
 	CheckStamina();
+	UpdatePositions();
 }
 
 
@@ -175,17 +196,23 @@ void UnitZone::NewTurnUpkeep(DataBase* database) {
 	}
 	
 	CheckStamina();
+	UpdatePositions();
 }
 
 void UnitZone::CheckStamina() {
 
 	for (int i = 0; i < unitList.size();i++) {
 		if (unitList[i]->GetStamina() <= 0) {
-			RemoveUnit(unitList[i]);
-			i--;
+			if (unitList[i]->GetRetreated()) {
+				RemoveUnit(unitList[i]);
+				i--;
+			}
+			else {
+				unitList[i]->Retreat();
+			}
 		}
 	}
-	UpdatePositions();
+	
 }
 
 void UnitZone::ModifyUnits(Modifier* mod) {
@@ -209,6 +236,13 @@ int UnitZone::GetEffectCostChange() {
 		}
 	}
 	return total;
+}
+
+void UnitZone::Update(Time t) {
+	for (Unit* u :GetUnits()) {
+		u->Update(t);
+	}
+	CheckStamina();
 }
 
 int UnitZone::GetUnitCostChange() {

@@ -26,6 +26,12 @@
       "type": "POWER_RIBBIT",
       "value": -1,
       "text": "Deal damage to enemy equal\nto target ally's attack.\nThat unit loses VALUE stamina."
+    },
+    "Log Frog": {
+      "name": "Log Frog",
+      "type": "LOG_FROG",
+      "value": 2,
+      "text": "Create VALUE Logs when played."
     }
   }
 }

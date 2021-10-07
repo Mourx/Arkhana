@@ -118,43 +118,43 @@ void Enemy::EndTurnUpkeep() {
 }
 
 void Enemy::Update(Time t) {
-	for (Unit* u : attackZone->GetUnits()) {
-		u->Update(t);
-	}
-	for (Unit* u : blockZone->GetUnits()) {
-		u->Update(t);
-	}
+	attackZone->Update(t);
+	blockZone->Update(t);
 	if (bAttacking) {
-		if (attackTimer < attackDuration) {
+		if (attackTimer == 0) {
 			attackTimer += t.asSeconds();
 			for (Unit* u : attackZone->GetUnits()) {
 				if (u->GetPPower() > 1) {
-					int flipdir = attackTimer <= attackDuration / 2 ? 1 : -1;
-					float xdir = 0;
-					float ydir = 0.2 * attackDirection * flipdir;
-					u->Move(Vector2f(xdir, ydir));
+					u->Attack();
 				}
 			}
 		}
 		else {
-			attackTimer = 0;
-			bAttacking = false;
+			attackTimer += t.asSeconds();
+			if (attackTimer >= attackDuration) {
+				bAttacking = false;
+			}
 		}
 	}
 	else if (bRetreating) {
-		if (retreatTimer < retreatDuration) {
+		if (retreatTimer == 0) {
 			retreatTimer += t.asSeconds();
 			for (Unit* u : attackZone->GetUnits()) {
 				if (u->GetStamina() == 1) {
-					float xdir = 0;
-					float ydir = ((250 * retreatDirection) / retreatDuration) * t.asSeconds();
-					u->Move(Vector2f(xdir, ydir));
+					u->Retreat();
+				}
+			}
+			for (Unit* u : blockZone->GetUnits()) {
+				if (u->GetStamina() == 1) {
+					u->Retreat();
 				}
 			}
 		}
 		else {
-			retreatTimer = 0;
-			bRetreating = false;
+			retreatTimer += t.asSeconds();
+			if (retreatTimer >= retreatDuration) {
+				bRetreating = false;
+			}
 		}
 	}
 	else {

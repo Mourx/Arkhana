@@ -157,6 +157,56 @@
       "text": "Power Ribbit: Lost VALUE stamina.",
       "mText": "Power Ribbit: Lost VALUE stamina."
     },
+    "musical_modifier": {
+      "name": "Musical Modifier",
+      "value": 0,
+      "multiplier": 0,
+      "sType": "STAMINA",
+      "mType": "UNIT_MOD",
+      "EOTChange": 0,
+      "text": "MUSICAL",
+      "mText": "MUSICAL"
+    },
+    "flute_frog_modifier": {
+      "name": "Flute Frog Modifier",
+      "value": 1,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "MUSIC_AURA",
+      "EOTChange": 0,
+      "text": "MUSICAL units gain VALUE attack.",
+      "mText": "MUSICAL units gain VALUE attack."
+    },
+    "drum_frog_modifier": {
+      "name": "Drum Frog Modifier",
+      "value": 1,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "MUSIC_AURA",
+      "EOTChange": 0,
+      "text": "MUSICAL units gain VALUE attack.",
+      "mText": "MUSICAL units gain VALUE attack."
+    },
+    "horn_frog_modifier": {
+      "name": "Horn Frog Modifier",
+      "value": 1,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "MUSIC_AURA",
+      "EOTChange": 0,
+      "text": "MUSICAL units gain VALUE attack.",
+      "mText": "MUSICAL units gain VALUE attack."
+    },
+    "tuba_frog_modifier": {
+      "name": "Tuba Frog Modifier",
+      "value": 1,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "MUSIC_AURA",
+      "EOTChange": 0,
+      "text": "MUSICAL units gain VALUE attack.",
+      "mText": "MUSICAL units gain VALUE attack."
+    },
     "ogre_buff": {
       "name": "Ogre Buff",
       "value": 4,

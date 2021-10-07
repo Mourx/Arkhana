@@ -78,6 +78,42 @@
       "stamina": 3,
       "filePath": "Textures/Units/bannerFrog.png"
     },
+    "Log Frog": {
+      "name": "Log Frog",
+      "physPower": 2,
+      "stamina": 2,
+      "filePath": "Textures/Units/logFrog.png"
+    },
+    "Log": {
+      "name": "Log",
+      "physPower": 0,
+      "stamina": 4,
+      "filePath": "Textures/Units/log.png"
+    },
+    "Flute Frog": {
+      "name": "Flute Frog",
+      "physPower": 6,
+      "stamina": 1,
+      "filePath": "Textures/Units/fluteFrog.png"
+    },
+    "Drum Frog": {
+      "name": "Drum Frog",
+      "physPower": 2,
+      "stamina": 4,
+      "filePath": "Textures/Units/drumFrog.png"
+    },
+    "Horn Frog": {
+      "name": "Horn Frog",
+      "physPower": 3,
+      "stamina": 3,
+      "filePath": "Textures/Units/hornFrog.png"
+    },
+    "Tuba Frog": {
+      "name": "Tuba Frog",
+      "physPower": 0,
+      "stamina": 3,
+      "filePath": "Textures/Units/tubaFrog.png"
+    },
     "Doublin": {
       "name": "Doublin",
       "physPower": 7,

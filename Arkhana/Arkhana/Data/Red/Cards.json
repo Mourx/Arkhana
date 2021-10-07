@@ -188,9 +188,69 @@
       "zTag": "",
       "AITag": "AI_ATTACK",
       "level": 0,
-      "modifiers": ["power_ribbit_modifier"],
+      "modifiers": [ "power_ribbit_modifier" ],
       "shaderPath": "Textures/Shaders/Empress.vert",
       "filePath": "Textures/Effects/powerRibbit.png"
+    },
+    "Log Frog": {
+      "name": "Log Frog",
+      "cost": 1,
+      "cardType": "CREATE_UNIT",
+      "effect": "Log Frog",
+      "unit": "Log Frog",
+      "zOTag": "Z_PLAYER",
+      "zTag": "DEFENSIVE",
+      "AITag": "AI_BLOCK",
+      "level": 0,
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Flute Frog": {
+      "name": "Flute Frog",
+      "cost": 1,
+      "cardType": "CREATE_UNIT",
+      "unit": "Flute Frog",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "AI_BLOCK",
+      "level": 0,
+      "modifiers": [ "musical_modifier","flute_frog_modifier" ],
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Drum Frog": {
+      "name": "Drum Frog",
+      "cost": 1,
+      "cardType": "CREATE_UNIT",
+      "unit": "Drum Frog",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "AI_BLOCK",
+      "level": 0,
+      "modifiers": [ "musical_modifier","drum_frog_modifier" ],
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Horn Frog": {
+      "name": "Horn Frog",
+      "cost": 1,
+      "cardType": "CREATE_UNIT",
+      "unit": "Horn Frog",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "AI_BLOCK",
+      "level": 0,
+      "modifiers": [ "musical_modifier","horn_frog_modifier" ],
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Tuba Frog": {
+      "name": "Tuba Frog",
+      "cost": 1,
+      "cardType": "CREATE_UNIT",
+      "unit": "Tuba Frog",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "AI_BLOCK",
+      "level": 0,
+      "modifiers": [ "musical_modifier","tuba_frog_modifier" ],
+      "shaderPath": "Textures/Shaders/Empress.vert"
     }
 
   }

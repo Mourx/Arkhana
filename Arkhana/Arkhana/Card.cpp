@@ -190,6 +190,12 @@ void Card::DoEffect(Unit* targUnit) {
 		targUnit->AddModifier(modifiers[0]);
 		database->enemy->DamagePhys(targUnit->GetPPower());
 		break;
+	case EFFECT_TYPE::LOG_FROG:
+		for (int i = 0; i < effect->value; i++) {
+			targetZone->AddUnit(new Unit(*database->UnitList["Log"], modifiers, this), database);
+		}
+		
+		break;
 	}
 }
 

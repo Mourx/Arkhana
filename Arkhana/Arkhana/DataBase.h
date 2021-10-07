@@ -101,6 +101,7 @@ public:
 		else if (data == "PLAYER_MOD") return MODIFIER_TYPE::PLAYER_MOD;
 		else if (data == "SWAP_ZONE") return MODIFIER_TYPE::SWAP_ZONE;
 		else if (data == "ZONE_MOD_ATTACK") return MODIFIER_TYPE::ZONE_MOD_ATTACK;
+		else if (data == "MUSIC_AURA") return MODIFIER_TYPE::MUSIC_AURA;
 		else return MODIFIER_TYPE::ZONE_MOD;
 	}
 
@@ -151,6 +152,7 @@ public:
 		if (data == "AMOUR_MOD") return EFFECT_TYPE::ARMOUR_MOD;
 		if (data == "FROG_FRIENDS") return EFFECT_TYPE::FROG_FRIENDS;
 		if (data == "POWER_RIBBIT") return EFFECT_TYPE::POWER_RIBBIT;
+		if (data == "LOG_FROG") return EFFECT_TYPE::LOG_FROG;
 		else return EFFECT_TYPE::ARMOUR_MOD;
 	}
 

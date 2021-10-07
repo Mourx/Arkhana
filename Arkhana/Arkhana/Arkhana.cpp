@@ -208,14 +208,8 @@ int main() {
 					staySprite.setPosition(Vector2f(0, 180));
 					break;
 				}
-				
-
-				
-
 				window->draw(staySprite);
 				window->draw(slideSprite);
-				
-				
 			}
 		}
 		window->display();
