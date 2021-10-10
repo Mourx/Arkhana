@@ -213,7 +213,7 @@
       "zTag": "",
       "AITag": "AI_BLOCK",
       "level": 0,
-      "modifiers": [ "musical_modifier","flute_frog_modifier" ],
+      "modifiers": [ "musical_modifier", "flute_frog_modifier" ],
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
     "Drum Frog": {
@@ -225,7 +225,7 @@
       "zTag": "",
       "AITag": "AI_BLOCK",
       "level": 0,
-      "modifiers": [ "musical_modifier","drum_frog_modifier" ],
+      "modifiers": [ "musical_modifier", "drum_frog_modifier" ],
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
     "Horn Frog": {
@@ -237,7 +237,7 @@
       "zTag": "",
       "AITag": "AI_BLOCK",
       "level": 0,
-      "modifiers": [ "musical_modifier","horn_frog_modifier" ],
+      "modifiers": [ "musical_modifier", "horn_frog_modifier" ],
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
     "Tuba Frog": {
@@ -247,9 +247,21 @@
       "unit": "Tuba Frog",
       "zOTag": "Z_PLAYER",
       "zTag": "",
-      "AITag": "AI_BLOCK",
+      "AITag": "",
       "level": 0,
-      "modifiers": [ "musical_modifier","tuba_frog_modifier" ],
+      "modifiers": [ "musical_modifier", "tuba_frog_modifier" ],
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Spear Frog": {
+      "name": "Spear Frog",
+      "cost": 1,
+      "cardType": "CREATE_UNIT",
+      "unit": "Spear Frog",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "",
+      "level": 0,
+      "modifiers": [ "spear_frog_modifier" ],
       "shaderPath": "Textures/Shaders/Empress.vert"
     }
 

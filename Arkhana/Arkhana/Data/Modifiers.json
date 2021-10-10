@@ -207,6 +207,16 @@
       "text": "MUSICAL units gain VALUE attack.",
       "mText": "MUSICAL units gain VALUE attack."
     },
+    "spear_frog_modifier": {
+      "name": "Tuba Frog Modifier",
+      "value": -2,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "OPPOSITE_ZONE",
+      "EOTChange": 0,
+      "text": "Enemy units opposite Spear\nFrog lose VALUE attack.",
+      "mText": "Spear Frog: Lose VALUE attack"
+    },
     "ogre_buff": {
       "name": "Ogre Buff",
       "value": 4,

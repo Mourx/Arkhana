@@ -61,7 +61,32 @@ void UnitZone::AddUnit(Unit* u, DataBase* database) {
 		case MODIFIER_TYPE::ZONE_MOD_ATTACK:
 			owner->GetZones()[0]->AddMod(mod);
 			break;
-		
+		case::MODIFIER_TYPE::OPPOSITE_ZONE:
+			if (this->type == ZONE_TYPE::Z_ATTACK) {
+				Player* p;
+				if (this->ownerType == ENEMY) {
+					p = player;
+				}
+				else {
+					p = enemy;
+				}
+				for (Unit* unit : p->GetZones()[1]->GetUnits()) {
+					unit->AddModifier(mod);
+				}
+			}
+			else {
+				Player* p;
+				if (this->ownerType == ENEMY) {
+					p = player;
+				}
+				else {
+					p = enemy;
+				}
+				for (Unit* unit : p->GetZones()[0]->GetUnits()) {
+					unit->AddModifier(mod);
+				}
+			}
+			u->RemoveUnitMod(mod);
 		default:
 			break;
 		}

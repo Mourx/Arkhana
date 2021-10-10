@@ -102,6 +102,7 @@ public:
 		else if (data == "SWAP_ZONE") return MODIFIER_TYPE::SWAP_ZONE;
 		else if (data == "ZONE_MOD_ATTACK") return MODIFIER_TYPE::ZONE_MOD_ATTACK;
 		else if (data == "MUSIC_AURA") return MODIFIER_TYPE::MUSIC_AURA;
+		else if (data == "OPPOSITE_ZONE") return MODIFIER_TYPE::OPPOSITE_ZONE;
 		else return MODIFIER_TYPE::ZONE_MOD;
 	}
 

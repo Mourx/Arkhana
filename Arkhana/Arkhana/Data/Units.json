@@ -114,6 +114,12 @@
       "stamina": 3,
       "filePath": "Textures/Units/tubaFrog.png"
     },
+    "Spear Frog": {
+      "name": "Spear Frog",
+      "physPower": 2,
+      "stamina": 2,
+      "filePath": "Textures/Units/spearFrog.png"
+    },
     "Doublin": {
       "name": "Doublin",
       "physPower": 7,

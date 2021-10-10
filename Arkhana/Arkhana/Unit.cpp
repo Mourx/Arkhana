@@ -41,6 +41,8 @@ Unit::Unit(UnitData data,vector<Modifier*> mods,Card* c) {
 		case MODIFIER_TYPE::MUSIC_AURA:
 			auraMods.push_back(new Modifier(mod));
 			break;
+		case MODIFIER_TYPE::OPPOSITE_ZONE:
+			unitMods.push_back(new Modifier(mod));
 		}
 		
 	}
