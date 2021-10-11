@@ -134,8 +134,8 @@ void Player::SetFaction() {
 	decklist.clear();
 	cardList = database->CardListRedUnlocked;
 
-	decklist.push_back(new Card(*cardList["Spear Frog"], database));
-	decklist.push_back(new Card(*cardList["Spear Frog"], database));
+	decklist.push_back(new Card(*cardList["Bog Frog"], database));
+	decklist.push_back(new Card(*cardList["Bog Frog"], database));
 	decklist.push_back(new Card(*cardList["Frog Shrine"], database));
 	decklist.push_back(new Card(*cardList["Tongue Whip"], database));
 	decklist.push_back(new Card(*cardList["Tuba Frog"], database));

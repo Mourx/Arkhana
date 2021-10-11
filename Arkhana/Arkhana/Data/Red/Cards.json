@@ -263,7 +263,18 @@
       "level": 0,
       "modifiers": [ "spear_frog_modifier" ],
       "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Bog Frog": {
+      "name": "Bog Frog",
+      "cost": 1,
+      "cardType": "CREATE_UNIT",
+      "unit": "Bog Frog",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "",
+      "level": 0,
+      "modifiers": [ "bog_frog_modifier" ],
+      "shaderPath": "Textures/Shaders/Empress.vert"
     }
-
   }
 }

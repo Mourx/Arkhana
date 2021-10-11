@@ -120,6 +120,12 @@
       "stamina": 2,
       "filePath": "Textures/Units/spearFrog.png"
     },
+    "Bog Frog": {
+      "name": "Bog Frog",
+      "physPower": 1,
+      "stamina": 6,
+      "filePath": "Textures/Units/bogFrog.png"
+    },
     "Doublin": {
       "name": "Doublin",
       "physPower": 7,
