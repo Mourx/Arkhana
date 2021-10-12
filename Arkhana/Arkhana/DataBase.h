@@ -87,7 +87,7 @@ public:
 	map<int, string> costIcons;
 
 	int playerLevel = 1;
-	bool bDebugMode = true;
+	bool bDebugMode = false;
 
 	MODIFIER_TYPE GetModEnum(string data) {
 		if (data == "ZONE_MOD") return MODIFIER_TYPE::ZONE_MOD;

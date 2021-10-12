@@ -49,7 +49,7 @@ protected:
     bool bForgeUnlocked = true;
     bool bForgeVisited = true;
 
-    int tier = 2;
+    int tier = 0;
     int forgeUnlocks = 0;
 
     vector<Vector2f> encPos = { Vector2f(200, 150),Vector2f(525, 150),Vector2f(850, 200),Vector2f(1150, 480) };
