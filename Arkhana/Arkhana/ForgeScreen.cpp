@@ -267,7 +267,7 @@ void ForgeScreen::CreateDeckGrid(bool bUpgrading) {
 	int count = 0;
 	for (Card* c : player->GetDeckList()) {
 		if (bUpgrading) {
-			if (c->GetType() == CARD_TYPE::CREATE_UNIT) {
+			if (c->GetType() == CARD_TYPE::UNIT) {
 				c->SetPosition(upgradePos + Vector2f((count % 5) * 180, (count / 5) * 210));
 				count++;
 			}

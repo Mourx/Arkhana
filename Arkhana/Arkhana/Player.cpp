@@ -134,12 +134,12 @@ void Player::SetFaction() {
 	decklist.clear();
 	cardList = database->CardListRedUnlocked;
 
+	decklist.push_back(new Card(*cardList["Frog Dog"], database));
+	decklist.push_back(new Card(*cardList["Frog Dog"], database));
+	decklist.push_back(new Card(*cardList["Frog Dog"], database));
 	decklist.push_back(new Card(*cardList["Frog"], database));
 	decklist.push_back(new Card(*cardList["Frog"], database));
 	decklist.push_back(new Card(*cardList["Frog"], database));
-	decklist.push_back(new Card(*cardList["Frog"], database));
-	decklist.push_back(new Card(*cardList["Shield Frog"], database));
-	decklist.push_back(new Card(*cardList["Shield Frog"], database));
 	decklist.push_back(new Card(*cardList["Shield Frog"], database));
 	decklist.push_back(new Card(*cardList["Shield Frog"], database));
 
@@ -153,7 +153,7 @@ void Player::Update(Time t) {
 		if (attackTimer == 0) {
 			attackTimer += t.asSeconds();
 			for (Unit* u : attackZone->GetUnits()) {
-				if (u->GetPPower() > 1) {
+				if (u->GetPPower() >= 1) {
 					u->Attack();
 				}
 			}
@@ -226,6 +226,7 @@ void Player::DrawForeground() {
 }
 
 void Player::NewTurnUpkeep() {
+	
 	DrawCards(CARDS_PER_TURN);
 	ResetMana();
 	bHasAttacked = false;
@@ -233,7 +234,6 @@ void Player::NewTurnUpkeep() {
 	UpdateCosts();
 	attackZone->NewTurnUpkeep(database);
 	blockZone->NewTurnUpkeep(database);
-	blockZone->CheckStamina();
 }
 
 void Player::EndTurnUpkeep() {
@@ -331,7 +331,7 @@ void Player::UpdateCosts() {
 	}
 		
 	for (Card* c : hand) {
-		if (c->GetType() == CARD_TYPE::CREATE_UNIT) {
+		if (c->GetType() == CARD_TYPE::UNIT) {
 			c->SetCostChange(unitCostChange);
 		}
 		else {

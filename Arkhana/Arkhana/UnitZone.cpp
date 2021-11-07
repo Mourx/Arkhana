@@ -189,13 +189,19 @@ void UnitZone::UpdateStatMods() {
 void UnitZone::EndTurnUpkeep(DataBase* database) {
 	
 	for (Unit* u : unitList) {
-		if (type == ZONE_TYPE::Z_ATTACK) {
-		}
+
 		for (Modifier* mod : u->GetModifiers()) {
 			if (mod->GetModType() == MODIFIER_TYPE::UNIT_EOT_MOD) {
 				u->AddModifier(mod->GetModifier());
 			}
-			mod->ApplyEOT();
+			if (mod->GetName() == "Stamina Reduced") {
+				if (GetType() == ZONE_TYPE::Z_ATTACK) {
+					mod->ApplyEOT();
+				}
+			}
+			else {
+				mod->ApplyEOT();
+			}
 		}
 		
 		for (Modifier* mod : u->GetAuras()) {
@@ -215,6 +221,16 @@ void UnitZone::EndTurnUpkeep(DataBase* database) {
 
 void UnitZone::NewTurnUpkeep(DataBase* database) {
 	for (Unit* u : unitList) {
+		for (Modifier* mod : u->GetModifiers()) {
+			if (mod->GetName() == "Stamina Reduced") {
+				if (GetType() == ZONE_TYPE::Z_BLOCK) {
+					mod->ApplyEOT();
+				}
+			}
+			if (mod->GetModType() == MODIFIER_TYPE::SOT_EFFECT) {
+				u->GetCard()->DoEffect(u,this);
+			}
+		}
 		if (type == ZONE_TYPE::Z_BLOCK) {
 			u->UpdateStats();
 		}

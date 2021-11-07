@@ -45,6 +45,8 @@ struct EffectData {
 	EFFECT_TYPE effect;
 	int value;
 	string text;
+	bool tUnit = false;
+	string unit;
 };
 
 struct ModifierData {
@@ -103,6 +105,7 @@ public:
 		else if (data == "ZONE_MOD_ATTACK") return MODIFIER_TYPE::ZONE_MOD_ATTACK;
 		else if (data == "MUSIC_AURA") return MODIFIER_TYPE::MUSIC_AURA;
 		else if (data == "OPPOSITE_ZONE") return MODIFIER_TYPE::OPPOSITE_ZONE;
+		else if (data == "SOT_EFFECT") return MODIFIER_TYPE::SOT_EFFECT;
 		else return MODIFIER_TYPE::ZONE_MOD;
 	}
 
@@ -117,14 +120,9 @@ public:
 	}
 
 	CARD_TYPE GetCardEnum(string data) {
-		if (data == "CREATE_UNIT") return CREATE_UNIT;
-		else if (data == "APPLY_ZONE_MOD") return APPLY_ZONE_MOD;
-		else if (data == "TARGET_STRONGEST") return TARGET_STRONGEST;
-		else if (data == "TARGET_UNIT") return TARGET_UNIT;
-		else if (data == "CREATE_UNIT_MULTIPLE") return CREATE_UNIT_MULTIPLE;
+		if (data == "UNIT") return UNIT;
 		else if (data == "EFFECT") return EFFECT;
-		
-		else return CREATE_UNIT;
+		else return UNIT;
 	}
 
 	ZONE_TYPE GetZoneEnum(string data) {
@@ -151,9 +149,13 @@ public:
 
 	EFFECT_TYPE GetEffectEnum(string data) {
 		if (data == "AMOUR_MOD") return EFFECT_TYPE::ARMOUR_MOD;
+		if (data == "ZONE_MOD") return EFFECT_TYPE::ZONE_MOD;
+		if (data == "TARGET_STRONGEST") return EFFECT_TYPE::TARGET_STRONGEST;
+		if (data == "TARGET_UNIT") return EFFECT_TYPE::TARGET_UNIT;
 		if (data == "FROG_FRIENDS") return EFFECT_TYPE::FROG_FRIENDS;
 		if (data == "POWER_RIBBIT") return EFFECT_TYPE::POWER_RIBBIT;
-		if (data == "LOG_FROG") return EFFECT_TYPE::LOG_FROG;
+		if (data == "CREATE_UNIT") return EFFECT_TYPE::CREATE_UNIT;
+		if (data == "FROG_DOG") return EFFECT_TYPE::FROG_DOG;
 		else return EFFECT_TYPE::ARMOUR_MOD;
 	}
 
@@ -178,4 +180,5 @@ public:
 	Sound sound;
 	SoundBuffer rollover;
 };
+
 

@@ -3,7 +3,7 @@
     "Frog": {
       "name": "Frog",
       "cost": 1,
-      "cardType": "CREATE_UNIT",
+      "cardType": "UNIT",
       "unit": "Frog",
       "zTag": "",
       "zOTag": "Z_PLAYER",
@@ -14,7 +14,7 @@
     "Shield Frog": {
       "name": "Shield Frog",
       "cost": 1,
-      "cardType": "CREATE_UNIT",
+      "cardType": "UNIT",
       "unit": "Shield Frog",
       "zTag": "DEFENSIVE",
       "zOTag": "Z_PLAYER",
@@ -37,7 +37,7 @@
     "Two Frogs": {
       "name": "Two Frogs",
       "cost": 2,
-      "cardType": "CREATE_UNIT",
+      "cardType": "UNIT",
       "unit": "Two Frogs",
       "zTag": "",
       "zOTag": "Z_PLAYER",
@@ -48,23 +48,25 @@
     "Froggy Rage": {
       "name": "Froggy Rage",
       "cost": 2,
-      "cardType": "APPLY_ZONE_MOD",
+      "cardType": "EFFECT",
       "zTag": "",
       "zOTag": "Z_PLAYER",
       "filePath": "Textures/Cards/rage.png",
       "AITag": "AI_MOST_UNITS_AI",
       "modifiers": [ "rage_modifier" ],
+      "effect": "Zone Mod",
       "level": 0,
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
     "Tongue Whip": {
       "name": "Tongue Whip",
       "cost": 2,
-      "cardType": "TARGET_STRONGEST",
+      "cardType": "EFFECT",
       "zTag": "",
       "zOTag": "Z_ENEMY",
       "filePath": "Textures/Cards/sapSpirit.png",
       "AITag": "AI_STRONGEST_UNIT_PLAYER",
+      "effect": "Target Strongest",
       "modifiers": [ "remove_stamina_modifier" ],
       "level": 0,
       "shaderPath": "Textures/Shaders/Empress.vert"
@@ -72,7 +74,7 @@
     "Frog Shrine": {
       "name": "Frog Shrine",
       "cost": 3,
-      "cardType": "CREATE_UNIT",
+      "cardType": "UNIT",
       "unit": "Shrine",
       "zTag": "",
       "zOTag": "Z_PLAYER",
@@ -84,7 +86,7 @@
     "Spy Frog": {
       "name": "Spy Frog",
       "cost": 2,
-      "cardType": "CREATE_UNIT",
+      "cardType": "UNIT",
       "unit": "Spy Frog",
       "zTag": "UNDERCOVER",
       "zOTag": "Z_ENEMY",
@@ -96,7 +98,7 @@
     "Big Frog": {
       "name": "Big Frog",
       "cost": 3,
-      "cardType": "CREATE_UNIT",
+      "cardType": "UNIT",
       "unit": "Big Frog",
       "zOTag": "Z_PLAYER",
       "zTag": "AGGRESSIVE",
@@ -108,7 +110,7 @@
     "Guard Frog": {
       "name": "Guard Frog",
       "cost": 1,
-      "cardType": "CREATE_UNIT",
+      "cardType": "UNIT",
       "unit": "Guard Frog",
       "zOTag": "Z_PLAYER",
       "zTag": "",
@@ -120,7 +122,7 @@
     "Mystic Frog": {
       "name": "Mystic Frog",
       "cost": 1,
-      "cardType": "CREATE_UNIT",
+      "cardType": "UNIT",
       "unit": "Mystic Frog",
       "zOTag": "Z_PLAYER",
       "zTag": "",
@@ -132,7 +134,7 @@
     "Jog Frog": {
       "name": "Jog Frog",
       "cost": 1,
-      "cardType": "CREATE_UNIT",
+      "cardType": "UNIT",
       "unit": "Jog Frog",
       "zOTag": "Z_PLAYER",
       "zTag": "",
@@ -144,7 +146,7 @@
     "General Frog": {
       "name": "General Frog",
       "cost": 1,
-      "cardType": "CREATE_UNIT",
+      "cardType": "UNIT",
       "unit": "General Frog",
       "zOTag": "Z_PLAYER",
       "zTag": "DEFENSIVE",
@@ -156,7 +158,7 @@
     "Banner Frog": {
       "name": "Banner Frog",
       "cost": 1,
-      "cardType": "CREATE_UNIT",
+      "cardType": "UNIT",
       "unit": "Banner Frog",
       "zOTag": "Z_PLAYER",
       "zTag": "",
@@ -168,7 +170,7 @@
     "Frog Friends": {
       "name": "Frog Friends",
       "cost": 1,
-      "cardType": "TARGET_UNIT",
+      "cardType": "EFFECT",
       "effect": "Frog Friends",
       "unit": "",
       "zOTag": "Z_PLAYER",
@@ -181,7 +183,7 @@
     "Power Ribbit": {
       "name": "Power Ribbit",
       "cost": 1,
-      "cardType": "TARGET_UNIT",
+      "cardType": "EFFECT",
       "effect": "Power Ribbit",
       "unit": "",
       "zOTag": "Z_PLAYER",
@@ -195,7 +197,7 @@
     "Log Frog": {
       "name": "Log Frog",
       "cost": 1,
-      "cardType": "CREATE_UNIT",
+      "cardType": "UNIT",
       "effect": "Log Frog",
       "unit": "Log Frog",
       "zOTag": "Z_PLAYER",
@@ -204,10 +206,22 @@
       "level": 0,
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
+    "Spawn Frog": {
+      "name": "Spawn Frog",
+      "cost": 1,
+      "cardType": "EFFECT",
+      "effect": "Spawn Frog",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "AI_BLOCK",
+      "level": 0,
+      "shaderPath": "Textures/Shaders/Empress.vert",
+      "filePath": "Textures/Units/frogSpawn.png"
+    },
     "Flute Frog": {
       "name": "Flute Frog",
       "cost": 1,
-      "cardType": "CREATE_UNIT",
+      "cardType": "UNIT",
       "unit": "Flute Frog",
       "zOTag": "Z_PLAYER",
       "zTag": "",
@@ -219,7 +233,7 @@
     "Drum Frog": {
       "name": "Drum Frog",
       "cost": 1,
-      "cardType": "CREATE_UNIT",
+      "cardType": "UNIT",
       "unit": "Drum Frog",
       "zOTag": "Z_PLAYER",
       "zTag": "",
@@ -231,7 +245,7 @@
     "Horn Frog": {
       "name": "Horn Frog",
       "cost": 1,
-      "cardType": "CREATE_UNIT",
+      "cardType": "UNIT",
       "unit": "Horn Frog",
       "zOTag": "Z_PLAYER",
       "zTag": "",
@@ -243,7 +257,7 @@
     "Tuba Frog": {
       "name": "Tuba Frog",
       "cost": 1,
-      "cardType": "CREATE_UNIT",
+      "cardType": "UNIT",
       "unit": "Tuba Frog",
       "zOTag": "Z_PLAYER",
       "zTag": "",
@@ -255,7 +269,7 @@
     "Spear Frog": {
       "name": "Spear Frog",
       "cost": 1,
-      "cardType": "CREATE_UNIT",
+      "cardType": "UNIT",
       "unit": "Spear Frog",
       "zOTag": "Z_PLAYER",
       "zTag": "",
@@ -267,13 +281,26 @@
     "Bog Frog": {
       "name": "Bog Frog",
       "cost": 1,
-      "cardType": "CREATE_UNIT",
+      "cardType": "UNIT",
       "unit": "Bog Frog",
       "zOTag": "Z_PLAYER",
       "zTag": "",
       "AITag": "",
       "level": 0,
       "modifiers": [ "bog_frog_modifier" ],
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Frog Dog": {
+      "name": "Frog Dog",
+      "cost": 1,
+      "cardType": "UNIT",
+      "unit": "Frog Dog",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "",
+      "level": 0,
+      "effect":  "Frog Dog",
+      "modifiers": [ "frog_dog_dummy" ],
       "shaderPath": "Textures/Shaders/Empress.vert"
     }
   }

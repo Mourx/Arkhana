@@ -7,6 +7,13 @@
       "text": "Increases Armour by VALUE"
 
     },
+    "Froggy Rage": {
+      "name": "Froggy Rage",
+      "type": "FROGGY_RAGE",
+      "value": 5,
+      "text": "Increases Armour by VALUE"
+
+    },
     "Big Armour": {
       "name": "Big Armour",
       "type": "ARMOUR_MOD",
@@ -14,24 +21,51 @@
       "text": "Increases Armour by VALUE",
       "filePath": "Textures/Units/gnome.png"
     },
+    "Zone Mod": {
+      "name": "Zone Mod",
+      "type": "ZONE_MOD",
+      "value": 0,
+      "text": ""
+    },
     "Frog Friends": {
       "name": "Frog Friends",
       "type": "FROG_FRIENDS",
       "value": 0,
-      "text": "Exhaust target ally and\nits closest opposing unit."
-
+      "text": "Exhaust target ally and\nits closest opposing unit.",
+      "tUnit": "TRUE"
+    },
+    "Target Strongest": {
+      "name": "Target Strongest",
+      "type": "TARGET_STRONGEST",
+      "value": 0,
+      "text": ""
     },
     "Power Ribbit": {
       "name": "Power Ribbit",
       "type": "POWER_RIBBIT",
       "value": -1,
-      "text": "Deal damage to enemy equal\nto target ally's attack.\nThat unit loses VALUE stamina."
+      "text": "Deal damage to enemy equal\nto target ally's attack.\nThat unit loses VALUE stamina.",
+      "tUnit": "TRUE"
     },
     "Log Frog": {
       "name": "Log Frog",
-      "type": "LOG_FROG",
+      "type": "CREATE_UNIT",
       "value": 2,
+      "unit": "Log Frog",
       "text": "Create VALUE Logs when played."
+    },
+    "Spawn Frog": {
+      "name": "Spawn Frog",
+      "type": "CREATE_UNIT",
+      "value": 3,
+      "unit": "Frog Spawn",
+      "text": "Create VALUE Frog Spawn\nwhen played."
+    },
+    "Frog Dog": {
+      "name": "Frog Dog",
+      "type": "FROG_DOG",
+      "value": -1,
+      "text": "Start of turn: Weakest\nenemy units opposite\nFrog Dog lose VALUE attack."
     }
   }
 }

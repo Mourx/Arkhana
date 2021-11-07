@@ -225,7 +225,27 @@
       "mType": "OPPOSITE_ZONE",
       "EOTChange": 0,
       "text": "Enemy units opposite bog\nFrog lose VALUE stamina.",
-      "mText": "Spear Frog: Lose VALUE attack"
+      "mText": "Bog Frog: Lose VALUE attack."
+    },
+    "frog_dog_modifier": {
+      "name": "Frog Dog Modifier",
+      "value": -1,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "SOT_EFFECT",
+      "EOTChange": 0,
+      "text": "Start of turn: Weakest enemy\nunits opposite\nFrog Dog lose VALUE attack.",
+      "mText": "Frog Dog: Lose VALUE attack."
+    },
+    "frog_dog_dummy": {
+      "name": "Frog Dog Dummy",
+      "value": 0,
+      "multiplier": 0,
+      "sType": "STAMINA",
+      "mType": "SOT_EFFECT",
+      "EOTChange": 0,
+      "text": "",
+      "mText": "Frog Dog: Scaring\nthe enemy."
     },
     "ogre_buff": {
       "name": "Ogre Buff",

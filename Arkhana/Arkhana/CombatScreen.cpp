@@ -16,10 +16,10 @@ CombatScreen::CombatScreen(RenderTexture* w,DataBase* data,Player* p,Encounter* 
 	for (Card* c : enemy->GetStartingPlay()) {
 		c->SetTarget(AI->GetTarget(c));
 		switch (c->GetType()) {
-		case CREATE_UNIT:
+		case UNIT:
 			c->Play(hoverUnit);
 			break;
-		case APPLY_ZONE_MOD:
+		default:
 			c->Play(hoverUnit);
 			break;
 		}
@@ -70,7 +70,7 @@ void CombatScreen::MouseReleased(Vector2f mousePos) {
 			if (selectedZone != NULL) {
 				if (selCard->GetZoneType() == ZONE_TYPE::Z_ANY || (selCard->GetZoneType() == selectedZone->GetType())) {
 					if (selCard->GetZoneOwner() == Z_EITHER || selectedZone->GetOwnerType() == selCard->GetZoneOwner()) {
-						if (player->GetCurrentMana() < selCard->GetCost() || (selCard->GetType() == TARGET_UNIT && hoverUnit == NULL)) {
+						if (player->GetCurrentMana() < selCard->GetCost() || (selCard->IsUnitTarget() && hoverUnit == NULL)) {
 							selCard->SetPosition(player->selectedCard->GetHandPos());
 						}
 						else {

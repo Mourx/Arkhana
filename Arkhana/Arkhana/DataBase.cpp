@@ -71,6 +71,12 @@ void DataBase::BuildEffectLists() {
 			}
 			effect->text = text;
 		}
+		if (ListItr->value.HasMember("tUnit")) {
+			string str = ListItr->value["tUnit"].GetString();
+			effect->tUnit =  str == "TRUE";
+		}
+		if (ListItr->value.HasMember("unit")) effect->unit = ListItr->value["unit"].GetString();
+
 		string str(ListItr->name.GetString());
 		effectList.insert({ str,effect });
 	}

@@ -126,6 +126,18 @@
       "stamina": 6,
       "filePath": "Textures/Units/bogFrog.png"
     },
+    "Frog Spawn": {
+      "name": "Frog Spawn",
+      "physPower": 0,
+      "stamina": 2,
+      "filePath": "Textures/Units/frogSpawn.png"
+    },
+    "Frog Dog": {
+      "name": "Frog Dog",
+      "physPower": 1,
+      "stamina": 4,
+      "filePath": "Textures/Units/frogDog.png"
+    },
     "Doublin": {
       "name": "Doublin",
       "physPower": 7,

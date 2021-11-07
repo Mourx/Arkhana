@@ -32,6 +32,9 @@ Unit::Unit(UnitData data,vector<Modifier*> mods,Card* c) {
 		case MODIFIER_TYPE::PLAYER_MOD:
 			unitMods.push_back(new Modifier(mod));
 			break;
+		case MODIFIER_TYPE::SOT_EFFECT:
+			unitMods.push_back(new Modifier(mod));
+			break;
 		case MODIFIER_TYPE::SWAP_ZONE:
 			unitMods.push_back(new Modifier(mod));
 			break;

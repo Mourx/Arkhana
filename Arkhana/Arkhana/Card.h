@@ -62,8 +62,10 @@ public:
     }
     bool IsUndercover() { return bUndercover; }
     void SetCostChange(int change);
+    bool IsUnitTarget();
+    void DoEffect(Unit* targUnit,UnitZone* targZone);
 protected:
-    void DoEffect(Unit* targUnit);
+    
     virtual void ApplyModifier(UnitZone*);
     virtual void ApplyModifier(Unit*);
     void UpdatePositions();
@@ -128,7 +130,7 @@ protected:
     string zTag;
     AI_TAG AITag;
     EffectData* effect = NULL;
-    CARD_TYPE type = CREATE_UNIT;
+    CARD_TYPE type = UNIT;
     ZONE_OWNER zOwner = Z_PLAYER;
     ZONE_TYPE zType = ZONE_TYPE::Z_ANY;
 };

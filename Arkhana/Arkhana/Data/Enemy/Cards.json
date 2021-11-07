@@ -43,21 +43,23 @@
     "Rage": {
       "name": "Rage",
       "cost": 2,
-      "cardType": "APPLY_ZONE_MOD",
+      "cardType": "EFFECT",
       "zTag": "",
       "zOTag": "Z_PLAYER",
       "AITag": "AI_MOST_UNITS_AI",
-	    "filePath": "Textures/Cards/rage.png",
+      "filePath": "Textures/Cards/rage.png",
+      "effect":  "Zone Mod",
       "modifiers": [ "rage_modifier" ],
       "shaderPath": "Textures/Shaders/enemyGoblin.vert"
     },
     "Sap Spirit": {
       "name": "Sap Spirit",
       "cost": 2,
-      "cardType": "TARGET_STRONGEST",
+      "cardType": "EFFECT",
       "zTag": "",
       "zOTag": "Z_ENEMY",
       "AITag": "AI_STRONGEST_UNIT_PLAYER",
+      "effect":  "Target Strongest",
       "modifiers": [ "remove_stamina_modifier" ],
       "shaderPath": "Textures/Shaders/enemyGoblin.vert"
     },

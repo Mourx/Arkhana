@@ -20,7 +20,7 @@ Card::Card(CardData data,DataBase* dataB) {
 	goldCost = 80 + rand() % 32;
 	costIcon.setTexture(texCost);
 	SetPosition(Vector2f(300, 300));
-	if (type == CREATE_UNIT) {
+	if (type == UNIT) {
 		pPow = database->UnitList[unit]->physPower;
 		stamina = database->UnitList[unit]->stamina;
 	}
@@ -80,7 +80,7 @@ Card::Card(CardData data,DataBase* dataB) {
 	txtDesc.setCharacterSize(12);
 	txtDesc.setFillColor(Color::Black);
 
-	if (type == CREATE_UNIT) {
+	if (type == UNIT) {
 		texCardArt.loadFromFile(database->UnitList[unit]->filePath);
 	}
 	else if(data.filePath!= ""){
@@ -102,32 +102,20 @@ void Card::UpdateStrings() {
 void Card::Play(Unit* targUnit) {
 	Unit* u;
 	switch (type) {
-	case CREATE_UNIT:
-		u = new Unit(*database->UnitList[unit], modifiers,this);
-		targetZone->AddUnit(u,database);
-		break;
-	case APPLY_ZONE_MOD:
-		ApplyModifier(targetZone);
-		break;
-	case TARGET_STRONGEST:
-		targUnit = NULL;
-		for (Unit* u : targetZone->GetUnits()) {
-			if (targUnit == NULL) targUnit = u;
-			else if (targUnit->GetPPower() < u->GetPPower()) {
-				targUnit = u;
-			}
-			else if (targUnit->GetPPower() == u->GetPPower()) {
-				if (targUnit->GetStamina() < u->GetStamina()) {
-					targUnit = u;
-				}
-			}
-		
-		}
-
-		if(targUnit != NULL) ApplyModifier(targUnit);
+	case UNIT:
+		u = new Unit(*database->UnitList[unit], modifiers, this);
+		targetZone->AddUnit(u, database);
 		break;
 	}
-	if(effect != NULL) DoEffect(targUnit);
+	if (effect != NULL) {
+		switch (effect->effect) {
+		case EFFECT_TYPE::FROG_DOG:
+			break;
+		default:
+			DoEffect(targUnit, targetZone);
+			break;
+		}		
+	}
 	bHasTargetZone = false;
 	targetZone->CheckStamina();
 	targetZone = NULL;
@@ -157,7 +145,7 @@ void Card::UpdatePositions() {
 	
 }
 
-void Card::DoEffect(Unit* targUnit) {
+void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 	Player* p;
 	int count;
 	Unit* enemy;
@@ -165,6 +153,27 @@ void Card::DoEffect(Unit* targUnit) {
 	case EFFECT_TYPE::ARMOUR_MOD:
 		p = targetZone->GetOwner();
 		p->ModifyArmour(effect->value);
+		break;
+	case EFFECT_TYPE::ZONE_MOD:
+		ApplyModifier(targetZone);
+		break;
+	case EFFECT_TYPE::TARGET_STRONGEST:
+		targUnit = NULL;
+		for (Unit* u : targetZone->GetUnits()) {
+			if (targUnit == NULL) targUnit = u;
+			else if (targUnit->GetPPower() < u->GetPPower()) {
+				targUnit = u;
+			}
+			else if (targUnit->GetPPower() == u->GetPPower()) {
+				if (targUnit->GetStamina() < u->GetStamina()) {
+					targUnit = u;
+				}
+			}
+		}
+		if (targUnit != NULL) ApplyModifier(targUnit);
+		break;
+	case EFFECT_TYPE::TARGET_UNIT:
+
 		break;
 	case EFFECT_TYPE::FROG_FRIENDS:
 		count = 0;
@@ -190,11 +199,17 @@ void Card::DoEffect(Unit* targUnit) {
 		targUnit->AddModifier(modifiers[0]);
 		database->enemy->DamagePhys(targUnit->GetPPower());
 		break;
-	case EFFECT_TYPE::LOG_FROG:
+	case EFFECT_TYPE::CREATE_UNIT:
 		for (int i = 0; i < effect->value; i++) {
-			targetZone->AddUnit(new Unit(*database->UnitList["Log"], modifiers, this), database);
+			targetZone->AddUnit(new Unit(*database->UnitList[effect->unit], modifiers, this), database);
 		}
-		
+		break;
+	case EFFECT_TYPE::FROG_DOG:
+		targetZone = targZone;
+		UnitZone* oppZ = database->enemy->GetZones()[(int)targetZone->GetOppositeType()];
+		for (Unit* u : oppZ->GetUnits()) {
+			u->AddModifier(new Modifier(*database->modList["frog_dog_modifier"]));
+		}
 		break;
 	}
 }
@@ -208,7 +223,7 @@ void Card::SetCostChange(int change) {
 
 void Card::Draw(RenderTexture* w) {
 	w->draw(icon, &cardShader);
-	if (type == CREATE_UNIT) {
+	if (type == UNIT) {
 		w->draw(txtPhys);
 		w->draw(txtMag);
 		w->draw(physIcon);
@@ -274,4 +289,13 @@ void Card::SetHover(bool b){
 	}
 	bHover = b;
 		
+}
+
+bool Card::IsUnitTarget() {
+	if (effect!=nullptr && effect->tUnit) {
+
+		return true;
+	}else{
+		return false;
+	}
 }
