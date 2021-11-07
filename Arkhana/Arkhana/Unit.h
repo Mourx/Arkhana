@@ -40,9 +40,7 @@ public:
     bool IsUndercover();
     void RemoveUnitMod(Modifier* mod);
     Modifier* GetStaminaMod();
-    void Retreat() {
-        bRetreating = true;
-    }
+    void Retreat();
     void Attack() {
         bAttacking = true;
     }
@@ -51,6 +49,7 @@ public:
         retreatDirection = ret;
         attackDirection = atk;
     }
+    bool IsRetreating() { return bRetreating; }
 protected:
     void ModifyStat(STAT_TYPE stat, int value, int multiplier);
     
@@ -73,7 +72,7 @@ protected:
 
     bool bBoss = false;
 
-
+    vector<string> retreatPhrases;
     float attackDuration = 2;
     float attackTimer = 0;
     float attackDirection = -1;
@@ -92,11 +91,17 @@ protected:
     Sprite highlightIcon;
     Texture texHighlight;
 
+    Sprite speechIcon;
+    Texture texSpeech;
+
     Text txtPhys;
     Text txtMag;
+    Text txtSpeech;
+
 
     Vector2f txtPhysPos = Vector2f(20, 100);
     Vector2f txtMagPos = Vector2f(60, 100);
+    Vector2f txtSpeechPos = Vector2f(40, 20);
 
     Font font;
 

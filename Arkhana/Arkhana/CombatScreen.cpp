@@ -168,30 +168,38 @@ void CombatScreen::Update(Time t) {
 	
 
 	if (currentTurn == ENEMY) {
-		
-		if (enemy->HasAttacked() == false) {
-			if (enemy->GetCurrentMana() >= 1) {
-				Card* eCard = enemy->GetNext();
-				if (eCard->IsAtTarget()) {
-					// Maybe implement an AI controller? thinking how to emulate a player
-					eCard->Play(hoverUnit);
-					eCard->SetPosition(Vector2f(-200, -200));
-					enemy->PlayNext();
+		bool bWaitRetreats = false;
+		for (Unit* u : enemy->GetZones()[(int)ZONE_TYPE::Z_BLOCK]->GetUnits()) {
+			if (u->IsRetreating()) {
+				bWaitRetreats = true;
+			}
+		}
+		if (!bWaitRetreats) {
+			if (enemy->HasAttacked() == false) {
+				if (enemy->GetCurrentMana() >= 1) {
+					Card* eCard = enemy->GetNext();
+					if (eCard->IsAtTarget()) {
+						// Maybe implement an AI controller? thinking how to emulate a player
+						eCard->Play(hoverUnit);
+						eCard->SetPosition(Vector2f(-200, -200));
+						enemy->PlayNext();
+					}
+					else if (eCard->IsMoving() == false) {
+						eCard->SetTarget(AI->GetTarget(eCard));
+					}
 				}
-				else if(eCard->IsMoving() == false) {
-					eCard->SetTarget(AI->GetTarget(eCard));
+				else {
+					enemy->AnimateAttack();
 				}
 			}
 			else {
-				enemy->AnimateAttack();
-			}
-		}
-		else {
-			if (enemy->GetAttacking() == false && !enemy->HasRetreated()) {
-				enemy->GetZones()[(int)ZONE_TYPE::Z_ATTACK]->UpdatePositions();
-				enemy->AnimateRetreat();
-			}else if (enemy->HasRetreated() && enemy->GetRetreating() == false) {
-				AdvanceTurn(PLAYER);
+				if (enemy->GetAttacking() == false && !enemy->HasRetreated()) {
+					enemy->GetZones()[(int)ZONE_TYPE::Z_ATTACK]->UpdatePositions();
+					enemy->AnimateRetreat();
+				}
+				else if (enemy->HasRetreated() && enemy->GetRetreating() == false) {
+					AdvanceTurn(PLAYER);
+				}
 			}
 		}
 	}

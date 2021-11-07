@@ -243,6 +243,10 @@ void DataBase::Init() {
 		string path = "Textures/GUI/ManaCosts/" + to_string(i) + ".png";
 		costIcons.insert({ i,path });
 	}
+	retreatPhrases.push_back("Run away!");
+	retreatPhrases.push_back("Fleeeeee!");
+	retreatPhrases.push_back("I'm Tired");
+	retreatPhrases.push_back("Not Today");
 	BuildModifierLists();
 	BuildCardListsRed();
 	BuildCardListsEnemy();

@@ -109,6 +109,7 @@ void Enemy::NewTurnUpkeep() {
 	blockZone->NewTurnUpkeep(database);
 	bHasAttacked = false;
 	bHasRetreated = false;
+	bRetreating = false;
 }
 
 void Enemy::EndTurnUpkeep() {
@@ -124,7 +125,7 @@ void Enemy::Update(Time t) {
 		if (attackTimer == 0) {
 			attackTimer += t.asSeconds();
 			for (Unit* u : attackZone->GetUnits()) {
-				if (u->GetPPower() > 1) {
+				if (u->GetPPower() >= 1) {
 					u->Attack();
 				}
 			}
@@ -144,11 +145,13 @@ void Enemy::Update(Time t) {
 					u->Retreat();
 				}
 			}
+			/*
 			for (Unit* u : blockZone->GetUnits()) {
 				if (u->GetStamina() == 1) {
 					u->Retreat();
 				}
 			}
+			*/
 		}
 		else {
 			retreatTimer += t.asSeconds();

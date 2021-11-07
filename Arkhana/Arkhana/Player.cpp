@@ -173,11 +173,11 @@ void Player::Update(Time t) {
 					u->Retreat();
 				}
 			}
-			for (Unit* u : blockZone->GetUnits()) {
+			/*for (Unit* u : blockZone->GetUnits()) {
 				if (u->GetStamina() == 1) {
 					u->Retreat();
 				}
-			}
+			}*/
 		}
 		else {
 			retreatTimer += t.asSeconds();

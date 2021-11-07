@@ -179,6 +179,8 @@ public:
 
 	Sound sound;
 	SoundBuffer rollover;
+
+	vector<string> retreatPhrases;
 };
 
 

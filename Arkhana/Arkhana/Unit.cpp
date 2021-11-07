@@ -51,24 +51,34 @@ Unit::Unit(UnitData data,vector<Modifier*> mods,Card* c) {
 	}
 	icon.setTexture(texIcon);
 	
+	retreatPhrases.push_back("Run away!");
+	retreatPhrases.push_back("Fleeeeee!");
+	retreatPhrases.push_back("I'm Tired");
+	retreatPhrases.push_back("Not Today");
+
 	texBackground.loadFromFile("Textures/Units/shadow.png");
 	unitBackground.setTexture(texBackground);
 	texHighlight.loadFromFile("Textures/Units/highlight.png");
 	highlightIcon.setTexture(texHighlight);
+	texSpeech.loadFromFile("Textures/GUI/speechBubble.png");
+	speechIcon.setTexture(texSpeech);
 
 	font.loadFromFile("Fonts/Arial/arial.ttf");
 	txtPhys.setFont(font);
 	txtMag.setFont(font);
+	txtSpeech.setFont(font);
 	
 	icon.setScale(2, 2);
 	unitBackground.setScale(2, 2);
 	txtPhys.setCharacterSize(20);
 	txtMag.setCharacterSize(20);
+	txtSpeech.setCharacterSize(14);
 
 	txtPhys.setFillColor(Color::Red);
 	txtMag.setFillColor(Color::Blue);
+	txtSpeech.setFillColor(Color::Black);
 
-
+	txtSpeech.setString("Run Away!");
 	
 	physicalPower = basePhys;
 	stamina = baseStamina;
@@ -88,6 +98,10 @@ void Unit::UpdateStrings() {
 	tR = txtMag.getLocalBounds();
 	txtMag.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
 	txtMag.setPosition(pos + txtMagPos);
+
+	tR = txtSpeech.getLocalBounds();
+	txtSpeech.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
+	txtSpeech.setPosition(speechIcon.getPosition() + txtSpeechPos);
 }
 
 void Unit::Update(Time t) {
@@ -96,6 +110,7 @@ void Unit::Update(Time t) {
 	if (nudgeTimer >= nudgeDelay) {
 		nudgeDir *= -1;
 		icon.setPosition(pos + (Vector2f(0, 3 * nudgeDir)));
+
 		nudgeTimer = 0;
 	}
 	if (bAttacking) {
@@ -176,8 +191,11 @@ void Unit::SetPosition(Vector2f p) {
 	GameObject::SetPosition(pos);
 	unitBackground.setPosition(pos+Vector2f(0,60));
 	highlightIcon.setPosition(pos);
+	speechIcon.setPosition(pos + Vector2f(40, -20));
 	txtPhys.setPosition(pos + txtPhysPos);
 	txtMag.setPosition(pos + txtMagPos);
+	txtSpeech.setPosition(speechIcon.getPosition() + txtSpeechPos);
+
 }
 
 void Unit::Draw(RenderTexture* w) {
@@ -190,6 +208,10 @@ void Unit::Draw(RenderTexture* w) {
 	w->draw(txtMag);
 	if (bHover) {
 		w->draw(highlightIcon);
+	}
+	if (bRetreating) {
+		w->draw(speechIcon);
+		w->draw(txtSpeech);
 	}
 }
 
@@ -225,4 +247,13 @@ void Unit::ModifyStat(STAT_TYPE stat, int value, int multiplier) {
 
 void Unit::Move(Vector2f offset) {
 	SetPosition(icon.getPosition() + offset);
+}
+
+
+void Unit::Retreat() {
+	if (!bRetreating) {
+		txtSpeech.setString(retreatPhrases[rand() % retreatPhrases.size()]);
+		UpdateStrings();
+		bRetreating = true;
+	}
 }
