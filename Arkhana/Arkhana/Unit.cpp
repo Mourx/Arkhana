@@ -46,6 +46,8 @@ Unit::Unit(UnitData data,vector<Modifier*> mods,Card* c) {
 			break;
 		case MODIFIER_TYPE::OPPOSITE_ZONE:
 			unitMods.push_back(new Modifier(mod));
+		default:
+			unitMods.push_back(new Modifier(mod));
 		}
 		
 	}
@@ -149,6 +151,7 @@ void Unit::UpdateStats() {
 		switch (mod->GetModType()) {
 		case MODIFIER_TYPE::ZONE_MOD:
 		case MODIFIER_TYPE::ZONE_MOD_ATTACK:
+		case MODIFIER_TYPE::UNIT_ENTER_APPLY_MOD:
 			break;
 		default:
 			ModifyStat(mod->GetStat(), mod->GetValue(), mod->GetMultiplier());
@@ -202,7 +205,7 @@ void Unit::Draw(RenderTexture* w) {
 	
 	w->draw(unitBackground);
 	GameObject::Draw(w);
-	if (!card->IsUndercover()) {
+	if (!card->IsUndercover() && !card->IsPassive()) {
 		w->draw(txtPhys);
 	}
 	w->draw(txtMag);
@@ -217,6 +220,10 @@ void Unit::Draw(RenderTexture* w) {
 
 bool Unit::IsUndercover() {
 	return card->IsUndercover();
+}
+
+bool Unit::IsPassive() {
+	return card->IsPassive();
 }
 
 void Unit::ModifyStat(STAT_TYPE stat, int value, int multiplier) {

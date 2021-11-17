@@ -30,7 +30,7 @@ void UnitZone::DrawUnits(RenderTexture* w) {
 int UnitZone::GetCombinedPhysicalPower() {
 	int power = 0;
 	for (Unit* u : unitList) {
-		if(!u->IsUndercover()) power += u->GetPPower();
+		if(!u->IsUndercover() && !u->IsPassive()) power += u->GetPPower();
 	}
 	return power;
 }
@@ -51,6 +51,13 @@ void UnitZone::AddUnit(Unit* u, DataBase* database) {
 		u->SetDirections(1, -1);
 	}
 	if(!u->IsBoss() && u->GetStaminaMod()== NULL) u->AddModifier((new Modifier(*database->modList["eot_stamina"])));
+	for (Unit* unit : GetUnits()) {
+		for (Modifier* mod : unit->GetModifiers()) {
+			if (mod->GetModType() == MODIFIER_TYPE::UNIT_ENTER_APPLY_MOD) {
+				u->AddModifier(mod->GetModifier());
+			}
+		}
+	}
 	unitList.push_back(u);
 	for (Modifier* mod : u->GetModifiers()) {
 		switch (mod->GetModType()) {
@@ -91,6 +98,7 @@ void UnitZone::AddUnit(Unit* u, DataBase* database) {
 			break;
 		}
 	}
+	
 	player->GetZones()[(int)ZONE_TYPE::Z_ATTACK]->UpdatePositions();
 	player->GetZones()[(int)ZONE_TYPE::Z_ATTACK]->UpdateStatMods();
 	player->GetZones()[(int)ZONE_TYPE::Z_BLOCK]->UpdatePositions();

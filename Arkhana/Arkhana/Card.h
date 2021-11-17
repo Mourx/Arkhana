@@ -61,6 +61,7 @@ public:
         return txtName.getString();
     }
     bool IsUndercover() { return bUndercover; }
+    bool IsPassive() { return bPassive; }
     void SetCostChange(int change);
     bool IsUnitTarget();
     void DoEffect(Unit* targUnit,UnitZone* targZone);
@@ -86,6 +87,7 @@ protected:
     int goldCost = 0;
     bool bHasTargetZone = false;
     bool bUndercover = false;
+    bool bPassive = false;
     
     UnitZone* targetZone;
 

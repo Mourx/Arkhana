@@ -106,6 +106,7 @@ public:
 		else if (data == "MUSIC_AURA") return MODIFIER_TYPE::MUSIC_AURA;
 		else if (data == "OPPOSITE_ZONE") return MODIFIER_TYPE::OPPOSITE_ZONE;
 		else if (data == "SOT_EFFECT") return MODIFIER_TYPE::SOT_EFFECT;
+		else if (data == "UNIT_ENTER_APPLY_MOD") return MODIFIER_TYPE::UNIT_ENTER_APPLY_MOD;
 		else return MODIFIER_TYPE::ZONE_MOD;
 	}
 

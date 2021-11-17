@@ -4,60 +4,60 @@
       "actionCount": 2,
       "armour": 0,
       "decklist": [
-        [ "Goblin", "Goblin" ],
-        [ "Doublin" ],
-        [ "Shield Goblin", "Rage" ]
+        [ "Goblin", "Goblin", "Goblin", "Rage" ],
+        [ "Shield Goblin", "Goblin", "Doublin" ],
+        [ "Shield Goblin", "Shield Goblin", "Rage" ]
       ],
       "description": "A band of goblins\nfrom the east!\n\nGoblins tend to\ntry and swarm the\nememy.",
       "health": 15,
       "level": 0,
       "name": "goblins",
-      "startingPlay": [ "Goblin" ],
+      "startingPlay": [ "Goblin", "Goblin", "Goblin" ],
       "type": "E_COMBAT"
     },
     "ogres": {
       "actionCount": 1,
       "armour": 10,
       "decklist": [
-        [ "Ogre" ],
+        [ "Ogre", "Ogre" ],
         [ "Sap Spirit" ],
-        [ "Goblin" ]
+        [ "Goblin", "Goblin", "Goblin", "Goblin", "Goblin" ]
       ],
       "description": "An Ogre! and his\ngoblin friends.\n\nKeep an eye on\nthe power of\nthe ogre.",
       "health": 40,
       "level": 1,
       "name": "ogres",
-      "startingPlay": [ "Ogre" ],
+      "startingPlay": [ "Ogre", "Goblin", "Goblin", "Goblin" ],
       "type": "E_COMBAT"
     },
     "several goblins": {
       "actionCount": 2,
       "armour": 0,
       "decklist": [
-        [ "Doublin" ],
-        [ "Rage", "Rage" ],
-        [ "Goblin", "Shrine" ]
+        [ "Doublin", "Doublin", "Doublin" ],
+        [ "Doublin", "Goblin","Rage", "Rage" ],
+        [ "Goblin", "Doublin", "Goblin", "Shrine" ]
       ],
       "description": "Uh oh! Several goblins!",
       "health": 60,
       "level": 2,
       "name": "several goblins",
-      "startingPlay": [ "Doublin","Doublin" ],
+      "startingPlay": [ "Doublin", "Doublin", "Goblin", "Goblin" ],
       "type": "E_COMBAT"
     },
     "troll boss": {
       "actionCount": 2,
       "armour": 20,
       "decklist": [
-        [ "Ogre" ],
-        [ "Rage", "Rage" ],
-        [ "Doublin", "Shrine" ]
+        [ "Ogre", "Doublin", "Goblin" ],
+        [ "Goblin", "Goblin", "Rage", "Rage" ],
+        [ "Doublin", "Goblin", "Shrine" ]
       ],
       "description": "He's the big boss.\nBe Careful",
       "health": 60,
       "level": 3,
       "name": "Troll Boss",
-      "startingPlay": [ "Troll Boss" ],
+      "startingPlay": [ "Troll Boss", "Ogre","Ogre","Doublin","Goblin" ],
       "type": "E_BOSS"
     }
   }

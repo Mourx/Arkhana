@@ -157,7 +157,7 @@
     },
     "Banner Frog": {
       "name": "Banner Frog",
-      "cost": 1,
+      "cost": 3,
       "cardType": "UNIT",
       "unit": "Banner Frog",
       "zOTag": "Z_PLAYER",
@@ -299,8 +299,21 @@
       "zTag": "",
       "AITag": "",
       "level": 0,
-      "effect":  "Frog Dog",
+      "effect": "Frog Dog",
       "modifiers": [ "frog_dog_dummy" ],
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Lily Pad": {
+      "name": "Lily Pad",
+      "cost": 1,
+      "cardType": "UNIT",
+      "unit": "Lily Pad",
+      "zOTag": "Z_PLAYER",
+      "zTag": "PASSIVE",
+      "AITag": "",
+      "level": 0,
+      "effect": "Lily Pad",
+      "modifiers": [ "lily_pad_modifier" ],
       "shaderPath": "Textures/Shaders/Empress.vert"
     }
   }

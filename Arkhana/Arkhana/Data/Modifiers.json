@@ -247,6 +247,27 @@
       "text": "",
       "mText": "Frog Dog: Scaring\nthe enemy."
     },
+    "lily_pad_buff": {
+      "name": "Lily Pad Modifier",
+      "value": 1,
+      "multiplier": 0,
+      "sType": "STAMINA",
+      "mType": "UNIT_MOD",
+      "EOTChange": 0,
+      "text": "Lily Pad: +VALUE stamina",
+      "mText": "Other units gain VALUE\nStamina on enter."
+    },
+    "lily_pad_modifier": {
+      "name": "Lily Pad Modifier",
+      "value": 1,
+      "multiplier": 0,
+      "sType": "STAMINA",
+      "mType": "UNIT_ENTER_APPLY_MOD",
+      "EOTChange": 0,
+      "modifier": "lily_pad_buff",
+      "text": "Other units gain VALUE\nStamina on enter.",
+      "mText": "Other units gain VALUE\nStamina on enter."
+    },
     "ogre_buff": {
       "name": "Ogre Buff",
       "value": 4,

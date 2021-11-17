@@ -134,12 +134,12 @@ void Player::SetFaction() {
 	decklist.clear();
 	cardList = database->CardListRedUnlocked;
 
-	decklist.push_back(new Card(*cardList["Frog Dog"], database));
-	decklist.push_back(new Card(*cardList["Frog Dog"], database));
-	decklist.push_back(new Card(*cardList["Frog Dog"], database));
 	decklist.push_back(new Card(*cardList["Frog"], database));
 	decklist.push_back(new Card(*cardList["Frog"], database));
 	decklist.push_back(new Card(*cardList["Frog"], database));
+	decklist.push_back(new Card(*cardList["Frog"], database));
+	decklist.push_back(new Card(*cardList["Shield Frog"], database));
+	decklist.push_back(new Card(*cardList["Shield Frog"], database));
 	decklist.push_back(new Card(*cardList["Shield Frog"], database));
 	decklist.push_back(new Card(*cardList["Shield Frog"], database));
 
@@ -153,7 +153,7 @@ void Player::Update(Time t) {
 		if (attackTimer == 0) {
 			attackTimer += t.asSeconds();
 			for (Unit* u : attackZone->GetUnits()) {
-				if (u->GetPPower() >= 1) {
+				if (u->GetPPower() >= 1 && !(u->IsPassive() || u->IsUndercover())) {
 					u->Attack();
 				}
 			}

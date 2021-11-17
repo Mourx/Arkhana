@@ -96,7 +96,7 @@ protected:
 	int maxMana = 3;
 	int currentMana = 3;
 
-	int currentGold = 3000;
+	int currentGold = 25;
 
 	Text txtCurMana;
 	Vector2f txtCurManaPos = Vector2f(100,700);

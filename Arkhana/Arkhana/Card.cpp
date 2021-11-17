@@ -75,6 +75,7 @@ Card::Card(CardData data,DataBase* dataB) {
 	if (txt == "") txt = zTag;
 	else txt = txt + "\n" + zTag;
 	if (zTag == "UNDERCOVER") bUndercover = true;
+	if (zTag == "PASSIVE") bPassive = true;
 	txtDesc.setFont(font);
 	txtDesc.setString(txt);
 	txtDesc.setCharacterSize(12);

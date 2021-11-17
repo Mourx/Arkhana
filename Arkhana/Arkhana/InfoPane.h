@@ -39,7 +39,7 @@ public:
         cardInfoName = unit->GetCard()->GetName();
         txtCardInfo.setString(cardInfo);
         txtCardInfoName.setString(cardInfoName);
-        if (!unit->IsUndercover()) {
+        if (!unit->IsUndercover() && !unit->IsPassive()) {
             unitPower = "Power:   " + to_string((int)unit->GetPPower());
         }
         else {

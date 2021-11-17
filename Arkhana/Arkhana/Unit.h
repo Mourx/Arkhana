@@ -38,6 +38,7 @@ public:
     }
     bool IsBoss() { return bBoss; }
     bool IsUndercover();
+    bool IsPassive();
     void RemoveUnitMod(Modifier* mod);
     Modifier* GetStaminaMod();
     void Retreat();

@@ -138,6 +138,12 @@
       "stamina": 4,
       "filePath": "Textures/Units/frogDog.png"
     },
+    "Lily Pad": {
+      "name": "Lily Pad",
+      "physPower": 0,
+      "stamina": 6,
+      "filePath": "Textures/Units/lilyPad.png"
+    },
     "Doublin": {
       "name": "Doublin",
       "physPower": 7,
