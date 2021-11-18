@@ -17,13 +17,14 @@ void GameObject::Draw(RenderTexture* w) {
 
 void GameObject::Update(Time t) {
 	if (bMoving) {
-
+		moveTimer += t.asSeconds();
 		icon.move(Vector2f(xdir, ydir) * t.asSeconds());
 		SetPosition(icon.getPosition());
-		if (abs(pos.x - targetPos.x) <= 5 && abs(pos.y - targetPos.y) <= 5) {
+		if ((abs(pos.x - targetPos.x) <= 5 && abs(pos.y - targetPos.y) <= 5) || (moveTimer >= moveDuration)) {
 			bMoving = false;
 			SetPosition(targetPos);
 			bAtTarget = true;
+			moveTimer = 0;
 		}
 	}
 }

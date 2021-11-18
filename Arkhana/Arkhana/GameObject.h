@@ -21,7 +21,7 @@ public:
 		bMoving = true;
 		xdir = (targetPos.x - pos.x) / moveDuration;
 		ydir = (targetPos.y - pos.y) / moveDuration;
-
+		moveTimer = 0;
 	}
 	virtual void SetHover(bool b) { bHover = b; }
 	bool GetHover() { return bHover; }

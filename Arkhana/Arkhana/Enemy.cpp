@@ -193,7 +193,8 @@ void Enemy::SetNextMove() {
 		c->SetPosition(Vector2f(-200, -200));
 		c->ResetTarget();
 	}
-	for (int i = 0; i < maxMana; i++) {
+	maxMana = decklist.size();
+	for (int i = 0; i < decklist.size(); i++) {
 		int index = cardIndex + i;
 		if (index >= decklist.size()) {
 			index = 0;

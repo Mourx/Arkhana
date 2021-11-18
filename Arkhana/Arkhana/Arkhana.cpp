@@ -6,6 +6,7 @@
 #include "RewardScreen.h"
 #include "PathScreen.h"
 #include "ForgeScreen.h"
+#include "GameOverScreen.h"
 #include "DataBase.h"
 #include "InfoPane.h"
 using namespace sf;
@@ -51,7 +52,7 @@ int main() {
 	music.setVolume(10.f);
 	music.setLoop(true);
 	music.play();
-
+	
 
 	Sprite tempScreen;
 	TRANSITION_TYPE tType = LEFT_ENTER;
@@ -62,7 +63,7 @@ int main() {
 	Sprite slideSprite;
 	Sprite staySprite;
 
-	currentScreen = pathScreen;
+	currentScreen = new GameOverScreen(screenRender,database,player);
 	Clock clock;
 	Time elapsed;
 	Event event;
@@ -88,6 +89,8 @@ int main() {
 		switch (currentScreen->GetNextScreen()) {
 		case MAIN_MENU:
 			currentScreen = new MainMenuScreen(screenRender,player);
+			pathScreen = new PathScreen(screenRender, database, player);
+			player = new Player(screenRender, database);
 			shaderEffect.update(*window);
 			preSlide.update(screenRender->getTexture());
 			break;
@@ -101,6 +104,7 @@ int main() {
 			break;
 		case GAME_OVER:
 			tType = DOWN_ENTER;
+			currentScreen = new GameOverScreen(screenRender, database, player);
 			break;
 		case REWARD_SCREEN:
 			currentScreen = new RewardScreen(screenRender,database,player,enemy);

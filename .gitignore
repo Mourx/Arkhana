@@ -1,2 +1,9 @@
 *.ipch
 ConceptAndDesign/.~lock.CardLists.ods#
+*.tlog
+*.obj
+*.obj
+*.tlog
+Arkhana/Arkhana/x64/Debug/AIController.obj
+*.obj
+*.obj
