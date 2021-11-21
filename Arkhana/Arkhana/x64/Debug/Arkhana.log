@@ -1,4 +1,4 @@
-﻿  GameOverScreen.cpp
+﻿  Arkhana.cpp
 C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\GameObject.h(41,21): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Unit.h(50,28): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Unit.h(51,27): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
@@ -13,22 +13,23 @@ C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\UnitZone.h(64,83): warni
           [
               T=float
           ]
-C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\GameOverScreen.cpp(14,81): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Arkhana.cpp(43,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Arkhana.cpp(43,15): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Arkhana.cpp(197,23): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  MainMenuScreen.cpp
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\GameObject.h(41,21): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Unit.h(50,28): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Unit.h(51,27): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\UnitZone.h(31,37): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\UnitZone.h(64,126): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
-          [
-              T=unsigned int
-          ]
-          and
           [
               T=float
           ]
-C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\GameOverScreen.cpp(14,58): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\UnitZone.h(64,83): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
-          [
-              T=unsigned int
-          ]
-          and
           [
               T=float
           ]
+  Generating Code...
   Arkhana.vcxproj -> C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\x64\Debug\Arkhana.exe

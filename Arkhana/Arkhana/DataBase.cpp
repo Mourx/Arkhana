@@ -1,5 +1,7 @@
 #include "DataBase.h"
 #include "Modifier.h"
+#include "Faction.h"
+
 void DataBase::BuildModifierLists() {
 	FILE* fp;
 	fopen_s(&fp, "Data/Modifiers.json", "rb");

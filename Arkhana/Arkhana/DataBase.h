@@ -13,6 +13,7 @@
 
 class Modifier;
 class Player;
+class Faction;
 using namespace rapidjson;
 using namespace std;
 using namespace sf;
@@ -182,6 +183,7 @@ public:
 	SoundBuffer rollover;
 
 	vector<string> retreatPhrases;
+	vector<Faction*> factions;
 };
 
 

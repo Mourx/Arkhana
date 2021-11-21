@@ -88,7 +88,7 @@ protected:
 	int CARDS_PER_TURN = 5;
 	int CARDS_START = 6;
 
-	int maxArmour = 20;
+	int maxArmour = 0;
 	int armour = maxArmour;
 	int health = 10;
 	int maxHealth = 50;

@@ -11,17 +11,17 @@ public:
     void MouseMoved(Vector2f mousePos);
     void MouseClicked(Vector2f mousePos);
 protected:
-    Sprite redFactionIcon;
-    Sprite blueFactionIcon;
+    GameObject* faction1;
     
-    Texture texRedFaction;
-    Texture texBlueFaction;
+    Texture texFaction1;
     
+    Sprite background;
+    Texture texBackground;
+
     Shader redShader;
     Shader blueShader;
 
-    Vector2f redFactionPos = Vector2f(600, 400);
-    Vector2f blueFactionPos = Vector2f(900, 400);
+    Vector2f faction1Pos = Vector2f(1250, 650);
 
     Player* player;
 };

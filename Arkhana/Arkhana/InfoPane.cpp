@@ -11,7 +11,7 @@ InfoPane::InfoPane() {
 	font.loadFromFile("Fonts/ManaSpace/manaspc.ttf");
 	txtDescription.setFont(font);
 	txtDescription.setCharacterSize(18);
-	txtDescription.setString("Wow what an enemy! \nSometimes they are in \ngroups of 5!");
+	txtDescription.setString("Welcome to Forty Frogs!\nClick on a Frog to begin!\nEach frog starts with\nits own deck!");
 	txtDescription.setPosition(descriptionPos);
 
 	txtHoverDescription.setFont(font);

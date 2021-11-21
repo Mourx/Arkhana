@@ -63,7 +63,7 @@ int main() {
 	Sprite slideSprite;
 	Sprite staySprite;
 
-	currentScreen = new GameOverScreen(screenRender,database,player);
+	currentScreen = new MainMenuScreen(screenRender, player);
 	Clock clock;
 	Time elapsed;
 	Event event;
@@ -91,6 +91,8 @@ int main() {
 			currentScreen = new MainMenuScreen(screenRender,player);
 			pathScreen = new PathScreen(screenRender, database, player);
 			player = new Player(screenRender, database);
+			player->SetFaction();
+			player->SetBarWindow(windowRender);
 			shaderEffect.update(*window);
 			preSlide.update(screenRender->getTexture());
 			break;
