@@ -15,6 +15,21 @@
       "startingPlay": [ "Goblin", "Goblin", "Goblin" ],
       "type": "E_COMBAT"
     },
+    "tough goblins": {
+      "actionCount": 2,
+      "armour": 0,
+      "decklist": [
+        [ "Goblin", "Doublin", "Doublin", "Rage" ],
+        [ "Shield Goblin", "Goblin", "Doublin" ],
+        [ "Shield Goblin", "Shield Goblin", "Rage" ]
+      ],
+      "description": "These goblins seem\na bit tougher!\n\nGoblins tend to\ntry and swarm the\nememy.",
+      "health": 15,
+      "level": 1,
+      "name": "goblins",
+      "startingPlay": [ "Goblin", "Goblin", "Doublin", "Doublin" ],
+      "type": "E_COMBAT"
+    },
     "ogres": {
       "actionCount": 1,
       "armour": 10,
@@ -25,7 +40,7 @@
       ],
       "description": "An Ogre! and his\ngoblin friends.\n\nKeep an eye on\nthe power of\nthe ogre.",
       "health": 40,
-      "level": 1,
+      "level": 2,
       "name": "ogres",
       "startingPlay": [ "Ogre", "Goblin", "Goblin", "Goblin" ],
       "type": "E_COMBAT"
@@ -35,7 +50,7 @@
       "armour": 0,
       "decklist": [
         [ "Doublin", "Doublin", "Doublin" ],
-        [ "Doublin", "Goblin","Rage", "Rage" ],
+        [ "Doublin", "Doublin", "Goblin", "Rage", "Rage" ],
         [ "Goblin", "Doublin", "Goblin", "Shrine" ]
       ],
       "description": "Uh oh! Several goblins!",
@@ -54,10 +69,10 @@
         [ "Doublin", "Goblin", "Shrine" ]
       ],
       "description": "He's the big boss.\nBe Careful",
-      "health": 60,
+      "health": 120,
       "level": 3,
       "name": "Troll Boss",
-      "startingPlay": [ "Troll Boss", "Ogre","Ogre","Doublin","Goblin" ],
+      "startingPlay": [ "Troll Boss", "Ogre", "Ogre", "Doublin", "Goblin" ],
       "type": "E_BOSS"
     }
   }

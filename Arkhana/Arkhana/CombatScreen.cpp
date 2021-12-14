@@ -107,6 +107,9 @@ void CombatScreen::MouseMoved(Vector2f mousePos) {
 	if (!player->selectedCard == NULL) {
 		player->selectedCard->SetPosition(Vector2f(mousePos.x - iconOffsetX, mousePos.y - iconOffsetY));
 	}
+	if (selectedZone != NULL) {
+		selectedZone->SetHover(false);
+	}
 	selectedZone = NULL;
 	hoverUnit = NULL;
 	hoverCard = NULL;
@@ -154,6 +157,9 @@ void CombatScreen::MouseMoved(Vector2f mousePos) {
 		}
 	}
 	eNext = NULL;
+	if (selectedZone != NULL) {
+		selectedZone->SetHover(true);
+	}
 	vector<Card*> list = enemy->GetDeckList();
 	for (int i = list.size() - 1; i >= 0; i--) {
 		FloatRect bounds = list[i]->GetIcon()->getGlobalBounds();

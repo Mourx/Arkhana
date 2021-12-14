@@ -63,6 +63,7 @@ public:
         for (int i = 0; i < unitList.size(); i++) {
             unitList[i]->SetPosition(this->GetIcon()->getPosition() + Vector2f(10 + (i % 5) * 90, 10 + ((i / 5) * 125) * dir + offset));
         }
+        hoverIcon.setPosition(pos + hoverOffset);
     }
 protected:
     void UpdateStatMods();
@@ -80,5 +81,10 @@ protected:
     Vector2f animationPos = Vector2f(50, 50);
     vector<Modifier*> zoneMods;
     ZONE_TYPE type;
+
+    Sprite hoverIcon;
+    Texture texHoverIcon;
+
+    Vector2f hoverOffset = Vector2f(0, -50);
 };
 

@@ -4,11 +4,16 @@
 UnitZone::UnitZone(int zoneType,Player* p,Player* e, ZONE_OWNER zPlayer, ZONE_TYPE t) {
 	if (zoneType == 0) {
 		texIcon.loadFromFile("Textures/GUI/attackZone.png");
+		texHoverIcon.loadFromFile("Textures/GUI/attackZoneHover.png");
 	}
 	else {
 		texIcon.loadFromFile("Textures/GUI/blockZone.png");
+		texHoverIcon.loadFromFile("Textures/GUI/blockZoneHover.png");
 	}
+
+
 	icon.setTexture(texIcon);
+	hoverIcon.setTexture(texHoverIcon);
 	player = p;
 	enemy = e;
 	owner = zPlayer == ENEMY ? e : p;
@@ -24,6 +29,9 @@ void UnitZone::Draw(RenderTexture* w) {
 void UnitZone::DrawUnits(RenderTexture* w) {
 	for (Unit* u : unitList) {
 		u->Draw(w);
+	}
+	if (GetHover()) {
+		w->draw(hoverIcon);
 	}
 }
 
