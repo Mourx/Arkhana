@@ -49,7 +49,7 @@ void Player::InitSprites() {
 	texGem.loadFromFile("Textures/Cards/gem.png");
 	gemIcon.setTexture(texGem);
 	gemIcon.setPosition(gemPos);
-	gemIcon.setScale(6, 6);
+	gemIcon.setScale(3, 3);
 
 	texDiscard.loadFromFile("Textures/GUI/discard_bin.png");
 	discardIcon.setTexture(texDiscard);
@@ -65,38 +65,38 @@ void Player::InitSprites() {
 	texPhysArm.loadFromFile("Textures/GUI/armourPhysical.png");
 	physArmIcon.setTexture(texPhysArm);
 	physArmIcon.setPosition(physArmPos);
-	physArmIcon.setScale(4, 4);
+	physArmIcon.setScale(1.5, 1.5);
 
 	
 	texHealth.loadFromFile("Textures/GUI/health.png");
 	healthIcon.setTexture(texHealth);
 	healthIcon.setPosition(healthPos);
-	healthIcon.setScale(2, 2);
+	healthIcon.setScale(1.5, 1.5);
 
 	font.loadFromFile("Fonts/Arial/arial.ttf");
-
+	coolFont.loadFromFile("Fonts/ManaSpace/manaspc.ttf");
 	txtPlayerGold.setPosition(txtPlayerGoldPos);
-	txtPlayerGold.setFont(font);
+	txtPlayerGold.setFont(coolFont);
 
 	txtHealth.setPosition(txtHealthPos);
-	txtHealth.setFont(font);
+	txtHealth.setFont(coolFont);
 	
 	txtPhysArm.setPosition(txtPhysArmPos);
-	txtPhysArm.setFont(font);
+	txtPhysArm.setFont(coolFont);
 
-	txtCurMana.setFont(font);
-	txtCurMana.setCharacterSize(60);
+	txtCurMana.setFont(coolFont);
+	txtCurMana.setCharacterSize(30);
 	txtCurMana.setFillColor(Color::Cyan);
 
-	txtDeckTotalSize.setFont(font);
+	txtDeckTotalSize.setFont(coolFont);
 	txtDeckTotalSize.setPosition(txtDeckTotalSizePos);
 
-	txtDeckSize.setFont(font);
+	txtDeckSize.setFont(coolFont);
 	txtDiscardSize.setPosition(txtDiscardSizePos);
 	txtBurntSize.setPosition(txtBurntSizePos);
 
-	txtDiscardSize.setFont(font);
-	txtBurntSize.setFont(font);
+	txtDiscardSize.setFont(coolFont);
+	txtBurntSize.setFont(coolFont);
 }
 
 void Player::UpdateStrings() {
@@ -128,6 +128,14 @@ void Player::UpdateStrings() {
 	tR = txtBurntSize.getLocalBounds();
 	txtBurntSize.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
 	txtBurntSize.setPosition(txtBurntSizePos);
+
+	tR = txtHealth.getLocalBounds();
+	txtHealth.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
+	txtHealth.setPosition(txtHealthPos);
+
+	tR = txtPhysArm.getLocalBounds();
+	txtPhysArm.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
+	txtPhysArm.setPosition(txtPhysArmPos);
 }
 
 void Player::SetFaction() {
@@ -208,8 +216,10 @@ void Player::DrawBackground() {
 	window->draw(gemIcon);
 	window->draw(discardIcon);
 	window->draw(burntIcon);
+	window->draw(healthIcon);
 	window->draw(physArmIcon);
 
+	window->draw(txtHealth);
 	window->draw(txtPhysArm);
 	window->draw(txtCurMana);
 	window->draw(txtDeckSize);
@@ -223,6 +233,7 @@ void Player::DrawBackground() {
 void Player::DrawForeground() {
 	attackZone->DrawUnits(window);
 	blockZone->DrawUnits(window);
+	
 }
 
 void Player::NewTurnUpkeep() {

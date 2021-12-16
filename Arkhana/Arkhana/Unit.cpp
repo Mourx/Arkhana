@@ -119,7 +119,7 @@ void Unit::Update(Time t) {
 		if (attackTimer < attackDuration) {
 			attackTimer += t.asSeconds();
 			int flipdir = attackTimer <= attackDuration / 2 ? 1 : -1;
-			float xdir = 0;
+			float xdir = ((200 * attackDirection) / attackDuration) * flipdir * t.asSeconds();
 			float ydir = ((400* attackDirection)/attackDuration) * flipdir * t.asSeconds();
 			Move(Vector2f(xdir, ydir));
 		}

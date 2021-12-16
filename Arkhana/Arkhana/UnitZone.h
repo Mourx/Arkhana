@@ -65,12 +65,17 @@ public:
         }
         hoverIcon.setPosition(pos + hoverOffset);
     }
+    void SetTargetable(bool b) {
+        bTargetable = b;
+    }
 protected:
     void UpdateStatMods();
     
     float zoneBonusPhys = 0;
 
     float zoneMultiplierPhys = 0;
+
+    bool bTargetable = false;
 
     vector<Unit*> unitList;
     ZONE_OWNER ownerType;
@@ -84,7 +89,10 @@ protected:
 
     Sprite hoverIcon;
     Texture texHoverIcon;
+    
+    Shader shaderPulse;
+    float pulseTimer = 0;
 
-    Vector2f hoverOffset = Vector2f(0, -50);
+    Vector2f hoverOffset = Vector2f(0, 0);
 };
 

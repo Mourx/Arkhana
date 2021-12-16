@@ -10,7 +10,7 @@ UnitZone::UnitZone(int zoneType,Player* p,Player* e, ZONE_OWNER zPlayer, ZONE_TY
 		texIcon.loadFromFile("Textures/GUI/blockZone.png");
 		texHoverIcon.loadFromFile("Textures/GUI/blockZoneHover.png");
 	}
-
+	shaderPulse.loadFromFile("Textures/Shaders/pulse.vert", Shader::Vertex);
 
 	icon.setTexture(texIcon);
 	hoverIcon.setTexture(texHoverIcon);
@@ -33,6 +33,10 @@ void UnitZone::DrawUnits(RenderTexture* w) {
 	if (GetHover()) {
 		w->draw(hoverIcon);
 	}
+	else if (bTargetable) {
+		w->draw(hoverIcon,&shaderPulse);
+	}
+	
 }
 
 int UnitZone::GetCombinedPhysicalPower() {
@@ -296,6 +300,8 @@ int UnitZone::GetEffectCostChange() {
 }
 
 void UnitZone::Update(Time t) {
+	pulseTimer += t.asSeconds();
+	shaderPulse.setUniform("time", pulseTimer);
 	for (Unit* u :GetUnits()) {
 		u->Update(t);
 	}

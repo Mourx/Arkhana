@@ -21,6 +21,7 @@ public:
     COMBAT_RESULT GetResult() { return result; }
     Enemy* GetEnemy() { return enemy; }
     void SetInfo(InfoPane* info);
+    void UpdateDamagePredictions();
 protected:
     Player* player;
     Enemy* enemy;
@@ -53,5 +54,20 @@ protected:
 
     Sprite background;
     Texture texBackground;
+
+    Sprite playerDamageSign;
+    Sprite enemyDamageSign;
+    Texture texPDS;
+
+    Vector2f pdsPos = Vector2f(0,350);
+    Vector2f edsPos = Vector2f(1200, 270);
+
+    Text textPredictPD;
+    Text textPredictED;
+
+    Vector2f textPredictPDPos = Vector2f(60, 390);
+    Vector2f textPredictEDPos = Vector2f(1260, 310);
+
+    Font coolFont;
 };
 

@@ -5,8 +5,8 @@ Enemy::Enemy(RenderTexture* w,DataBase* data){
 	database = data;
 	window = w;
 
-	attackZonePos = Vector2f(800, 0);
-	blockZonePos = Vector2f(200, 0);
+	attackZonePos = Vector2f(000, 0);
+	blockZonePos = Vector2f(600, 0);
 
 	attackZone = new UnitZone(0,data->player,this, Z_ENEMY,ZONE_TYPE::Z_ATTACK);
 	attackZone->SetPosition(attackZonePos);
@@ -17,13 +17,13 @@ Enemy::Enemy(RenderTexture* w,DataBase* data){
 	zones.push_back(attackZone);
 	zones.push_back(blockZone);
 
-	physArmPos = Vector2f(1410, 345);
-	healthPos = Vector2f(1410, 15);
+	physArmPos = Vector2f(1230, 110);
+	healthPos = Vector2f(1230, 10);
 	attackDirection = 1;
 	retreatDirection = -1;
 	
-	txtPhysArmPos = Vector2f(1490, 145);
-	txtHealthPos = Vector2f(1500, 15);
+	txtPhysArmPos = physArmPos + Vector2f(30, 75);
+	txtHealthPos = healthPos + Vector2f(30, 75);
 
 	cardList = database->CardListEnemy;
 
@@ -39,7 +39,7 @@ void Enemy::InitSprites() {
 	texPhysArm.loadFromFile("Textures/GUI/armourPhysical.png");
 	physArmIcon.setTexture(texPhysArm);
 	physArmIcon.setPosition(physArmPos);
-	physArmIcon.setScale(4, -4);
+	physArmIcon.setScale(1.5, 1.5);
 
 
 
@@ -47,7 +47,7 @@ void Enemy::InitSprites() {
 	texHealth.loadFromFile("Textures/GUI/health.png");
 	healthIcon.setTexture(texHealth);
 	healthIcon.setPosition(healthPos);
-	healthIcon.setScale(2, 2);
+	healthIcon.setScale(1.5, 1.5);
 
 	font.loadFromFile("Fonts/Arial/arial.ttf");
 
@@ -69,9 +69,10 @@ void Enemy::DrawBackground() {
 	window->draw(gemIcon);
 	window->draw(discardIcon);
 	window->draw(burntIcon);
+	window->draw(healthIcon);
 	window->draw(physArmIcon);
 
-	window->draw(healthIcon);
+	
 	window->draw(txtHealth);
 	window->draw(txtPhysArm);
 	window->draw(txtCurMana);

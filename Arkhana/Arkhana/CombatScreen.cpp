@@ -29,6 +29,19 @@ CombatScreen::CombatScreen(RenderTexture* w,DataBase* data,Player* p,Encounter* 
 	background.setTexture(texBackground);
 	background.setPosition(0, 0);
 
+	texPDS.loadFromFile("Textures/GUI/damageBackground.png");
+	playerDamageSign.setTexture(texPDS);
+	enemyDamageSign.setTexture(texPDS);
+	playerDamageSign.setPosition(pdsPos);
+	enemyDamageSign.setPosition(edsPos);
+	
+	coolFont.loadFromFile("Fonts/ManaSpace/manaspc.ttf");
+	textPredictED.setFont(coolFont);
+	textPredictPD.setFont(coolFont);
+	textPredictED.setCharacterSize(40);
+	textPredictPD.setCharacterSize(40);
+
+
 	endTurn = new EndTurnButton();
 	endTurn->SetPosition(endTurnPos);
 	SetNextEnemyMove();
@@ -38,6 +51,10 @@ CombatScreen::CombatScreen(RenderTexture* w,DataBase* data,Player* p,Encounter* 
 
 void CombatScreen::Draw() {
 	window->draw(background);
+	window->draw(playerDamageSign);
+	window->draw(enemyDamageSign);
+	window->draw(textPredictED);
+	window->draw(textPredictPD);
 	endTurn->Draw(window);
 	enemy->DrawBackground();
 	player->DrawBackground();
@@ -49,6 +66,8 @@ void CombatScreen::Draw() {
 	if (eNext != NULL) {
 		eNext->Draw(window);
 	}
+	
+	
 }
 
 void CombatScreen::MouseClicked(Vector2f mousePos) {
@@ -66,34 +85,24 @@ void CombatScreen::MouseClicked(Vector2f mousePos) {
 void CombatScreen::MouseReleased(Vector2f mousePos) {
 	if (currentTurn == PLAYER) {
 		if (player->selectedCard != NULL){
-			Card* selCard = player->selectedCard;
 			if (selectedZone != NULL) {
-				if (selCard->GetZoneType() == ZONE_TYPE::Z_ANY || (selCard->GetZoneType() == selectedZone->GetType())) {
-					if (selCard->GetZoneOwner() == Z_EITHER || selectedZone->GetOwnerType() == selCard->GetZoneOwner()) {
-						if (player->GetCurrentMana() < selCard->GetCost() || (selCard->IsUnitTarget() && hoverUnit == NULL)) {
-							selCard->SetPosition(player->selectedCard->GetHandPos());
-						}
-						else {
-							selCard->Play(selectedZone,hoverUnit);
-							player->UseCard(selCard);
-
-						}
-					}
-					else {
-						selCard->SetPosition(player->selectedCard->GetHandPos());
-					}
+				Card* selCard = player->selectedCard;
+				if (player->GetCurrentMana() < selCard->GetCost() || (selCard->IsUnitTarget() && hoverUnit == NULL)) {
+					selCard->SetPosition(player->selectedCard->GetHandPos());
 					player->selectedCard = NULL;
 				}
 				else {
-					selCard->SetPosition(player->selectedCard->GetHandPos());
+					selCard->Play(selectedZone, hoverUnit);
+					player->UseCard(selCard);
 					player->selectedCard = NULL;
 				}
 			}
 			else {
-				selCard->SetPosition(player->selectedCard->GetHandPos());
+				player->selectedCard->SetPosition(player->selectedCard->GetHandPos());
 				player->selectedCard = NULL;
 			}
 		}
+		
 		//end turn button functionality
 		FloatRect bounds = endTurn->GetIcon()->getGlobalBounds();
 		if (bounds.contains(mousePos)) {
@@ -104,16 +113,48 @@ void CombatScreen::MouseReleased(Vector2f mousePos) {
 }
 
 void CombatScreen::MouseMoved(Vector2f mousePos) {
-	if (!player->selectedCard == NULL) {
-		player->selectedCard->SetPosition(Vector2f(mousePos.x - iconOffsetX, mousePos.y - iconOffsetY));
+	if (player->selectedCard != NULL || hoverCard != NULL) {
+		Card* card;
+		if (player->selectedCard != NULL) {
+			card = player->selectedCard;
+			card->SetPosition(Vector2f(mousePos.x - iconOffsetX, mousePos.y - iconOffsetY));
+		}
+		else {
+			
+			card = hoverCard;
+		}
+		
+		for (UnitZone* u : player->GetZones()) {
+			u->SetTargetable(false);
+			if (card->GetZoneType() == ZONE_TYPE::Z_ANY || (card->GetZoneType() == u->GetType())) {
+				if (card->GetZoneOwner() == Z_EITHER || u->GetOwnerType() == card->GetZoneOwner()) {
+					u->SetTargetable(true);
+				}
+			}
+		}
+		for (UnitZone* u : enemy->GetZones()) {
+			u->SetTargetable(false);
+			if (card->GetZoneType() == ZONE_TYPE::Z_ANY || (card->GetZoneType() == u->GetType())) {
+				if (card->GetZoneOwner() == Z_EITHER || u->GetOwnerType() == card->GetZoneOwner()) {
+					u->SetTargetable(true);
+				}
+			}
+		}
 	}
-	if (selectedZone != NULL) {
-		selectedZone->SetHover(false);
+	else {
+		for (UnitZone* u : player->GetZones()) {
+			u->SetTargetable(false);
+		}
+		for (UnitZone* u : enemy->GetZones()) {
+			u->SetTargetable(false);
+		}
 	}
+	
 	selectedZone = NULL;
 	hoverUnit = NULL;
 	hoverCard = NULL;
 	for (UnitZone* u : player->GetZones()) {
+		u->SetHover(false);
 		FloatRect bounds = u->GetIcon()->getGlobalBounds();
 		if (bounds.contains(mousePos)) {
 			selectedZone = u;
@@ -130,6 +171,7 @@ void CombatScreen::MouseMoved(Vector2f mousePos) {
 		}
 	}
 	for (UnitZone* u : enemy->GetZones()) {
+		u->SetHover(false);
 		FloatRect bounds = u->GetIcon()->getGlobalBounds();
 		if (bounds.contains(mousePos)) {
 			selectedZone = u;
@@ -157,8 +199,18 @@ void CombatScreen::MouseMoved(Vector2f mousePos) {
 		}
 	}
 	eNext = NULL;
-	if (selectedZone != NULL) {
-		selectedZone->SetHover(true);
+	if (!player->selectedCard == NULL && selectedZone != NULL) {
+		if (player->selectedCard->GetZoneType() == ZONE_TYPE::Z_ANY || (player->selectedCard->GetZoneType() == selectedZone->GetType())) {
+			if (player->selectedCard->GetZoneOwner() == Z_EITHER || selectedZone->GetOwnerType() == player->selectedCard->GetZoneOwner()) {
+				selectedZone->SetHover(true);
+			}
+			else {
+				selectedZone = NULL;
+			}
+		}
+		else {
+			selectedZone = NULL;
+		}
 	}
 	vector<Card*> list = enemy->GetDeckList();
 	for (int i = list.size() - 1; i >= 0; i--) {
@@ -171,7 +223,7 @@ void CombatScreen::MouseMoved(Vector2f mousePos) {
 }
 
 void CombatScreen::Update(Time t) {
-	
+	UpdateDamagePredictions();
 
 	if (currentTurn == ENEMY) {
 		bool bWaitRetreats = false;
@@ -311,4 +363,44 @@ void CombatScreen::SetInfo(InfoPane* info) {
 	}if (hoverUnit != NULL) {
 		info->SetUnitInfo(hoverUnit);
 	}
+}
+
+
+void CombatScreen::UpdateDamagePredictions() {
+
+	vector<UnitZone*> eZones = enemy->GetZones();
+	vector<UnitZone*> pZones = player->GetZones();
+
+	UnitZone* eAttack = eZones[(int)ZONE_TYPE::Z_ATTACK];
+	UnitZone* eBlock = eZones[(int)(ZONE_TYPE::Z_BLOCK)];
+
+	UnitZone* pAttack = pZones[(int)ZONE_TYPE::Z_ATTACK];
+	UnitZone* pBlock = pZones[(int)ZONE_TYPE::Z_BLOCK];
+
+	int enemyPhysDamage = pAttack->GetCombinedPhysicalPower() - eBlock->GetCombinedPhysicalPower();
+	int playerPhysDamage = eAttack->GetCombinedPhysicalPower() - pBlock->GetCombinedPhysicalPower();
+
+	if (enemyPhysDamage <= 0) {
+		textPredictED.setFillColor(Color::Blue);
+	}
+	else {
+		textPredictED.setFillColor(Color::Red);
+	}
+	if (playerPhysDamage <= 0) {
+		textPredictPD.setFillColor(Color::Blue);
+	}
+	else {
+		textPredictPD.setFillColor(Color::Red);
+	}
+
+	textPredictED.setString(to_string(abs(enemyPhysDamage)));
+	textPredictPD.setString(to_string(abs(playerPhysDamage)));
+
+	FloatRect tR = textPredictPD.getLocalBounds();
+	textPredictPD.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
+	textPredictPD.setPosition(textPredictPDPos);
+	
+	tR = textPredictED.getLocalBounds();
+	textPredictED.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
+	textPredictED.setPosition(textPredictEDPos);
 }
