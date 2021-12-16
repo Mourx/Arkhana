@@ -59,14 +59,14 @@ protected:
     Sprite enemyDamageSign;
     Texture texPDS;
 
-    Vector2f pdsPos = Vector2f(0,350);
-    Vector2f edsPos = Vector2f(1200, 270);
+    Vector2f pdsPos = Vector2f(5,400);
+    Vector2f edsPos = Vector2f(1270, 250);
 
     Text textPredictPD;
     Text textPredictED;
 
-    Vector2f textPredictPDPos = Vector2f(60, 390);
-    Vector2f textPredictEDPos = Vector2f(1260, 310);
+    Vector2f textPredictPDPos = Vector2f(50, 430);
+    Vector2f textPredictEDPos = Vector2f(1315, 280);
 
     Font coolFont;
 };

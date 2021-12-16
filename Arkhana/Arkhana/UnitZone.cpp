@@ -3,12 +3,12 @@
 
 UnitZone::UnitZone(int zoneType,Player* p,Player* e, ZONE_OWNER zPlayer, ZONE_TYPE t) {
 	if (zoneType == 0) {
-		texIcon.loadFromFile("Textures/GUI/attackZone.png");
-		texHoverIcon.loadFromFile("Textures/GUI/attackZoneHover.png");
+		texIcon.loadFromFile("Textures/GUI/attackZoneShear.png");
+		texHoverIcon.loadFromFile("Textures/GUI/attackZoneHoverShear.png");
 	}
 	else {
-		texIcon.loadFromFile("Textures/GUI/blockZone.png");
-		texHoverIcon.loadFromFile("Textures/GUI/blockZoneHover.png");
+		texIcon.loadFromFile("Textures/GUI/blockZoneShear.png");
+		texHoverIcon.loadFromFile("Textures/GUI/blockZoneHoverShear.png");
 	}
 	shaderPulse.loadFromFile("Textures/Shaders/pulse.vert", Shader::Vertex);
 
@@ -213,15 +213,15 @@ void UnitZone::EndTurnUpkeep(DataBase* database) {
 		for (Modifier* mod : u->GetModifiers()) {
 			if (mod->GetModType() == MODIFIER_TYPE::UNIT_EOT_MOD) {
 				u->AddModifier(mod->GetModifier());
-			}
-			if (mod->GetName() == "Stamina Reduced") {
-				if (GetType() == ZONE_TYPE::Z_ATTACK) {
+				if (mod->GetName() == "Stamina Reduced") {
+					if (GetType() == ZONE_TYPE::Z_ATTACK) {
+						mod->ApplyEOT();
+					}
+				}
+				else {
 					mod->ApplyEOT();
 				}
-			}
-			else {
-				mod->ApplyEOT();
-			}
+			}			
 		}
 		
 		for (Modifier* mod : u->GetAuras()) {
@@ -246,6 +246,9 @@ void UnitZone::NewTurnUpkeep(DataBase* database) {
 				if (GetType() == ZONE_TYPE::Z_BLOCK) {
 					mod->ApplyEOT();
 				}
+			}
+			if (mod->GetModType() == MODIFIER_TYPE::UNIT_SOT_MOD) {
+				mod->ApplyEOT();
 			}
 			if (mod->GetModType() == MODIFIER_TYPE::SOT_EFFECT) {
 				u->GetCard()->DoEffect(u,this);

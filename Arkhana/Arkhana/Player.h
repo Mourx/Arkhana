@@ -146,11 +146,11 @@ protected:
 
 	Sprite physArmIcon;
 	Texture texPhysArm;
-	Vector2f physArmPos = Vector2f(30, 540);
+	Vector2f physArmPos = Vector2f(30, 480);
 
 	Sprite healthIcon;
 	Texture texHealth;
-	Vector2f healthPos = Vector2f(30, 440);
+	Vector2f healthPos = Vector2f(50, 580);
 
 	float attackDuration = 2;
 	float attackTimer = 0;
@@ -180,8 +180,8 @@ protected:
 	Vector2f txtHealthPos = healthPos + Vector2f(30, 75);
 	Vector2f txtPhysArmPos = physArmPos + Vector2f(30, 75);
 
-	Vector2f attackZonePos = Vector2f(720, 350);
-	Vector2f blockZonePos = Vector2f(120, 350);
+	Vector2f attackZonePos = Vector2f(680, 350);
+	Vector2f blockZonePos = Vector2f(80, 350);
 
 	vector<UnitZone*> zones;
 	map<string,CardData*> cardList;

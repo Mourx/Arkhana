@@ -138,6 +138,12 @@
       "stamina": 4,
       "filePath": "Textures/Units/frogDog.png"
     },
+    "Smog Frog": {
+      "name": "Smog Frog",
+      "physPower": 100,
+      "stamina": 1,
+      "filePath": "Textures/Units/smogFrog.png"
+    },
     "Lily Pad": {
       "name": "Lily Pad",
       "physPower": 0,

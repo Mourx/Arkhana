@@ -10,12 +10,6 @@ Unit::Unit(UnitData data,vector<Modifier*> mods,Card* c) {
 	card = c;
 	for (Modifier* mod : mods) {
 		switch (mod->GetModType()) {
-		case MODIFIER_TYPE::UNIT_MOD:
-			unitMods.push_back(new Modifier(mod));
-			break;
-		case MODIFIER_TYPE::UNIT_EOT_MOD:
-			unitMods.push_back(new Modifier(mod));
-			break;
 		case MODIFIER_TYPE::BOSS_RESIST_MOD:
 			bBoss = true;
 			unitMods.push_back(new Modifier(mod));
@@ -26,26 +20,9 @@ Unit::Unit(UnitData data,vector<Modifier*> mods,Card* c) {
 		case MODIFIER_TYPE::AURA_EOT_MOD:
 			auraMods.push_back(new Modifier(mod));
 			break;
-		case MODIFIER_TYPE::PLAYER_EOT_MOD:
-			unitMods.push_back(new Modifier(mod));
-			break;
-		case MODIFIER_TYPE::PLAYER_MOD:
-			unitMods.push_back(new Modifier(mod));
-			break;
-		case MODIFIER_TYPE::SOT_EFFECT:
-			unitMods.push_back(new Modifier(mod));
-			break;
-		case MODIFIER_TYPE::SWAP_ZONE:
-			unitMods.push_back(new Modifier(mod));
-			break;
-		case MODIFIER_TYPE::ZONE_MOD_ATTACK:
-			unitMods.push_back(new Modifier(mod));
-			break;
 		case MODIFIER_TYPE::MUSIC_AURA:
 			auraMods.push_back(new Modifier(mod));
 			break;
-		case MODIFIER_TYPE::OPPOSITE_ZONE:
-			unitMods.push_back(new Modifier(mod));
 		default:
 			unitMods.push_back(new Modifier(mod));
 		}
@@ -119,7 +96,7 @@ void Unit::Update(Time t) {
 		if (attackTimer < attackDuration) {
 			attackTimer += t.asSeconds();
 			int flipdir = attackTimer <= attackDuration / 2 ? 1 : -1;
-			float xdir = ((200 * attackDirection) / attackDuration) * flipdir * t.asSeconds();
+			float xdir = ((150 * attackDirection) / attackDuration) * flipdir * t.asSeconds();
 			float ydir = ((400* attackDirection)/attackDuration) * flipdir * t.asSeconds();
 			Move(Vector2f(xdir, ydir));
 		}
