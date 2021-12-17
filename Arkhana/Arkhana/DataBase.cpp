@@ -20,6 +20,13 @@ void DataBase::BuildModifierLists() {
 		mod->sType = GetStatEnum(ListItr->value["sType"].GetString());
 		mod->mType = GetModEnum(ListItr->value["mType"].GetString());
 		if (ListItr->value.HasMember("EOTChange")) mod->EOTChange = ListItr->value["EOTChange"].GetInt();
+		if (ListItr->value.HasMember("duration")) {
+			int dur = ListItr->value["duration"].GetInt();
+			mod->duration = dur;
+		}
+		else {
+			mod->duration = 999;
+		}
 		if (ListItr->value.HasMember("text")) {
 			string text = ListItr->value["text"].GetString();
 			while (text.find("VALUE") != string::npos) {
@@ -28,8 +35,13 @@ void DataBase::BuildModifierLists() {
 			while (text.find("EOTCHANGE") != string::npos) {
 				text.replace(text.find("EOTCHANGE"), 9, to_string(std::abs(mod->EOTChange)));
 			}
+			while (text.find("DURATION") != string::npos) {
+				const string turns = mod->duration > 1 ? to_string(std::abs(mod->duration)) + " turns" : to_string(std::abs(mod->duration)) + " turn";
+				text.replace(text.find("DURATION"), 8, turns);
+			}
 			mod->text = text;
 		}
+
 		if (ListItr->value.HasMember("mText")) {
 			string mtext = ListItr->value["mText"].GetString();
 			while (mtext.find("VALUE") != string::npos) {
@@ -37,6 +49,10 @@ void DataBase::BuildModifierLists() {
 			}
 			while (mtext.find("EOTCHANGE") != string::npos) {
 				mtext.replace(mtext.find("EOTCHANGE"), 9, to_string(std::abs(mod->EOTChange)));
+			}
+			while (mtext.find("DURATION") != string::npos) {
+				const string turns = mod->duration > 1 ? to_string(std::abs(mod->duration)) + " turns" : to_string(std::abs(mod->duration)) + " turn";
+				mtext.replace(mtext.find("DURATION"), 8, turns);
 			}
 			mod->mText = mtext;
 		}
@@ -66,17 +82,20 @@ void DataBase::BuildEffectLists() {
 		effect->name = ListItr->value["name"].GetString();
 		effect->value = ListItr->value["value"].GetInt();
 		effect->effect = GetEffectEnum(ListItr->value["type"].GetString());
+		
 		if (ListItr->value.HasMember("text")) {
 			string text = ListItr->value["text"].GetString();
 			while (text.find("VALUE") != string::npos) {
 				text.replace(text.find("VALUE"), 5, to_string(std::abs(effect->value)));
 			}
+			
 			effect->text = text;
 		}
 		if (ListItr->value.HasMember("tUnit")) {
 			string str = ListItr->value["tUnit"].GetString();
 			effect->tUnit =  str == "TRUE";
 		}
+		
 		if (ListItr->value.HasMember("unit")) effect->unit = ListItr->value["unit"].GetString();
 
 		string str(ListItr->name.GetString());

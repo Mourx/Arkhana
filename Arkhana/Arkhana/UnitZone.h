@@ -74,6 +74,7 @@ protected:
     float zoneBonusPhys = 0;
 
     float zoneMultiplierPhys = 0;
+    int zonePower = 0;
 
     bool bTargetable = false;
 

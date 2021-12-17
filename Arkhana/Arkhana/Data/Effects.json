@@ -66,6 +66,12 @@
       "type": "FROG_DOG",
       "value": -1,
       "text": "Start of turn: Weakest\nenemy units opposite\nFrog Dog lose VALUE attack."
+    },
+    "Frog Fog": {
+      "name": "Frog Fog",
+      "type": "MODIFY_BOTH_BLOCK",
+      "value": 100,
+      "text": ""
     }
   }
 }

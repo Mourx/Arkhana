@@ -23,6 +23,12 @@ public:
 		w->draw(icon);
 	}
 	Modifier* GetModifier() { return modifier; }
+	void ModifyDuration(int value) {
+		duration += value;
+	}
+	int GetDuration() {
+		return duration;
+	}
 protected:
 	
 	void GetData();
@@ -32,6 +38,7 @@ protected:
 	string text;
 	string mText;
 	int value = 1;
+	int duration = 999;
 	int multiplier = 0;
 	int EOTChange = 0;
 	STAT_TYPE sType = STAT_TYPE::DMG_PHYSICAL;

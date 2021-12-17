@@ -327,6 +327,19 @@
       "level": 0,
       "modifiers": [ "smog_frog_modifier" ],
       "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Frog Fog": {
+      "name": "Frog Fog",
+      "cost": 1,
+      "cardType": "EFFECT",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "",
+      "level": 0,
+      "effect": "Frog Fog",
+      "shaderPath": "Textures/Shaders/Empress.vert",
+      "filePath": "Textures/Effects/frogFog.png",
+      "modifiers": [ "frog_fog_modifier" ]
     }
   }
 }

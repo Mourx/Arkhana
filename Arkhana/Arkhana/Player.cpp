@@ -142,9 +142,9 @@ void Player::SetFaction() {
 	decklist.clear();
 	cardList = database->CardListRedUnlocked;
 
-	decklist.push_back(new Card(*cardList["Frog"], database));
-	decklist.push_back(new Card(*cardList["Frog"], database));
-	decklist.push_back(new Card(*cardList["Frog"], database));
+	decklist.push_back(new Card(*cardList["Frog Fog"], database));
+	decklist.push_back(new Card(*cardList["Frog Fog"], database));
+	decklist.push_back(new Card(*cardList["Frog Fog"], database));
 	decklist.push_back(new Card(*cardList["Frog"], database));
 	decklist.push_back(new Card(*cardList["Shield Frog"], database));
 	decklist.push_back(new Card(*cardList["Shield Frog"], database));

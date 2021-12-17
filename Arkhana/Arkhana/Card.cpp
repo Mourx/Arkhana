@@ -150,6 +150,9 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 	Player* p;
 	int count;
 	Unit* enemy;
+	UnitZone* oppZ;
+	Modifier* enemyMod;
+	Modifier* playerMod;
 	switch (effect->effect) {
 	case EFFECT_TYPE::ARMOUR_MOD:
 		p = targetZone->GetOwner();
@@ -207,10 +210,17 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 		break;
 	case EFFECT_TYPE::FROG_DOG:
 		targetZone = targZone;
-		UnitZone* oppZ = database->enemy->GetZones()[(int)targetZone->GetOppositeType()];
+		oppZ = database->enemy->GetZones()[(int)targetZone->GetOppositeType()];
 		for (Unit* u : oppZ->GetUnits()) {
 			u->AddModifier(new Modifier(*database->modList["frog_dog_modifier"]));
 		}
+		break;
+	case EFFECT_TYPE::MODFIY_BOTH_BLOCK:
+		enemyMod = new Modifier(modifiers[0]);
+		playerMod = new Modifier(modifiers[0]);
+		//playerMod->ModifyDuration(1);
+		database->player->GetZones()[(int)ZONE_TYPE::Z_BLOCK]->AddMod(playerMod);
+		database->enemy->GetZones()[(int)ZONE_TYPE::Z_BLOCK]->AddMod(enemyMod);
 		break;
 	}
 }

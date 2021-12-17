@@ -61,6 +61,7 @@ public:
 	int EOTChange = 0;
 	MODIFIER_TYPE mType;
 	Modifier* modifier;
+	int duration;
 };
 
 struct EncounterData {
@@ -119,6 +120,7 @@ public:
 		else if (data == "HEALTH") return STAT_TYPE::HEALTH;
 		else if (data == "EFFECT_COST") return STAT_TYPE::EFFECT_COST;
 		else if (data == "UNIT_COST") return STAT_TYPE::UNIT_COST;
+		else if (data == "ZONE_POWER") return STAT_TYPE::ZONE_POWER;
 		else return STAT_TYPE::DMG_PHYSICAL;
 	}
 
@@ -159,6 +161,7 @@ public:
 		if (data == "POWER_RIBBIT") return EFFECT_TYPE::POWER_RIBBIT;
 		if (data == "CREATE_UNIT") return EFFECT_TYPE::CREATE_UNIT;
 		if (data == "FROG_DOG") return EFFECT_TYPE::FROG_DOG;
+		if (data == "MODIFY_BOTH_BLOCK") return EFFECT_TYPE::MODFIY_BOTH_BLOCK;
 		else return EFFECT_TYPE::ARMOUR_MOD;
 	}
 

@@ -44,16 +44,19 @@ int UnitZone::GetCombinedPhysicalPower() {
 	for (Unit* u : unitList) {
 		if(!u->IsUndercover() && !u->IsPassive()) power += u->GetPPower();
 	}
+	power += zonePower;
 	return power;
 }
 
 
 void UnitZone::AddMod(Modifier* mod) {
 	zoneMods.push_back(mod);
+	UpdateStatMods();
 }
 
 void UnitZone::RemoveMod(Modifier* mod) {
 	zoneMods.erase(remove(zoneMods.begin(), zoneMods.end(), mod), zoneMods.end());
+	UpdateStatMods();
 }
 
 void UnitZone::AddUnit(Unit* u, DataBase* database) {
@@ -150,6 +153,7 @@ void UnitZone::RemoveUnit(Unit* u) {
 
 void UnitZone::UpdateStatMods() {
 	zoneBonusPhys = 0;
+	zonePower = 0;
 	int musicBonusPhys = 0;
 	int musicMultiplierPhys = 0;
 	zoneMultiplierPhys = 0;
@@ -186,6 +190,7 @@ void UnitZone::UpdateStatMods() {
 			case STAT_TYPE::STAMINA:
 
 				break;
+
 			default:
 				break;
 			}
@@ -204,10 +209,15 @@ void UnitZone::UpdateStatMods() {
 			u->SetZoneBonusesPhys(zoneBonusPhys, zoneMultiplierPhys, zMods);
 		}
 	}
+	for (Modifier* mod : zoneMods) {
+		if (mod->GetStat() == STAT_TYPE::ZONE_POWER) {
+			zonePower += mod->GetValue();
+		}
+	}
 }
 
 void UnitZone::EndTurnUpkeep(DataBase* database) {
-	
+
 	for (Unit* u : unitList) {
 
 		for (Modifier* mod : u->GetModifiers()) {
@@ -242,6 +252,12 @@ void UnitZone::EndTurnUpkeep(DataBase* database) {
 
 
 void UnitZone::NewTurnUpkeep(DataBase* database) {
+	for (Modifier* mod : zoneMods) {
+		mod->ModifyDuration(-1);
+		if (mod->GetDuration() <= 0) {
+			RemoveMod(mod);
+		}
+	}
 	for (Unit* u : unitList) {
 		for (Modifier* mod : u->GetModifiers()) {
 			if (mod->GetName() == "Stamina Reduced") {
