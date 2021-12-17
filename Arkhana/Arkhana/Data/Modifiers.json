@@ -23,7 +23,7 @@
       "value": 0,
       "multiplier": 0,
       "sType": "STAMINA",
-      "mType": "UNIT_MOD",
+      "mType": "UNIT_EOT_MOD",
       "EOTChange": -1,
       "text": "Stamina reduced each turn",
       "mText": "Stamina reduced each turn"

@@ -212,8 +212,10 @@ void UnitZone::EndTurnUpkeep(DataBase* database) {
 
 		for (Modifier* mod : u->GetModifiers()) {
 			if (mod->GetModType() == MODIFIER_TYPE::UNIT_EOT_MOD) {
-				u->AddModifier(mod->GetModifier());
-				if (mod->GetName() == "Stamina Reduced") {
+				if (mod->GetModifier() != NULL) {
+					u->AddModifier(mod->GetModifier());
+				}
+				else if (mod->GetName() == "Stamina Reduced") {
 					if (GetType() == ZONE_TYPE::Z_ATTACK) {
 						mod->ApplyEOT();
 					}
