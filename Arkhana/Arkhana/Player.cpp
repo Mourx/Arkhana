@@ -36,14 +36,14 @@ void Player::InitSprites() {
 	playerGoldIcon.setTexture(texPlayerGold);
 	playerGoldIcon.setPosition(playerGoldPos);
 
-	texDeck.loadFromFile("Textures/GUI/deck_book.png");
+	texDeck.loadFromFile("Textures/GUI/reserveTent.png");
 	deckIcon.setTexture(texDeck);
 	deckIcon.setPosition(deckPos);
-	deckIcon.setScale(2, 2);
+	deckIcon.setScale(1, 1);
 
 	deckSizeIcon.setTexture(texDeck);
 	deckSizeIcon.setPosition(deckSizePos);
-	deckSizeIcon.setScale(2, 2);
+	deckSizeIcon.setScale(1, 1);
 
 
 	texGem.loadFromFile("Textures/Cards/gem.png");
@@ -51,10 +51,11 @@ void Player::InitSprites() {
 	gemIcon.setPosition(gemPos);
 	gemIcon.setScale(3, 3);
 
-	texDiscard.loadFromFile("Textures/GUI/discard_bin.png");
+	texDiscard.loadFromFile("Textures/GUI/restTent.png");
 	discardIcon.setTexture(texDiscard);
 	discardIcon.setPosition(discardPos);
-	discardIcon.setScale(2, 2);
+	discardIcon.setScale(1, 1);
+	
 
 	texBurnt.loadFromFile("Textures/GUI/burnt_void.png");
 	burntIcon.setTexture(texBurnt);

@@ -38,10 +38,14 @@ CombatScreen::CombatScreen(RenderTexture* w,DataBase* data,Player* p,Encounter* 
 	coolFont.loadFromFile("Fonts/ManaSpace/manaspc.ttf");
 	textPredictED.setFont(coolFont);
 	textPredictPD.setFont(coolFont);
-	textPredictED.setCharacterSize(40);
-	textPredictPD.setCharacterSize(40);
-
-
+	textPredictED.setCharacterSize(100);
+	textPredictPD.setCharacterSize(100);
+	textPredictED.setOutlineColor(Color(0,0,0,100));
+	textPredictPD.setOutlineColor(Color(0,0,0,100));
+	textPredictED.setOutlineThickness(2);
+	textPredictPD.setOutlineThickness(2);
+	shaderTranslucent.loadFromFile("Textures/Shaders/translucent.vert", Shader::Vertex);
+	
 	endTurn = new EndTurnButton();
 	endTurn->SetPosition(endTurnPos);
 	SetNextEnemyMove();
@@ -51,14 +55,14 @@ CombatScreen::CombatScreen(RenderTexture* w,DataBase* data,Player* p,Encounter* 
 
 void CombatScreen::Draw() {
 	window->draw(background);
-	window->draw(playerDamageSign);
-	window->draw(enemyDamageSign);
-	window->draw(textPredictED);
-	window->draw(textPredictPD);
+	//window->draw(playerDamageSign);
+	//window->draw(enemyDamageSign);
+	
 	endTurn->Draw(window);
 	enemy->DrawBackground();
 	player->DrawBackground();
-
+	window->draw(textPredictED);
+	window->draw(textPredictPD);
 	enemy->DrawForeground();
 	player->DrawForeground();
 
@@ -379,18 +383,19 @@ void CombatScreen::UpdateDamagePredictions() {
 
 	int enemyPhysDamage = pAttack->GetCombinedPhysicalPower() - eBlock->GetCombinedPhysicalPower();
 	int playerPhysDamage = eAttack->GetCombinedPhysicalPower() - pBlock->GetCombinedPhysicalPower();
-
+	Color blue = Color(0, 0, 255, 100);
+	Color red = Color(255, 0, 0, 100);
 	if (enemyPhysDamage <= 0) {
-		textPredictED.setFillColor(Color::Blue);
+		textPredictED.setFillColor(blue);
 	}
 	else {
-		textPredictED.setFillColor(Color::Red);
+		textPredictED.setFillColor(red);
 	}
 	if (playerPhysDamage <= 0) {
-		textPredictPD.setFillColor(Color::Blue);
+		textPredictPD.setFillColor(blue);
 	}
 	else {
-		textPredictPD.setFillColor(Color::Red);
+		textPredictPD.setFillColor(red);
 	}
 
 	textPredictED.setString(to_string(abs(enemyPhysDamage)));

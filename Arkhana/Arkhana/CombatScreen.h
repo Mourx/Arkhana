@@ -65,8 +65,10 @@ protected:
     Text textPredictPD;
     Text textPredictED;
 
-    Vector2f textPredictPDPos = Vector2f(50, 430);
-    Vector2f textPredictEDPos = Vector2f(1315, 280);
+    Shader shaderTranslucent;
+
+    Vector2f textPredictPDPos = Vector2f(300, 525);
+    Vector2f textPredictEDPos = Vector2f(900, 175);
 
     Font coolFont;
 };

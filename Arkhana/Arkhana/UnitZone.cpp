@@ -3,12 +3,12 @@
 
 UnitZone::UnitZone(int zoneType,Player* p,Player* e, ZONE_OWNER zPlayer, ZONE_TYPE t) {
 	if (zoneType == 0) {
-		texIcon.loadFromFile("Textures/GUI/attackZoneShear.png");
-		texHoverIcon.loadFromFile("Textures/GUI/attackZoneHoverShear.png");
+		texIcon.loadFromFile("Textures/GUI/attackZone.png");
+		texHoverIcon.loadFromFile("Textures/GUI/attackZoneHover.png");
 	}
 	else {
-		texIcon.loadFromFile("Textures/GUI/blockZoneShear.png");
-		texHoverIcon.loadFromFile("Textures/GUI/blockZoneHoverShear.png");
+		texIcon.loadFromFile("Textures/GUI/blockZone.png");
+		texHoverIcon.loadFromFile("Textures/GUI/blockZoneHover.png");
 	}
 	shaderPulse.loadFromFile("Textures/Shaders/pulse.vert", Shader::Vertex);
 

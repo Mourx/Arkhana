@@ -99,7 +99,7 @@ protected:
 	int currentGold = 25;
 
 	Text txtCurMana;
-	Vector2f txtCurManaPos = Vector2f(60,700);
+	Vector2f txtCurManaPos = Vector2f(90,760);
 
 	UnitZone* attackZone;
 	UnitZone* blockZone;
@@ -119,7 +119,7 @@ protected:
 
 	Sprite gemIcon;
 	Texture texGem;
-	Vector2f gemPos = Vector2f(20, 700);
+	Vector2f gemPos = Vector2f(70, 720);
 
 	Sprite discardIcon;
 	Texture texDiscard;
@@ -146,11 +146,11 @@ protected:
 
 	Sprite physArmIcon;
 	Texture texPhysArm;
-	Vector2f physArmPos = Vector2f(30, 480);
+	Vector2f physArmPos = Vector2f(1230, 480);
 
 	Sprite healthIcon;
 	Texture texHealth;
-	Vector2f healthPos = Vector2f(50, 580);
+	Vector2f healthPos = Vector2f(1230, 580);
 
 	float attackDuration = 2;
 	float attackTimer = 0;
@@ -180,8 +180,8 @@ protected:
 	Vector2f txtHealthPos = healthPos + Vector2f(30, 75);
 	Vector2f txtPhysArmPos = physArmPos + Vector2f(30, 75);
 
-	Vector2f attackZonePos = Vector2f(680, 350);
-	Vector2f blockZonePos = Vector2f(80, 350);
+	Vector2f attackZonePos = Vector2f(600, 350);
+	Vector2f blockZonePos = Vector2f(0, 350);
 
 	vector<UnitZone*> zones;
 	map<string,CardData*> cardList;

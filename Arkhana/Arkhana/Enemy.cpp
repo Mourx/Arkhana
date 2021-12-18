@@ -17,7 +17,7 @@ Enemy::Enemy(RenderTexture* w,DataBase* data){
 	zones.push_back(attackZone);
 	zones.push_back(blockZone);
 
-	physArmPos = Vector2f(1250, 130);
+	physArmPos = Vector2f(1230, 130);
 	healthPos = Vector2f(1230, 10);
 	attackDirection = 1;
 	retreatDirection = -1;
