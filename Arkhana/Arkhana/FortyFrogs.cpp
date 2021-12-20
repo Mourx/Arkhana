@@ -34,7 +34,7 @@ int main() {
 	Enemy* enemy = new Enemy();
 	database->enemy = enemy;
 	MainMenuScreen* mainMenu = new MainMenuScreen(screenRender,player);
-	PathScreen* pathScreen =  new PathScreen();
+	PathScreen* pathScreen;
 	Screen* currentScreen = new Screen();
 	InfoPane* info = new InfoPane();
 	View view;
@@ -52,7 +52,7 @@ int main() {
 	music.play();
 	
 	pathScreen = new PathScreen(screenRender, database, player);
-
+	//
 	Sprite tempScreen;
 	TRANSITION_TYPE tType = LEFT_ENTER;
 	Texture preSlide;
@@ -87,9 +87,7 @@ int main() {
 		// Switch Screens if needed - do appropriate switching tasks
 		switch (currentScreen->GetNextScreen()) {
 		case MAIN_MENU:
-	
 			mainMenu->Reset();
-			pathScreen->Init();
 			currentScreen = mainMenu;
 			shaderEffect.update(*window);
 			preSlide.update(screenRender->getTexture());
@@ -115,6 +113,7 @@ int main() {
 			tType = DOWN_ENTER;
 			break;
 		case PATH_SCREEN:
+			pathScreen->Init();
 			if (currentScreen->GetType() == REWARD_SCREEN) {
 				pathScreen->ResetDetails(WIN);
 			}

@@ -4,14 +4,14 @@
 
 Card::Card(CardData data,DataBase* dataB) {
 	database = dataB;
-	texIcon.loadFromFile("Textures/Cards/CardBasic.png");
+	texIcon = *database->texList["Textures/Cards/CardBasic.png"];
 	name = data.name;
 	modifiers = data.modifiers;
 	type = data.cType;
 	icon.setTexture(texIcon);
 	unit = data.unit;
 	cost = data.cost;
-	texCost.loadFromFile("Textures/Cards/gem.png");
+	texCost = *database->texList["Textures/Cards/gem.png"];
 	for (int i = 0; i < costPositions.size(); i++) {
 		Sprite icon;
 		icon.setScale(0.5, 0.5);
@@ -33,8 +33,8 @@ Card::Card(CardData data,DataBase* dataB) {
 	}
 	cardShader.loadFromFile(data.shaderPath, Shader::Vertex);
 
-	font.loadFromFile("Fonts/Arial/arial.ttf");
-	coolFont.loadFromFile("Fonts/ManaSpace/manaspc.ttf");
+	font = database->font;
+	
 	
 	// load arcana symbol
 	//texArcanaSymbol
@@ -43,10 +43,10 @@ Card::Card(CardData data,DataBase* dataB) {
 	txtName.setFont(font);
 	txtName.setFillColor(Color::Black);
 
-	texPhys.loadFromFile("Textures/Cards/sword.png");
+	texPhys = *database->texList["Textures/Cards/sword.png"];
 	physIcon.setTexture(texPhys);
 
-	texCardBorder.loadFromFile("Textures/Cards/CardBorder.png");
+	texCardBorder = *database->texList["Textures/Cards/CardBorder.png"];
 	cardBorder.setTexture(texCardBorder);
 	cardBorder.setPosition(pos);
 	
@@ -54,7 +54,7 @@ Card::Card(CardData data,DataBase* dataB) {
 	physIcon.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
 	physIcon.setPosition(pos + physPos);
 
-	texMag.loadFromFile("Textures/Cards/flame.png");
+	texMag = *database->texList["Textures/Cards/flame.png"];
 	magIcon.setTexture(texMag);
 	tR = magIcon.getLocalBounds();
 	magIcon.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
@@ -66,12 +66,12 @@ Card::Card(CardData data,DataBase* dataB) {
 		s.setPosition(pos + s.getPosition());
 	}
 
-	txtPhys.setFont(coolFont);
+	txtPhys.setFont(database->coolFont);
 	txtPhys.setCharacterSize(20);
 	txtPhys.setString(to_string(pPow));
 	txtPhys.setFillColor(Color::Black);
 	
-	txtMag.setFont(coolFont);
+	txtMag.setFont(database->coolFont);
 	txtMag.setCharacterSize(20);
 	txtMag.setString(to_string(stamina));
 	txtMag.setFillColor(Color::Black);
@@ -91,10 +91,10 @@ Card::Card(CardData data,DataBase* dataB) {
 	txtDesc.setFillColor(Color::Black);
 
 	if (type == UNIT) {
-		texCardArt.loadFromFile(database->UnitList[unit]->filePath);
+		texCardArt = *database->texList[database->UnitList[unit]->filePath];
 	}
 	else if(data.filePath!= ""){
-		texCardArt.loadFromFile(data.filePath);
+		texCardArt = *database->texList[data.filePath];
 	}
 	cardArt.setTexture(texCardArt);
 	cardArt.setScale(2, 2);

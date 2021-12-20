@@ -169,9 +169,6 @@ protected:
 	float playTimer = 0;
 	bool bPlayingCard = false;
 
-
-	Font font;
-	Font coolFont;
 	Text txtCurrentMana;
 
 	Text txtHealth;

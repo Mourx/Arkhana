@@ -110,7 +110,6 @@ void PathScreen::InitEncounters() {
 			Encounter* e = new Encounter(window,database, j);
 			e->SetPosition(encPos[j] + Vector2f(rand() % 150, 250 * i));
 			encounters.push_back(e);
-
 		}
 	}
 }

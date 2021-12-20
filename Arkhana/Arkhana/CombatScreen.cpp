@@ -35,9 +35,9 @@ CombatScreen::CombatScreen(RenderTexture* w,DataBase* data,Player* p,Encounter* 
 	playerDamageSign.setPosition(pdsPos);
 	enemyDamageSign.setPosition(edsPos);
 	
-	coolFont.loadFromFile("Fonts/ManaSpace/manaspc.ttf");
-	textPredictED.setFont(coolFont);
-	textPredictPD.setFont(coolFont);
+
+	textPredictED.setFont(database->coolFont);
+	textPredictPD.setFont(database->coolFont);
 	textPredictED.setCharacterSize(100);
 	textPredictPD.setCharacterSize(100);
 	textPredictED.setOutlineColor(Color(0,0,0,100));

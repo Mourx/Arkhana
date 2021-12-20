@@ -26,15 +26,15 @@ Player::Player(RenderTexture* w, DataBase* data) {
 }
 
 void Player::InitSprites() {
-	texPlayerBar.loadFromFile("Textures/GUI/playerBar.png");
+	texPlayerBar = *database->texList["Textures/GUI/playerBar.png"];
 	playerBarIcon.setTexture(texPlayerBar);
 	playerBarIcon.setPosition(playerBarPos);
 
-	texPlayerGold.loadFromFile("Textures/GUI/gold.png");
+	texPlayerGold = *database->texList["Textures/GUI/gold.png"];
 	playerGoldIcon.setTexture(texPlayerGold);
 	playerGoldIcon.setPosition(playerGoldPos);
 
-	texDeck.loadFromFile("Textures/GUI/reserveTent.png");
+	texDeck = *database->texList["Textures/GUI/reserveTent.png"];
 	deckIcon.setTexture(texDeck);
 	deckIcon.setPosition(deckPos);
 	deckIcon.setScale(1, 1);
@@ -44,58 +44,57 @@ void Player::InitSprites() {
 	deckSizeIcon.setScale(1, 1);
 
 
-	texGem.loadFromFile("Textures/Cards/gem.png");
+	texGem = *database->texList["Textures/Cards/gem.png"];
 	gemIcon.setTexture(texGem);
 	gemIcon.setPosition(gemPos);
 	gemIcon.setScale(2, 2);
 
-	texDiscard.loadFromFile("Textures/GUI/restTent.png");
+	texDiscard = *database->texList["Textures/GUI/restTent.png"];
 	discardIcon.setTexture(texDiscard);
 	discardIcon.setPosition(discardPos);
 	discardIcon.setScale(1, 1);
 	
 
-	texBurnt.loadFromFile("Textures/GUI/burnt_void.png");
+	texBurnt = *database->texList["Textures/GUI/burnt_void.png"];
 	burntIcon.setTexture(texBurnt);
 	burntIcon.setPosition(burntPos);
 	burntIcon.setScale(2, 2);
 
 
-	texPhysArm.loadFromFile("Textures/GUI/armourPhysical.png");
+	texPhysArm = *database->texList["Textures/GUI/armourPhysical.png"];
 	physArmIcon.setTexture(texPhysArm);
 	physArmIcon.setPosition(physArmPos);
 	physArmIcon.setScale(1.5, 1.5);
 
 	
-	texHealth.loadFromFile("Textures/GUI/health.png");
+	texHealth = *database->texList["Textures/GUI/health.png"];
 	healthIcon.setTexture(texHealth);
 	healthIcon.setPosition(healthPos);
 	healthIcon.setScale(1.5, 1.5);
 
-	font.loadFromFile("Fonts/Arial/arial.ttf");
-	coolFont.loadFromFile("Fonts/ManaSpace/manaspc.ttf");
+	
 	txtPlayerGold.setPosition(txtPlayerGoldPos);
-	txtPlayerGold.setFont(coolFont);
+	txtPlayerGold.setFont(database->coolFont);
 
 	txtHealth.setPosition(txtHealthPos);
-	txtHealth.setFont(coolFont);
+	txtHealth.setFont(database->coolFont);
 	
 	txtPhysArm.setPosition(txtPhysArmPos);
-	txtPhysArm.setFont(coolFont);
+	txtPhysArm.setFont(database->coolFont);
 
-	txtCurMana.setFont(coolFont);
+	txtCurMana.setFont(database->coolFont);
 	txtCurMana.setCharacterSize(30);
 	txtCurMana.setFillColor(Color::Cyan);
 
-	txtDeckTotalSize.setFont(coolFont);
+	txtDeckTotalSize.setFont(database->coolFont);
 	txtDeckTotalSize.setPosition(txtDeckTotalSizePos);
 
-	txtDeckSize.setFont(coolFont);
+	txtDeckSize.setFont(database->coolFont);
 	txtDiscardSize.setPosition(txtDiscardSizePos);
 	txtBurntSize.setPosition(txtBurntSizePos);
 
-	txtDiscardSize.setFont(coolFont);
-	txtBurntSize.setFont(coolFont);
+	txtDiscardSize.setFont(database->coolFont);
+	txtBurntSize.setFont(database->coolFont);
 }
 
 void Player::UpdateStrings() {

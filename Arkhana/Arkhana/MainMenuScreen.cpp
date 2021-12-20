@@ -29,7 +29,6 @@ void MainMenuScreen::Draw() {
 	for (Faction* faction : factions) {
 		faction->Draw(window);
 	}
-	//window->draw(blueFactionIcon,&blueShader);
 }
 
 void MainMenuScreen::MouseMoved(Vector2f mousePos) {
@@ -52,9 +51,4 @@ void MainMenuScreen::MouseClicked(Vector2f mousePos) {
 			nextScreen = PATH_SCREEN;
 		}
 	}
-	/*bounds = blueFactionIcon.getGlobalBounds();
-	if (bounds.contains(mousePos)) {
-		player->SetFaction();
-		nextScreen = PATH_SCREEN;
-	}*/
 }

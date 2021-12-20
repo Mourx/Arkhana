@@ -70,6 +70,5 @@ protected:
     Vector2f textPredictPDPos = Vector2f(300, 525);
     Vector2f textPredictEDPos = Vector2f(900, 175);
 
-    Font coolFont;
 };
 

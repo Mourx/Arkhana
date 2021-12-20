@@ -10,6 +10,7 @@
 #include <cstdio>
 #include <iostream>
 #include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
 
 class Modifier;
 class Player;
@@ -92,6 +93,7 @@ public:
 	map<string, CardData*> CardListEnemy;
 	map<string, ModifierData*> modList;
 	map<string, EffectData*> effectList;
+	map<string, Texture*> texList;
 	vector<FactionData*> factionList;
 	vector<map<string, EncounterData*>> encounters;
 	vector<vector<string>> encounterNames;
@@ -99,6 +101,9 @@ public:
 
 	int playerLevel = 1;
 	bool bDebugMode = true;
+
+	Font font;
+	Font coolFont;
 
 	MODIFIER_TYPE GetModEnum(string data) {
 		if (data == "ZONE_MOD") return MODIFIER_TYPE::ZONE_MOD;
@@ -187,6 +192,7 @@ public:
 	void BuildEncounterLists();
 	void BuildEffectLists();
 	void BuildFactionLists();
+	void BuildSharedTextures();
 	void Init();
 	Player* player;
 	Player* enemy;

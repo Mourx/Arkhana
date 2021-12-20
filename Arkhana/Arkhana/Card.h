@@ -119,7 +119,6 @@ protected:
     Texture texCardBorder;
 
     Font font;
-    Font coolFont;
 
     Vector2f txtNamePos = Vector2f(75, 100);
     Vector2f txtPhysPos = Vector2f(110, 40);

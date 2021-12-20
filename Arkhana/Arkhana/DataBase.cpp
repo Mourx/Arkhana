@@ -65,6 +65,9 @@ void DataBase::BuildModifierLists() {
 
 			string str = ListItr->value["filepath"].GetString();
 			mod->filePath = str;
+			Texture* tex = new Texture();
+			tex->loadFromFile(mod->filePath);
+			texList.insert({ mod->filePath,tex });
 		}
 		else {
 			mod->filePath = "Textures/GUI/burnt_void.png";
@@ -137,6 +140,9 @@ void DataBase::BuildCardListsRed() {
 		if (ListItr->value.HasMember("filePath")) {
 			string str = ListItr->value["filePath"].GetString();
 			card->filePath = str;
+			Texture* tex = new Texture();
+			tex->loadFromFile(card->filePath);
+			texList.insert({ card->filePath,tex });
 		}
 		card->cost = ListItr->value["cost"].GetInt();
 		card->cType = GetCardEnum(ListItr->value["cardType"].GetString());
@@ -181,6 +187,9 @@ void DataBase::BuildCardListsEnemy() {
 		if (ListItr->value.HasMember("filePath")) {
 			string str = ListItr->value["filePath"].GetString();
 			card->filePath = str;
+			Texture* tex = new Texture();
+			tex->loadFromFile(card->filePath);
+			texList.insert({ card->filePath,tex });
 		}
 		card->cost = ListItr->value["cost"].GetInt();
 		card->cType = GetCardEnum(ListItr->value["cardType"].GetString());
@@ -212,7 +221,9 @@ void DataBase::BuildUnitLists() {
 		unit->physPower = ListItr->value["physPower"].GetInt();
 		unit->stamina = ListItr->value["stamina"].GetInt();
 		unit->filePath = ListItr->value["filePath"].GetString();
-
+		Texture* tex = new Texture();
+		tex->loadFromFile(unit->filePath);
+		texList.insert({ unit->filePath,tex });
 		UnitList.insert({ name,unit });
 	}
 	fclose(fp);
@@ -288,9 +299,62 @@ void DataBase::BuildFactionLists() {
 		faction->decklist = list;
 		faction->name = ListItr->value["name"].GetString();
 		faction->filepath = ListItr->value["filepath"].GetString();
+		Texture* tex = new Texture();
+		tex->loadFromFile(faction->filepath);
+		texList.insert({ faction->filepath,tex });
 		factionList.push_back(faction);
 	}
 	fclose(fp);
+}
+
+void DataBase::BuildSharedTextures() {
+	Texture* tex = new Texture();
+	tex->loadFromFile("Textures/Cards/sword.png");
+	texList.insert({ "Textures/Cards/sword.png",tex });
+
+	tex = new Texture();
+	tex->loadFromFile("Textures/Cards/CardBorder.png");
+	texList.insert({ "Textures/Cards/CardBorder.png",tex });
+
+	tex = new Texture();
+	tex->loadFromFile("Textures/Cards/flame.png");
+	texList.insert({ "Textures/Cards/flame.png",tex });
+
+	tex = new Texture();
+	tex->loadFromFile("Textures/Cards/gem.png");
+	texList.insert({ "Textures/Cards/gem.png",tex });
+
+	tex = new Texture();
+	tex->loadFromFile("Textures/Cards/CardBasic.png");
+	texList.insert({ "Textures/Cards/CardBasic.png",tex });
+
+	tex = new Texture();
+	tex->loadFromFile("Textures/GUI/playerBar.png");
+	texList.insert({ "Textures/GUI/playerBar.png",tex });
+
+	tex = new Texture();
+	tex->loadFromFile("Textures/GUI/gold.png");
+	texList.insert({ "Textures/GUI/gold.png",tex });
+
+	tex = new Texture();
+	tex->loadFromFile("Textures/GUI/reserveTent.png");
+	texList.insert({ "Textures/GUI/reserveTent.png",tex });
+
+	tex = new Texture();
+	tex->loadFromFile("Textures/GUI/restTent.png");
+	texList.insert({ "Textures/GUI/restTent.png",tex });
+
+	tex = new Texture();
+	tex->loadFromFile("Textures/GUI/burnt_void.png");
+	texList.insert({ "Textures/GUI/burnt_void.png",tex });
+
+	tex = new Texture();
+	tex->loadFromFile("Textures/GUI/armourPhysical.png");
+	texList.insert({ "Textures/GUI/armourPhysical.png",tex });
+
+	tex = new Texture();
+	tex->loadFromFile("Textures/GUI/health.png");
+	texList.insert({ "Textures/GUI/health.png",tex });
 }
 
 void DataBase::Init() {
@@ -310,5 +374,9 @@ void DataBase::Init() {
 	BuildEffectLists();
 	BuildFactionLists();
 
+	BuildSharedTextures();
+
+	font.loadFromFile("Fonts/Arial/arial.ttf");
+	coolFont.loadFromFile("Fonts/ManaSpace/manaspc.ttf");
 	rollover.loadFromFile("Sound/UI/rollover1.wav");
 }

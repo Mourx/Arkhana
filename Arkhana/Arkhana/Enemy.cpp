@@ -36,7 +36,7 @@ Enemy::Enemy(RenderTexture* w,DataBase* data){
 
 
 void Enemy::InitSprites() {
-	texPhysArm.loadFromFile("Textures/GUI/armourPhysical.png");
+	texPhysArm = *database->texList["Textures/GUI/armourPhysical.png"];
 	physArmIcon.setTexture(texPhysArm);
 	physArmIcon.setPosition(physArmPos);
 	physArmIcon.setScale(1.5, 1.5);
@@ -44,18 +44,17 @@ void Enemy::InitSprites() {
 
 
 
-	texHealth.loadFromFile("Textures/GUI/health.png");
+	texHealth = *database->texList["Textures/GUI/health.png"];
 	healthIcon.setTexture(texHealth);
 	healthIcon.setPosition(healthPos);
 	healthIcon.setScale(1.5, 1.5);
 
-	font.loadFromFile("Fonts/Arial/arial.ttf");
-	coolFont.loadFromFile("Fonts/ManaSpace/manaspc.ttf");
+	
 	txtHealth.setPosition(txtHealthPos);
-	txtHealth.setFont(coolFont);
+	txtHealth.setFont(database->coolFont);
 
 	txtPhysArm.setPosition(txtPhysArmPos);
-	txtPhysArm.setFont(coolFont);
+	txtPhysArm.setFont(database->coolFont);
 
 
 
