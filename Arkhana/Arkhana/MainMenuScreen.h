@@ -1,5 +1,7 @@
 #pragma once
 #include "Screen.h"
+#include "Faction.h"
+#include "DataBase.h"
 class Player;
 class MainMenuScreen :
     public Screen
@@ -10,18 +12,20 @@ public:
     void Draw();
     void MouseMoved(Vector2f mousePos);
     void MouseClicked(Vector2f mousePos);
+    void Reset() {
+        nextScreen = NONE;
+    }
 protected:
-    GameObject* faction1;
     
-    Texture texFaction1;
-    
+    vector<Faction*> factions;
+    DataBase* database;
     Sprite background;
     Texture texBackground;
 
     Shader redShader;
     Shader blueShader;
 
-    Vector2f faction1Pos = Vector2f(1250, 650);
+    Vector2f factionPosStart = Vector2f(1200, 650);
 
     Player* player;
 };

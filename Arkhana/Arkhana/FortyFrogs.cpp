@@ -18,25 +18,23 @@ int main() {
 	DataBase* database = new DataBase();
 	database->Init();
 	
-	RenderWindow* window = new RenderWindow(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Frog Frog Frog Frog",Style::Default);
+	RenderWindow* window = new RenderWindow(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Frog Frog Frog Frog",Style::Fullscreen);
 	CombatScreen* combat;
 	RenderTexture* screenRender = new RenderTexture();
 	RenderTexture* windowRender = new RenderTexture();
-	
+	//window->setSize(Vector2u(1600, 900));
 	windowRender->create(SCREEN_WIDTH, SCREEN_HEIGHT);
 	windowRender->clear();
-	screenRender->create(SCREEN_WIDTH-320, SCREEN_HEIGHT-180);
+	screenRender->create(SCREEN_WIDTH-(320.0/1920.0)*SCREEN_WIDTH, SCREEN_HEIGHT-(180.0/1080)*SCREEN_HEIGHT);
 	screenRender->clear();
 	Player* player = new Player(screenRender, database);
 	player->SetBarWindow(windowRender);
 	database->player = player;
-	//TAKE THIS OUT
-	player->SetFaction();
-	//TAKE THIS OUT
+
 	Enemy* enemy = new Enemy();
 	database->enemy = enemy;
 	MainMenuScreen* mainMenu = new MainMenuScreen(screenRender,player);
-	PathScreen* pathScreen = new PathScreen(screenRender, database, player);
+	PathScreen* pathScreen =  new PathScreen();
 	Screen* currentScreen = new Screen();
 	InfoPane* info = new InfoPane();
 	View view;
@@ -53,22 +51,23 @@ int main() {
 	music.setLoop(true);
 	music.play();
 	
+	pathScreen = new PathScreen(screenRender, database, player);
 
 	Sprite tempScreen;
 	TRANSITION_TYPE tType = LEFT_ENTER;
 	Texture preSlide;
-	preSlide.create(1920, 1080);
+	preSlide.create(SCREEN_WIDTH, SCREEN_HEIGHT);
 	Texture postSlide;
-	postSlide.create(1920,1080);
+	postSlide.create(SCREEN_WIDTH, SCREEN_HEIGHT);
 	Sprite slideSprite;
 	Sprite staySprite;
 
-	currentScreen = new MainMenuScreen(screenRender, player);
+	currentScreen = mainMenu;
 	Clock clock;
 	Time elapsed;
 	Event event;
 	Texture shaderEffect;
-	shaderEffect.create(1920, 1080);
+	shaderEffect.create(SCREEN_WIDTH, SCREEN_HEIGHT);
 	float transitionTime = 0.6f;
 	float transitionTimer = 0.0f;
 	bool bTransition = false;
@@ -88,13 +87,10 @@ int main() {
 		// Switch Screens if needed - do appropriate switching tasks
 		switch (currentScreen->GetNextScreen()) {
 		case MAIN_MENU:
-			currentScreen = new MainMenuScreen(screenRender,player);
-			pathScreen = new PathScreen(screenRender, database, player);
-			player = new Player(screenRender, database);
-			player->SetFaction();
-			player->SetBarWindow(windowRender);
-			enemy = new Enemy();
-			database->enemy = enemy;
+	
+			mainMenu->Reset();
+			pathScreen->Init();
+			currentScreen = mainMenu;
 			shaderEffect.update(*window);
 			preSlide.update(screenRender->getTexture());
 			break;
@@ -108,6 +104,7 @@ int main() {
 			break;
 		case GAME_OVER:
 			tType = DOWN_ENTER;
+
 			currentScreen = new GameOverScreen(screenRender, database, player);
 			break;
 		case REWARD_SCREEN:

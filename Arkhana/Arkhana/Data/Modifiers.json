@@ -288,7 +288,8 @@
       "EOTChange": 0,
       "duration": 1,
       "text": "You and Enemy gain VALUE\nblock for DURATION.",
-      "mText": "Gain VALUE block for DURATION."
+      "mText": "Gain VALUE block for DURATION.",
+      "filepath": "Textures/Effects/frogFog.png"
     },
     "ogre_buff": {
       "name": "Ogre Buff",

@@ -22,14 +22,13 @@ void Modifier::GetData() {
 	EOTChange = data.EOTChange;
 	modifier = data.modifier;
 	duration = data.duration;
-	if (sType == STAT_TYPE::DMG_PHYSICAL) {
-		texIcon.loadFromFile("Textures/Cards/sword.png");
-	}
-	else if (sType == STAT_TYPE::STAMINA) {
-		texIcon.loadFromFile("Textures/Cards/flame.png");
-	}
-	else if (sType == STAT_TYPE::ARMOUR_PHYSICAL) {
-		texIcon.loadFromFile("Textures/GUI/armourPhysical.png");
-	}
+	texIcon.loadFromFile(data.filePath);
 	icon.setTexture(texIcon);
+	icon.setScale(0.75, 0.75);
+	font.loadFromFile("Fonts/ManaSpace/manaspc.ttf");
+	textDuration.setFont(font);
+	textDuration.setCharacterSize(12);
+	textDuration.setFillColor(Color::Blue);
+	textDuration.setOutlineColor(Color::Black);
+	textDuration.setString(to_string(duration));
 }

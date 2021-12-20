@@ -93,8 +93,9 @@ protected:
 
     Shader cardShader;
 
-    Sprite costIcon;
+    vector<Sprite> costIcons;
     Texture texCost;
+    vector<Vector2f> costPositions = { Vector2f(139, 12) ,Vector2f(124, 12) ,Vector2f(109, 12),Vector2f(94, 12) };
 
     Text txtName;
     Text txtPhys;
@@ -118,16 +119,17 @@ protected:
     Texture texCardBorder;
 
     Font font;
+    Font coolFont;
 
-    Vector2f txtNamePos = Vector2f(85, 20);
-    Vector2f txtPhysPos = Vector2f(20, 175);
-    Vector2f physPos = Vector2f(40, 175);
-    Vector2f txtMagPos = Vector2f(90, 175);
-    Vector2f magPos = Vector2f(110, 175);
-    Vector2f txtDescPos = Vector2f(75, 140);
-    Vector2f cardArtPos = Vector2f(35, 50);
-    Vector2f costIconPos = Vector2f(15, 15);
-    Vector2f goldCostPos = Vector2f(75, 220);
+    Vector2f txtNamePos = Vector2f(75, 100);
+    Vector2f txtPhysPos = Vector2f(110, 40);
+    Vector2f physPos = Vector2f(135, 40);
+    Vector2f txtMagPos = Vector2f(110, 65);
+    Vector2f magPos = Vector2f(135, 65);
+    Vector2f txtDescPos = Vector2f(75, 125);
+    Vector2f cardArtPos = Vector2f(1, 1);
+    Vector2f costIconPos = Vector2f(139, 12);
+    Vector2f goldCostPos = Vector2f(75, 170);
 
     string zTag;
     AI_TAG AITag;

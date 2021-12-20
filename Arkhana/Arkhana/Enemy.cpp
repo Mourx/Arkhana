@@ -17,8 +17,8 @@ Enemy::Enemy(RenderTexture* w,DataBase* data){
 	zones.push_back(attackZone);
 	zones.push_back(blockZone);
 
-	physArmPos = Vector2f(1230, 130);
-	healthPos = Vector2f(1230, 10);
+	physArmPos = Vector2f(1230, 200);
+	healthPos = Vector2f(1230, 110);
 	attackDirection = 1;
 	retreatDirection = -1;
 	
@@ -50,12 +50,12 @@ void Enemy::InitSprites() {
 	healthIcon.setScale(1.5, 1.5);
 
 	font.loadFromFile("Fonts/Arial/arial.ttf");
-
+	coolFont.loadFromFile("Fonts/ManaSpace/manaspc.ttf");
 	txtHealth.setPosition(txtHealthPos);
-	txtHealth.setFont(font);
+	txtHealth.setFont(coolFont);
 
 	txtPhysArm.setPosition(txtPhysArmPos);
-	txtPhysArm.setFont(font);
+	txtPhysArm.setFont(coolFont);
 
 
 

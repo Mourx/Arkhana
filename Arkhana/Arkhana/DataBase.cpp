@@ -61,6 +61,15 @@ void DataBase::BuildModifierLists() {
 			mod->modifier = new Modifier(*modList[str]);
 			
 		}
+		if (ListItr->value.HasMember("filepath")) {
+
+			string str = ListItr->value["filepath"].GetString();
+			mod->filePath = str;
+		}
+		else {
+			mod->filePath = "Textures/GUI/burnt_void.png";
+		}
+
 		string str(ListItr->name.GetString());
 		modList.insert({ str,mod });
 	}
@@ -259,6 +268,31 @@ void DataBase::BuildEncounterLists() {
 	fclose(fp);
 }
 
+void DataBase::BuildFactionLists() {
+	FILE* fp;
+	fopen_s(&fp, "Data/Factions.json", "rb");
+
+	char readBuffer[16384];
+	FileReadStream is(fp, readBuffer, sizeof(readBuffer));
+
+	Document d;
+	d.ParseStream(is);
+
+	for (Value::ConstMemberIterator ListItr = d["Factions"].MemberBegin(); ListItr != d["Factions"].MemberEnd(); ListItr++) {
+		FactionData* faction = new FactionData();
+		rapidjson::GenericArray<true, rapidjson::Value> arr = ListItr->value["decklist"].GetArray();
+		vector<string> list;
+		for (int j = 0; j < arr.Size(); j++) {
+			list.push_back(arr[j].GetString());
+		}
+		faction->decklist = list;
+		faction->name = ListItr->value["name"].GetString();
+		faction->filepath = ListItr->value["filepath"].GetString();
+		factionList.push_back(faction);
+	}
+	fclose(fp);
+}
+
 void DataBase::Init() {
 	for (int i = 0; i < 11; i++) {
 		string path = "Textures/GUI/ManaCosts/" + to_string(i) + ".png";
@@ -274,6 +308,7 @@ void DataBase::Init() {
 	BuildUnitLists();
 	BuildEncounterLists();
 	BuildEffectLists();
+	BuildFactionLists();
 
 	rollover.loadFromFile("Sound/UI/rollover1.wav");
 }

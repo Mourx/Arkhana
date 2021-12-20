@@ -1,17 +1,22 @@
 #pragma once
 #include "GameObject.h"
 #include "DataBase.h"
+#include "Card.h"
 class Faction :
     public GameObject
 {
 public:
-    Faction(DataBase* db, FACTION_TYPE factType);
+    Faction(DataBase* db, FactionData* factType);
     ~Faction() {}
-    FACTION_TYPE GetType() { return type; }
+    FactionData* GetData() { return type; }
+    vector<Card*> GetDecklist() { return deckList; }
+    map<string, CardData*> GetCardList() { return cardList; }
+
 protected:
     DataBase* database;
-    vector<CardData*> startingDeck;
-    vector<CardData*> decklist;
-    FACTION_TYPE type;
+    vector<Card*> deckList;
+    FactionData* type;
+    map<string, CardData*> cardList;
+    
 };
 

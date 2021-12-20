@@ -23,7 +23,9 @@ UnitZone::UnitZone(int zoneType,Player* p,Player* e, ZONE_OWNER zPlayer, ZONE_TY
 
 void UnitZone::Draw(RenderTexture* w) {
 	w->draw(icon);
-	
+	for (Modifier* mod : zoneMods) {
+		mod->Draw(w);
+	}
 }
 
 void UnitZone::DrawUnits(RenderTexture* w) {
@@ -52,11 +54,13 @@ int UnitZone::GetCombinedPhysicalPower() {
 void UnitZone::AddMod(Modifier* mod) {
 	zoneMods.push_back(mod);
 	UpdateStatMods();
+	UpdatePositions();
 }
 
 void UnitZone::RemoveMod(Modifier* mod) {
 	zoneMods.erase(remove(zoneMods.begin(), zoneMods.end(), mod), zoneMods.end());
 	UpdateStatMods();
+	UpdatePositions();
 }
 
 void UnitZone::AddUnit(Unit* u, DataBase* database) {
@@ -254,8 +258,11 @@ void UnitZone::EndTurnUpkeep(DataBase* database) {
 void UnitZone::NewTurnUpkeep(DataBase* database) {
 	for (Modifier* mod : zoneMods) {
 		mod->ModifyDuration(-1);
-		if (mod->GetDuration() <= 0) {
-			RemoveMod(mod);
+	}
+	for (int i = 0; i < zoneMods.size(); i++) {
+		if (zoneMods[i]->GetDuration() <= 0) {
+			RemoveMod(zoneMods[i]);
+			i--;
 		}
 	}
 	for (Unit* u : unitList) {

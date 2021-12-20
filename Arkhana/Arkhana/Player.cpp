@@ -1,5 +1,5 @@
 #include "Player.h"
-
+#include "Faction.h"
 Player::Player() {
 
 }
@@ -7,12 +7,8 @@ Player::Player() {
 Player::Player(RenderTexture* w, DataBase* data) {
 	database = data;
 	window = w;
+	cardList = database->CardListRedUnlocked;
 	
-	
-
-	// load these based on the selected Arcana
-	armour = 10;
-	health = maxHealth;
 
 	attackZone = new UnitZone(0,this,data->enemy,Z_PLAYER,ZONE_TYPE::Z_ATTACK);
 	attackZone->SetPosition(attackZonePos);
@@ -22,6 +18,8 @@ Player::Player(RenderTexture* w, DataBase* data) {
 
 	zones.push_back(attackZone);
 	zones.push_back(blockZone);
+
+	shaderMana.loadFromFile("Textures/Shaders/manaPulse.vert", Shader::Vertex);
 
 	InitSprites();
 	UpdateStrings();
@@ -49,7 +47,7 @@ void Player::InitSprites() {
 	texGem.loadFromFile("Textures/Cards/gem.png");
 	gemIcon.setTexture(texGem);
 	gemIcon.setPosition(gemPos);
-	gemIcon.setScale(3, 3);
+	gemIcon.setScale(2, 2);
 
 	texDiscard.loadFromFile("Textures/GUI/restTent.png");
 	discardIcon.setTexture(texDiscard);
@@ -139,23 +137,27 @@ void Player::UpdateStrings() {
 	txtPhysArm.setPosition(txtPhysArmPos);
 }
 
-void Player::SetFaction() {
+void Player::SetFaction(Faction* f) {
 	decklist.clear();
-	cardList = database->CardListRedUnlocked;
+	faction = f;
+	cardList = faction->GetCardList();
+	decklist = faction->GetDecklist();
+	if (database->bDebugMode) {
+		maxHealth = 1;
+		armour = 1;
+	}
 
-	decklist.push_back(new Card(*cardList["Frog Fog"], database));
-	decklist.push_back(new Card(*cardList["Frog Fog"], database));
-	decklist.push_back(new Card(*cardList["Frog Fog"], database));
-	decklist.push_back(new Card(*cardList["Frog"], database));
-	decklist.push_back(new Card(*cardList["Shield Frog"], database));
-	decklist.push_back(new Card(*cardList["Shield Frog"], database));
-	decklist.push_back(new Card(*cardList["Shield Frog"], database));
-	decklist.push_back(new Card(*cardList["Shield Frog"], database));
-
+	// load these based on the selected Arcana
+	armour = 10;
+	health = maxHealth;
+	
+	InitSprites();
 	UpdateStrings();
 }
 
 void Player::Update(Time t) {
+	manaPulseTimer += t.asSeconds();
+	shaderMana.setUniform("time", manaPulseTimer);
 	attackZone->Update(t);
 	blockZone->Update(t);
 	if (bAttacking) {
@@ -214,7 +216,13 @@ void Player::DrawBackground() {
 	blockZone->Draw(window);
 	
 	window->draw(deckIcon);
-	window->draw(gemIcon);
+	if (currentMana > 0) {
+		window->draw(gemIcon,&shaderMana);
+	}
+	else {
+		window->draw(gemIcon);
+	}
+	
 	window->draw(discardIcon);
 	window->draw(burntIcon);
 	window->draw(healthIcon);

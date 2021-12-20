@@ -9,6 +9,7 @@ class PathScreen :
 {       
 public:
     PathScreen(RenderTexture* w, DataBase* db,Player* p);
+    PathScreen() {}
     ~PathScreen() {}
     void Draw();
     void Update(Time t);
@@ -22,8 +23,10 @@ public:
     void ForgeVisited(bool b) {
         bForgeVisited = b;
     }
-protected:
     void InitEncounters();
+    void Init();
+protected:
+
 
     RenderTexture* window;
     DataBase* database;

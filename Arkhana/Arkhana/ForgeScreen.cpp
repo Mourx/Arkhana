@@ -234,7 +234,7 @@ void ForgeScreen::MouseClicked(Vector2f mousePos) {
 
 void ForgeScreen::GenerateOptions() {
 	selCard = NULL;
-	map<string, CardData*> cardList = player->GetCardLists();
+	map<string, CardData*> cardList = database->CardListRedAll;
 
 	vector<int> cIns;
 	for (int i = 0; i < optionsAmount; i++) {

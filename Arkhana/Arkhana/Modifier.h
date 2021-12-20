@@ -18,13 +18,22 @@ public:
 	void ApplyEOT() { value += EOTChange; }
 	int GetEOT() { return EOTChange; }
 	string GetName() { return name; }
-	void SetPosition(Vector2f pos) { icon.setPosition(pos); }
+	void SetPosition(Vector2f pos) { 
+		icon.setPosition(pos);
+		FloatRect tR = textDuration.getLocalBounds();
+		textDuration.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
+		textDuration.setPosition(pos + Vector2f(15, 15));
+	}
 	void Draw(RenderTexture* w) {
 		w->draw(icon);
+		if (duration <= 10) {
+			w->draw(textDuration);
+		}
 	}
 	Modifier* GetModifier() { return modifier; }
 	void ModifyDuration(int value) {
 		duration += value;
+		textDuration.setString(to_string(duration));
 	}
 	int GetDuration() {
 		return duration;
@@ -46,7 +55,8 @@ protected:
 	Modifier* modifier;
 	Sprite icon;
 	Texture texIcon;
-
+	Text textDuration;
+	Font font;
 
 };
 

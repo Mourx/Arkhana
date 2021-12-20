@@ -7,7 +7,7 @@
 #include "DataBase.h"
 
 using namespace std;
-
+class Faction;
 class Player
 {
 public:
@@ -41,7 +41,7 @@ public:
 	map<string, CardData*> GetCardLists() { return cardList; }
 	void AddCard(Card* c) { decklist.push_back(c); }
 	void AddGold(int m) { currentGold += m; }
-	void SetFaction();
+	void SetFaction(Faction* faction);
 	int GetGold() { return currentGold; }
 	void SetBarWindow(RenderTexture* w) {
 		playerBarWindow = w;
@@ -79,7 +79,7 @@ protected:
 	int unitCostChange = 0;
 
 
-	Vector2f cardsStart = Vector2f(200, 700);
+	Vector2f cardsStart = Vector2f(200, 725);
 	Vector2f cardsEnd = Vector2f(1250, 700);
 	Vector2f offScreenPos = Vector2f(-200, -200);
 
@@ -119,7 +119,7 @@ protected:
 
 	Sprite gemIcon;
 	Texture texGem;
-	Vector2f gemPos = Vector2f(70, 720);
+	Vector2f gemPos = Vector2f(55, 720);
 
 	Sprite discardIcon;
 	Texture texDiscard;
@@ -146,11 +146,11 @@ protected:
 
 	Sprite physArmIcon;
 	Texture texPhysArm;
-	Vector2f physArmPos = Vector2f(1230, 480);
+	Vector2f physArmPos = Vector2f(1230, 430);
 
 	Sprite healthIcon;
 	Texture texHealth;
-	Vector2f healthPos = Vector2f(1230, 580);
+	Vector2f healthPos = Vector2f(1230, 530);
 
 	float attackDuration = 2;
 	float attackTimer = 0;
@@ -185,5 +185,10 @@ protected:
 
 	vector<UnitZone*> zones;
 	map<string,CardData*> cardList;
+
+	Faction* faction;
+
+	Shader shaderMana;
+	float manaPulseTimer;
 };
 

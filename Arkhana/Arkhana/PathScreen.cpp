@@ -9,18 +9,26 @@ PathScreen::PathScreen(RenderTexture* w, DataBase* db, Player* p) {
 	texBackground.loadFromFile("Textures/GUI/pathBackground.png");
 	background.setTexture(texBackground);
 	background.setPosition(0, 0);
-	InitEncounters();
+	
 	type = PATH_SCREEN;
-	forge = new ForgeScreen(window, database, player);
+	
 
 	texForgeIcon.loadFromFile("Textures/GUI/forgeIcon.png");
 	forgeIcon = new GameObject();
 	forgeIcon->GetIcon()->setTexture(texForgeIcon);
 	forgeIcon->GetIcon()->setPosition(forgeIconPos);
-
+	
 	description = "Clear each encounter\nto unlock the forge\nand move to the\nnext tier.";
 	forgePrompt = "Visit the Forge and \nupgrade your deck!";
 	forgeVisitedPrompt = "The Forge will restock\nwhen you clear this tier.";
+	Init();
+}
+
+void PathScreen::Init() {
+	nextScreen = NONE;
+	InitEncounters();
+	forge = new ForgeScreen(window, database, player);
+
 }
 
 void PathScreen::ResetDetails(COMBAT_RESULT res) {
@@ -96,6 +104,7 @@ void PathScreen::MouseReleased(Vector2f mousePos) {
 }
 
 void PathScreen::InitEncounters() {
+	encounters.clear();
 	for (int j = 0; j < encounterAmounts.size();j++) {
 		for (int i = 0; i<encounterAmounts[j]; i++) {
 			Encounter* e = new Encounter(window,database, j);

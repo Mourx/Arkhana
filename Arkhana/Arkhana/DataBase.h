@@ -62,6 +62,7 @@ public:
 	MODIFIER_TYPE mType;
 	Modifier* modifier;
 	int duration;
+	string filePath;
 };
 
 struct EncounterData {
@@ -77,6 +78,11 @@ public:
 	ENCOUNTER_TYPE type;
 };
 
+struct FactionData {
+	vector<string> decklist;
+	string filepath;
+	string name;
+};
 
 class DataBase {
 public:
@@ -86,12 +92,13 @@ public:
 	map<string, CardData*> CardListEnemy;
 	map<string, ModifierData*> modList;
 	map<string, EffectData*> effectList;
+	vector<FactionData*> factionList;
 	vector<map<string, EncounterData*>> encounters;
 	vector<vector<string>> encounterNames;
 	map<int, string> costIcons;
 
 	int playerLevel = 1;
-	bool bDebugMode = false;
+	bool bDebugMode = true;
 
 	MODIFIER_TYPE GetModEnum(string data) {
 		if (data == "ZONE_MOD") return MODIFIER_TYPE::ZONE_MOD;
@@ -179,6 +186,7 @@ public:
 	void BuildCardListsEnemy();
 	void BuildEncounterLists();
 	void BuildEffectLists();
+	void BuildFactionLists();
 	void Init();
 	Player* player;
 	Player* enemy;

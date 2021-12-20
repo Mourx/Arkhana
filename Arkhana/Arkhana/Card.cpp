@@ -11,14 +11,21 @@ Card::Card(CardData data,DataBase* dataB) {
 	icon.setTexture(texIcon);
 	unit = data.unit;
 	cost = data.cost;
-	texCost.loadFromFile(database->costIcons[cost]);
+	texCost.loadFromFile("Textures/Cards/gem.png");
+	for (int i = 0; i < costPositions.size(); i++) {
+		Sprite icon;
+		icon.setScale(0.5, 0.5);
+		icon.setTexture(texCost);
+		icon.setPosition(costPositions[i]);
+		costIcons.push_back(icon);
+	}
+	
 	zTag = data.zTag;
 	zType = database->GetZoneEnum(zTag);
 	zOwner = data.zOTag;
 	AITag = data.AITag;
 	if(data.effect != "") effect = database->effectList[data.effect];
 	goldCost = 80 + rand() % 32;
-	costIcon.setTexture(texCost);
 	SetPosition(Vector2f(300, 300));
 	if (type == UNIT) {
 		pPow = database->UnitList[unit]->physPower;
@@ -27,11 +34,12 @@ Card::Card(CardData data,DataBase* dataB) {
 	cardShader.loadFromFile(data.shaderPath, Shader::Vertex);
 
 	font.loadFromFile("Fonts/Arial/arial.ttf");
+	coolFont.loadFromFile("Fonts/ManaSpace/manaspc.ttf");
 	
 	// load arcana symbol
 	//texArcanaSymbol
 	txtName.setString(name);
-	txtName.setCharacterSize(20);
+	txtName.setCharacterSize(24);
 	txtName.setFont(font);
 	txtName.setFillColor(Color::Black);
 
@@ -52,17 +60,18 @@ Card::Card(CardData data,DataBase* dataB) {
 	magIcon.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
 	magIcon.setPosition(pos + magPos);
 
-	tR = costIcon.getLocalBounds();
-	costIcon.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
-	costIcon.setPosition(pos + costIconPos);
+	for (Sprite s : costIcons) {
+		tR = s.getLocalBounds();
+		s.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
+		s.setPosition(pos + s.getPosition());
+	}
 
-
-	txtPhys.setFont(font);
+	txtPhys.setFont(coolFont);
 	txtPhys.setCharacterSize(20);
 	txtPhys.setString(to_string(pPow));
 	txtPhys.setFillColor(Color::Black);
 	
-	txtMag.setFont(font);
+	txtMag.setFont(coolFont);
 	txtMag.setCharacterSize(20);
 	txtMag.setString(to_string(stamina));
 	txtMag.setFillColor(Color::Black);
@@ -227,8 +236,7 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 
 void Card::SetCostChange(int change) {
 	costChange = change;
-	texCost.loadFromFile(database->costIcons[cost+costChange]);
-	costIcon.setTexture(texCost);
+
 
 }
 
@@ -240,7 +248,9 @@ void Card::Draw(RenderTexture* w) {
 		w->draw(physIcon);
 		w->draw(magIcon);
 	}
-	w->draw(costIcon);
+	for (int i = 0; i < GetCost(); i++) {
+		w->draw(costIcons[i]);
+	}
 	w->draw(txtName);
 	//w->draw(txtDesc);
 	w->draw(cardArt);
@@ -278,9 +288,11 @@ void Card::SetPosition(Vector2f p) {
 	txtDesc.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
 	txtDesc.setPosition(pos + txtDescPos);
 
-	tR = costIcon.getLocalBounds();
-	costIcon.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
-	costIcon.setPosition(pos + costIconPos);
+	for (int i = 0; i < costIcons.size(); i++) {
+		tR = costIcons[i].getLocalBounds();
+		costIcons[i].setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
+		costIcons[i].setPosition(pos + costPositions[i]);
+	}
 
 	cardArt.setPosition(pos + cardArtPos);
 
