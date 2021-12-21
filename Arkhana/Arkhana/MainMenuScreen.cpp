@@ -10,7 +10,7 @@ MainMenuScreen::MainMenuScreen(RenderTexture* w,Player* p) {
 	int count = 0;
 	for (FactionData* data : database->factionList) {
 		Faction* faction = new Faction(player->GetDatabase(),data);
-		faction->SetPosition(factionPosStart + Vector2f(75 * count++, 0));
+		faction->SetPosition(factionPosStart + Vector2f(140 * count++, 0));
 		factions.push_back(faction);
 	}
 

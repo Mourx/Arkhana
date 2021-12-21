@@ -57,6 +57,8 @@ public:
 	void SwapUnits();
 	DataBase* GetDatabase() { return database; }
 	void SetEnemy(Player* enemy);
+	void SetDamageDealt(int d) { damageDealt = d; }
+	Vector2f GetHealthPos() { return healthPos; }
 protected:
 	void DiscardHand();
 	void DrawCards(int amount);
@@ -157,6 +159,11 @@ protected:
 	float attackDirection = -1;
 	bool bAttacking = false;
 	bool bHasAttacked = false;
+	bool bAnimatingDamage = false;
+	float damageTimer = 0;
+	float damageDuration = 2;
+	float damageDealt = 0;
+	float blipInterval = 0;
 
 	bool bRetreating = false;
 	bool bHasRetreated = false;
@@ -187,5 +194,7 @@ protected:
 
 	Shader shaderMana;
 	float manaPulseTimer;
+
+	vector<GameObject*> damageBlips;
 };
 

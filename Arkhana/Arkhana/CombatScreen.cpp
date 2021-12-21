@@ -36,14 +36,24 @@ CombatScreen::CombatScreen(RenderTexture* w,DataBase* data,Player* p,Encounter* 
 	enemyDamageSign.setPosition(edsPos);
 	
 
-	textPredictED.setFont(database->coolFont);
-	textPredictPD.setFont(database->coolFont);
-	textPredictED.setCharacterSize(100);
-	textPredictPD.setCharacterSize(100);
-	textPredictED.setOutlineColor(Color(0,0,0,100));
-	textPredictPD.setOutlineColor(Color(0,0,0,100));
-	textPredictED.setOutlineThickness(2);
-	textPredictPD.setOutlineThickness(2);
+	textPBlock.setFont(database->coolFont);
+	textPAttack.setFont(database->coolFont);
+	textEBlock.setFont(database->coolFont);
+	textEAttack.setFont(database->coolFont);
+
+	textPBlock.setCharacterSize(100);
+	textPAttack.setCharacterSize(100);
+	textPBlock.setOutlineColor(Color(0,0,0,100));
+	textPAttack.setOutlineColor(Color(0,0,0,100));
+	textPBlock.setOutlineThickness(2);
+	textPAttack.setOutlineThickness(2);
+
+	textEBlock.setCharacterSize(100);
+	textEAttack.setCharacterSize(100);
+	textEBlock.setOutlineColor(Color(0, 0, 0, 100));
+	textEAttack.setOutlineColor(Color(0, 0, 0, 100));
+	textEBlock.setOutlineThickness(2);
+	textEAttack.setOutlineThickness(2);
 	shaderTranslucent.loadFromFile("Textures/Shaders/translucent.vert", Shader::Vertex);
 	
 	endTurn = new EndTurnButton();
@@ -61,8 +71,10 @@ void CombatScreen::Draw() {
 	endTurn->Draw(window);
 	enemy->DrawBackground();
 	player->DrawBackground();
-	window->draw(textPredictED);
-	window->draw(textPredictPD);
+	window->draw(textPBlock);
+	window->draw(textPAttack);
+	window->draw(textEBlock);
+	window->draw(textEAttack);
 	enemy->DrawForeground();
 	player->DrawForeground();
 
@@ -321,6 +333,8 @@ void CombatScreen::CheckDeaths() {
 		nextScreen = GAME_OVER;
 		break;
 	case WIN:
+		player->EndTurnUpkeep();
+		player->NewTurnUpkeep();
 		nextScreen = REWARD_SCREEN;
 		break;
 	case ONGOING:
@@ -347,10 +361,10 @@ void CombatScreen::CalculateCombat() {
 	if (enemyPhysDamage <= 0) enemyPhysDamage = 0;
 
 	if (currentTurn == PLAYER) {
-		enemy->DamagePhys(enemyPhysDamage);
+		//enemy->DamagePhys(enemyPhysDamage);
 	}
 	else {
-		player->DamagePhys(playerPhysDamage);
+		//player->DamagePhys(playerPhysDamage);
 	}
 	
 
@@ -385,27 +399,35 @@ void CombatScreen::UpdateDamagePredictions() {
 	int playerPhysDamage = eAttack->GetCombinedPhysicalPower() - pBlock->GetCombinedPhysicalPower();
 	Color blue = Color(0, 0, 255, 100);
 	Color red = Color(255, 0, 0, 100);
-	if (enemyPhysDamage <= 0) {
-		textPredictED.setFillColor(blue);
-	}
-	else {
-		textPredictED.setFillColor(red);
-	}
-	if (playerPhysDamage <= 0) {
-		textPredictPD.setFillColor(blue);
-	}
-	else {
-		textPredictPD.setFillColor(red);
-	}
 
-	textPredictED.setString(to_string(abs(enemyPhysDamage)));
-	textPredictPD.setString(to_string(abs(playerPhysDamage)));
+	textPBlock.setFillColor(blue);
+	textEBlock.setFillColor(blue);
+	textPAttack.setFillColor(red);
+	textEAttack.setFillColor(red);
 
-	FloatRect tR = textPredictPD.getLocalBounds();
-	textPredictPD.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
-	textPredictPD.setPosition(textPredictPDPos);
+
+	textPBlock.setString(to_string(pBlock->GetCombinedPhysicalPower()));
+	textPAttack.setString(to_string(pAttack->GetCombinedPhysicalPower()));
+	textEBlock.setString(to_string(eBlock->GetCombinedPhysicalPower()));
+	textEAttack.setString(to_string(eAttack->GetCombinedPhysicalPower()));
+
+	FloatRect tR = textPAttack.getLocalBounds();
+	textPAttack.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
+	textPAttack.setPosition(textPAttackPos);
 	
-	tR = textPredictED.getLocalBounds();
-	textPredictED.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
-	textPredictED.setPosition(textPredictEDPos);
+	tR = textPBlock.getLocalBounds();
+	textPBlock.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
+	textPBlock.setPosition(textPBlockPos);
+
+	tR = textEBlock.getLocalBounds();
+	textEBlock.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
+	textEBlock.setPosition(textEBlockPos);
+
+	tR = textEAttack.getLocalBounds();
+	textEAttack.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
+	textEAttack.setPosition(textEAttackPos);
+
+
+	player->SetDamageDealt(enemyPhysDamage);
+	enemy->SetDamageDealt(playerPhysDamage);
 }

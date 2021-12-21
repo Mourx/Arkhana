@@ -4,9 +4,9 @@
       "actionCount": 2,
       "armour": 0,
       "decklist": [
-        [ "Goblin", "Goblin", "Goblin", "Rage" ],
-        [ "Shield Goblin", "Goblin", "Doublin" ],
-        [ "Shield Goblin", "Shield Goblin", "Rage" ]
+        [ "Goblin", "Goblin", "Rage" ],
+        [ "Shield Goblin", "Doublin" ],
+        [ "Shield Goblin", "Goblin", "Rage" ]
       ],
       "description": "A band of goblins\nfrom the east!\n\nGoblins tend to\ntry and swarm the\nememy.",
       "health": 15,

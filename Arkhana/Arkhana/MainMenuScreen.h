@@ -25,7 +25,7 @@ protected:
     Shader redShader;
     Shader blueShader;
 
-    Vector2f factionPosStart = Vector2f(1200, 650);
+    Vector2f factionPosStart = Vector2f(1050, 650);
 
     Player* player;
 };

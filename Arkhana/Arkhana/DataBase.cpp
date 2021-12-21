@@ -355,6 +355,10 @@ void DataBase::BuildSharedTextures() {
 	tex = new Texture();
 	tex->loadFromFile("Textures/GUI/health.png");
 	texList.insert({ "Textures/GUI/health.png",tex });
+
+	tex = new Texture();
+	tex->loadFromFile("Textures/GUI/damageBlip.png");
+	texList.insert({ "Textures/GUI/damageBlip.png",tex });
 }
 
 void DataBase::Init() {

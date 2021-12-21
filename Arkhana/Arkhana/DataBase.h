@@ -100,7 +100,7 @@ public:
 	map<int, string> costIcons;
 
 	int playerLevel = 1;
-	bool bDebugMode = true;
+	bool bDebugMode = false;
 
 	Font font;
 	Font coolFont;

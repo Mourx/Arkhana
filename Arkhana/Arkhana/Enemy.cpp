@@ -121,19 +121,57 @@ void Enemy::EndTurnUpkeep() {
 void Enemy::Update(Time t) {
 	attackZone->Update(t);
 	blockZone->Update(t);
+	for (int i = 0; i < damageBlips.size(); i++) {
+		damageBlips[i]->Update(t);
+		if (damageBlips[i]->IsAtTarget()) {
+			database->player->DamagePhys(1);
+			damageBlips.erase(damageBlips.begin() + i);
+			i--;
+		}
+		else if (!damageBlips[i]->IsMoving()) {
+			damageBlips[i]->SetPosition(attackZone->GetUnits()[i % attackZone->GetUnits().size()]->GetIcon()->getPosition() + Vector2f(30, 30));
+		}
+	}
 	if (bAttacking) {
-		if (attackTimer == 0) {
-			attackTimer += t.asSeconds();
-			for (Unit* u : attackZone->GetUnits()) {
-				if (u->GetPPower() >= 1) {
-					u->Attack();
+		if (bAnimatingDamage) {
+			if (damageTimer < damageDuration) {
+				damageTimer += t.asSeconds();
+				for (int i = 0; i < damageBlips.size(); i++) {
+					if (damageTimer >= i * blipInterval) {
+						if (!damageBlips[i]->IsMoving()) {
+							damageBlips[i]->SetTarget(database->player->GetHealthPos());
+						}
+					}
 				}
+			}
+			else {
+				damageTimer = 0;
+				bAttacking = false;
+				bAnimatingDamage = false;
 			}
 		}
 		else {
-			attackTimer += t.asSeconds();
-			if (attackTimer >= attackDuration) {
-				bAttacking = false;
+			if (attackTimer == 0) {
+				attackTimer += t.asSeconds();
+				for (Unit* u : attackZone->GetUnits()) {
+					if (u->GetPPower() >= 1 && !(u->IsPassive() || u->IsUndercover())) {
+						u->Attack();
+					}
+				}
+			}
+			else {
+				attackTimer += t.asSeconds();
+				if (attackTimer >= attackDuration / 2) {
+					bAnimatingDamage = true;
+					for (int i = 0; i < damageDealt; i++) {
+						GameObject* blip = new GameObject();
+						blip->GetIcon()->setTexture(*database->texList["Textures/GUI/damageBlip.png"]);
+						blip->SetPosition(attackZone->GetUnits()[i % attackZone->GetUnits().size()]->GetIcon()->getPosition() + Vector2f(30, 30));
+						damageBlips.push_back(blip);
+					}
+					blipInterval = (damageDuration / 2.0) / damageDealt;
+					damageTimer = 0;
+				}
 			}
 		}
 	}

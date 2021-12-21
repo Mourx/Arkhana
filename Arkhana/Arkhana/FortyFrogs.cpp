@@ -87,6 +87,7 @@ int main() {
 		// Switch Screens if needed - do appropriate switching tasks
 		switch (currentScreen->GetNextScreen()) {
 		case MAIN_MENU:
+			pathScreen->Init();
 			mainMenu->Reset();
 			currentScreen = mainMenu;
 			shaderEffect.update(*window);
@@ -113,7 +114,7 @@ int main() {
 			tType = DOWN_ENTER;
 			break;
 		case PATH_SCREEN:
-			pathScreen->Init();
+			
 			if (currentScreen->GetType() == REWARD_SCREEN) {
 				pathScreen->ResetDetails(WIN);
 			}

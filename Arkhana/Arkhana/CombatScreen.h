@@ -62,13 +62,17 @@ protected:
     Vector2f pdsPos = Vector2f(5,400);
     Vector2f edsPos = Vector2f(1270, 250);
 
-    Text textPredictPD;
-    Text textPredictED;
+    Text textPAttack;
+    Text textPBlock;
+    Text textEAttack;
+    Text textEBlock;
 
     Shader shaderTranslucent;
 
-    Vector2f textPredictPDPos = Vector2f(300, 525);
-    Vector2f textPredictEDPos = Vector2f(900, 175);
+    Vector2f textPAttackPos = Vector2f(900, 525);
+    Vector2f textPBlockPos = Vector2f(300, 525);
+    Vector2f textEAttackPos = Vector2f(300, 175);
+    Vector2f textEBlockPos = Vector2f(900, 175);
 
 };
 

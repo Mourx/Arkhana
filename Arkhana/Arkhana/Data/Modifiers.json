@@ -276,8 +276,8 @@
       "mType": "UNIT_SOT_MOD",
       "EOTChange": -100,
       "modifier": "lily_pad_buff",
-      "text": "Lose EOTChange Attack at start\nof turn.",
-      "mText": "Losing EOTChange Attack each turn."
+      "text": "Lose EOTCHANGE Attack at start\nof turn.",
+      "mText": "Losing EOTCHANGE Attack each turn."
     },
     "frog_fog_modifier": {
       "name": "Frog Fog Modifier",
