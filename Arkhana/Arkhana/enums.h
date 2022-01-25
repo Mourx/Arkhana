@@ -35,9 +35,9 @@ enum CARD_TYPE {
 };
 
 enum ZONE_OWNER {
-	Z_PLAYER = 0,
-	Z_ENEMY = 1,
-	Z_EITHER = 2
+	Z_PLAYER,
+	Z_ENEMY,
+	Z_EITHER
 };
 
 enum class ZONE_TYPE {
@@ -83,7 +83,8 @@ enum class EFFECT_TYPE {
 	FROG_FRIENDS,
 	POWER_RIBBIT,
 	FROG_DOG,
-	MODFIY_BOTH_BLOCK
+	MODFIY_BOTH_BLOCK,
+	DRIZZLE
 };
 
 enum class STAT_TYPE {

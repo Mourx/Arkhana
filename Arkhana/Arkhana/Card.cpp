@@ -162,6 +162,7 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 	UnitZone* oppZ;
 	Modifier* enemyMod;
 	Modifier* playerMod;
+	Modifier* generalMod;
 	switch (effect->effect) {
 	case EFFECT_TYPE::ARMOUR_MOD:
 		p = targetZone->GetOwner();
@@ -230,6 +231,14 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 		//playerMod->ModifyDuration(1);
 		database->player->GetZones()[(int)ZONE_TYPE::Z_BLOCK]->AddMod(playerMod);
 		database->enemy->GetZones()[(int)ZONE_TYPE::Z_BLOCK]->AddMod(enemyMod);
+		break;
+	case EFFECT_TYPE::DRIZZLE:
+		generalMod = new Modifier(modifiers[0]);
+		generalMod->SetValue(effect->value);
+		targetZone->GetOwner()->GetZones()[(int)ZONE_TYPE::Z_BLOCK]->AddMod(generalMod);
+		generalMod = new Modifier(generalMod);
+		generalMod->SetValue(effect->value);
+		targetZone->GetOwner()->GetZones()[(int)ZONE_TYPE::Z_ATTACK]->AddMod(generalMod);
 		break;
 	}
 }

@@ -38,6 +38,9 @@ public:
 	int GetDuration() {
 		return duration;
 	}
+	void SetValue(int v) {
+		value = v;
+	}
 protected:
 	
 	void GetData();

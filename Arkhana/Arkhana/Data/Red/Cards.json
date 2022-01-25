@@ -340,6 +340,30 @@
       "shaderPath": "Textures/Shaders/Empress.vert",
       "filePath": "Textures/Effects/frogFog.png",
       "modifiers": [ "frog_fog_modifier" ]
+    },
+    "Drizzle": {
+      "name": "Drizzle",
+      "cost": 1,
+      "cardType": "EFFECT",
+      "zOTag": "Z_ENEMY",
+      "zTag": "",
+      "AITag": "",
+      "level": 0,
+      "effect": "Drizzle",
+      "shaderPath": "Textures/Shaders/Empress.vert",
+      "filePath": "Textures/Effects/drizzle.png",
+      "modifiers": [ "drizzle_modifier" ]
+    },
+    "Tadpole": {
+      "name": "Tadpole",
+      "cost": 1,
+      "cardType": "UNIT",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "",
+      "level": 0,
+      "unit": "Tadpole",
+      "shaderPath": "Textures/Shaders/Empress.vert"
     }
   }
 }

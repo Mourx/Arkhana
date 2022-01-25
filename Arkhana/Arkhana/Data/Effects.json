@@ -72,6 +72,12 @@
       "type": "MODIFY_BOTH_BLOCK",
       "value": 100,
       "text": ""
+    },
+    "Drizzle": {
+      "name": "Drizzle",
+      "type": "DRIZZLE",
+      "value": -1,
+      "text": ""
     }
   }
 }

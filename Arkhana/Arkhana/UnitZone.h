@@ -53,23 +53,7 @@ public:
     void SetEnemy(Player* e) {
         enemy = e;
     }
-    void UpdatePositions() {
-        int offset = 0;
-        int modOffset = 300;
-        int dir = 1;
-        if (this->ownerType == ENEMY) {
-            offset = 220;
-            modOffset = 0;
-            dir = -1;
-        }
-        for (int i = 0; i < unitList.size(); i++) {
-            unitList[i]->SetPosition(this->GetIcon()->getPosition() + Vector2f(10 +(i/3)*10 + (i % 5) * 90, 10 + ((i / 5) * 125) * dir + offset));
-        }
-        hoverIcon.setPosition(pos + hoverOffset);
-        for(int i = 0; i<zoneMods.size();i++){
-            zoneMods[i]->SetPosition(this->GetIcon()->getPosition() + Vector2f(10 + 35 * i, 10 + modOffset));
-        }
-    }
+    void UpdatePositions();
     void SetTargetable(bool b) {
         bTargetable = b;
     }

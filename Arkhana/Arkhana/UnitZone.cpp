@@ -51,16 +51,39 @@ int UnitZone::GetCombinedPhysicalPower() {
 }
 
 
-void UnitZone::AddMod(Modifier* mod) {
-	zoneMods.push_back(mod);
-	UpdateStatMods();
-	UpdatePositions();
-}
 
 void UnitZone::RemoveMod(Modifier* mod) {
 	zoneMods.erase(remove(zoneMods.begin(), zoneMods.end(), mod), zoneMods.end());
 	UpdateStatMods();
 	UpdatePositions();
+}
+
+
+
+void UnitZone::AddMod(Modifier* mod) {
+	zoneMods.push_back(mod);
+	UpdateStatMods();
+	cout << "yeet" << endl;
+	UpdatePositions();
+}
+
+void UnitZone::UpdatePositions() {
+	int offset = 0;
+	int modOffset = 300;
+	int dir = 1;
+	if (ownerType == ZONE_OWNER::Z_ENEMY) {
+		offset = 220;
+		modOffset = 0;
+		dir = -1;
+	}
+	for (int i = 0; i < unitList.size(); i++) {
+		unitList[i]->SetPosition(this->GetIcon()->getPosition() + Vector2f(10 + (i / 3) * 10 + (i % 5) * 90, 10 + ((i / 5) * 125) * dir + offset));
+	}
+	hoverIcon.setPosition(pos + hoverOffset);
+	for (int i = 0; i < zoneMods.size(); i++) {
+		zoneMods[i]->SetPosition(this->GetIcon()->getPosition() + Vector2f(10 + 35 * i, 10 + modOffset));
+	}
+
 }
 
 void UnitZone::AddUnit(Unit* u, DataBase* database) {
@@ -184,28 +207,33 @@ void UnitZone::UpdateStatMods() {
 				}
 			}
 		}
-		for (Modifier* mod : zoneMods) {
-			zMods.push_back(mod);
-			switch (mod->GetStat()) {
-			case STAT_TYPE::DMG_PHYSICAL:
-				zoneBonusPhys += mod->GetValue();
-				zoneMultiplierPhys += mod->GetMultiplier();
-				break;
-			case STAT_TYPE::STAMINA:
+		
+	}
+	
+	for (Modifier* mod : zoneMods) {
+		if (mod->GetStat() == STAT_TYPE::ZONE_POWER) {
+			zonePower += mod->GetValue();
+		}
+		zMods.push_back(mod);
+		switch (mod->GetStat()) {
+		case STAT_TYPE::DMG_PHYSICAL:
+			zoneBonusPhys += mod->GetValue();
+			zoneMultiplierPhys += mod->GetMultiplier();
+			break;
+		case STAT_TYPE::STAMINA:
 
-				break;
+			break;
 
-			default:
-				break;
-			}
+		default:
+			break;
 		}
 	}
 	for (Unit* u : unitList) {
 		bool bMusical = false;
-		
+
 		for (Modifier* mod : u->GetModifiers()) {
 			if (mod->GetName() == "Musical Modifier") {
-				u->SetZoneBonusesPhys(zoneBonusPhys+musicBonusPhys, zoneMultiplierPhys+musicMultiplierPhys, zMods);
+				u->SetZoneBonusesPhys(zoneBonusPhys + musicBonusPhys, zoneMultiplierPhys + musicMultiplierPhys, zMods);
 				bMusical = true;
 			}
 		}
@@ -213,15 +241,14 @@ void UnitZone::UpdateStatMods() {
 			u->SetZoneBonusesPhys(zoneBonusPhys, zoneMultiplierPhys, zMods);
 		}
 	}
-	for (Modifier* mod : zoneMods) {
-		if (mod->GetStat() == STAT_TYPE::ZONE_POWER) {
-			zonePower += mod->GetValue();
-		}
-	}
 }
 
 void UnitZone::EndTurnUpkeep(DataBase* database) {
-
+	if (type == ZONE_TYPE::Z_ATTACK) {
+		for (Modifier* mod : zoneMods) {
+			mod->ModifyDuration(-1);
+		}
+	}
 	for (Unit* u : unitList) {
 
 		for (Modifier* mod : u->GetModifiers()) {
@@ -256,8 +283,10 @@ void UnitZone::EndTurnUpkeep(DataBase* database) {
 
 
 void UnitZone::NewTurnUpkeep(DataBase* database) {
-	for (Modifier* mod : zoneMods) {
-		mod->ModifyDuration(-1);
+	if (type == ZONE_TYPE::Z_BLOCK) {
+		for (Modifier* mod : zoneMods) {
+			mod->ModifyDuration(-1);
+		}
 	}
 	for (int i = 0; i < zoneMods.size(); i++) {
 		if (zoneMods[i]->GetDuration() <= 0) {

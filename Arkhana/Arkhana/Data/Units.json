@@ -150,6 +150,12 @@
       "stamina": 6,
       "filePath": "Textures/Units/lilyPad.png"
     },
+    "Tadpole": {
+      "name": "Tadpole",
+      "physPower": 0,
+      "stamina": 5,
+      "filePath": "Textures/Units/tadpole.png"
+    },
     "Doublin": {
       "name": "Doublin",
       "physPower": 7,

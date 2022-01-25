@@ -174,6 +174,7 @@ public:
 		if (data == "CREATE_UNIT") return EFFECT_TYPE::CREATE_UNIT;
 		if (data == "FROG_DOG") return EFFECT_TYPE::FROG_DOG;
 		if (data == "MODIFY_BOTH_BLOCK") return EFFECT_TYPE::MODFIY_BOTH_BLOCK;
+		if (data == "DRIZZLE") return EFFECT_TYPE::DRIZZLE;
 		else return EFFECT_TYPE::ARMOUR_MOD;
 	}
 

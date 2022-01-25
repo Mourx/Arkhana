@@ -291,6 +291,18 @@
       "mText": "Gain VALUE block for DURATION.",
       "filepath": "Textures/Effects/frogFog.png"
     },
+    "drizzle_modifier": {
+      "name": "Drizzle Modifier",
+      "value": -1,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "ZONE_MOD",
+      "EOTChange": 0,
+      "duration": 1,
+      "text": "Enemy units gain VALUE\nattack for DURATION.",
+      "mText": "Lose VALUE attack for DURATION.",
+      "filepath": "Textures/Effects/drizzle.png"
+    },
     "ogre_buff": {
       "name": "Ogre Buff",
       "value": 4,
