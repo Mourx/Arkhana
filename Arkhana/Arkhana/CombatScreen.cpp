@@ -236,6 +236,13 @@ void CombatScreen::MouseMoved(Vector2f mousePos) {
 			hoverCard = eNext;
 		}
 	}
+	FloatRect bounds = endTurn->GetIcon()->getGlobalBounds();
+	if (bounds.contains(mousePos)) {
+		endTurn->SetHover(true);
+	}
+	else {
+		endTurn->SetHover(false);
+	}
 }
 
 void CombatScreen::Update(Time t) {

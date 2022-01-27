@@ -43,7 +43,7 @@ protected:
     Vector2f iconSnapPos;
 
     EndTurnButton* endTurn;
-    Vector2f endTurnPos = Vector2f(1425, 600);
+    Vector2f endTurnPos = Vector2f(1450, 600);
     
     UnitZone* selectedZone = NULL;
     Card* eNext = NULL;
