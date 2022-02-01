@@ -221,9 +221,7 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 	case EFFECT_TYPE::FROG_DOG:
 		targetZone = targZone;
 		oppZ = database->enemy->GetZones()[(int)targetZone->GetOppositeType()];
-		for (Unit* u : oppZ->GetUnits()) {
-			u->AddModifier(new Modifier(*database->modList["frog_dog_modifier"]));
-		}
+		
 		break;
 	case EFFECT_TYPE::MODFIY_BOTH_BLOCK:
 		enemyMod = new Modifier(modifiers[0]);
@@ -239,6 +237,30 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 		generalMod = new Modifier(generalMod);
 		generalMod->SetValue(effect->value);
 		targetZone->GetOwner()->GetZones()[(int)ZONE_TYPE::Z_ATTACK]->AddMod(generalMod);
+		break;
+	case EFFECT_TYPE::POTION_BUFF:
+		targetZone->AddMod(new Modifier(*database->modList["potion_frog"]));
+		break;
+	case EFFECT_TYPE::MODIFY_ALL_ATTACK:
+		generalMod = new Modifier(*database->modList["modify_attack_modifier"]);
+		generalMod->SetValue(effect->value);
+		generalMod->SetMText(effect->name + ": Attack modified by" + to_string(effect->value));
+		targetZone = database->player->GetZones()[(int)ZONE_TYPE::Z_BLOCK];
+		for (Unit* u : targetZone->GetUnits()) {
+			u->AddModifier(generalMod);
+		}
+		targetZone = database->player->GetZones()[(int)ZONE_TYPE::Z_ATTACK];
+		for (Unit* u : targetZone->GetUnits()) {
+			u->AddModifier(generalMod);
+		}
+		targetZone = database->enemy->GetZones()[(int)ZONE_TYPE::Z_ATTACK];
+		for (Unit* u : targetZone->GetUnits()) {
+			u->AddModifier(generalMod);
+		}
+		targetZone = database->enemy->GetZones()[(int)ZONE_TYPE::Z_BLOCK];
+		for (Unit* u : targetZone->GetUnits()) {
+			u->AddModifier(generalMod);
+		}
 		break;
 	}
 }

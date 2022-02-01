@@ -354,6 +354,32 @@
       "filePath": "Textures/Effects/drizzle.png",
       "modifiers": [ "drizzle_modifier" ]
     },
+    "Deluge": {
+      "name": "Deluge",
+      "cost": 2,
+      "cardType": "EFFECT",
+      "zOTag": "Z_ENEMY",
+      "zTag": "",
+      "AITag": "",
+      "level": 0,
+      "effect": "Deluge",
+      "shaderPath": "Textures/Shaders/Empress.vert",
+      "filePath": "Textures/Effects/drizzle.png",
+      "modifiers": [ "drizzle_modifier" ]
+    },
+    "Flood": {
+      "name": "Flood",
+      "cost": 3,
+      "cardType": "EFFECT",
+      "zOTag": "Z_ENEMY",
+      "zTag": "",
+      "AITag": "",
+      "level": 0,
+      "effect": "Flood",
+      "shaderPath": "Textures/Shaders/Empress.vert",
+      "filePath": "Textures/Effects/drizzle.png",
+      "modifiers": [ "drizzle_modifier" ]
+    },
     "Tadpole": {
       "name": "Tadpole",
       "cost": 1,
@@ -363,6 +389,54 @@
       "AITag": "",
       "level": 0,
       "unit": "Tadpole",
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Potion Frog": {
+      "name": "Potion Frog",
+      "cost": 1,
+      "cardType": "UNIT",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "",
+      "level": 0,
+      "unit": "Potion Frog",
+      "effect": "Potion Buff",
+      "modifiers": [ "eot_potion_frog" ],
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "King Frog": {
+      "name": "King Frog",
+      "cost": 1,
+      "cardType": "UNIT",
+      "zOTag": "Z_PLAYER",
+      "zTag": "Z_MIN_3_UNIT",
+      "AITag": "",
+      "level": 0,
+      "unit": "King Frog",
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Leap Frog": {
+      "name": "Leap Frog",
+      "cost": 1,
+      "cardType": "UNIT",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "",
+      "level": 0,
+      "unit": "Leap Frog",
+      "modifiers": ["evasive_modifier"],
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Big Croak": {
+      "name": "Big Croak",
+      "cost": 1,
+      "cardType": "EFFECT",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "",
+      "level": 0,
+      "effect": "Big Croak",
+      "filePath": "Textures/Effects/bigCroak.png",
       "shaderPath": "Textures/Shaders/Empress.vert"
     }
   }

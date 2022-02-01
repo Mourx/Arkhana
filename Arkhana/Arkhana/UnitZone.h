@@ -50,6 +50,7 @@ public:
     void RemoveUnit(Unit* u);
     void AddMod(Modifier* mod);
     void RemoveMod(Modifier* mod);
+    void RemoveMod(string modName);
     void SetEnemy(Player* e) {
         enemy = e;
     }
@@ -57,6 +58,10 @@ public:
     void SetTargetable(bool b) {
         bTargetable = b;
     }
+    bool IsTargetable() {
+        return bTargetable;
+    }
+    int GetEvasiveDamage();
 protected:
     void UpdateStatMods();
     

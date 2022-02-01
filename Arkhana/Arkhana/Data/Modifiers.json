@@ -9,6 +9,15 @@
       "text": "Upgrade: +VALUE power",
       "mText": "Upgrade: +VALUE power"
     },
+    "modify_attack_modifier": {
+      "name": "Modify Attack",
+      "value": 0,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "UNIT_MOD",
+      "text": "Attack modified by VALUE",
+      "mText": "Attack modified by VALUE"
+    },
     "upgrade_stamina": {
       "name": "Upgrade Stamina",
       "value": 1,
@@ -27,6 +36,16 @@
       "EOTChange": -1,
       "text": "Stamina reduced each turn",
       "mText": "Stamina reduced each turn"
+    },
+    "evasive_modifier": {
+      "name": "Evasive",
+      "value": 0,
+      "multiplier": 0,
+      "sType": "",
+      "mType": "UNIT_MOD",
+      "EOTChange": 0,
+      "text": "EVASIVE",
+      "mText": "EVASIVE"
     },
     "aura_empress_shrine": {
       "name": "Empress Shrine Aura",
@@ -128,12 +147,13 @@
       "mText": "Moves to the other zone\nat the end of each turn."
     },
     "general_frog_modifier": {
-      "name": "Guard Frog Modifier",
+      "name": "General Frog Modifier",
       "value": 1,
       "multiplier": 0,
       "sType": "DMG_PHYSICAL",
       "mType": "ZONE_MOD_ATTACK",
       "EOTChange": 0,
+      "filepath": "Textures/Units/generalFrog.png",
       "text": "Units in the Attack Zone\ngain VALUE attack.",
       "mText": "Units in the Attack Zone\ngain VALUE attack."
     },
@@ -302,6 +322,27 @@
       "text": "Enemy units gain VALUE\nattack for DURATION.",
       "mText": "Lose VALUE attack for DURATION.",
       "filepath": "Textures/Effects/drizzle.png"
+    },
+    "eot_potion_frog": {
+      "name": "Potion Frog Stamina Reduced",
+      "value": 0,
+      "multiplier": 0,
+      "sType": "STAMINA",
+      "mType": "UNIT_EOT_MOD",
+      "EOTChange": -1,
+      "text": "Stamina reduced each turn",
+      "mText": "Stamina reduced each turn"
+    },
+    "potion_frog": {
+      "name": "Potion Frog",
+      "value": 0,
+      "multiplier": 0,
+      "sType": "",
+      "mType": "ZONE_MOD",
+      "EOTChange": 0,
+      "filepath": "Textures/Units/potionFrog.png",
+      "text": "Units other than Potion Frogs\ndon't lose stamina\neach turn",
+      "mText": "Units other than Potion Frogs\ndon't lose stamina\neach turn"
     },
     "ogre_buff": {
       "name": "Ogre Buff",

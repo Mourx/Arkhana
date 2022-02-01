@@ -78,6 +78,30 @@
       "type": "DRIZZLE",
       "value": -1,
       "text": ""
+    },
+    "Deluge": {
+      "name": "Deluge",
+      "type": "DRIZZLE",
+      "value": -2,
+      "text": ""
+    },
+    "Flood": {
+      "name": "Flood",
+      "type": "DRIZZLE",
+      "value": -4,
+      "text": ""
+    },
+    "Potion Buff": {
+      "name": "Potion Buff",
+      "type": "POTION_BUFF",
+      "value": 0,
+      "text": ""
+    },
+    "Big Croak": {
+      "name": "Big Croak",
+      "type": "MODIFY_ALL_ATTACK",
+      "value": -1,
+      "text": ""
     }
   }
 }

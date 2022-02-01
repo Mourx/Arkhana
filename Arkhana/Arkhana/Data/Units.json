@@ -144,6 +144,18 @@
       "stamina": 1,
       "filePath": "Textures/Units/smogFrog.png"
     },
+    "Potion Frog": {
+      "name": "Potion Frog",
+      "physPower": 4,
+      "stamina": 4,
+      "filePath": "Textures/Units/potionFrog.png"
+    },
+    "King Frog": {
+      "name": "King Frog",
+      "physPower": 20,
+      "stamina": 5,
+      "filePath": "Textures/Units/kingFrog.png"
+    },
     "Lily Pad": {
       "name": "Lily Pad",
       "physPower": 0,
@@ -155,6 +167,12 @@
       "physPower": 0,
       "stamina": 5,
       "filePath": "Textures/Units/tadpole.png"
+    },
+    "Leap Frog": {
+      "name": "Leap Frog",
+      "physPower": 2,
+      "stamina": 5,
+      "filePath": "Textures/Units/leapFrog.png"
     },
     "Doublin": {
       "name": "Doublin",

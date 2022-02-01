@@ -145,6 +145,7 @@ public:
 	ZONE_TYPE GetZoneEnum(string data) {
 		if (data == "AGGRESSIVE") return ZONE_TYPE::Z_ATTACK;
 		else if (data == "DEFENSIVE") return ZONE_TYPE::Z_BLOCK;
+		else if (data == "Z_MIN_3_UNIT") return ZONE_TYPE::Z_MIN_3_UNIT;
 		else return ZONE_TYPE::Z_ANY;
 	}
 
@@ -175,6 +176,8 @@ public:
 		if (data == "FROG_DOG") return EFFECT_TYPE::FROG_DOG;
 		if (data == "MODIFY_BOTH_BLOCK") return EFFECT_TYPE::MODFIY_BOTH_BLOCK;
 		if (data == "DRIZZLE") return EFFECT_TYPE::DRIZZLE;
+		if (data == "POTION_BUFF") return EFFECT_TYPE::POTION_BUFF;
+		if (data == "MODIFY_ALL_ATTACK") return EFFECT_TYPE::MODIFY_ALL_ATTACK;
 		else return EFFECT_TYPE::ARMOUR_MOD;
 	}
 

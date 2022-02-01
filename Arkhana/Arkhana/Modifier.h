@@ -41,6 +41,12 @@ public:
 	void SetValue(int v) {
 		value = v;
 	}
+	void SetName(string s) {
+		name = s;
+	}
+	void SetMText(string s) {
+		mText = s;
+	}
 protected:
 	
 	void GetData();

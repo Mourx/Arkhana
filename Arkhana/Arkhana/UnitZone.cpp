@@ -44,7 +44,36 @@ void UnitZone::DrawUnits(RenderTexture* w) {
 int UnitZone::GetCombinedPhysicalPower() {
 	int power = 0;
 	for (Unit* u : unitList) {
-		if(!u->IsUndercover() && !u->IsPassive()) power += u->GetPPower();
+		if (!u->IsUndercover() && !u->IsPassive()) {
+			bool bEvasive = false;
+			for (Modifier* mod : u->GetModifiers()) {
+				if (mod->GetName() == "Evasive") {
+					bEvasive = true;
+				}
+			}
+			if (bEvasive == false) {
+				power += u->GetPPower();
+			}
+		}
+	}
+	power += zonePower;
+	return power;
+}
+
+int UnitZone::GetEvasiveDamage() {
+	int power = 0;
+	for (Unit* u : unitList) {
+		if (!u->IsUndercover() && !u->IsPassive()) {
+			bool bEvasive = false;
+			for (Modifier* mod : u->GetModifiers()) {
+				if (mod->GetName() == "Evasive") {
+					bEvasive = true;
+				}
+			}
+			if (bEvasive == true) {
+				power += u->GetPPower();
+			}
+		}
 	}
 	power += zonePower;
 	return power;
@@ -54,6 +83,19 @@ int UnitZone::GetCombinedPhysicalPower() {
 
 void UnitZone::RemoveMod(Modifier* mod) {
 	zoneMods.erase(remove(zoneMods.begin(), zoneMods.end(), mod), zoneMods.end());
+	UpdateStatMods();
+	UpdatePositions();
+}
+
+
+void UnitZone::RemoveMod(string modName) {
+	Modifier* toRemove = NULL;
+	for (Modifier* mod : zoneMods) {
+		if (mod->GetName() == modName) {
+			toRemove = mod;
+		}
+	}
+	zoneMods.erase(remove(zoneMods.begin(), zoneMods.end(), toRemove), zoneMods.end());
 	UpdateStatMods();
 	UpdatePositions();
 }
@@ -166,6 +208,9 @@ void UnitZone::RemoveUnit(Unit* u) {
 			break;
 		}
 	}
+	if (u->GetName() == "Potion Frog") {
+		RemoveMod("potion_frog");
+	}
 	unitList.erase(remove(unitList.begin(),unitList.end(),u),unitList.end());
 
 	player->GetZones()[(int)ZONE_TYPE::Z_ATTACK]->UpdatePositions();
@@ -244,8 +289,12 @@ void UnitZone::UpdateStatMods() {
 }
 
 void UnitZone::EndTurnUpkeep(DataBase* database) {
+	bool bPotioned = false; 
 	if (type == ZONE_TYPE::Z_ATTACK) {
 		for (Modifier* mod : zoneMods) {
+			if (mod->GetName() == "Potion Frog") {
+				bPotioned = true;
+			}
 			mod->ModifyDuration(-1);
 		}
 	}
@@ -256,7 +305,11 @@ void UnitZone::EndTurnUpkeep(DataBase* database) {
 				if (mod->GetModifier() != NULL) {
 					u->AddModifier(mod->GetModifier());
 				}
-				else if (mod->GetName() == "Stamina Reduced") {
+				else if (mod->GetName() == "Stamina Reduced" && bPotioned == false) {
+					if (GetType() == ZONE_TYPE::Z_ATTACK) {
+						mod->ApplyEOT();
+					}
+				}else if (mod->GetName() == "Potion Frog Stamina Reduced") {
 					if (GetType() == ZONE_TYPE::Z_ATTACK) {
 						mod->ApplyEOT();
 					}
@@ -283,8 +336,12 @@ void UnitZone::EndTurnUpkeep(DataBase* database) {
 
 
 void UnitZone::NewTurnUpkeep(DataBase* database) {
+	bool bPotioned = false;
 	if (type == ZONE_TYPE::Z_BLOCK) {
 		for (Modifier* mod : zoneMods) {
+			if (mod->GetName() == "Potion Frog") {
+				bPotioned = true;
+			}
 			mod->ModifyDuration(-1);
 		}
 	}
@@ -296,7 +353,12 @@ void UnitZone::NewTurnUpkeep(DataBase* database) {
 	}
 	for (Unit* u : unitList) {
 		for (Modifier* mod : u->GetModifiers()) {
-			if (mod->GetName() == "Stamina Reduced") {
+			if (mod->GetName() == "Stamina Reduced" && bPotioned == false) {
+				if (GetType() == ZONE_TYPE::Z_BLOCK) {
+					mod->ApplyEOT();
+				}
+			}
+			else if (mod->GetName() == "Potion Frog Stamina Reduced") {
 				if (GetType() == ZONE_TYPE::Z_BLOCK) {
 					mod->ApplyEOT();
 				}

@@ -150,6 +150,7 @@ void Player::SetFaction(Faction* f) {
 	armour = 10;
 	health = maxHealth;
 	
+	
 	InitSprites();
 	UpdateStrings();
 }

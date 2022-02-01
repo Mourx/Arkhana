@@ -43,7 +43,8 @@ enum ZONE_OWNER {
 enum class ZONE_TYPE {
 	Z_ANY = 3,
 	Z_ATTACK = 0,
-	Z_BLOCK =1
+	Z_BLOCK =1,
+	Z_MIN_3_UNIT
 };
 
 enum AI_TAG {
@@ -84,7 +85,9 @@ enum class EFFECT_TYPE {
 	POWER_RIBBIT,
 	FROG_DOG,
 	MODFIY_BOTH_BLOCK,
-	DRIZZLE
+	DRIZZLE,
+	POTION_BUFF,
+	MODIFY_ALL_ATTACK
 };
 
 enum class STAT_TYPE {

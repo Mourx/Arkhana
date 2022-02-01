@@ -50,6 +50,9 @@ public:
         retreatDirection = ret;
         attackDirection = atk;
     }
+    string GetName() {
+        return name;
+    }
     bool IsRetreating() { return bRetreating; }
 protected:
     void ModifyStat(STAT_TYPE stat, int value, int multiplier);

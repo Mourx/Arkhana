@@ -67,6 +67,12 @@ protected:
     Text textEAttack;
     Text textEBlock;
 
+    Text textEstDamagePlayer;
+    Text textEstDamageEnemy;
+
+    Vector2f estDamagePlayerPos = Vector2f(1330, 605);
+    Vector2f estDamageEnemyPos = Vector2f(1330, 185);
+
     Shader shaderTranslucent;
 
     Vector2f textPAttackPos = Vector2f(900, 525);

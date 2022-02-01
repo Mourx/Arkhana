@@ -41,6 +41,10 @@ CombatScreen::CombatScreen(RenderTexture* w,DataBase* data,Player* p,Encounter* 
 	textEBlock.setFont(database->coolFont);
 	textEAttack.setFont(database->coolFont);
 
+	textEstDamagePlayer.setFont(database->coolFont);
+	textEstDamageEnemy.setFont(database->coolFont);
+
+
 	textPBlock.setCharacterSize(100);
 	textPAttack.setCharacterSize(100);
 	textPBlock.setOutlineColor(Color(0,0,0,100));
@@ -65,8 +69,6 @@ CombatScreen::CombatScreen(RenderTexture* w,DataBase* data,Player* p,Encounter* 
 
 void CombatScreen::Draw() {
 	window->draw(background);
-	//window->draw(playerDamageSign);
-	//window->draw(enemyDamageSign);
 	
 	endTurn->Draw(window);
 	enemy->DrawBackground();
@@ -75,6 +77,8 @@ void CombatScreen::Draw() {
 	window->draw(textPAttack);
 	window->draw(textEBlock);
 	window->draw(textEAttack);
+	window->draw(textEstDamagePlayer);
+	window->draw(textEstDamageEnemy);
 	enemy->DrawForeground();
 	player->DrawForeground();
 
@@ -147,12 +151,26 @@ void CombatScreen::MouseMoved(Vector2f mousePos) {
 					u->SetTargetable(true);
 				}
 			}
+			else if (card->GetZoneType() == ZONE_TYPE::Z_MIN_3_UNIT) {
+				if (u->GetUnits().size() >= 3) {
+					if (card->GetZoneOwner() == Z_EITHER || u->GetOwnerType() == card->GetZoneOwner()) {
+						u->SetTargetable(true);
+					}
+				}
+			}
 		}
 		for (UnitZone* u : enemy->GetZones()) {
 			u->SetTargetable(false);
 			if (card->GetZoneType() == ZONE_TYPE::Z_ANY || (card->GetZoneType() == u->GetType())) {
 				if (card->GetZoneOwner() == Z_EITHER || u->GetOwnerType() == card->GetZoneOwner()) {
 					u->SetTargetable(true);
+				}
+			}
+			else if (card->GetZoneType() == ZONE_TYPE::Z_MIN_3_UNIT) {
+				if (u->GetUnits().size() >= 3) {
+					if (card->GetZoneOwner() == Z_EITHER || u->GetOwnerType() == card->GetZoneOwner()) {
+						u->SetTargetable(true);
+					}
 				}
 			}
 		}
@@ -216,17 +234,9 @@ void CombatScreen::MouseMoved(Vector2f mousePos) {
 	}
 	eNext = NULL;
 	if (!player->selectedCard == NULL && selectedZone != NULL) {
-		if (player->selectedCard->GetZoneType() == ZONE_TYPE::Z_ANY || (player->selectedCard->GetZoneType() == selectedZone->GetType())) {
-			if (player->selectedCard->GetZoneOwner() == Z_EITHER || selectedZone->GetOwnerType() == player->selectedCard->GetZoneOwner()) {
-				selectedZone->SetHover(true);
-			}
-			else {
-				selectedZone = NULL;
-			}
-		}
-		else {
+		if (!selectedZone->IsTargetable()){
 			selectedZone = NULL;
-		}
+		}		
 	}
 	vector<Card*> list = enemy->GetDeckList();
 	for (int i = list.size() - 1; i >= 0; i--) {
@@ -402,8 +412,17 @@ void CombatScreen::UpdateDamagePredictions() {
 	UnitZone* pAttack = pZones[(int)ZONE_TYPE::Z_ATTACK];
 	UnitZone* pBlock = pZones[(int)ZONE_TYPE::Z_BLOCK];
 
+	int enemyEvasiveDamage = pAttack->GetEvasiveDamage();
+	int playerEvasiveDamage = eAttack->GetEvasiveDamage();
+
 	int enemyPhysDamage = pAttack->GetCombinedPhysicalPower() - eBlock->GetCombinedPhysicalPower();
 	int playerPhysDamage = eAttack->GetCombinedPhysicalPower() - pBlock->GetCombinedPhysicalPower();
+	if (enemyPhysDamage <= 0) {
+		enemyPhysDamage = 0;
+	}
+	if (playerPhysDamage <= 0) {
+		playerPhysDamage = 0;
+	}
 	Color blue = Color(0, 0, 255, 100);
 	Color red = Color(255, 0, 0, 100);
 
@@ -435,6 +454,22 @@ void CombatScreen::UpdateDamagePredictions() {
 	textEAttack.setPosition(textEAttackPos);
 
 
-	player->SetDamageDealt(enemyPhysDamage);
-	enemy->SetDamageDealt(playerPhysDamage);
+	player->SetDamageDealt(enemyPhysDamage+enemyEvasiveDamage);
+	enemy->SetDamageDealt(playerPhysDamage+playerEvasiveDamage);
+
+	blue = Color(0, 0, 255, 190);
+	red = Color(255, 0, 0, 190);
+
+	textEstDamagePlayer.setFillColor(red);
+	textEstDamageEnemy.setFillColor(red);
+
+	textEstDamagePlayer.setString(to_string(playerPhysDamage + playerEvasiveDamage));
+	tR = textEstDamagePlayer.getLocalBounds();
+	textEstDamagePlayer.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
+	textEstDamagePlayer.setPosition(estDamagePlayerPos);
+	
+	textEstDamageEnemy.setString(to_string(enemyPhysDamage + enemyEvasiveDamage));
+	tR = textEstDamageEnemy.getLocalBounds();
+	textEstDamageEnemy.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
+	textEstDamageEnemy.setPosition(estDamageEnemyPos);
 }
