@@ -79,10 +79,109 @@ int main() {
 
 
 	while (window->isOpen()) {
-		
+		float frameLimit = 0.0083;
+		Time currentTime;
 		// Update Things
-		elapsed = clock.restart();
-		currentScreen->Update(elapsed);
+
+		if (clock.getElapsedTime().asSeconds() >= frameLimit) {
+			elapsed = clock.restart();
+			currentScreen->Update(elapsed);
+
+
+			// Do Transition Effects
+			if (bTransition) {
+				transitionTimer += elapsed.asSeconds();
+				if (transitionTimer >= transitionTime) {
+					bTransition = false;
+					transitionTimer = 0;
+				}
+			}
+			window->clear(Color::Black);
+			window->setView(view);
+			currentScreen->SetInfo(info);
+			currentScreen->Draw();
+			postSlide.update(screenRender->getTexture());
+
+			player->DrawPlayerBar();
+			info->Draw(windowRender);
+
+
+			windowRender->display();
+			screenRender->display();
+
+			tempScreen = Sprite(screenRender->getTexture());
+			tempScreen.setPosition(0, 180);
+			window->draw(Sprite(windowRender->getTexture()));
+			window->draw(tempScreen);
+			if (bTransition) {
+
+				if (currentScreen->GetType() == COMBAT_SCREEN && bVortexLoaded) {
+					transitionTime = 1.2f;
+					if (transitionTimer >= transitionTime / 2.0) {
+						shaderEffect.update(*window);
+					}
+					float timeVal = (transitionTimer >= transitionTime / 2.0) ? timeVal = transitionTime - transitionTimer : timeVal = transitionTimer;
+					timeVal = timeVal / (transitionTime / 2.0);
+					shader.setUniform("centre", Vector2f(0.5, 0.5));
+					shader.setUniform("t", timeVal);
+					shader.setUniform("iResolution", Vector2f(1920, 1080));
+					shader.setUniform("currentTexture", shaderEffect);
+					render.setTexture(shaderEffect);
+					window->draw(render, &shader);
+				}
+				else {
+					transitionTime = 0.6f;
+					switch (tType) {
+					case LEFT_ENTER:
+						slideSprite.setPosition(Vector2f(-1600 + 1600 * (transitionTimer / transitionTime), 180));
+						slideSprite.setTexture(postSlide);
+						staySprite.setTexture(preSlide);
+						staySprite.setPosition(Vector2f(0, 180));
+						break;
+					case DOWN_ENTER:
+						slideSprite.setPosition(Vector2f(0, 1080 - 900 * (transitionTimer / transitionTime)));
+						slideSprite.setTexture(postSlide);
+						staySprite.setTexture(preSlide);
+						staySprite.setPosition(Vector2f(0, 180));
+						break;
+					case DOWN_EXIT:
+						slideSprite.setPosition(Vector2f(0, 180 + 1080 * (transitionTimer / transitionTime)));
+						slideSprite.setTexture(preSlide);
+						staySprite.setTexture(postSlide);
+						staySprite.setPosition(Vector2f(0, 180));
+						break;
+					}
+					window->draw(staySprite);
+					window->draw(slideSprite);
+				}
+			}
+
+
+			window->display();
+
+		}
+		// Poll Mouse events 
+		while (window->pollEvent(event))
+		{
+			if (event.type == Event::Closed) window->close();
+			Vector2f m = window->mapPixelToCoords(Mouse::getPosition(*window)) + Vector2f(0, -180);
+			if (event.type == Event::MouseMoved) {
+				currentScreen->MouseMoved(m);
+			}
+			if (event.type == Event::MouseButtonPressed) {
+				currentScreen->MouseClicked(m);
+			}
+			if (event.type == Event::MouseButtonReleased) {
+				currentScreen->MouseReleased(m);
+			}
+			if (event.type == Event::Resized) {
+				view = getLetterboxView(view, event.size.width, event.size.height);
+			}
+
+
+		}
+
+		
 
 		// Switch Screens if needed - do appropriate switching tasks
 		switch (currentScreen->GetNextScreen()) {
@@ -138,96 +237,10 @@ int main() {
 		case NONE:
 			break;
 		}
-
-		// Poll Mouse events 
-		while (window->pollEvent(event))
-		{
-			if (event.type == Event::Closed) window->close();
-			Vector2f m = window->mapPixelToCoords(Mouse::getPosition(*window)) + Vector2f(0,-180);
-			if (event.type == Event::MouseMoved) {
-				currentScreen->MouseMoved(m);
-			}
-			if (event.type == Event::MouseButtonPressed) {
-				currentScreen->MouseClicked(m);
-			}
-			if (event.type == Event::MouseButtonReleased) {
-				currentScreen->MouseReleased(m);
-			}
-			if (event.type == Event::Resized) {
-				view = getLetterboxView(view, event.size.width, event.size.height);
-			}
+		
 			
-			
-		}
-
-		// Do Transition Effects
-		if (bTransition) {
-			transitionTimer += elapsed.asSeconds();
-			if (transitionTimer >= transitionTime) {
-				bTransition = false;
-				transitionTimer = 0;
-			}
-		}
-		window->clear(Color::Black);
-		window->setView(view);
-		currentScreen->SetInfo(info);
-		currentScreen->Draw();
-		postSlide.update(screenRender->getTexture());
-		
-		player->DrawPlayerBar();
-		info->Draw(windowRender);
 
 		
-		windowRender->display();
-		screenRender->display();
-		
-		tempScreen = Sprite(screenRender->getTexture());
-		tempScreen.setPosition(0, 180);
-		window->draw(Sprite(windowRender->getTexture()));
-		window->draw(tempScreen);
-		if (bTransition) {
-
-			if (currentScreen->GetType() == COMBAT_SCREEN && bVortexLoaded) {
-				transitionTime = 1.2f;
-				if (transitionTimer >= transitionTime / 2.0) {
-					shaderEffect.update(*window);
-				}
-				float timeVal = (transitionTimer >= transitionTime / 2.0) ? timeVal = transitionTime - transitionTimer : timeVal = transitionTimer;
-				timeVal = timeVal / (transitionTime / 2.0);
-				shader.setUniform("centre", Vector2f(0.5, 0.5));
-				shader.setUniform("t", timeVal);
-				shader.setUniform("iResolution", Vector2f(1920, 1080));
-				shader.setUniform("currentTexture", shaderEffect);
-				render.setTexture(shaderEffect);
-				window->draw(render, &shader);
-			}
-			else {
-				transitionTime = 0.6f;
-				switch (tType) {
-				case LEFT_ENTER:
-					slideSprite.setPosition(Vector2f(-1600 + 1600 * (transitionTimer / transitionTime), 180));
-					slideSprite.setTexture(postSlide);
-					staySprite.setTexture(preSlide);
-					staySprite.setPosition(Vector2f(0, 180));
-					break;
-				case DOWN_ENTER:
-					slideSprite.setPosition(Vector2f(0,1080 - 900 * (transitionTimer / transitionTime)));
-					slideSprite.setTexture(postSlide);
-					staySprite.setTexture(preSlide);
-					staySprite.setPosition(Vector2f(0, 180));
-					break;
-				case DOWN_EXIT:
-					slideSprite.setPosition(Vector2f(0, 180 + 1080 * (transitionTimer / transitionTime)));
-					slideSprite.setTexture(preSlide);
-					staySprite.setTexture(postSlide);
-					staySprite.setPosition(Vector2f(0, 180));
-					break;
-				}
-				window->draw(staySprite);
-				window->draw(slideSprite);
-			}
-		}
-		window->display();
 	}
 	return 0;
 }

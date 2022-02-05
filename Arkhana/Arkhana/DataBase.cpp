@@ -137,6 +137,7 @@ void DataBase::BuildCardListsRed() {
 				card->modifiers.push_back(new Modifier(*modList[arr[i].GetString()]));
 			}
 		}
+		
 		if (ListItr->value.HasMember("filePath")) {
 			string str = ListItr->value["filePath"].GetString();
 			card->filePath = str;
@@ -157,6 +158,16 @@ void DataBase::BuildCardListsRed() {
 			CardListRedUnlocked.insert({ name,card });
 		}
 		CardListRedAll.insert({ name,card });
+	}
+
+	for (Value::ConstMemberIterator ListItr = d["Cards"].MemberBegin(); ListItr != d["Cards"].MemberEnd(); ListItr++) {
+		if (ListItr->value.HasMember("cards")) {
+			CardData* card = CardListRedAll[ListItr->value["name"].GetString()];
+			rapidjson::GenericArray<true, rapidjson::Value> arr = ListItr->value["cards"].GetArray();
+			for (int i = 0; i < arr.Size(); i++) {
+				card->cards.push_back(arr[i].GetString());
+			}
+		}
 	}
 	fclose(fp);
 }
@@ -201,6 +212,17 @@ void DataBase::BuildCardListsEnemy() {
 		card->shaderPath = ListItr->value["shaderPath"].GetString();
 		CardListEnemy.insert({ name,card });
 	}
+
+	for (Value::ConstMemberIterator ListItr = d["Cards"].MemberBegin(); ListItr != d["Cards"].MemberEnd(); ListItr++) {
+		if (ListItr->value.HasMember("cards")) {
+			CardData* card = CardListEnemy[ListItr->value["name"].GetString()];
+			rapidjson::GenericArray<true, rapidjson::Value> arr = ListItr->value["cards"].GetArray();
+			for (int i = 0; i < arr.Size(); i++) {
+				card->cards.push_back(arr[i].GetString());
+			}
+		}
+	}
+
 	fclose(fp);
 }
 
@@ -361,6 +383,17 @@ void DataBase::BuildSharedTextures() {
 	texList.insert({ "Textures/GUI/damageBlip.png",tex });
 }
 
+
+void DataBase::BuildAllCardList() {
+	map<string, CardData*>::iterator it;
+	for (it = CardListRedAll.begin(); it != CardListRedAll.end(); it++) {
+		CardListAll.insert({ it->first,it->second });
+	}
+	for (it = CardListEnemy.begin(); it != CardListEnemy.end(); it++) {
+		CardListAll.insert({ it->first,it->second });
+	}
+}
+
 void DataBase::Init() {
 	for (int i = 0; i < 11; i++) {
 		string path = "Textures/GUI/ManaCosts/" + to_string(i) + ".png";
@@ -377,7 +410,7 @@ void DataBase::Init() {
 	BuildEncounterLists();
 	BuildEffectLists();
 	BuildFactionLists();
-
+	BuildAllCardList();
 	BuildSharedTextures();
 
 	font.loadFromFile("Fonts/Arial/arial.ttf");

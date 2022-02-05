@@ -40,6 +40,7 @@ public:
 	AI_TAG AITag;
 	int level = 0;
 	vector<Modifier*> modifiers;
+	vector<string> cards;
 };
 
 struct EffectData {
@@ -91,6 +92,7 @@ public:
 	map<string, CardData*> CardListRedUnlocked;
 	map<string, CardData*> CardListRedAll;
 	map<string, CardData*> CardListEnemy;
+	map<string, CardData*> CardListAll;
 	map<string, ModifierData*> modList;
 	map<string, EffectData*> effectList;
 	map<string, Texture*> texList;
@@ -178,6 +180,12 @@ public:
 		if (data == "DRIZZLE") return EFFECT_TYPE::DRIZZLE;
 		if (data == "POTION_BUFF") return EFFECT_TYPE::POTION_BUFF;
 		if (data == "MODIFY_ALL_ATTACK") return EFFECT_TYPE::MODIFY_ALL_ATTACK;
+		if (data == "APPLY_MOD") return EFFECT_TYPE::APPLY_MOD;
+		if (data == "GAIN_CARD") return EFFECT_TYPE::GAIN_CARD;
+		if (data == "GIVE_CARD") return EFFECT_TYPE::GIVE_CARD;
+		if (data == "DAMAGE") return EFFECT_TYPE::DAMAGE;
+		if (data == "CHORUS_CROAK") return EFFECT_TYPE::CHORUS_CROAK;
+		if (data == "FEAR_FROG") return EFFECT_TYPE::FEAR_FROG;
 		else return EFFECT_TYPE::ARMOUR_MOD;
 	}
 
@@ -196,6 +204,7 @@ public:
 	void BuildEncounterLists();
 	void BuildEffectLists();
 	void BuildFactionLists();
+	void BuildAllCardList();
 	void BuildSharedTextures();
 	void Init();
 	Player* player;

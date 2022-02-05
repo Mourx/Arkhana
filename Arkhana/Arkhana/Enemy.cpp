@@ -94,6 +94,18 @@ Card* Enemy::PlayNext() {
 	return c;
 }
 
+void Enemy::AddCardToHand(Card* c) {
+	decklist.push_back(c);
+	for (int i = 0; i < decklist.size(); i++) {
+		int index = cardIndex + i;
+		if (index >= decklist.size()) {
+			index = 0;
+		}
+		decklist[index]->SetPosition(eNextPos + Vector2f(0, -40 * i));
+	}
+	maxMana = decklist.size();
+}
+
 void Enemy::DrawActions() {
 
 	for (int i = decklist.size() - 1; i >= 0; i--) {

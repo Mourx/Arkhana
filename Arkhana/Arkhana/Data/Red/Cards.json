@@ -424,7 +424,7 @@
       "AITag": "",
       "level": 0,
       "unit": "Leap Frog",
-      "modifiers": ["evasive_modifier"],
+      "modifiers": [ "evasive_modifier" ],
       "shaderPath": "Textures/Shaders/Empress.vert"
     },
     "Big Croak": {
@@ -437,6 +437,82 @@
       "level": 0,
       "effect": "Big Croak",
       "filePath": "Textures/Effects/bigCroak.png",
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Jump Up": {
+      "name": "Jump Up",
+      "cost": 1,
+      "cardType": "EFFECT",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "",
+      "level": 0,
+      "effect": "Jump Up",
+      "filePath": "Textures/Effects/jumpUp.png",
+      "modifiers": [ "evasive_modifier" ],
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Wet Frog": {
+      "name": "Wet Frog",
+      "cost": 1,
+      "cardType": "UNIT",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "",
+      "level": 0,
+      "unit": "Wet Frog",
+      "effect": "Wet Frog",
+      "cards": [ "Drizzle", "Drizzle" ],
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Sneaky Frog": {
+      "name": "Sneaky Frog",
+      "cost": 1,
+      "cardType": "UNIT",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "",
+      "level": 0,
+      "unit": "Sneaky Frog",
+      "effect": "Sneaky Frog",
+      "cards": [ "Frog Bomb" ],
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Frog Bomb": {
+      "name": "Frog Bomb",
+      "cost": 1,
+      "cardType": "EFFECT",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "",
+      "level": 0,
+      "effect": "Frog Bomb",
+      "filePath": "Textures/Effects/frogBomb.png",
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Chorus Croak": {
+      "name": "Chorus Croak",
+      "cost": 1,
+      "cardType": "EFFECT",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "",
+      "level": 0,
+      "effect": "Chorus Croak",
+      "filePath": "Textures/Effects/chorusCroak.png",
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Fear Frog": {
+      "name": "Fear Frog",
+      "cost": 1,
+      "cardType": "UNIT",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "",
+      "level": 0,
+      "effect": "Fear Frog",
+      "unit": "Fear Frog",
+      "modifiers": [ "fear_frog_dummy" ],
       "shaderPath": "Textures/Shaders/Empress.vert"
     }
   }

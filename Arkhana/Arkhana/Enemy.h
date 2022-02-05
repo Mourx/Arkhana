@@ -20,6 +20,7 @@ public:
     vector<Card*> GetStartingPlay() { return startingPlay; }
     int GetLevel() { return level; }
     void DrawBackground();
+    void AddCardToHand(Card* c);
 protected:
 
     void InitSprites();

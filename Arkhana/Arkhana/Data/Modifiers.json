@@ -254,7 +254,7 @@
       "sType": "DMG_PHYSICAL",
       "mType": "SOT_EFFECT",
       "EOTChange": 0,
-      "text": "Start of turn: Weakest enemy\nunits opposite\nFrog Dog lose VALUE attack.",
+      "text": "Start of turn: Enemy\nunits opposite Frog Dog\nlose VALUE attack.",
       "mText": "Frog Dog: Lose VALUE attack."
     },
     "frog_dog_dummy": {
@@ -265,7 +265,7 @@
       "mType": "SOT_EFFECT",
       "EOTChange": 0,
       "text": "",
-      "mText": "Frog Dog: Scaring\nthe enemy."
+      "mText": "Start of turn: Enemy\nunits opposite Frog Dog\nlose VALUE attack."
     },
     "lily_pad_buff": {
       "name": "Lily Pad Modifier",
@@ -343,6 +343,26 @@
       "filepath": "Textures/Units/potionFrog.png",
       "text": "Units other than Potion Frogs\ndon't lose stamina\neach turn",
       "mText": "Units other than Potion Frogs\ndon't lose stamina\neach turn"
+    },
+    "fear_frog_modifier": {
+      "name": "Fear Frog Modifier",
+      "value": -1,
+      "multiplier": 0,
+      "sType": "STAMINA",
+      "mType": "SOT_EFFECT",
+      "EOTChange": 0,
+      "text": "Start of turn: Enemy\nunits opposite Frog Dog\nlose VALUE attack.",
+      "mText": "Frog Dog: Lose VALUE attack."
+    },
+    "fear_frog_dummy": {
+      "name": "Fear Frog Dummy",
+      "value": 0,
+      "multiplier": 0,
+      "sType": "STAMINA",
+      "mType": "SOT_EFFECT",
+      "EOTChange": 0,
+      "text": "",
+      "mText": "End of Turn: Enemy\nunits opposite Frog Dog\nlose VALUE stamina."
     },
     "ogre_buff": {
       "name": "Ogre Buff",

@@ -11,6 +11,7 @@ Card::Card(CardData data,DataBase* dataB) {
 	icon.setTexture(texIcon);
 	unit = data.unit;
 	cost = data.cost;
+	cards = data.cards;
 	texCost = *database->texList["Textures/Cards/gem.png"];
 	for (int i = 0; i < costPositions.size(); i++) {
 		Sprite icon;
@@ -120,6 +121,7 @@ void Card::Play(Unit* targUnit) {
 	if (effect != NULL) {
 		switch (effect->effect) {
 		case EFFECT_TYPE::FROG_DOG:
+		case EFFECT_TYPE::FEAR_FROG:
 			break;
 		default:
 			DoEffect(targUnit, targetZone);
@@ -221,7 +223,16 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 	case EFFECT_TYPE::FROG_DOG:
 		targetZone = targZone;
 		oppZ = database->enemy->GetZones()[(int)targetZone->GetOppositeType()];
-		
+		for (Unit* u : oppZ->GetUnits()) {
+			u->AddModifier(new Modifier(*database->modList["frog_dog_modifier"]));
+		}
+		break;
+	case EFFECT_TYPE::FEAR_FROG:
+		targetZone = targZone;
+		oppZ = database->enemy->GetZones()[(int)targetZone->GetOppositeType()];
+		for (Unit* u : oppZ->GetUnits()) {
+			u->AddModifier(new Modifier(*database->modList["fear_frog_modifier"]));
+		}
 		break;
 	case EFFECT_TYPE::MODFIY_BOTH_BLOCK:
 		enemyMod = new Modifier(modifiers[0]);
@@ -261,6 +272,44 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 		for (Unit* u : targetZone->GetUnits()) {
 			u->AddModifier(generalMod);
 		}
+		break;
+	case EFFECT_TYPE::APPLY_MOD:
+		for (Modifier* mod : modifiers) {
+			generalMod = new Modifier(mod);
+			targUnit->AddModifier(generalMod);
+		}
+		break;
+	case EFFECT_TYPE::GAIN_CARD:
+		for (string s : cards) {
+			p = targetZone->GetOwner();
+			p->AddCardToHand(new Card(*database->CardListAll[s],database));
+		}
+		break;
+	case EFFECT_TYPE::GIVE_CARD:
+		for (string s : cards) {
+			p = targetZone->GetOwner();
+			if (p == database->player) {
+				p = database->enemy;
+			}
+			else {
+				p = database->player;
+			}
+			p->AddCardToHand(new Card(*database->CardListAll[s], database));
+		}
+		break;
+	case EFFECT_TYPE::DAMAGE:
+		targZone->GetOwner()->DamagePhys(effect->value);
+		break;
+	case EFFECT_TYPE::CHORUS_CROAK:
+		int count = targZone->GetUnits().size();
+		p = targetZone->GetOwner();
+		if (p == database->player) {
+			p = database->enemy;
+		}
+		else {
+			p = database->player;
+		}
+		p->DamagePhys(count * effect->value);
 		break;
 	}
 }

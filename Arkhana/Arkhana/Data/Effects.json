@@ -65,7 +65,7 @@
       "name": "Frog Dog",
       "type": "FROG_DOG",
       "value": -1,
-      "text": "Start of turn: Weakest\nenemy units opposite\nFrog Dog lose VALUE attack."
+      "text": "Start of turn: Enemy\nunits opposite Frog Dog\nlose VALUE attack."
     },
     "Frog Fog": {
       "name": "Frog Fog",
@@ -102,6 +102,43 @@
       "type": "MODIFY_ALL_ATTACK",
       "value": -1,
       "text": ""
+    },
+    "Jump Up": {
+      "name": "Jump Up",
+      "type": "APPLY_MOD",
+      "value": 0,
+      "text": "Give target ally EVASIVE",
+      "tUnit": "TRUE"
+    },
+    "Wet Frog": {
+      "name": "Wet Frog",
+      "type": "GAIN_CARD",
+      "value": 2,
+      "text": "Gain VALUE Drizzle cards\nto your hand."
+    },
+    "Sneaky Frog": {
+      "name": "Sneaky Frog",
+      "type": "GIVE_CARD",
+      "value": 2,
+      "text": "Gain VALUE Drizzle cards\nto your hand."
+    },
+    "Frog Bomb": {
+      "name": "Frog Bomb",
+      "type": "DAMAGE",
+      "value": 3,
+      "text": "Take VALUE damage."
+    },
+    "Chorus Croak": {
+      "name": "Chorus Croak",
+      "type": "CHORUS_CROAK",
+      "value": 2,
+      "text": "Deal VALUE damage per unit in\nselected zone."
+    },
+    "Fear Frog": {
+      "name": "Fear Frog",
+      "type": "FEAR_FROG",
+      "value": -1,
+      "text": "End of turn: Enemy\nunits opposite Frog Dog\nlose VALUE stamina."
     }
   }
 }

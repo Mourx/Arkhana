@@ -76,6 +76,7 @@ protected:
     string name;
     string unit;
     vector<Modifier*> modifiers;
+    vector<string> cards;
     MODIFIER_TYPE mod;
     int cost = 0;
     int costChange = 0;

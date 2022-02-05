@@ -313,6 +313,8 @@ void UnitZone::EndTurnUpkeep(DataBase* database) {
 					if (GetType() == ZONE_TYPE::Z_ATTACK) {
 						mod->ApplyEOT();
 					}
+				}else if (mod->GetModType() == MODIFIER_TYPE::EOT_EFFECT) {
+					u->GetCard()->DoEffect(u, this);
 				}
 				else {
 					mod->ApplyEOT();

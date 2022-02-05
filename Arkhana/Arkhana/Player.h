@@ -59,6 +59,7 @@ public:
 	void SetEnemy(Player* enemy);
 	void SetDamageDealt(int d) { damageDealt = d; }
 	Vector2f GetHealthPos() { return healthPos; }
+	virtual void AddCardToHand(Card* c);
 protected:
 	void DiscardHand();
 	void DrawCards(int amount);

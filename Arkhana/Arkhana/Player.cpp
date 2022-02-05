@@ -155,6 +155,12 @@ void Player::SetFaction(Faction* f) {
 	UpdateStrings();
 }
 
+void Player::AddCardToHand(Card* c) {
+	hand.push_back(c);
+	SetCardPositions();
+
+}
+
 void Player::Update(Time t) {
 	manaPulseTimer += t.asSeconds();
 	shaderMana.setUniform("time", manaPulseTimer);
