@@ -139,6 +139,18 @@
       "type": "FEAR_FROG",
       "value": -1,
       "text": "End of turn: Enemy\nunits opposite Frog Dog\nlose VALUE stamina."
+    },
+    "Siege Frog": {
+      "name": "Siege Frog",
+      "type": "MODIFY_ZONE_STAMINA",
+      "value": 1,
+      "text": "On Enter: Allies gain\nVALUE stamina."
+    },
+    "Frogapult": {
+      "name": "Frogapult",
+      "type": "FROGAPULT",
+      "value": 1,
+      "text": "End of turn:\n Exhaust ally to the right.\n Enemy takes unit's attack\n as damage"
     }
   }
 }

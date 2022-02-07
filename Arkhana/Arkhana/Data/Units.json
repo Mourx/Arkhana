@@ -192,6 +192,24 @@
       "stamina": 2,
       "filePath": "Textures/Units/fearFrog.png"
     },
+    "Battering Frog": {
+      "name": "Battering Frog",
+      "physPower": 0,
+      "stamina": 10,
+      "filePath": "Textures/Units/batteringFrog.png"
+    },
+    "Siege Frog": {
+      "name": "Siege Frog",
+      "physPower": 2,
+      "stamina": 2,
+      "filePath": "Textures/Units/siegeFrog.png"
+    },
+    "Frogapult": {
+      "name": "Frogapult",
+      "physPower": 0,
+      "stamina": 4,
+      "filePath": "Textures/Units/frogapult.png"
+    },
     "Doublin": {
       "name": "Doublin",
       "physPower": 7,

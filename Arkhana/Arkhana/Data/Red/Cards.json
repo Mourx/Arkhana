@@ -514,6 +514,43 @@
       "unit": "Fear Frog",
       "modifiers": [ "fear_frog_dummy" ],
       "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Battering Frog": {
+      "name": "Battering Frog",
+      "cost": 1,
+      "cardType": "UNIT",
+      "unit": "Battering Frog",
+      "zOTag": "Z_PLAYER",
+      "zTag": "PASSIVE",
+      "AITag": "",
+      "level": 0,
+      "modifiers": [ "battering_frog_modifier" ],
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Siege Frog": {
+      "name": "Siege Frog",
+      "cost": 1,
+      "cardType": "UNIT",
+      "unit": "Siege Frog",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "",
+      "level": 0,
+      "effect": "Siege Frog",
+      "shaderPath": "Textures/Shaders/Empress.vert"
+    },
+    "Frogapult": {
+      "name": "Frogapult",
+      "cost": 1,
+      "cardType": "UNIT",
+      "unit": "Frogapult",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "",
+      "level": 0,
+      "effect": "Frogapult",
+      "modifiers":  ["frogapult_dummy"],
+      "shaderPath": "Textures/Shaders/Empress.vert"
     }
   }
 }

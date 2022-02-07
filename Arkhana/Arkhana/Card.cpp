@@ -122,6 +122,7 @@ void Card::Play(Unit* targUnit) {
 		switch (effect->effect) {
 		case EFFECT_TYPE::FROG_DOG:
 		case EFFECT_TYPE::FEAR_FROG:
+		case EFFECT_TYPE::FROGAPULT:
 			break;
 		default:
 			DoEffect(targUnit, targetZone);
@@ -161,10 +162,15 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 	Player* p;
 	int count;
 	Unit* enemy;
+	Unit* unit;
 	UnitZone* oppZ;
+	UnitZone* zone;
 	Modifier* enemyMod;
 	Modifier* playerMod;
 	Modifier* generalMod;
+	if (targetZone == NULL) {
+		targetZone = targZone;
+	}
 	switch (effect->effect) {
 	case EFFECT_TYPE::ARMOUR_MOD:
 		p = targetZone->GetOwner();
@@ -255,7 +261,7 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 	case EFFECT_TYPE::MODIFY_ALL_ATTACK:
 		generalMod = new Modifier(*database->modList["modify_attack_modifier"]);
 		generalMod->SetValue(effect->value);
-		generalMod->SetMText(effect->name + ": Attack modified by" + to_string(effect->value));
+		generalMod->SetMText(effect->name + ":\n   Attack modified by " + to_string(effect->value));
 		targetZone = database->player->GetZones()[(int)ZONE_TYPE::Z_BLOCK];
 		for (Unit* u : targetZone->GetUnits()) {
 			u->AddModifier(generalMod);
@@ -301,7 +307,7 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 		targZone->GetOwner()->DamagePhys(effect->value);
 		break;
 	case EFFECT_TYPE::CHORUS_CROAK:
-		int count = targZone->GetUnits().size();
+		count = targZone->GetUnits().size();
 		p = targetZone->GetOwner();
 		if (p == database->player) {
 			p = database->enemy;
@@ -310,6 +316,40 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 			p = database->player;
 		}
 		p->DamagePhys(count * effect->value);
+		break;
+	case EFFECT_TYPE::MODIFY_ZONE_ATTACK:
+		generalMod = new Modifier(*database->modList["modify_attack_modifier"]);
+		generalMod->SetValue(effect->value);
+		generalMod->SetMText(effect->name + ":\n   Attack modified by " + to_string(effect->value));
+		for (Unit* u : targetZone->GetUnits()) {
+			u->AddModifier(generalMod);
+		}
+		break;
+	case EFFECT_TYPE::MODIFY_ZONE_STAMINA:
+		generalMod = new Modifier(*database->modList["modify_stamina_modifier"]);
+		generalMod->SetValue(effect->value);
+		generalMod->SetMText(effect->name + ":\n   Stamina modified by " + to_string(effect->value));
+		for (Unit* u : targetZone->GetUnits()) {
+			u->AddModifier(generalMod);
+		}
+		break;
+	case EFFECT_TYPE::FROGAPULT:
+		vector<Unit*>::iterator it = find(targetZone->GetUnits().begin(), targetZone->GetUnits().end(), targUnit);
+		if (it != targetZone->GetUnits().end()) {
+			it++;
+			unit = *it;
+			it = targetZone->GetUnits().end();
+			count = (unit)->GetPPower();
+			targetZone->RemoveUnit(unit);
+			p = targetZone->GetOwner();
+			if (p == database->player) {
+				p = database->enemy;
+			}
+			else {
+				p = database->player;
+			}
+			p->DamagePhys(count);
+		}
 		break;
 	}
 }

@@ -124,6 +124,7 @@ public:
 		else if (data == "SOT_EFFECT") return MODIFIER_TYPE::SOT_EFFECT;
 		else if (data == "UNIT_ENTER_APPLY_MOD") return MODIFIER_TYPE::UNIT_ENTER_APPLY_MOD;
 		else if (data == "UNIT_SOT_MOD") return MODIFIER_TYPE::UNIT_SOT_MOD;
+		else if (data == "EOT_EFFECT") return MODIFIER_TYPE::EOT_EFFECT;
 		else return MODIFIER_TYPE::ZONE_MOD;
 	}
 
@@ -186,6 +187,9 @@ public:
 		if (data == "DAMAGE") return EFFECT_TYPE::DAMAGE;
 		if (data == "CHORUS_CROAK") return EFFECT_TYPE::CHORUS_CROAK;
 		if (data == "FEAR_FROG") return EFFECT_TYPE::FEAR_FROG;
+		if (data == "MODIFY_ZONE_STAMINA") return EFFECT_TYPE::MODIFY_ZONE_STAMINA;
+		if (data == "MODIFY_ZONE_ATTACK") return EFFECT_TYPE::MODIFY_ZONE_ATTACK;
+		if (data == "FROGAPULT") return EFFECT_TYPE::FROGAPULT;
 		else return EFFECT_TYPE::ARMOUR_MOD;
 	}
 

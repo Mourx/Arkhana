@@ -6,8 +6,8 @@
       "multiplier": 0,
       "sType": "DMG_PHYSICAL",
       "mType": "UNIT_MOD",
-      "text": "Upgrade: +VALUE power",
-      "mText": "Upgrade: +VALUE power"
+      "text": "Upgrade:\n   +VALUE power",
+      "mText": "Upgrade:\n   +VALUE power"
     },
     "modify_attack_modifier": {
       "name": "Modify Attack",
@@ -18,14 +18,23 @@
       "text": "Attack modified by VALUE",
       "mText": "Attack modified by VALUE"
     },
+    "modify_stamina_modifier": {
+      "name": "Modify Stamina",
+      "value": 0,
+      "multiplier": 0,
+      "sType": "STAMINA",
+      "mType": "UNIT_MOD",
+      "text": "Stamina modified by VALUE",
+      "mText": "Stamina modified by VALUE"
+    },
     "upgrade_stamina": {
       "name": "Upgrade Stamina",
       "value": 1,
       "multiplier": 0,
       "sType": "STAMINA",
       "mType": "UNIT_MOD",
-      "text": "Upgrade: +VALUE stamina",
-      "mText": "Upgrade: +VALUE stamina"
+      "text": "Upgrade:\n   +VALUE stamina",
+      "mText": "Upgrade:\n   +VALUE stamina"
     },
     "eot_stamina": {
       "name": "Stamina Reduced",
@@ -53,8 +62,8 @@
       "multiplier": 0,
       "sType": "DMG_PHYSICAL",
       "mType": "AURA_MOD",
-      "text": "AURA: Friendly units gain\n\t +VALUE power",
-      "mText": "Shrine: +VALUE power"
+      "text": "AURA:\n   Friendly units gain\n\t +VALUE power",
+      "mText": "Shrine:\n   +VALUE power"
     },
     "rage_modifier": {
       "name": "Rage Modifier",
@@ -63,7 +72,7 @@
       "sType": "DMG_PHYSICAL",
       "mType": "UNIT_MOD",
       "text": "Friendly units gain +VALUE\n\t power",
-      "mText": "Rage: +VALUE power"
+      "mText": "Rage:\n   +VALUE power"
     },
     "remove_stamina_modifier": {
       "name": "Remove Stamina Modifier",
@@ -72,7 +81,7 @@
       "sType": "STAMINA",
       "mType": "UNIT_MOD",
       "text": "Reduce the highest power\n unit's stamina by VALUE",
-      "mText": "Sapped: Stamina reduced by VALUE"
+      "mText": "Sapped:\n   Stamina reduced by VALUE"
     },
     "big_frog_buff": {
       "name": "Big Frog Buff",
@@ -82,7 +91,7 @@
       "mType": "UNIT_MOD",
       "EOTChange": 0,
       "text": "Friendly units gain +VALUE\n\tpower each turn",
-      "mText": "Big Frog: +VALUE power"
+      "mText": "Big Frog:\n   +VALUE power"
     },
     "big_frog_modifier": {
       "name": "Big Frog Modifier",
@@ -92,7 +101,7 @@
       "mType": "AURA_EOT_MOD",
       "EOTChange": 1,
       "text": "Friendly units gain\n EOTCHANGE attack each turn",
-      "mText": "Big Frog: +EOTCHANGE power each turn",
+      "mText": "Big Frog:\n   +EOTCHANGE power each turn",
       "modifier": "big_frog_buff"
     },
     "spy_frog_buff": {
@@ -103,7 +112,7 @@
       "mType": "UNIT_MOD",
       "EOTChange": 0,
       "text": "Zone units lose VALUE\n\tpower each turn",
-      "mText": "Spy Frog: Lost VALUE power"
+      "mText": "Spy Frog:\n   Lost VALUE power"
     },
     "spy_frog_modifier": {
       "name": "Big Frog Modifier",
@@ -113,7 +122,7 @@
       "mType": "AURA_EOT_MOD",
       "EOTChange": -1,
       "text": "Zone units lose EOTCHANGE power\n\t each turn",
-      "mText": "Spy Frog: Lose EOTCHANGE power\n\t\t each turn",
+      "mText": "Spy Frog:\n   Lose EOTCHANGE power\n\t\t each turn",
       "modifier": "spy_frog_buff"
     },
     "guard_frog_modifier": {
@@ -175,7 +184,7 @@
       "mType": "UNIT_MOD",
       "EOTChange": 0,
       "text": "Power Ribbit: Lost VALUE stamina.",
-      "mText": "Power Ribbit: Lost VALUE stamina."
+      "mText": "Power Ribbit:\n   Lost VALUE stamina."
     },
     "musical_modifier": {
       "name": "Musical Modifier",
@@ -235,7 +244,7 @@
       "mType": "OPPOSITE_ZONE",
       "EOTChange": 0,
       "text": "Enemy units opposite Spear\nFrog lose VALUE attack.",
-      "mText": "Spear Frog: Lose VALUE attack"
+      "mText": "Spear Frog:\n   Lose VALUE attack"
     },
     "bog_frog_modifier": {
       "name": "Bog Frog Modifier",
@@ -245,7 +254,7 @@
       "mType": "OPPOSITE_ZONE",
       "EOTChange": 0,
       "text": "Enemy units opposite bog\nFrog lose VALUE stamina.",
-      "mText": "Bog Frog: Lose VALUE attack."
+      "mText": "Bog Frog:\n   Lose VALUE attack."
     },
     "frog_dog_modifier": {
       "name": "Frog Dog Modifier",
@@ -255,7 +264,7 @@
       "mType": "SOT_EFFECT",
       "EOTChange": 0,
       "text": "Start of turn: Enemy\nunits opposite Frog Dog\nlose VALUE attack.",
-      "mText": "Frog Dog: Lose VALUE attack."
+      "mText": "Frog Dog:\n   Lose VALUE attack."
     },
     "frog_dog_dummy": {
       "name": "Frog Dog Dummy",
@@ -265,7 +274,7 @@
       "mType": "SOT_EFFECT",
       "EOTChange": 0,
       "text": "",
-      "mText": "Start of turn: Enemy\nunits opposite Frog Dog\nlose VALUE attack."
+      "mText": "Start of turn:\n   Enemy\nunits opposite Frog Dog\nlose VALUE attack."
     },
     "lily_pad_buff": {
       "name": "Lily Pad Modifier",
@@ -274,7 +283,7 @@
       "sType": "STAMINA",
       "mType": "UNIT_MOD",
       "EOTChange": 0,
-      "text": "Lily Pad: +VALUE stamina",
+      "text": "Lily Pad:\n   +VALUE stamina",
       "mText": "Other units gain VALUE\nStamina on enter."
     },
     "lily_pad_modifier": {
@@ -352,7 +361,7 @@
       "mType": "SOT_EFFECT",
       "EOTChange": 0,
       "text": "Start of turn: Enemy\nunits opposite Frog Dog\nlose VALUE attack.",
-      "mText": "Frog Dog: Lose VALUE attack."
+      "mText": "Frog Dog:\n   Lose VALUE attack."
     },
     "fear_frog_dummy": {
       "name": "Fear Frog Dummy",
@@ -362,7 +371,27 @@
       "mType": "SOT_EFFECT",
       "EOTChange": 0,
       "text": "",
-      "mText": "End of Turn: Enemy\nunits opposite Frog Dog\nlose VALUE stamina."
+      "mText": "End of Turn:\n   Enemy\nunits opposite Frog Dog\nlose VALUE stamina."
+    },
+    "battering_frog_modifier": {
+      "name": "Battering Frog Modifier",
+      "value": 1,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "AURA_MOD",
+      "EOTChange": 0,
+      "text": "Allies gain VALUE attack.",
+      "mText": "Battering Frog:\n   +VALUE attack."
+    },
+    "frogapult_dummy": {
+      "name": "Frogapult Dummy",
+      "value": 0,
+      "multiplier": 0,
+      "sType": "STAMINA",
+      "mType": "EOT_EFFECT",
+      "EOTChange": 0,
+      "text": "",
+      "mText": "End of turn:\n Exhaust ally to the left.\n Enemy takes unit's attack\n as damage"
     },
     "ogre_buff": {
       "name": "Ogre Buff",
@@ -372,7 +401,7 @@
       "mType": "UNIT_MOD",
       "EOTChange": 0,
       "text": "Ogre gains +VALUE power\n\t each turn",
-      "mText": "Ogre: +VALUE power"
+      "mText": "Ogre:\n   +VALUE power"
     },
     "ogre_modifier": {
       "name": "Ogre Modifier",
@@ -382,7 +411,7 @@
       "mType": "UNIT_EOT_MOD",
       "EOTChange": 4,
       "text": "Ogre gains +EOTCHANGE power\n\t each turn",
-      "mText": "Ogre: +EOTCHANGE power each turn",
+      "mText": "Ogre:\n   +EOTCHANGE power each turn",
       "modifier": "ogre_buff"
     },
     "troll_buff": {
@@ -393,7 +422,7 @@
       "mType": "UNIT_MOD",
       "EOTChange": 4,
       "text": "Friendly units gain +EOTCHANGE power\n\t each turn",
-      "mText": "Troll Boss: +EOTCHANGE power"
+      "mText": "Troll Boss:\n   +EOTCHANGE power"
 
     },
     "troll_rage": {
@@ -404,7 +433,7 @@
       "mType": "AURA_EOT_MOD",
       "EOTChange": 4,
       "text": "Friendly units gain +EOTCHANGE power\n\t each turn",
-      "mText": "Troll Boss: +EOTCHANGE power\n\t\t\teach turn",
+      "mText": "Troll Boss:\n   +EOTCHANGE power\n\t\t\teach turn",
       "modifier": "troll_buff"
     },
 
