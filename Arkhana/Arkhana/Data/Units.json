@@ -210,6 +210,60 @@
       "stamina": 4,
       "filePath": "Textures/Units/frogapult.png"
     },
+    "Jungle Frog": {
+      "name": "Jungle Frog",
+      "physPower": 6,
+      "stamina": 0,
+      "filePath": "Textures/Units/jungleFrog.png"
+    },
+    "Fire Frog": {
+      "name": "Fire Frog",
+      "physPower": 3,
+      "stamina": 2,
+      "filePath": "Textures/Units/fireFrog.png"
+    },
+    "Builder Frog": {
+      "name": "Builder Frog",
+      "physPower": 2,
+      "stamina": 4,
+      "filePath": "Textures/Units/builderFrog.png"
+    },
+    "Cool Frog": {
+      "name": "Cool Frog",
+      "physPower": 1,
+      "stamina": 3,
+      "filePath": "Textures/Units/coolFrog.png"
+    },
+    "Cute Frog": {
+      "name": "Cute Frog",
+      "physPower": 3,
+      "stamina": 1,
+      "filePath": "Textures/Units/cuteFrog.png"
+    },
+    "Tuxedo Frog": {
+      "name": "Tuxedo Frog",
+      "physPower": 3,
+      "stamina": 3,
+      "filePath": "Textures/Units/tuxedoFrog.png"
+    },
+    "Frog Pond": {
+      "name": "Frog Pond",
+      "physPower": 0,
+      "stamina": 10,
+      "filePath": "Textures/Units/frogPond.png"
+    },
+    "God Frog": {
+      "name": "God Frog",
+      "physPower": 10,
+      "stamina": 3,
+      "filePath": "Textures/Units/godFrog.png"
+    },
+    "Sad Frog": {
+      "name": "Sad Frog",
+      "physPower": 1,
+      "stamina": 10,
+      "filePath": "Textures/Units/sadFrog.png"
+    },
     "Doublin": {
       "name": "Doublin",
       "physPower": 7,

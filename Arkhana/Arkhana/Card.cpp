@@ -115,6 +115,7 @@ void Card::Play(Unit* targUnit) {
 	switch (type) {
 	case UNIT:
 		u = new Unit(*database->UnitList[unit], modifiers, this);
+		targUnit = u;
 		targetZone->AddUnit(u, database);
 		break;
 	}
@@ -123,6 +124,7 @@ void Card::Play(Unit* targUnit) {
 		case EFFECT_TYPE::FROG_DOG:
 		case EFFECT_TYPE::FEAR_FROG:
 		case EFFECT_TYPE::FROGAPULT:
+		case EFFECT_TYPE::CREATE_UNIT_EOT:
 			break;
 		default:
 			DoEffect(targUnit, targetZone);
@@ -147,8 +149,8 @@ void Card::ApplyModifier(Unit* u) {
 }
 
 void Card::ApplyModifier(UnitZone* zone) {
-	for (Modifier* modifier : modifiers) {
-		zone->ModifyUnits(modifier);
+	for (Modifier* modifiers : modifiers) {
+		zone->ModifyUnits(modifiers);
 	}
 }
 
@@ -168,6 +170,8 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 	Modifier* enemyMod;
 	Modifier* playerMod;
 	Modifier* generalMod;
+	vector<Unit*>::iterator it;
+	vector<Unit*> units;
 	if (targetZone == NULL) {
 		targetZone = targZone;
 	}
@@ -223,7 +227,12 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 		break;
 	case EFFECT_TYPE::CREATE_UNIT:
 		for (int i = 0; i < effect->value; i++) {
-			targetZone->AddUnit(new Unit(*database->UnitList[effect->unit], modifiers, this), database);
+			targetZone->AddUnit(new Unit(*database->UnitList[effect->unit], database->CardListAll[effect->unit]->modifiers, new Card(*database->CardListAll[effect->unit], database)), database);
+		}
+		break;
+	case EFFECT_TYPE::CREATE_UNIT_EOT:
+		for (int i = 0; i < effect->value; i++) {
+			targetZone->AddUnit(new Unit(*database->UnitList[effect->unit], database->CardListAll[effect->unit]->modifiers, new Card(*database->CardListAll[effect->unit],database)), database);
 		}
 		break;
 	case EFFECT_TYPE::FROG_DOG:
@@ -334,7 +343,7 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 		}
 		break;
 	case EFFECT_TYPE::FROGAPULT:
-		vector<Unit*>::iterator it = find(targetZone->GetUnits().begin(), targetZone->GetUnits().end(), targUnit);
+		it = find(targetZone->GetUnits().begin(), targetZone->GetUnits().end(), targUnit);
 		if (it != targetZone->GetUnits().end()) {
 			it++;
 			unit = *it;
@@ -351,7 +360,77 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 			p->DamagePhys(count);
 		}
 		break;
+	case EFFECT_TYPE::JUNGLE_FROG:
+		for (int i = 0; i < effect->value; i++) {
+			targetZone->AddUnit(new Unit(*database->UnitList[effect->unit], database->CardListAll[effect->unit]->modifiers, this), database);
+		}
+		count = 0;
+		for (Unit* unit : targetZone->GetUnits()) {
+			if (unit->GetName() == "Log") {
+				count++;
+			}
+		}
+		generalMod = new Modifier(*database->modList["modify_stamina_modifier"]);
+		generalMod->SetValue(count);
+		targUnit->AddModifier(generalMod);
+		break;
+	case EFFECT_TYPE::FIRE_FROG:
+		for (int i = 0; i < effect->value; i++) {
+			targetZone->AddUnit(new Unit(*database->UnitList[effect->unit], database->CardListAll[effect->unit]->modifiers, this), database);
+		}
+		count = 0;
+		for (Unit* unit : targetZone->GetUnits()) {
+			if (unit->GetName() == "Log") {
+				count++;
+				targetZone->RemoveUnit(unit);
+			}
+		}
+		database->enemy->DamagePhys(count * 3);
+		break;
+	case EFFECT_TYPE::TWISTER:
+		units = vector<Unit*>();
+		targetZone = database->player->GetZones()[(int)ZONE_TYPE::Z_BLOCK];
+		units = targetZone->GetUnits();
+		targetZone->ClearUnits();
+		targetZone = database->player->GetZones()[(int)ZONE_TYPE::Z_ATTACK];
+		for (Unit* u : targetZone->GetUnits()) {
+			units.push_back(u);
+		}
+		targetZone->ClearUnits();
+		for (Unit* u : units) {
+			if ((rand() % 2) == 1) {
+				database->player->GetZones()[(int)ZONE_TYPE::Z_BLOCK]->AddUnit(u,database);
+			}
+			else {
+				database->player->GetZones()[(int)ZONE_TYPE::Z_ATTACK]->AddUnit(u,database);
+			}
+		}
+		targetZone = database->enemy->GetZones()[(int)ZONE_TYPE::Z_ATTACK];
+		units = targetZone->GetUnits();
+		targetZone->ClearUnits();
+		targetZone = database->enemy->GetZones()[(int)ZONE_TYPE::Z_BLOCK];
+		for (Unit* u : targetZone->GetUnits()) {
+			units.push_back(u);
+		}
+		targetZone->ClearUnits();
+		for (Unit* u : units) {
+			if ((rand() % 2) == 1) {
+				database->enemy->GetZones()[(int)ZONE_TYPE::Z_BLOCK]->AddUnit(u, database);
+			}
+			else {
+				database->enemy->GetZones()[(int)ZONE_TYPE::Z_ATTACK]->AddUnit(u, database);
+			}
+		}
+		break;
+	case EFFECT_TYPE::GOD_FROG:
+		targetZone->AddUnit(new Unit(*database->UnitList["Shrine"], database->CardListAll["Shrine"]->modifiers, new Card(*database->CardListAll["Shrine"], database)), database);
+		targetZone->AddUnit(new Unit(*database->UnitList["Frog"], database->CardListAll["Frog"]->modifiers, new Card(*database->CardListAll["Frog"], database)), database);
+		targetZone->AddUnit(new Unit(*database->UnitList["Frog"], database->CardListAll["Frog"]->modifiers, new Card(*database->CardListAll["Frog"], database)), database);
+		targetZone->GetOwner()->Heal(5);
+		targetZone->GetOwner()->ModifyArmour(5);
+		break;
 	}
+	
 }
 
 void Card::SetCostChange(int change) {

@@ -30,7 +30,7 @@ public:
 			w->draw(textDuration);
 		}
 	}
-	Modifier* GetModifier() { return modifier; }
+	vector<Modifier*> GetModifier() { return modifiers; }
 	void ModifyDuration(int value) {
 		duration += value;
 		textDuration.setString(to_string(duration));
@@ -47,6 +47,15 @@ public:
 	void SetMText(string s) {
 		mText = s;
 	}
+	bool IsDynamic() {
+		return bDynamic;
+	}
+	void SetActive(bool b) {
+		bActive = b;
+	}
+	bool GetActive() {
+		return bActive;
+	}
 protected:
 	
 	void GetData();
@@ -55,13 +64,15 @@ protected:
 	string name;
 	string text;
 	string mText;
+	bool bDynamic;
+	bool bActive = true;
 	int value = 1;
 	int duration = 999;
 	int multiplier = 0;
 	int EOTChange = 0;
 	STAT_TYPE sType = STAT_TYPE::DMG_PHYSICAL;
 	MODIFIER_TYPE mType = MODIFIER_TYPE::ZONE_MOD;
-	Modifier* modifier;
+	vector<Modifier*> modifiers;
 	Sprite icon;
 	Texture texIcon;
 	Text textDuration;

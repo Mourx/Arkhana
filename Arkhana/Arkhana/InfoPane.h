@@ -36,7 +36,7 @@ public:
     }
     void SetUnitInfo(Unit* unit) {
         cardInfo = "";
-        cardInfoName = unit->GetCard()->GetName();
+        cardInfoName = unit->GetName();
         txtCardInfo.setString(cardInfo);
         txtCardInfoName.setString(cardInfoName);
         if (!unit->IsUndercover() && !unit->IsPassive()) {

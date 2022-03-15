@@ -62,9 +62,10 @@ public:
 	string mText;
 	int EOTChange = 0;
 	MODIFIER_TYPE mType;
-	Modifier* modifier;
+	vector<Modifier*> modifiers;
 	int duration;
 	string filePath;
+	bool bDynamic = false;
 };
 
 struct EncounterData {
@@ -125,6 +126,7 @@ public:
 		else if (data == "UNIT_ENTER_APPLY_MOD") return MODIFIER_TYPE::UNIT_ENTER_APPLY_MOD;
 		else if (data == "UNIT_SOT_MOD") return MODIFIER_TYPE::UNIT_SOT_MOD;
 		else if (data == "EOT_EFFECT") return MODIFIER_TYPE::EOT_EFFECT;
+		else if (data == "UNIT_LEAVE_MOD") return MODIFIER_TYPE::UNIT_LEAVE_MOD;
 		else return MODIFIER_TYPE::ZONE_MOD;
 	}
 
@@ -190,6 +192,12 @@ public:
 		if (data == "MODIFY_ZONE_STAMINA") return EFFECT_TYPE::MODIFY_ZONE_STAMINA;
 		if (data == "MODIFY_ZONE_ATTACK") return EFFECT_TYPE::MODIFY_ZONE_ATTACK;
 		if (data == "FROGAPULT") return EFFECT_TYPE::FROGAPULT;
+		if (data == "JUNGLE_FROG") return EFFECT_TYPE::JUNGLE_FROG;
+		if (data == "FIRE_FROG") return EFFECT_TYPE::FIRE_FROG;
+		if (data == "BUILDER_FROG") return EFFECT_TYPE::BUILDER_FROG;
+		if (data == "CREATE_UNIT_EOT") return EFFECT_TYPE::CREATE_UNIT_EOT;
+		if (data == "TWISTER") return EFFECT_TYPE::TWISTER;
+		if (data == "GOD_FROG") return EFFECT_TYPE::GOD_FROG;
 		else return EFFECT_TYPE::ARMOUR_MOD;
 	}
 

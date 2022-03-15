@@ -340,7 +340,7 @@
       "mType": "UNIT_EOT_MOD",
       "EOTChange": -1,
       "text": "Stamina reduced each turn",
-      "mText": "Stamina reduced each turn"
+      "mText": "Stamina reduced each turn\nUnits other than Potion Frogs\ndon't lose stamina\neach turn"
     },
     "potion_frog": {
       "name": "Potion Frog",
@@ -392,6 +392,103 @@
       "EOTChange": 0,
       "text": "",
       "mText": "End of turn:\n Exhaust ally to the left.\n Enemy takes unit's attack\n as damage"
+    },
+    "builder_frog_modifier": {
+      "name": "Builder Frog Modifier",
+      "value": 1,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "UNIT_MOD",
+      "EOTChange": 0,
+      "dynamic": true,
+      "text": "",
+      "mText": "+VALUE attack per ally log."
+    },
+
+    "cool_frog_modifier": {
+      "name": "Cool Frog Modifier",
+      "value": 3,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "UNIT_MOD",
+      "EOTChange": 0,
+      "dynamic": true,
+      "text": "",
+      "mText": "+VALUE attack if you have a\nCute Frog."
+    },
+    "cute_frog_modifier": {
+      "name": "Cute Frog Modifier",
+      "value": 3,
+      "multiplier": 0,
+      "sType": "STAMINA",
+      "mType": "UNIT_MOD",
+      "EOTChange": 0,
+      "dynamic": true,
+      "text": "",
+      "mText": "+VALUE stamina if you have a\nCool Frog."
+    },
+    "tuxedo_frog_attack_modifier": {
+      "name": "Tuxedo Frog Attack Modifier",
+      "value": 2,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "UNIT_MOD",
+      "EOTChange": 0,
+      "dynamic": true,
+      "text": "",
+      "mText": "+VALUE attack if you have a\nCool Frog."
+    },
+    "tuxedo_frog_stamina_modifier": {
+      "name": "Tuxedo Frog Stamina Modifier",
+      "value": 2,
+      "multiplier": 0,
+      "sType": "STAMINA",
+      "mType": "UNIT_MOD",
+      "EOTChange": 0,
+      "dynamic": true,
+      "text": "",
+      "mText": "+VALUE stamina if you have a\nCute Frog."
+    },
+    "frog_pond_modifier": {
+      "name": "Frog Pond Modifier",
+      "value": 0,
+      "multiplier": 0,
+      "sType": "STAMINA",
+      "mType": "EOT_EFFECT",
+      "EOTChange": 0,
+      "text": "End of turn create a tadpole.",
+      "mText": "End of turn create a tadpole."
+    },
+    "sad_frog_attack_modifier": {
+      "name": "Sad Frog Attack Modifier",
+      "value": 2,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "UNIT_MOD",
+      "EOTChange": 0,
+      "text": "+VALUE attack from frogs\nleaving him :(",
+      "mText": "+VALUE attack from frogs\nleaving him :("
+    },
+    "sad_frog_stamina_modifier": {
+      "name": "Sad Frog Attack Modifier",
+      "value": -1,
+      "multiplier": 0,
+      "sType": "STAMINA",
+      "mType": "UNIT_MOD",
+      "EOTChange": 0,
+      "text": "-VALUE stamina from frogs\nleaving him :(",
+      "mText": "-VALUE stamina from frogs\nleaving him :("
+    },
+    "sad_frog_modifier": {
+      "name": "Sad Frog Attack Modifier",
+      "value": 0,
+      "multiplier": 0,
+      "sType": "STAMINA",
+      "mType": "UNIT_LEAVE_MOD",
+      "EOTChange": 0,
+      "modifiers": [ "sad_frog_stamina_modifier", "sad_frog_attack_modifier" ],
+      "text": "Gain attack and lose\nstamina when allies\nexhaust.",
+      "mText": "Gain attack and lose\nstamina when allies\nexhaust."
     },
     "ogre_buff": {
       "name": "Ogre Buff",

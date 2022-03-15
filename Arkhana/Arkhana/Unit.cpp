@@ -131,7 +131,9 @@ void Unit::UpdateStats() {
 		case MODIFIER_TYPE::UNIT_ENTER_APPLY_MOD:
 			break;
 		default:
-			ModifyStat(mod->GetStat(), mod->GetValue(), mod->GetMultiplier());
+			if (mod->GetActive()) {
+				ModifyStat(mod->GetStat(), mod->GetValue(), mod->GetMultiplier());
+			}
 			break;
 		}
 		

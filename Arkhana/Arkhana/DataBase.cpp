@@ -41,7 +41,9 @@ void DataBase::BuildModifierLists() {
 			}
 			mod->text = text;
 		}
-
+		if (ListItr->value.HasMember("dynamic")) {
+			mod->bDynamic = ListItr->value["dynamic"].GetBool();
+		}
 		if (ListItr->value.HasMember("mText")) {
 			string mtext = ListItr->value["mText"].GetString();
 			while (mtext.find("VALUE") != string::npos) {
@@ -58,8 +60,14 @@ void DataBase::BuildModifierLists() {
 		}
 		if (ListItr->value.HasMember("modifier")) {
 			string str = ListItr->value["modifier"].GetString();
-			mod->modifier = new Modifier(*modList[str]);
+			mod->modifiers.push_back(new Modifier(*modList[str]));
 			
+		}
+		if (ListItr->value.HasMember("modifiers")) {
+			rapidjson::GenericArray<true, rapidjson::Value> arr = ListItr->value["modifiers"].GetArray();
+			for (int i = 0; i < arr.Size(); i++) {
+				mod->modifiers.push_back(new Modifier(*modList[arr[i].GetString()]));
+			}
 		}
 		if (ListItr->value.HasMember("filepath")) {
 

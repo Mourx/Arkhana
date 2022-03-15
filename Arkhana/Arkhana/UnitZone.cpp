@@ -138,7 +138,9 @@ void UnitZone::AddUnit(Unit* u, DataBase* database) {
 	for (Unit* unit : GetUnits()) {
 		for (Modifier* mod : unit->GetModifiers()) {
 			if (mod->GetModType() == MODIFIER_TYPE::UNIT_ENTER_APPLY_MOD) {
-				u->AddModifier(mod->GetModifier());
+				for (Modifier* eachMod : mod->GetModifier()) {
+					u->AddModifier(eachMod);
+				}
 			}
 		}
 	}
@@ -212,7 +214,15 @@ void UnitZone::RemoveUnit(Unit* u) {
 		RemoveMod("potion_frog");
 	}
 	unitList.erase(remove(unitList.begin(),unitList.end(),u),unitList.end());
-
+	for (Unit* u : unitList) {
+		for (Modifier* mod : u->GetModifiers()) {
+			if (mod->GetModType() == MODIFIER_TYPE::UNIT_LEAVE_MOD) {
+				for (Modifier* eachMod : mod->GetModifier()) {
+					u->AddModifier(new Modifier(eachMod));
+				}
+			}
+		}
+	}
 	player->GetZones()[(int)ZONE_TYPE::Z_ATTACK]->UpdatePositions();
 	player->GetZones()[(int)ZONE_TYPE::Z_ATTACK]->UpdateStatMods();
 	player->GetZones()[(int)ZONE_TYPE::Z_BLOCK]->UpdatePositions();
@@ -298,35 +308,40 @@ void UnitZone::EndTurnUpkeep(DataBase* database) {
 			mod->ModifyDuration(-1);
 		}
 	}
-	for (Unit* u : unitList) {
-
-		for (Modifier* mod : u->GetModifiers()) {
-			if (mod->GetModType() == MODIFIER_TYPE::UNIT_EOT_MOD) {
-				if (mod->GetModifier() != NULL) {
-					u->AddModifier(mod->GetModifier());
-				}
-				else if (mod->GetName() == "Stamina Reduced" && bPotioned == false) {
-					if (GetType() == ZONE_TYPE::Z_ATTACK) {
-						mod->ApplyEOT();
+	for (int i = 0; i < unitList.size();i++) {
+		Unit* u = unitList[i];
+		for (Modifier* mods : u->GetModifiers()) {
+			if (mods->GetModType() == MODIFIER_TYPE::UNIT_EOT_MOD) {
+				if (mods->GetModifier().size() != 0) {
+					for (Modifier* mod :mods->GetModifier()) {
+						u->AddModifier(mod);
 					}
-				}else if (mod->GetName() == "Potion Frog Stamina Reduced") {
+				}
+				else if (mods->GetName() == "Stamina Reduced" && bPotioned == false) {
 					if (GetType() == ZONE_TYPE::Z_ATTACK) {
-						mod->ApplyEOT();
+						mods->ApplyEOT();
+					}
+				}else if (mods->GetName() == "Potion Frog Stamina Reduced") {
+					if (GetType() == ZONE_TYPE::Z_ATTACK) {
+						mods->ApplyEOT();
 					}
 				}
 				else {
-					mod->ApplyEOT();
+					mods->ApplyEOT();
 				}
 			}
-			else if (mod->GetModType() == MODIFIER_TYPE::EOT_EFFECT) {
+			else if (mods->GetModType() == MODIFIER_TYPE::EOT_EFFECT) {
 				u->GetCard()->DoEffect(u, this);
 			}
+			
 		}
 		
 		for (Modifier* mod : u->GetAuras()) {
 			if (mod->GetModType() == MODIFIER_TYPE::AURA_EOT_MOD) {
 				for (Unit* un : unitList) {
-					un->AddModifier(mod->GetModifier());
+					for (Modifier* eachMod : mod->GetModifier()) {
+						un->AddModifier(eachMod);
+					}
 				}
 			}
 			
@@ -336,7 +351,6 @@ void UnitZone::EndTurnUpkeep(DataBase* database) {
 	CheckStamina();
 	UpdatePositions();
 }
-
 
 void UnitZone::NewTurnUpkeep(DataBase* database) {
 	bool bPotioned = false;
@@ -426,7 +440,93 @@ void UnitZone::Update(Time t) {
 	shaderPulse.setUniform("time", pulseTimer);
 	for (Unit* u :GetUnits()) {
 		u->Update(t);
+		for (Modifier* mod : u->GetModifiers()) {
+			if (mod->IsDynamic()) {
+				if (mod->GetName() == "Builder Frog Modifier") {
+					int count = 0;
+					for (Unit* logCheck : unitList) {
+						if (logCheck->GetName() == "Log") {
+							count++;
+						}
+					}
+					mod->SetValue(count);
+					u->UpdateStats();
+					u->UpdateStrings();
+
+				}
+				if (mod->GetName() == "Cool Frog Modifier") {
+					bool active = false;
+					for (Unit* cuteCheck : unitList) {
+						if (cuteCheck->GetName() == "Cute Frog") {
+							active = true;
+						}
+					}
+					for (Unit* cuteCheck : owner->GetZones()[(int)GetOppositeType()]->GetUnits()) {
+						if (cuteCheck->GetName() == "Cute Frog") {
+							active = true;
+						}
+					}
+					mod->SetActive(active);
+					u->UpdateStats();
+					u->UpdateStrings();
+
+				}
+				if (mod->GetName() == "Cute Frog Modifier") {
+					bool active = false;
+					for (Unit* coolCheck : unitList) {
+						if (coolCheck->GetName() == "Cool Frog") {
+							active = true;
+						}
+					}
+					for (Unit* coolCheck : owner->GetZones()[(int)GetOppositeType()]->GetUnits()) {
+						if (coolCheck->GetName() == "Cool Frog") {
+							active = true;
+						}
+					}
+					mod->SetActive(active);
+					u->UpdateStats();
+					u->UpdateStrings();
+
+				}
+				if (mod->GetName() == "Tuxedo Frog Attack Modifier") {
+					bool active = false;
+					for (Unit* coolCheck : unitList) {
+						if (coolCheck->GetName() == "Cool Frog") {
+							active = true;
+						}
+					}
+					for (Unit* coolCheck : owner->GetZones()[(int)GetOppositeType()]->GetUnits()) {
+						if (coolCheck->GetName() == "Cool Frog") {
+							active = true;
+						}
+					}
+					mod->SetActive(active);
+					u->UpdateStats();
+					u->UpdateStrings();
+
+
+				}
+				if (mod->GetName() == "Tuxedo Frog Stamina Modifier") {
+					bool active = false;
+					for (Unit* cuteCheck : unitList) {
+						if (cuteCheck->GetName() == "Cute Frog") {
+							active = true;
+						}
+					}
+					for (Unit* cuteCheck : owner->GetZones()[(int)GetOppositeType()]->GetUnits()) {
+						if (cuteCheck->GetName() == "Cute Frog") {
+							active = true;
+						}
+					}
+					mod->SetActive(active);
+					u->UpdateStats();
+					u->UpdateStrings();
+
+				}
+			}
+		}
 	}
+
 	CheckStamina();
 }
 

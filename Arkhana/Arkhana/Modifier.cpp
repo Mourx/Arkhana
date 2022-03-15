@@ -20,8 +20,9 @@ void Modifier::GetData() {
 	text = data.text;
 	mText = data.mText;
 	EOTChange = data.EOTChange;
-	modifier = data.modifier;
+	modifiers = data.modifiers;
 	duration = data.duration;
+	bDynamic = data.bDynamic;
 	texIcon.loadFromFile(data.filePath);
 	icon.setTexture(texIcon);
 	icon.setScale(0.75, 0.75);

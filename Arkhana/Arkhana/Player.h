@@ -29,6 +29,7 @@ public:
 	virtual void NewTurnUpkeep();
 	virtual void EndTurnUpkeep();
 	void DamagePhys(int damage);
+	void Heal(int heal);
 	void ResetMana() { currentMana = maxMana; }
 	void AnimateAttack();
 	void AnimateRetreat();

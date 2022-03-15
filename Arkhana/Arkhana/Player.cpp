@@ -485,6 +485,13 @@ void Player::DamagePhys(int damage) {
 	}
 }
 
+void Player::Heal(int heal) {
+	health += heal;
+	if (health >= maxHealth) {
+		health = maxHealth;
+	}
+}
+
 void Player::AnimateAttack() {
 	if (attackZone->GetUnits().size() != 0) {
 		bAttacking = true;

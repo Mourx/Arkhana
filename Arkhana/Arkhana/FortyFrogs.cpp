@@ -85,6 +85,9 @@ int main() {
 
 		if (clock.getElapsedTime().asSeconds() >= frameLimit) {
 			elapsed = clock.restart();
+			if (elapsed.asSeconds() > 0.0083) {
+				elapsed = seconds(0.0083);
+			}
 			currentScreen->Update(elapsed);
 
 

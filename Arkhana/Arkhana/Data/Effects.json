@@ -51,7 +51,7 @@
       "name": "Log Frog",
       "type": "CREATE_UNIT",
       "value": 2,
-      "unit": "Log Frog",
+      "unit": "Log",
       "text": "Create VALUE Logs when played."
     },
     "Spawn Frog": {
@@ -120,7 +120,7 @@
       "name": "Sneaky Frog",
       "type": "GIVE_CARD",
       "value": 2,
-      "text": "Gain VALUE Drizzle cards\nto your hand."
+      "text": "Add VALUE Frog bomb cards\nto your enemy's hand."
     },
     "Frog Bomb": {
       "name": "Frog Bomb",
@@ -150,7 +150,47 @@
       "name": "Frogapult",
       "type": "FROGAPULT",
       "value": 1,
-      "text": "End of turn:\n Exhaust ally to the right.\n Enemy takes unit's attack\n as damage"
+      "text": "End of turn:\n Exhaust ally to the right.\n Enemy takes unit's attack\n as damage."
+    },
+    "Jungle Frog": {
+      "name": "Jungle Frog",
+      "type": "JUNGLE_FROG",
+      "value": 1,
+      "unit": "Log",
+      "text": "Create VALUE Logs when played.\n+1 Stamina on enter\n per ally log."
+    },
+    "Fire Frog": {
+      "name": "Fire Frog",
+      "type": "FIRE_FROG",
+      "value": 1,
+      "unit": "Log",
+      "text": "Create VALUE Logs when played.\nOn enter burn ally logs.\nDeal attack damage per\nLog to enemy."
+    },
+    "Builder Frog": {
+      "name": "Builder Frog",
+      "type": "CREATE_UNIT",
+      "value": 1,
+      "unit": "Log",
+      "text": "Create VALUE Logs when played."
+    },
+    "Frog Pond": {
+      "name": "Frog Pond",
+      "type": "CREATE_UNIT_EOT",
+      "value": 1,
+      "unit": "Tadpole",
+      "text": "End of turn create VALUE Tadpole."
+    },
+    "Twister": {
+      "name": "Twister",
+      "type": "TWISTER",
+      "value": 0,
+      "text": "Randomly move all units"
+    },
+    "God Frog": {
+      "name": "God Frog",
+      "type": "GOD_FROG",
+      "value": 0,
+      "text": "Create 1 Shrine.\nCreate 2 Frogs.\nHeal 5 Health.\nGain 5 Armour."
     }
   }
 }
