@@ -191,6 +191,100 @@
       "type": "GOD_FROG",
       "value": 0,
       "text": "Create 1 Shrine.\nCreate 2 Frogs.\nHeal 5 Health.\nGain 5 Armour."
+    },
+    "Log Supply": {
+      "name": "Log Supply",
+      "type": "CREATE_UNIT",
+      "value": 3,
+      "unit": "Log",
+      "text": "Create VALUE Logs."
+    },
+    "Blessing Gold": {
+      "name": "Blessing Gold",
+      "type": "MODIFY_GOLD",
+      "value": 5,
+      "text": "Gain VALUE gold."
+    },
+    "Blessing Armour": {
+      "name": "Blessing Armour",
+      "type": "ARMOUR_MOD",
+      "value": 7,
+      "text": "Gain VALUE armour."
+    },
+    "Recycle Discard": {
+      "name": "Recycle Discard",
+      "type": "DISCARD_CARD",
+      "value": 1,
+      "text": "Discard VALUE card at random."
+    },
+    "Recycle Draw": {
+      "name": "Recycle Draw",
+      "type": "DRAW_CARD",
+      "value": 3,
+      "text": "Draw VALUE cards."
+    },
+    "Heal": {
+      "name": "Heal",
+      "type": "MODIFY_HEALTH",
+      "value": 3,
+      "text": "Heal VALUE health."
+    },
+    "Balance": {
+      "name": "Balance",
+      "type": "MODIFY_ALL",
+      "value": 3,
+      "text": "Set all units' attack to VALUE."
+    },
+    "Sleep": {
+      "name": "Sleep",
+      "type": "MODIFY_ALL",
+      "value": 0,
+      "text": "Exhaust all units."
+    },
+    "Shiny Frog": {
+      "name": "Shiny Frog",
+      "type": "DRAW_CARD",
+      "value": 3,
+      "text": "Draw VALUE cards."
+    },
+    "Exile": {
+      "name": "Exile",
+      "type": "APPLY_MOD",
+      "value": 0,
+      "text": "Exhaust target unit",
+      "tUnit": "TRUE"
+    },
+    "Frog Weights": {
+      "name": "Frog Weights",
+      "type": "APPLY_MOD",
+      "value": 5,
+      "text": "Target unit gains\nVALUE attack.",
+      "tUnit": "TRUE"
+    },
+    "Ghost Frog": {
+      "name": "Ghost Frog",
+      "type": "MODIFY_ZONE_STAMINA",
+      "value": -1,
+      "text": "On enter allies lose\nVALUE stamina."
+    },
+    "Confusion": {
+      "name": "Confusion",
+      "type": "MODIFY_ALL",
+      "value": 0,
+      "text": "Halve all stamina.\nDouble all attack.\nZone modifiers apply\nafter this change."
+    },
+    "Frog Intel": {
+      "name": "Frog intel",
+      "type": "DRAW_CARD",
+      "value": 2,
+      "text": "Draw VALUE cards."
+    },
+    "Frog Spawn": {
+      "name": "Frog Spawn",
+      "type": "CREATE_UNIT_EXHAUST",
+      "unit" :  "Tadpole",
+      "value": 1,
+      "text": "Create VALUE Tapdole\nwhen exhausted."
     }
   }
 }

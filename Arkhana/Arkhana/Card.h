@@ -64,9 +64,8 @@ public:
     bool IsPassive() { return bPassive; }
     void SetCostChange(int change);
     bool IsUnitTarget();
-    void DoEffect(Unit* targUnit,UnitZone* targZone);
+    void DoEffect(Unit* targUnit,UnitZone* targZone,EffectData* eff = NULL);
 protected:
-    
     virtual void ApplyModifier(UnitZone*);
     virtual void ApplyModifier(Unit*);
     void UpdatePositions();
@@ -133,7 +132,7 @@ protected:
 
     string zTag;
     AI_TAG AITag;
-    EffectData* effect = NULL;
+    vector<EffectData*> effect;
     CARD_TYPE type = UNIT;
     ZONE_OWNER zOwner = Z_PLAYER;
     ZONE_TYPE zType = ZONE_TYPE::Z_ANY;

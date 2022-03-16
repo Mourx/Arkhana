@@ -206,6 +206,9 @@ void UnitZone::RemoveUnit(Unit* u) {
 		case MODIFIER_TYPE::ZONE_MOD_ATTACK:
 			owner->GetZones()[0]->RemoveMod(mod);
 			break;
+		case MODIFIER_TYPE::EXHAUST_EFFECT:
+			u->GetCard()->DoEffect(u, this);
+			break;
 		default:
 			break;
 		}

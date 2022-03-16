@@ -31,7 +31,7 @@ public:
 	string name;
 	int cost;
 	CARD_TYPE cType;
-	string effect;
+	vector<string> effect;
 	string unit;
 	string zTag;
 	string filePath ="";
@@ -56,7 +56,7 @@ struct ModifierData {
 public:
 	string name;
 	int value;
-	int multiplier;
+	float multiplier;
 	STAT_TYPE sType;
 	string text;
 	string mText;
@@ -127,6 +127,9 @@ public:
 		else if (data == "UNIT_SOT_MOD") return MODIFIER_TYPE::UNIT_SOT_MOD;
 		else if (data == "EOT_EFFECT") return MODIFIER_TYPE::EOT_EFFECT;
 		else if (data == "UNIT_LEAVE_MOD") return MODIFIER_TYPE::UNIT_LEAVE_MOD;
+		else if (data == "SET_ATTACK") return MODIFIER_TYPE::SET_ATTACK;
+		else if (data == "SET_STAMINA") return MODIFIER_TYPE::SET_STAMINA;
+		else if (data == "EXHAUST_EFFECT") return MODIFIER_TYPE::EXHAUST_EFFECT;
 		else return MODIFIER_TYPE::ZONE_MOD;
 	}
 
@@ -138,6 +141,7 @@ public:
 		else if (data == "EFFECT_COST") return STAT_TYPE::EFFECT_COST;
 		else if (data == "UNIT_COST") return STAT_TYPE::UNIT_COST;
 		else if (data == "ZONE_POWER") return STAT_TYPE::ZONE_POWER;
+		else if (data == "MAX_MANA") return STAT_TYPE::MAX_MANA;
 		else return STAT_TYPE::DMG_PHYSICAL;
 	}
 
@@ -198,6 +202,12 @@ public:
 		if (data == "CREATE_UNIT_EOT") return EFFECT_TYPE::CREATE_UNIT_EOT;
 		if (data == "TWISTER") return EFFECT_TYPE::TWISTER;
 		if (data == "GOD_FROG") return EFFECT_TYPE::GOD_FROG;
+		if (data == "MODIFY_GOLD") return EFFECT_TYPE::MODIFY_GOLD;
+		if (data == "DRAW_CARD") return EFFECT_TYPE::DRAW_CARD;
+		if (data == "DISCARD_CARD") return EFFECT_TYPE::DISCARD_CARD;
+		if (data == "MODIFY_HEALTH") return EFFECT_TYPE::MODIFY_HEALTH;
+		if (data == "MODIFY_ALL") return EFFECT_TYPE::MODIFY_ALL;
+		if (data == "CREATE_UNIT_EXHAUST") return EFFECT_TYPE::CREATE_UNIT_EXHAUST;
 		else return EFFECT_TYPE::ARMOUR_MOD;
 	}
 

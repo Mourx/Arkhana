@@ -264,6 +264,36 @@
       "stamina": 10,
       "filePath": "Textures/Units/sadFrog.png"
     },
+    "Shiny Frog": {
+      "name": "Shiny Frog",
+      "physPower": 2,
+      "stamina": 3,
+      "filePath": "Textures/Units/shinyFrog.png"
+    },
+    "Ghost Frog": {
+      "name": "Ghost Frog",
+      "physPower": 15,
+      "stamina": 2,
+      "filePath": "Textures/Units/ghostFrog.png"
+    },
+    "Rainbow Frog": {
+      "name": "Rainbow Frog",
+      "physPower": 8,
+      "stamina": 7,
+      "filePath": "Textures/Units/rainbowFrog.png"
+    },
+    "Command Frog": {
+      "name": "Command Frog",
+      "physPower": 3,
+      "stamina": 4,
+      "filePath": "Textures/Units/commandFrog.png"
+    },
+    "Frog Champ": {
+      "name": "Frog Champ",
+      "physPower": 20,
+      "stamina": 1,
+      "filePath": "Textures/Units/frogChamp.png"
+    },
     "Doublin": {
       "name": "Doublin",
       "physPower": 7,

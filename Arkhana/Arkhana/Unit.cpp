@@ -130,6 +130,12 @@ void Unit::UpdateStats() {
 		case MODIFIER_TYPE::ZONE_MOD_ATTACK:
 		case MODIFIER_TYPE::UNIT_ENTER_APPLY_MOD:
 			break;
+		case MODIFIER_TYPE::SET_STAMINA:
+			SetStamina(mod->GetValue());
+			break;
+		case MODIFIER_TYPE::SET_ATTACK:
+			SetAttack(mod->GetValue());
+			break;
 		default:
 			if (mod->GetActive()) {
 				ModifyStat(mod->GetStat(), mod->GetValue(), mod->GetMultiplier());
@@ -143,6 +149,13 @@ void Unit::UpdateStats() {
 
 	stamina += zoneBonusMag;
 	stamina += zoneMultiplierMag;
+
+	if (bStaminaSet) {
+		stamina = setStam;
+	}
+	if (bAttackSet) {
+		physicalPower = setAttk;
+	}
 	UpdateStrings();
 }
 
@@ -205,7 +218,7 @@ bool Unit::IsPassive() {
 	return card->IsPassive();
 }
 
-void Unit::ModifyStat(STAT_TYPE stat, int value, int multiplier) {
+void Unit::ModifyStat(STAT_TYPE stat, int value, float multiplier) {
 	switch (stat) {
 	case STAT_TYPE::DMG_PHYSICAL:
 		physicalPower += value;
@@ -227,7 +240,8 @@ void Unit::ModifyStat(STAT_TYPE stat, int value, int multiplier) {
 	default:
 		break;
 	}
-	
+	stamina = floor(stamina);
+	physicalPower = floor(physicalPower);
 
 }
 

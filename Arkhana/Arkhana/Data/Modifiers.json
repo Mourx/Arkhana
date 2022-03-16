@@ -490,6 +490,76 @@
       "text": "Gain attack and lose\nstamina when allies\nexhaust.",
       "mText": "Gain attack and lose\nstamina when allies\nexhaust."
     },
+    "balance_modifier": {
+      "name": "Balance Modifier",
+      "value": 3,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "SET_ATTACK",
+      "EOTChange": 0,
+      "text": "Attack set to VALUE",
+      "mText": "Attack Set to VALUE"
+    },
+    "sleep_modifier": {
+      "name": "Sleep Modifier",
+      "value": 0,
+      "multiplier": 0,
+      "sType": "STAMINA",
+      "mType": "SET_STAMINA",
+      "EOTChange": 0,
+      "text": "Stamina set to VALUE",
+      "mText": "Stamina Set to VALUE"
+    },
+    "confusion_stamina_modifier": {
+      "name": "Confusion Stamina Modifier",
+      "value": 0,
+      "multiplier": 0.5,
+      "sType": "STAMINA",
+      "mType": "UNIT_MOD",
+      "EOTChange": 0,
+      "text": "Stamina multiplied by VALUE",
+      "mText": "Stamina multiplied by VALUE"
+    },
+    "confusion_attack_modifier": {
+      "name": "Confusion Attack Modifier",
+      "value": 0,
+      "multiplier": 2,
+      "sType": "DMG_PHYSICAL",
+      "mType": "UNIT_MOD",
+      "EOTChange": 0,
+      "text": "Attack multiplied by VALUE",
+      "mText": "Attack multiplied by VALUE"
+    },
+    "frog_weights_modifier": {
+      "name": "Frog Weights Modifier",
+      "value": 5,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "UNIT_MOD",
+      "EOTChange": 0,
+      "text": "Gain VALUE attack.",
+      "mText": "Gain VALUE attack."
+    },
+    "command_frog_modifier": {
+      "name": "Command Frog Modifier",
+      "value": 1,
+      "multiplier": 0,
+      "sType": "MAX_MANA",
+      "mType": "PLAYER_MOD",
+      "EOTChange": 0,
+      "text": "Increase Command Points by VALUE.",
+      "mText": "Increase Command Points by VALUE."
+    },
+    "frog_spawn_modifier": {
+      "name": "Frog Spawn Modifier",
+      "value": 1,
+      "multiplier": 0,
+      "sType": "STAMINA",
+      "mType": "EXHAUST_EFFECT",
+      "EOTChange": 0,
+      "text": "Create VALUE Tapdole\nwhen exhausted.",
+      "mText": "Create VALUE Tapdole\nwhen exhausted."
+    },
     "ogre_buff": {
       "name": "Ogre Buff",
       "value": 4,

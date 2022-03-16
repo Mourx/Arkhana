@@ -3,14 +3,14 @@
     "Basic Frog": {
       "name": "Basic Frog",
       "decklist": [
-        "Sad Frog",
-        "Sad Frog",
-        "Frog",
-        "Sad Frog",
         "Frog",
         "Frog",
         "Frog",
-        "Twister"
+        "Frog",
+        "Shield Frog",
+        "Shield Frog",
+        "Big Frog",
+        "Two Frogs"
       ],  
       "filepath": "Textures/Units/frog.png"
     },

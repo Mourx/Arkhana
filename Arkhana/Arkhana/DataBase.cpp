@@ -16,7 +16,7 @@ void DataBase::BuildModifierLists() {
 		ModifierData* mod = new ModifierData();
 		mod->name = ListItr->value["name"].GetString();
 		mod->value = ListItr->value["value"].GetInt();
-		mod->multiplier = ListItr->value["multiplier"].GetInt();
+		mod->multiplier = ListItr->value["multiplier"].GetFloat();
 		mod->sType = GetStatEnum(ListItr->value["sType"].GetString());
 		mod->mType = GetModEnum(ListItr->value["mType"].GetString());
 		if (ListItr->value.HasMember("EOTChange")) mod->EOTChange = ListItr->value["EOTChange"].GetInt();
@@ -155,7 +155,13 @@ void DataBase::BuildCardListsRed() {
 		}
 		card->cost = ListItr->value["cost"].GetInt();
 		card->cType = GetCardEnum(ListItr->value["cardType"].GetString());
-		if (ListItr->value.HasMember("effect")) card->effect = ListItr->value["effect"].GetString();
+		if (ListItr->value.HasMember("effect")) card->effect.push_back(ListItr->value["effect"].GetString());
+		if (ListItr->value.HasMember("effects")) {
+			rapidjson::GenericArray<true, rapidjson::Value> arr = ListItr->value["effects"].GetArray();
+			for (int i = 0; i < arr.Size(); i++) {
+				card->effect.push_back(arr[i].GetString());
+			}
+		}
 		if(ListItr->value.HasMember("unit")) card->unit = ListItr->value["unit"].GetString();
 		card->zTag = ListItr->value["zTag"].GetString();
 		card->zOTag = GetZoneOwnerEnum(ListItr->value["zOTag"].GetString());
@@ -212,7 +218,13 @@ void DataBase::BuildCardListsEnemy() {
 		}
 		card->cost = ListItr->value["cost"].GetInt();
 		card->cType = GetCardEnum(ListItr->value["cardType"].GetString());
-		if (ListItr->value.HasMember("effect")) card->effect = ListItr->value["effect"].GetString();
+		if (ListItr->value.HasMember("effect")) card->effect.push_back(ListItr->value["effect"].GetString());
+		if (ListItr->value.HasMember("effects")) {
+			rapidjson::GenericArray<true, rapidjson::Value> arr = ListItr->value["effects"].GetArray();
+			for (int i = 0; i < arr.Size(); i++) {
+				card->effect.push_back(arr[i].GetString());
+			}
+		}
 		if (ListItr->value.HasMember("unit")) card->unit = ListItr->value["unit"].GetString();
 		card->zTag = ListItr->value["zTag"].GetString();
 		card->zOTag = GetZoneOwnerEnum(ListItr->value["zOTag"].GetString());

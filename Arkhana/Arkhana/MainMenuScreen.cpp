@@ -21,6 +21,7 @@ MainMenuScreen::MainMenuScreen(RenderTexture* w,Player* p) {
 	texBackground.loadFromFile("Textures/GUI/menuBackground.png");
 	background.setTexture(texBackground);
 	background.setPosition(0, 0);
+	ShowAllCards();
 }
 
 void MainMenuScreen::Draw() {
@@ -28,6 +29,11 @@ void MainMenuScreen::Draw() {
 	window->draw(background);
 	for (Faction* faction : factions) {
 		faction->Draw(window);
+	}
+	if (bShowAllCards) {
+		for (Card* c : cardGrid) {
+			c->Draw(window);
+		}
 	}
 }
 
@@ -50,5 +56,17 @@ void MainMenuScreen::MouseClicked(Vector2f mousePos) {
 			player->SetFaction(faction);
 			nextScreen = PATH_SCREEN;
 		}
+	}
+}
+
+void MainMenuScreen::ShowAllCards() {
+	int count = 0;
+	map<string, CardData*>::iterator it;
+
+	for (it = database->CardListRedAll.begin(); it != database->CardListRedAll.end();it++) {
+		Card* card = new Card(*it->second, database);
+		card->SetPosition(Vector2f((count % 11) * 145, (count / 11) * 120));
+		cardGrid.push_back(card);
+		count++;
 	}
 }

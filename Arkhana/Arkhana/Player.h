@@ -30,7 +30,7 @@ public:
 	virtual void EndTurnUpkeep();
 	void DamagePhys(int damage);
 	void Heal(int heal);
-	void ResetMana() { currentMana = maxMana; }
+	void ResetMana();
 	void AnimateAttack();
 	void AnimateRetreat();
 	bool GetAttacking() { return bAttacking; }
@@ -61,11 +61,13 @@ public:
 	void SetDamageDealt(int d) { damageDealt = d; }
 	Vector2f GetHealthPos() { return healthPos; }
 	virtual void AddCardToHand(Card* c);
+	void DrawCards(int amount);
+	void Discard(int index);
 protected:
 	void DiscardHand();
-	void DrawCards(int amount);
+	
 	void Discard(Card* card);
-	void Discard(int index);
+	
 	void DrawInitialHand();
 	void SetCardPositions();
 	virtual void InitSprites();

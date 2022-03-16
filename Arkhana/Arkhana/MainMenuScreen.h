@@ -16,7 +16,7 @@ public:
         nextScreen = NONE;
     }
 protected:
-    
+    void ShowAllCards();
     vector<Faction*> factions;
     DataBase* database;
     Sprite background;
@@ -24,7 +24,8 @@ protected:
 
     Shader redShader;
     Shader blueShader;
-
+    bool bShowAllCards = false;
+    vector<Card*> cardGrid;
     Vector2f factionPosStart = Vector2f(1050, 650);
 
     Player* player;

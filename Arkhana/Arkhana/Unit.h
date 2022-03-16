@@ -54,12 +54,26 @@ public:
         return name;
     }
     bool IsRetreating() { return bRetreating; }
+    void SetAttack(int value) {
+        setAttk = value;
+        bAttackSet = true;
+    }
+    void SetStamina(int value) {
+        setStam = value;
+        bStaminaSet = true;
+    }
 protected:
-    void ModifyStat(STAT_TYPE stat, int value, int multiplier);
-    
+    void ModifyStat(STAT_TYPE stat, int value, float multiplier);
+
+
     float physicalPower = 0;
     float stamina = 0;
-    
+
+
+    bool bStaminaSet = false;
+    int setStam = 0;
+    bool bAttackSet = false;
+    int setAttk = 0;
     float zoneBonusPhys = 0;
     float zoneBonusMag = 0;
     float zoneMultiplierPhys = 0;

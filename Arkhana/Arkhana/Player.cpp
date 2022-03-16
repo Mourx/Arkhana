@@ -378,6 +378,19 @@ void Player::SwapUnits() {
 	}
 }
 
+void Player::ResetMana() {
+	currentMana = maxMana;
+	for (Modifier* mod : mods) {
+		if (mod->GetModType() == MODIFIER_TYPE::PLAYER_MOD) {
+			switch (mod->GetStat()) {
+			case STAT_TYPE::MAX_MANA:
+				currentMana += mod->GetValue();
+				break;;
+			}
+		}
+	}
+}
+
 void Player::UpdateCosts() {
 	effectCostChange = 0;
 	unitCostChange = 0;

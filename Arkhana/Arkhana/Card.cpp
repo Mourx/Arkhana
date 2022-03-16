@@ -25,7 +25,9 @@ Card::Card(CardData data,DataBase* dataB) {
 	zType = database->GetZoneEnum(zTag);
 	zOwner = data.zOTag;
 	AITag = data.AITag;
-	if(data.effect != "") effect = database->effectList[data.effect];
+	for (string s : data.effect) {
+		effect.push_back(database->effectList[s]);
+	}
 	goldCost = 80 + rand() % 32;
 	SetPosition(Vector2f(300, 300));
 	if (type == UNIT) {
@@ -78,7 +80,9 @@ Card::Card(CardData data,DataBase* dataB) {
 	txtMag.setFillColor(Color::Black);
 
 	string txt;
-	if(effect != NULL) txt = txt + effect->text;
+	for (EffectData* data : effect) {
+		txt = txt + data->text +"\n";
+	}
 	for (Modifier* m : modifiers) {
 		txt = txt + m->GetText() + "\n";
 	}
@@ -119,15 +123,16 @@ void Card::Play(Unit* targUnit) {
 		targetZone->AddUnit(u, database);
 		break;
 	}
-	if (effect != NULL) {
-		switch (effect->effect) {
+	for(EffectData* eff :effect){
+		switch (eff->effect) {
 		case EFFECT_TYPE::FROG_DOG:
 		case EFFECT_TYPE::FEAR_FROG:
 		case EFFECT_TYPE::FROGAPULT:
+		case EFFECT_TYPE::CREATE_UNIT_EXHAUST:
 		case EFFECT_TYPE::CREATE_UNIT_EOT:
 			break;
 		default:
-			DoEffect(targUnit, targetZone);
+			DoEffect(targUnit, targetZone,eff);
 			break;
 		}		
 	}
@@ -160,7 +165,7 @@ void Card::UpdatePositions() {
 	
 }
 
-void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
+void Card::DoEffect(Unit* targUnit, UnitZone* targZone,EffectData* eff) {
 	Player* p;
 	int count;
 	Unit* enemy;
@@ -175,10 +180,13 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 	if (targetZone == NULL) {
 		targetZone = targZone;
 	}
-	switch (effect->effect) {
+	if (eff == NULL) {
+		eff = effect[0];
+	}
+	switch (eff->effect) {
 	case EFFECT_TYPE::ARMOUR_MOD:
 		p = targetZone->GetOwner();
-		p->ModifyArmour(effect->value);
+		p->ModifyArmour(eff->value);
 		break;
 	case EFFECT_TYPE::ZONE_MOD:
 		ApplyModifier(targetZone);
@@ -210,7 +218,7 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 			count++;
 		}
 		targetZone->RemoveUnit(targUnit);
-		
+
 		enemy = NULL;
 		while (enemy == NULL && count >= 0) {
 			if (database->enemy->GetZones()[(int)targetZone->GetOppositeType()]->GetUnits().size() > count) {
@@ -218,21 +226,26 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 				break;
 			}
 			count--;
-		}	
-		if(enemy != NULL) database->enemy->GetZones()[(int)targetZone->GetOppositeType()]->RemoveUnit(enemy);
+		}
+		if (enemy != NULL) database->enemy->GetZones()[(int)targetZone->GetOppositeType()]->RemoveUnit(enemy);
 		break;
 	case EFFECT_TYPE::POWER_RIBBIT:
 		targUnit->AddModifier(modifiers[0]);
 		database->enemy->DamagePhys(targUnit->GetPPower());
 		break;
 	case EFFECT_TYPE::CREATE_UNIT:
-		for (int i = 0; i < effect->value; i++) {
-			targetZone->AddUnit(new Unit(*database->UnitList[effect->unit], database->CardListAll[effect->unit]->modifiers, new Card(*database->CardListAll[effect->unit], database)), database);
+		for (int i = 0; i < eff->value; i++) {
+			targetZone->AddUnit(new Unit(*database->UnitList[eff->unit], database->CardListAll[eff->unit]->modifiers, new Card(*database->CardListAll[eff->unit], database)), database);
 		}
 		break;
 	case EFFECT_TYPE::CREATE_UNIT_EOT:
-		for (int i = 0; i < effect->value; i++) {
-			targetZone->AddUnit(new Unit(*database->UnitList[effect->unit], database->CardListAll[effect->unit]->modifiers, new Card(*database->CardListAll[effect->unit],database)), database);
+		for (int i = 0; i < eff->value; i++) {
+			targetZone->AddUnit(new Unit(*database->UnitList[eff->unit], database->CardListAll[eff->unit]->modifiers, new Card(*database->CardListAll[eff->unit], database)), database);
+		}
+		break;
+	case EFFECT_TYPE::CREATE_UNIT_EXHAUST:
+		for (int i = 0; i < eff->value; i++) {
+			targetZone->AddUnit(new Unit(*database->UnitList[eff->unit], database->CardListAll[eff->unit]->modifiers, new Card(*database->CardListAll[eff->unit], database)), database);
 		}
 		break;
 	case EFFECT_TYPE::FROG_DOG:
@@ -258,10 +271,10 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 		break;
 	case EFFECT_TYPE::DRIZZLE:
 		generalMod = new Modifier(modifiers[0]);
-		generalMod->SetValue(effect->value);
+		generalMod->SetValue(eff->value);
 		targetZone->GetOwner()->GetZones()[(int)ZONE_TYPE::Z_BLOCK]->AddMod(generalMod);
 		generalMod = new Modifier(generalMod);
-		generalMod->SetValue(effect->value);
+		generalMod->SetValue(eff->value);
 		targetZone->GetOwner()->GetZones()[(int)ZONE_TYPE::Z_ATTACK]->AddMod(generalMod);
 		break;
 	case EFFECT_TYPE::POTION_BUFF:
@@ -269,8 +282,8 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 		break;
 	case EFFECT_TYPE::MODIFY_ALL_ATTACK:
 		generalMod = new Modifier(*database->modList["modify_attack_modifier"]);
-		generalMod->SetValue(effect->value);
-		generalMod->SetMText(effect->name + ":\n   Attack modified by " + to_string(effect->value));
+		generalMod->SetValue(eff->value);
+		generalMod->SetMText(eff->name + ":\n   Attack modified by " + to_string(eff->value));
 		targetZone = database->player->GetZones()[(int)ZONE_TYPE::Z_BLOCK];
 		for (Unit* u : targetZone->GetUnits()) {
 			u->AddModifier(generalMod);
@@ -288,6 +301,27 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 			u->AddModifier(generalMod);
 		}
 		break;
+	case EFFECT_TYPE::MODIFY_ALL:
+		for (Modifier* mod : modifiers) {
+			generalMod = new Modifier(mod);
+			targetZone = database->player->GetZones()[(int)ZONE_TYPE::Z_BLOCK];
+			for (Unit* u : targetZone->GetUnits()) {
+				u->AddModifier(generalMod);
+			}
+			targetZone = database->player->GetZones()[(int)ZONE_TYPE::Z_ATTACK];
+			for (Unit* u : targetZone->GetUnits()) {
+				u->AddModifier(generalMod);
+			}
+			targetZone = database->enemy->GetZones()[(int)ZONE_TYPE::Z_ATTACK];
+			for (Unit* u : targetZone->GetUnits()) {
+				u->AddModifier(generalMod);
+			}
+			targetZone = database->enemy->GetZones()[(int)ZONE_TYPE::Z_BLOCK];
+			for (Unit* u : targetZone->GetUnits()) {
+				u->AddModifier(generalMod);
+			}
+		}
+		break;
 	case EFFECT_TYPE::APPLY_MOD:
 		for (Modifier* mod : modifiers) {
 			generalMod = new Modifier(mod);
@@ -297,7 +331,7 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 	case EFFECT_TYPE::GAIN_CARD:
 		for (string s : cards) {
 			p = targetZone->GetOwner();
-			p->AddCardToHand(new Card(*database->CardListAll[s],database));
+			p->AddCardToHand(new Card(*database->CardListAll[s], database));
 		}
 		break;
 	case EFFECT_TYPE::GIVE_CARD:
@@ -313,7 +347,7 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 		}
 		break;
 	case EFFECT_TYPE::DAMAGE:
-		targZone->GetOwner()->DamagePhys(effect->value);
+		targZone->GetOwner()->DamagePhys(eff->value);
 		break;
 	case EFFECT_TYPE::CHORUS_CROAK:
 		count = targZone->GetUnits().size();
@@ -324,20 +358,20 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 		else {
 			p = database->player;
 		}
-		p->DamagePhys(count * effect->value);
+		p->DamagePhys(count * eff->value);
 		break;
 	case EFFECT_TYPE::MODIFY_ZONE_ATTACK:
 		generalMod = new Modifier(*database->modList["modify_attack_modifier"]);
-		generalMod->SetValue(effect->value);
-		generalMod->SetMText(effect->name + ":\n   Attack modified by " + to_string(effect->value));
+		generalMod->SetValue(eff->value);
+		generalMod->SetMText(eff->name + ":\n   Attack modified by " + to_string(eff->value));
 		for (Unit* u : targetZone->GetUnits()) {
 			u->AddModifier(generalMod);
 		}
 		break;
 	case EFFECT_TYPE::MODIFY_ZONE_STAMINA:
 		generalMod = new Modifier(*database->modList["modify_stamina_modifier"]);
-		generalMod->SetValue(effect->value);
-		generalMod->SetMText(effect->name + ":\n   Stamina modified by " + to_string(effect->value));
+		generalMod->SetValue(eff->value);
+		generalMod->SetMText(eff->name + ":\n   Stamina modified by " + to_string(eff->value));
 		for (Unit* u : targetZone->GetUnits()) {
 			u->AddModifier(generalMod);
 		}
@@ -361,8 +395,8 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 		}
 		break;
 	case EFFECT_TYPE::JUNGLE_FROG:
-		for (int i = 0; i < effect->value; i++) {
-			targetZone->AddUnit(new Unit(*database->UnitList[effect->unit], database->CardListAll[effect->unit]->modifiers, this), database);
+		for (int i = 0; i < eff->value; i++) {
+			targetZone->AddUnit(new Unit(*database->UnitList[eff->unit], database->CardListAll[eff->unit]->modifiers, this), database);
 		}
 		count = 0;
 		for (Unit* unit : targetZone->GetUnits()) {
@@ -375,8 +409,8 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 		targUnit->AddModifier(generalMod);
 		break;
 	case EFFECT_TYPE::FIRE_FROG:
-		for (int i = 0; i < effect->value; i++) {
-			targetZone->AddUnit(new Unit(*database->UnitList[effect->unit], database->CardListAll[effect->unit]->modifiers, this), database);
+		for (int i = 0; i < eff->value; i++) {
+			targetZone->AddUnit(new Unit(*database->UnitList[eff->unit], database->CardListAll[eff->unit]->modifiers, this), database);
 		}
 		count = 0;
 		for (Unit* unit : targetZone->GetUnits()) {
@@ -399,10 +433,10 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 		targetZone->ClearUnits();
 		for (Unit* u : units) {
 			if ((rand() % 2) == 1) {
-				database->player->GetZones()[(int)ZONE_TYPE::Z_BLOCK]->AddUnit(u,database);
+				database->player->GetZones()[(int)ZONE_TYPE::Z_BLOCK]->AddUnit(u, database);
 			}
 			else {
-				database->player->GetZones()[(int)ZONE_TYPE::Z_ATTACK]->AddUnit(u,database);
+				database->player->GetZones()[(int)ZONE_TYPE::Z_ATTACK]->AddUnit(u, database);
 			}
 		}
 		targetZone = database->enemy->GetZones()[(int)ZONE_TYPE::Z_ATTACK];
@@ -429,7 +463,22 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone) {
 		targetZone->GetOwner()->Heal(5);
 		targetZone->GetOwner()->ModifyArmour(5);
 		break;
+	case EFFECT_TYPE::MODIFY_GOLD:
+		targetZone->GetOwner()->AddGold(eff->value);
+		break;
+	case EFFECT_TYPE::DRAW_CARD:
+		targetZone->GetOwner()->DrawCards(eff->value);
+		break;
+	case EFFECT_TYPE::DISCARD_CARD:
+		count = rand() % targetZone->GetOwner()->GetHand().size();
+		targetZone->GetOwner()->Discard(count);
+		break;
+	case EFFECT_TYPE::MODIFY_HEALTH:
+		targetZone->GetOwner()->Heal(eff->value);
+		break;
 	}
+
+	
 	
 }
 
@@ -514,10 +563,11 @@ void Card::SetHover(bool b){
 }
 
 bool Card::IsUnitTarget() {
-	if (effect!=nullptr && effect->tUnit) {
+	for (EffectData* eff : effect) {
+		if (eff->tUnit) {
 
-		return true;
-	}else{
-		return false;
+			return true;
+		}
 	}
+	return false;
 }
