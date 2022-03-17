@@ -277,6 +277,9 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone,EffectData* eff) {
 		generalMod->SetValue(eff->value);
 		targetZone->GetOwner()->GetZones()[(int)ZONE_TYPE::Z_ATTACK]->AddMod(generalMod);
 		break;
+	case EFFECT_TYPE::ADD_ZONE_MOD:
+		targetZone->AddMod(new Modifier(modifiers[0]));
+		break;
 	case EFFECT_TYPE::POTION_BUFF:
 		targetZone->AddMod(new Modifier(*database->modList["potion_frog"]));
 		break;
@@ -476,6 +479,16 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone,EffectData* eff) {
 	case EFFECT_TYPE::MODIFY_HEALTH:
 		targetZone->GetOwner()->Heal(eff->value);
 		break;
+	case EFFECT_TYPE::MOVE_ALLIES:
+		p = targetZone->GetOwner();
+		targetZone = p->GetZones()[1];
+		units = vector<Unit*>();
+		units = targetZone->GetUnits();
+		targetZone->ClearUnits();
+		targetZone = p->GetZones()[0];
+		for (Unit* u : units) {
+			targetZone->AddUnit(u,database);
+		}
 	}
 
 	

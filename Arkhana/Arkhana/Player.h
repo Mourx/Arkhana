@@ -123,9 +123,9 @@ protected:
 	Text txtBurntSize;
 	Vector2f txtBurntSizePos = Vector2f(1490, 750);
 
-	Sprite gemIcon;
+	vector<Sprite> gemIcons;
 	Texture texGem;
-	Vector2f gemPos = Vector2f(55, 720);
+	Vector2f gemPos = Vector2f(114, 726);
 
 	Sprite discardIcon;
 	Texture texDiscard;

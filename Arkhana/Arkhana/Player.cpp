@@ -45,9 +45,17 @@ void Player::InitSprites() {
 
 
 	texGem = *database->texList["Textures/Cards/gem.png"];
-	gemIcon.setTexture(texGem);
-	gemIcon.setPosition(gemPos);
-	gemIcon.setScale(2, 2);
+	if (gemIcons.size() == 0) {
+		for (int i = 0; i < 4; i++) {
+			gemIcons.push_back(Sprite());
+		}
+	}
+	for (int i = 0; i < gemIcons.size();i++) {
+		gemIcons[i].setTexture(texGem);
+		gemIcons[i].setPosition(gemPos - Vector2f(33*i,0));
+		gemIcons[i].setScale(2, 2);
+	}
+	
 
 	texDiscard = *database->texList["Textures/GUI/restTent.png"];
 	discardIcon.setTexture(texDiscard);
@@ -260,11 +268,10 @@ void Player::DrawBackground() {
 	blockZone->Draw(window);
 	
 	window->draw(deckIcon);
-	if (currentMana > 0) {
-		window->draw(gemIcon,&shaderMana);
-	}
-	else {
-		window->draw(gemIcon);
+	for(int i = 3;i>=0;i--){
+		if (currentMana+1-i >=0) {
+			window->draw(gemIcons[i], &shaderMana);
+		}
 	}
 	
 	window->draw(discardIcon);

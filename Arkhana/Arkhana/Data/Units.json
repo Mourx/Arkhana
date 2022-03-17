@@ -311,6 +311,30 @@
       "physPower": 8,
       "stamina": 30,
       "filePath": "Textures/Units/ogre.png"
+    },
+    "Wolf": {
+      "name": "Wolf",
+      "physPower": 0,
+      "stamina": 4,
+      "filePath": "Textures/Units/wolf.png"
+    },
+    "Alpha Wolf": {
+      "name": "Alpha Wolf",
+      "physPower": 1,
+      "stamina": 4,
+      "filePath": "Textures/Units/alphaWolf.png"
+    },
+    "Rat": {
+      "name": "Rat",
+      "physPower": 2,
+      "stamina": 1,
+      "filePath": "Textures/Units/rat.png"
+    },
+    "Giant Rat": {
+      "name": "Giant Rat",
+      "physPower": 3,
+      "stamina": 3,
+      "filePath": "Textures/Units/giantRat.png"
     }
   }
 }

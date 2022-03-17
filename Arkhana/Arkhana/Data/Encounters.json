@@ -15,6 +15,36 @@
       "startingPlay": [ "Goblin", "Goblin", "Goblin" ],
       "type": "E_COMBAT"
     },
+    "wolves": {
+      "actionCount": 2,
+      "armour": 0,
+      "decklist": [
+        [ "Alpha Wolf", "Wolf" ],
+        [ "Wolf", "Wolf", "Wolf" ],
+        [ "Wolf", "Howl" ]
+      ],
+      "description": "A pack of wolves!\n\nTerrifying when they ready\na large attack.",
+      "health": 20,
+      "level": 0,
+      "name": "wolves",
+      "startingPlay": [ "Wolf", "Wolf", "Wolf" ],
+      "type": "E_COMBAT"
+    },
+    "rats": {
+      "actionCount": 2,
+      "armour": 0,
+      "decklist": [
+        [ "Rat", "Rat","Rat" ],
+        [ "Giant Rat", "Rat"],
+        [ "Giant Rat", "Infestation" ]
+      ],
+      "description": "RATS",
+      "health": 20,
+      "level": 0,
+      "name": "rats",
+      "startingPlay": [ "Rat", "Rat", "Rat","Rat" ],
+      "type": "E_COMBAT"
+    },
     "tough goblins": {
       "actionCount": 2,
       "armour": 0,
@@ -24,10 +54,25 @@
         [ "Shield Goblin", "Shield Goblin", "Rage" ]
       ],
       "description": "These goblins seem\na bit tougher!\n\nGoblins tend to\ntry and swarm the\nememy.",
-      "health": 15,
+      "health": 25,
       "level": 1,
-      "name": "goblins",
+      "name": "tough goblins",
       "startingPlay": [ "Goblin", "Goblin", "Doublin", "Doublin" ],
+      "type": "E_COMBAT"
+    },
+    "tough wolves": {
+      "actionCount": 2,
+      "armour": 0,
+      "decklist": [
+        [ "Alpha Wolf", "Wolf" ],
+        [ "Wolf", "Wolf", "Wolf", "Wolf" ],
+        [ "Alpha Wolf", "Howl" ]
+      ],
+      "description": "A large pack of wolves!\n\nTerrifying when they ready\na large attack.",
+      "health": 30,
+      "level": 1,
+      "name": "tough wolves",
+      "startingPlay": [ "Alpha Wolf", "Wolf", "Wolf" ],
       "type": "E_COMBAT"
     },
     "ogres": {

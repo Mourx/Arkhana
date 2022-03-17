@@ -65,7 +65,7 @@ void Enemy::DrawBackground() {
 	blockZone->Draw(window);
 
 	window->draw(deckIcon);
-	window->draw(gemIcon);
+	
 	window->draw(discardIcon);
 	window->draw(burntIcon);
 	window->draw(healthIcon);

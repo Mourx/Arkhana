@@ -303,16 +303,21 @@ void UnitZone::UpdateStatMods() {
 
 void UnitZone::EndTurnUpkeep(DataBase* database) {
 	bool bPotioned = false; 
-	if (type == ZONE_TYPE::Z_ATTACK) {
-		for (Modifier* mod : zoneMods) {
+	vector<Unit*> unitsUpdate = unitList;
+	for (Modifier* mod : zoneMods) {
+		if (type == ZONE_TYPE::Z_ATTACK) {
 			if (mod->GetName() == "Potion Frog") {
 				bPotioned = true;
 			}
 			mod->ModifyDuration(-1);
 		}
+		if (mod->GetModType() == MODIFIER_TYPE::EOT_EFFECT) {
+			(new Card(*database->CardListAll["Goblin"], database))->DoEffect(NULL, this, database->effectList[mod->GetEffect()]);
+			mod->ModifyDuration(-1);
+		}
 	}
-	for (int i = 0; i < unitList.size();i++) {
-		Unit* u = unitList[i];
+	for (int i = 0; i < unitsUpdate.size();i++) {
+		Unit* u = unitsUpdate[i];
 		for (Modifier* mods : u->GetModifiers()) {
 			if (mods->GetModType() == MODIFIER_TYPE::UNIT_EOT_MOD) {
 				if (mods->GetModifier().size() != 0) {
@@ -334,14 +339,19 @@ void UnitZone::EndTurnUpkeep(DataBase* database) {
 				}
 			}
 			else if (mods->GetModType() == MODIFIER_TYPE::EOT_EFFECT) {
-				u->GetCard()->DoEffect(u, this);
+				if (mods->GetEffect() != "") {
+					u->GetCard()->DoEffect(u, this,database->effectList[mods->GetEffect()]);
+				}
+				else {
+					u->GetCard()->DoEffect(u, this);
+				}
 			}
 			
 		}
 		
 		for (Modifier* mod : u->GetAuras()) {
 			if (mod->GetModType() == MODIFIER_TYPE::AURA_EOT_MOD) {
-				for (Unit* un : unitList) {
+				for (Unit* un : unitsUpdate) {
 					for (Modifier* eachMod : mod->GetModifier()) {
 						un->AddModifier(eachMod);
 					}
@@ -525,6 +535,28 @@ void UnitZone::Update(Time t) {
 					u->UpdateStats();
 					u->UpdateStrings();
 
+				}
+				if (mod->GetName() == "Wolf Modifier") {
+					int count = 0;
+					for (Unit* wolfCheck : unitList) {
+						if (wolfCheck->GetName() == "Wolf" || wolfCheck->GetName() == "Alpha Wolf") {
+							count++;
+						}
+					}
+					mod->SetValue(count);
+					u->UpdateStats();
+					u->UpdateStrings();
+				}
+				if (mod->GetName() == "Alpha Wolf Modifier") {
+					int count = 0;
+					for (Unit* wolfCheck : unitList) {
+						if (wolfCheck->GetName() == "Wolf") {
+							count+=2;
+						}
+					}
+					mod->SetValue(count);
+					u->UpdateStats();
+					u->UpdateStrings();
 				}
 			}
 		}

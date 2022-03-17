@@ -64,7 +64,7 @@
       "cardType": "EFFECT",
       "zTag": "",
       "zOTag": "Z_ENEMY",
-      "filePath": "Textures/Cards/sapSpirit.png",
+      "filePath": "Textures/Effects/sapSpirit.png",
       "AITag": "AI_STRONGEST_UNIT_PLAYER",
       "effect": "Target Strongest",
       "modifiers": [ "remove_stamina_modifier" ],

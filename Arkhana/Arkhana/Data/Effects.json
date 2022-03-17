@@ -282,9 +282,35 @@
     "Frog Spawn": {
       "name": "Frog Spawn",
       "type": "CREATE_UNIT_EXHAUST",
-      "unit" :  "Tadpole",
+      "unit": "Tadpole",
       "value": 1,
       "text": "Create VALUE Tapdole\nwhen exhausted."
+    },
+    "Howl": {
+      "name": "Howl",
+      "type": "MOVE_ALLIES",
+      "value": 0,
+      "text": "Move all allied units to\nthe Attack Zone."
+    },
+    "Giant Rat": {
+      "name": "Giant Rat",
+      "type": "CREATE_UNIT_EOT",
+      "unit": "Rat",
+      "value": 2,
+      "text": "End of turn create 2 Rats."
+    },
+    "Infestation": {
+      "name": "Infestation",
+      "type": "CREATE_UNIT_EOT",
+      "unit": "Rat",
+      "value": 2,
+      "text": "End of turn create 2 Rats."
+    },
+    "Infestation Apply": {
+      "name": "Infestation Apply",
+      "type": "ADD_ZONE_MOD",
+      "value": 0,
+      "text": ""
     }
   }
 }

@@ -3,7 +3,7 @@
     "Goblin": {
       "name": "Goblin",
       "cost": 1,
-      "cardType": "CREATE_UNIT",
+      "cardType": "UNIT",
       "unit": "Goblin",
       "zTag": "",
       "zOTag": "Z_PLAYER",
@@ -13,7 +13,7 @@
     "Shield Goblin": {
       "name": "Shield Goblin",
       "cost": 1,
-      "cardType": "CREATE_UNIT",
+      "cardType": "UNIT",
       "unit": "Shield Goblin",
       "zTag": "DEFENSIVE",
       "zOTag": "Z_PLAYER",
@@ -33,7 +33,7 @@
     "Doublin": {
       "name": "Doublin",
       "cost": 2,
-      "cardType": "CREATE_UNIT",
+      "cardType": "UNIT",
       "unit": "Doublin",
       "zTag": "",
       "zOTag": "Z_PLAYER",
@@ -48,7 +48,7 @@
       "zOTag": "Z_PLAYER",
       "AITag": "AI_MOST_UNITS_AI",
       "filePath": "Textures/Cards/rage.png",
-      "effect":  "Zone Mod",
+      "effect": "Zone Mod",
       "modifiers": [ "rage_modifier" ],
       "shaderPath": "Textures/Shaders/enemyGoblin.vert"
     },
@@ -59,14 +59,15 @@
       "zTag": "",
       "zOTag": "Z_ENEMY",
       "AITag": "AI_STRONGEST_UNIT_PLAYER",
-      "effect":  "Target Strongest",
+      "effect": "Target Strongest",
       "modifiers": [ "remove_stamina_modifier" ],
+      "filePath": "Textures/Effects/sapSpirit.png",
       "shaderPath": "Textures/Shaders/enemyGoblin.vert"
     },
     "Shrine": {
       "name": "Shrine",
       "cost": 3,
-      "cardType": "CREATE_UNIT",
+      "cardType": "UNIT",
       "unit": "Shrine",
       "zTag": "",
       "zOTag": "Z_PLAYER",
@@ -77,7 +78,7 @@
     "Ogre": {
       "name": "Ogre",
       "cost": 4,
-      "cardType": "CREATE_UNIT",
+      "cardType": "UNIT",
       "unit": "Ogre",
       "zOTag": "Z_PLAYER",
       "zTag": "AGGRESSIVE",
@@ -88,12 +89,79 @@
     "Troll Boss": {
       "name": "Troll Boss",
       "cost": 5,
-      "cardType": "CREATE_UNIT",
+      "cardType": "UNIT",
       "unit": "Troll Boss",
       "zOTag": "Z_PLAYER",
       "zTag": "AGGRESSIVE",
       "AITag": "AI_ATTACK",
       "modifiers": [ "troll_rage", "boss_resist" ],
+      "shaderPath": "Textures/Shaders/enemyGoblin.vert"
+    },
+    "Wolf": {
+      "name": "Wolf",
+      "cost": 1,
+      "cardType": "UNIT",
+      "unit": "Wolf",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "AI_RANDOM",
+      "modifiers": [ "wolf_modifier" ],
+      "shaderPath": "Textures/Shaders/enemyGoblin.vert"
+    },
+    "Alpha Wolf": {
+      "name": "Alpha Wolf",
+      "cost": 1,
+      "cardType": "UNIT",
+      "unit": "Alpha Wolf",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "AI_RANDOM",
+      "modifiers": [ "alpha_wolf_modifier" ],
+      "shaderPath": "Textures/Shaders/enemyGoblin.vert"
+    },
+    "Howl": {
+      "name": "Howl",
+      "cost": 1,
+      "cardType": "EFFECT",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "effect": "Howl",
+      "AITag": "",
+      "level": 0,
+      "filePath": "Textures/Effects/howl.png",
+      "shaderPath": "Textures/Shaders/enemyGoblin.vert"
+    },
+    "Rat": {
+      "name": "Rat",
+      "cost": 1,
+      "cardType": "UNIT",
+      "unit": "Rat",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "AI_RANDOM",
+      "shaderPath": "Textures/Shaders/enemyGoblin.vert"
+    },
+    "Giant Rat": {
+      "name": "Giant Rat",
+      "cost": 1,
+      "cardType": "UNIT",
+      "unit": "Giant Rat",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "AI_RANDOM",
+      "modifiers":  ["giant_rat_modifier"],
+      "shaderPath": "Textures/Shaders/enemyGoblin.vert"
+    },
+    "Infestation": {
+      "name": "Infestation",
+      "cost": 1,
+      "cardType": "EFFECT",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "effect": "Infestation Apply",
+      "AITag": "AI_RANDOM",
+      "modifiers": [ "infestation_modifier" ],
+      "filePath": "Textures/Effects/infestation.png",
       "shaderPath": "Textures/Shaders/enemyGoblin.vert"
     }
   }

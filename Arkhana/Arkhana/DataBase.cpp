@@ -69,6 +69,13 @@ void DataBase::BuildModifierLists() {
 				mod->modifiers.push_back(new Modifier(*modList[arr[i].GetString()]));
 			}
 		}
+		if (ListItr->value.HasMember("effect")) mod->effect.push_back(ListItr->value["effect"].GetString());
+		if (ListItr->value.HasMember("effects")) {
+			rapidjson::GenericArray<true, rapidjson::Value> arr = ListItr->value["effects"].GetArray();
+			for (int i = 0; i < arr.Size(); i++) {
+				mod->effect.push_back(arr[i].GetString());
+			}
+		}
 		if (ListItr->value.HasMember("filepath")) {
 
 			string str = ListItr->value["filepath"].GetString();

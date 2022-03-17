@@ -23,6 +23,7 @@ void Modifier::GetData() {
 	modifiers = data.modifiers;
 	duration = data.duration;
 	bDynamic = data.bDynamic;
+	effects = data.effect;
 	texIcon.loadFromFile(data.filePath);
 	icon.setTexture(texIcon);
 	icon.setScale(0.75, 0.75);

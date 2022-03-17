@@ -56,6 +56,12 @@ public:
 	bool GetActive() {
 		return bActive;
 	}
+	string GetEffect() {
+		if (effects.size() != 0) {
+			return effects[0];
+		}
+		else return "";
+	}
 protected:
 	
 	void GetData();
@@ -73,6 +79,7 @@ protected:
 	STAT_TYPE sType = STAT_TYPE::DMG_PHYSICAL;
 	MODIFIER_TYPE mType = MODIFIER_TYPE::ZONE_MOD;
 	vector<Modifier*> modifiers;
+	vector<string> effects;
 	Sprite icon;
 	Texture texIcon;
 	Text textDuration;

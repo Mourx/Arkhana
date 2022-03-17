@@ -66,6 +66,7 @@ public:
 	int duration;
 	string filePath;
 	bool bDynamic = false;
+	vector<string> effect;
 };
 
 struct EncounterData {
@@ -208,6 +209,8 @@ public:
 		if (data == "MODIFY_HEALTH") return EFFECT_TYPE::MODIFY_HEALTH;
 		if (data == "MODIFY_ALL") return EFFECT_TYPE::MODIFY_ALL;
 		if (data == "CREATE_UNIT_EXHAUST") return EFFECT_TYPE::CREATE_UNIT_EXHAUST;
+		if (data == "MOVE_ALLIES") return EFFECT_TYPE::MOVE_ALLIES;
+		if (data == "ADD_ZONE_MOD") return EFFECT_TYPE::ADD_ZONE_MOD;
 		else return EFFECT_TYPE::ARMOUR_MOD;
 	}
 

@@ -613,6 +613,52 @@
       "EOTChange": 0,
       "text": "Bossy",
       "mText": "BOSS:No Stamina loss\n\t  each round"
+    },
+    "wolf_modifier": {
+      "name": "Wolf Modifier",
+      "value": 1,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "UNIT_MOD",
+      "EOTChange": 0,
+      "dynamic": true,
+      "text": "",
+      "mText": "+VALUE per ally Wolf \nor Alpha Wolf."
+    },
+    "alpha_wolf_modifier": {
+      "name": "Alpha Wolf Modifier",
+      "value": 2,
+      "multiplier": 0,
+      "sType": "DMG_PHYSICAL",
+      "mType": "UNIT_MOD",
+      "EOTChange": 0,
+      "dynamic": true,
+      "text": "",
+      "mText": "+VALUE per ally Wolf."
+    },
+    "giant_rat_modifier": {
+      "name": "Giant Rat Modifier",
+      "value": 0,
+      "multiplier": 0,
+      "sType": "STAMINA",
+      "mType": "EOT_EFFECT",
+      "EOTChange": 0,
+      "effect": "Giant Rat",
+      "text": "End of turn: Create 2 Rats",
+      "mText": "End of turn: Create 2 Rats"
+    },
+    "infestation_modifier": {
+      "name": "Infestation Modifier",
+      "value": 0,
+      "multiplier": 0,
+      "sType": "STAMINA",
+      "mType": "EOT_EFFECT",
+      "EOTChange": 0,
+      "effect": "Infestation",
+      "text": "End of turn: Create 2 Rats",
+      "duration": 999,
+      "mText": "End of turn: Create 2 Rats",
+      "filepath": "Textures/Effects/infestation.png"
     }
   }
 }
