@@ -20,7 +20,19 @@ Card::Card(CardData data,DataBase* dataB) {
 		icon.setPosition(costPositions[i]);
 		costIcons.push_back(icon);
 	}
-	
+	rarity = data.rarity;
+	switch (rarity) {
+	case UNCOMMON:
+		texRarityBorder.loadFromFile("Textures/Cards/borderUncommon.png");
+		break;
+	case RARE:
+		texRarityBorder.loadFromFile("Textures/Cards/borderRare.png");
+		break;
+	default:
+		texRarityBorder.loadFromFile("Textures/Cards/borderCommon.png");
+		break;
+	}
+	rarityBorder.setTexture(texRarityBorder);
 	zTag = data.zTag;
 	zType = database->GetZoneEnum(zTag);
 	zOwner = data.zOTag;
@@ -515,6 +527,7 @@ void Card::Draw(RenderTexture* w) {
 	w->draw(txtName);
 	//w->draw(txtDesc);
 	w->draw(cardArt);
+	w->draw(rarityBorder);
 	if (bHover) {
 		w->draw(cardBorder);
 	}
@@ -529,7 +542,7 @@ void Card::SetPosition(Vector2f p) {
 	GameObject::SetPosition(pos);
 	
 	physIcon.setPosition(pos+physPos);
-
+	rarityBorder.setPosition(pos);
 	magIcon.setPosition(pos+magPos);
 	cardBorder.setPosition(pos);
 

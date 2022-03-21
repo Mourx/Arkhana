@@ -2,6 +2,7 @@
   "Cards": {
     "Frog": {
       "name": "Frog",
+      "rarity": "COMMON",
       "cost": 1,
       "cardType": "UNIT",
       "unit": "Frog",
@@ -13,6 +14,7 @@
     },
     "Shield Frog": {
       "name": "Shield Frog",
+      "rarity": "COMMON",
       "cost": 1,
       "cardType": "UNIT",
       "unit": "Shield Frog",
@@ -24,6 +26,7 @@
     },
     "Frog Armour": {
       "name": "Frog Armour",
+      "rarity": "COMMON",
       "cost": 1,
       "cardType": "EFFECT",
       "effect": "Frog Armour",
@@ -36,6 +39,7 @@
     },
     "Two Frogs": {
       "name": "Two Frogs",
+      "rarity": "COMMON",
       "cost": 2,
       "cardType": "UNIT",
       "unit": "Two Frogs",
@@ -47,6 +51,7 @@
     },
     "Froggy Rage": {
       "name": "Froggy Rage",
+      "rarity": "COMMON",
       "cost": 2,
       "cardType": "EFFECT",
       "zTag": "",
@@ -60,6 +65,7 @@
     },
     "Tongue Whip": {
       "name": "Tongue Whip",
+      "rarity": "UNCOMMON",
       "cost": 2,
       "cardType": "EFFECT",
       "zTag": "",
@@ -73,6 +79,7 @@
     },
     "Frog Shrine": {
       "name": "Frog Shrine",
+      "rarity": "UNCOMMON",
       "cost": 3,
       "cardType": "UNIT",
       "unit": "Shrine",
@@ -85,6 +92,7 @@
     },
     "Spy Frog": {
       "name": "Spy Frog",
+      "rarity": "UNCOMMON",
       "cost": 2,
       "cardType": "UNIT",
       "unit": "Spy Frog",
@@ -97,7 +105,8 @@
     },
     "Big Frog": {
       "name": "Big Frog",
-      "cost": 3,
+      "rarity": "UNCOMMON",
+      "cost": 2,
       "cardType": "UNIT",
       "unit": "Big Frog",
       "zOTag": "Z_PLAYER",
@@ -109,7 +118,8 @@
     },
     "Guard Frog": {
       "name": "Guard Frog",
-      "cost": 1,
+      "rarity": "COMMON",
+      "cost": 2,
       "cardType": "UNIT",
       "unit": "Guard Frog",
       "zOTag": "Z_PLAYER",
@@ -121,7 +131,8 @@
     },
     "Mystic Frog": {
       "name": "Mystic Frog",
-      "cost": 1,
+      "rarity": "COMMON",
+      "cost": 3,
       "cardType": "UNIT",
       "unit": "Mystic Frog",
       "zOTag": "Z_PLAYER",
@@ -133,6 +144,7 @@
     },
     "Jog Frog": {
       "name": "Jog Frog",
+      "rarity": "COMMON",
       "cost": 1,
       "cardType": "UNIT",
       "unit": "Jog Frog",
@@ -145,7 +157,8 @@
     },
     "General Frog": {
       "name": "General Frog",
-      "cost": 1,
+      "rarity": "COMMON",
+      "cost": 2,
       "cardType": "UNIT",
       "unit": "General Frog",
       "zOTag": "Z_PLAYER",
@@ -157,6 +170,7 @@
     },
     "Banner Frog": {
       "name": "Banner Frog",
+      "rarity": "COMMON",
       "cost": 3,
       "cardType": "UNIT",
       "unit": "Banner Frog",
@@ -169,7 +183,8 @@
     },
     "Frog Friends": {
       "name": "Frog Friends",
-      "cost": 1,
+      "rarity": "COMMON",
+      "cost": 2,
       "cardType": "EFFECT",
       "effect": "Frog Friends",
       "unit": "",
@@ -182,6 +197,7 @@
     },
     "Power Ribbit": {
       "name": "Power Ribbit",
+      "rarity": "COMMON",
       "cost": 1,
       "cardType": "EFFECT",
       "effect": "Power Ribbit",
@@ -196,6 +212,7 @@
     },
     "Log Frog": {
       "name": "Log Frog",
+      "rarity": "COMMON",
       "cost": 1,
       "cardType": "UNIT",
       "effect": "Log Frog",
@@ -208,6 +225,7 @@
     },
     "Log": {
       "name": "Log",
+      "rarity": "SPECIAL",
       "cost": 0,
       "cardType": "UNIT",
       "unit": "Log",
@@ -219,6 +237,7 @@
     },
     "Spawn Frog": {
       "name": "Spawn Frog",
+      "rarity": "COMMON",
       "cost": 1,
       "cardType": "EFFECT",
       "effect": "Spawn Frog",
@@ -231,7 +250,7 @@
     },
     "Flute Frog": {
       "name": "Flute Frog",
-      "cost": 1,
+      "cost": 2,
       "cardType": "UNIT",
       "unit": "Flute Frog",
       "zOTag": "Z_PLAYER",
@@ -243,7 +262,8 @@
     },
     "Drum Frog": {
       "name": "Drum Frog",
-      "cost": 1,
+      "rarity": "COMMON",
+      "cost": 2,
       "cardType": "UNIT",
       "unit": "Drum Frog",
       "zOTag": "Z_PLAYER",
@@ -255,7 +275,8 @@
     },
     "Horn Frog": {
       "name": "Horn Frog",
-      "cost": 1,
+      "rarity": "COMMON",
+      "cost": 2,
       "cardType": "UNIT",
       "unit": "Horn Frog",
       "zOTag": "Z_PLAYER",
@@ -267,7 +288,8 @@
     },
     "Tuba Frog": {
       "name": "Tuba Frog",
-      "cost": 1,
+      "rarity": "COMMON",
+      "cost": 2,
       "cardType": "UNIT",
       "unit": "Tuba Frog",
       "zOTag": "Z_PLAYER",
@@ -279,7 +301,8 @@
     },
     "Spear Frog": {
       "name": "Spear Frog",
-      "cost": 1,
+      "rarity": "COMMON",
+      "cost": 2,
       "cardType": "UNIT",
       "unit": "Spear Frog",
       "zOTag": "Z_PLAYER",
@@ -291,7 +314,8 @@
     },
     "Bog Frog": {
       "name": "Bog Frog",
-      "cost": 1,
+      "rarity": "COMMON",
+      "cost": 3,
       "cardType": "UNIT",
       "unit": "Bog Frog",
       "zOTag": "Z_PLAYER",
@@ -303,7 +327,8 @@
     },
     "Frog Dog": {
       "name": "Frog Dog",
-      "cost": 1,
+      "rarity": "COMMON",
+      "cost": 2,
       "cardType": "UNIT",
       "unit": "Frog Dog",
       "zOTag": "Z_PLAYER",
@@ -316,7 +341,8 @@
     },
     "Lily Pad": {
       "name": "Lily Pad",
-      "cost": 1,
+      "rarity": "COMMON",
+      "cost": 2,
       "cardType": "UNIT",
       "unit": "Lily Pad",
       "zOTag": "Z_PLAYER",
@@ -328,6 +354,7 @@
     },
     "Smog Frog": {
       "name": "Smog Frog",
+      "rarity": "COMMON",
       "cost": 1,
       "cardType": "UNIT",
       "unit": "Smog Frog",
@@ -340,6 +367,7 @@
     },
     "Frog Fog": {
       "name": "Frog Fog",
+      "rarity": "COMMON",
       "cost": 1,
       "cardType": "EFFECT",
       "zOTag": "Z_PLAYER",
@@ -353,6 +381,7 @@
     },
     "Drizzle": {
       "name": "Drizzle",
+      "rarity": "COMMON",
       "cost": 1,
       "cardType": "EFFECT",
       "zOTag": "Z_ENEMY",
@@ -366,6 +395,7 @@
     },
     "Deluge": {
       "name": "Deluge",
+      "rarity": "UNCOMMON",
       "cost": 2,
       "cardType": "EFFECT",
       "zOTag": "Z_ENEMY",
@@ -379,6 +409,7 @@
     },
     "Flood": {
       "name": "Flood",
+      "rarity": "RARE",
       "cost": 3,
       "cardType": "EFFECT",
       "zOTag": "Z_ENEMY",
@@ -392,7 +423,8 @@
     },
     "Tadpole": {
       "name": "Tadpole",
-      "cost": 1,
+      "rarity": "COMMON",
+      "cost": 0,
       "cardType": "UNIT",
       "zOTag": "Z_PLAYER",
       "zTag": "",
@@ -403,7 +435,8 @@
     },
     "Potion Frog": {
       "name": "Potion Frog",
-      "cost": 1,
+      "rarity": "RARE",
+      "cost": 3,
       "cardType": "UNIT",
       "zOTag": "Z_PLAYER",
       "zTag": "",
@@ -416,7 +449,8 @@
     },
     "King Frog": {
       "name": "King Frog",
-      "cost": 1,
+      "rarity": "RARE",
+      "cost": 2,
       "cardType": "UNIT",
       "zOTag": "Z_PLAYER",
       "zTag": "Z_MIN_3_UNIT",
@@ -427,6 +461,7 @@
     },
     "Leap Frog": {
       "name": "Leap Frog",
+      "rarity": "COMMON",
       "cost": 1,
       "cardType": "UNIT",
       "zOTag": "Z_PLAYER",
@@ -439,6 +474,7 @@
     },
     "Big Croak": {
       "name": "Big Croak",
+      "rarity": "COMMON",
       "cost": 1,
       "cardType": "EFFECT",
       "zOTag": "Z_PLAYER",
@@ -451,6 +487,7 @@
     },
     "Jump Up": {
       "name": "Jump Up",
+      "rarity": "COMMON",
       "cost": 1,
       "cardType": "EFFECT",
       "zOTag": "Z_PLAYER",
@@ -464,6 +501,7 @@
     },
     "Wet Frog": {
       "name": "Wet Frog",
+      "rarity": "COMMON",
       "cost": 1,
       "cardType": "UNIT",
       "zOTag": "Z_PLAYER",
@@ -477,6 +515,7 @@
     },
     "Sneaky Frog": {
       "name": "Sneaky Frog",
+      "rarity": "COMMON",
       "cost": 1,
       "cardType": "UNIT",
       "zOTag": "Z_PLAYER",
@@ -490,6 +529,7 @@
     },
     "Frog Bomb": {
       "name": "Frog Bomb",
+      "rarity": "SPECIAL",
       "cost": 1,
       "cardType": "EFFECT",
       "zOTag": "Z_PLAYER",
@@ -502,7 +542,8 @@
     },
     "Chorus Croak": {
       "name": "Chorus Croak",
-      "cost": 1,
+      "rarity": "COMMON",
+      "cost": 2,
       "cardType": "EFFECT",
       "zOTag": "Z_PLAYER",
       "zTag": "",
@@ -514,7 +555,8 @@
     },
     "Fear Frog": {
       "name": "Fear Frog",
-      "cost": 1,
+      "rarity": "COMMON",
+      "cost": 2,
       "cardType": "UNIT",
       "zOTag": "Z_PLAYER",
       "zTag": "",
@@ -527,6 +569,7 @@
     },
     "Battering Frog": {
       "name": "Battering Frog",
+      "rarity": "UNCOMMON",
       "cost": 1,
       "cardType": "UNIT",
       "unit": "Battering Frog",
@@ -539,6 +582,7 @@
     },
     "Siege Frog": {
       "name": "Siege Frog",
+      "rarity": "UNCOMMON",
       "cost": 1,
       "cardType": "UNIT",
       "unit": "Siege Frog",
@@ -551,6 +595,7 @@
     },
     "Frogapult": {
       "name": "Frogapult",
+      "rarity": "UNCOMMON",
       "cost": 1,
       "cardType": "UNIT",
       "unit": "Frogapult",
@@ -564,6 +609,7 @@
     },
     "Jungle Frog": {
       "name": "Jungle Frog",
+      "rarity": "COMMON",
       "cost": 1,
       "cardType": "UNIT",
       "unit": "Jungle Frog",
@@ -577,6 +623,7 @@
     },
     "Fire Frog": {
       "name": "Fire Frog",
+      "rarity": "COMMON",
       "cost": 1,
       "cardType": "UNIT",
       "unit": "Fire Frog",
@@ -589,6 +636,7 @@
     },
     "Builder Frog": {
       "name": "Builder Frog",
+      "rarity": "COMMON",
       "cost": 1,
       "cardType": "UNIT",
       "unit": "Builder Frog",
@@ -602,6 +650,7 @@
     },
     "Cool Frog": {
       "name": "Cool Frog",
+      "rarity": "COMMON",
       "cost": 1,
       "cardType": "UNIT",
       "unit": "Cool Frog",
@@ -614,6 +663,7 @@
     },
     "Cute Frog": {
       "name": "Cute Frog",
+      "rarity": "COMMON",
       "cost": 1,
       "cardType": "UNIT",
       "unit": "Cute Frog",
@@ -626,6 +676,7 @@
     },
     "Tuxedo Frog": {
       "name": "Tuxedo Frog",
+      "rarity": "COMMON",
       "cost": 1,
       "cardType": "UNIT",
       "unit": "Tuxedo Frog",
@@ -638,6 +689,7 @@
     },
     "Frog Pond": {
       "name": "Frog Pond",
+      "rarity": "UNCOMMON",
       "cost": 1,
       "cardType": "UNIT",
       "unit": "Frog Pond",
@@ -651,6 +703,7 @@
     },
     "God Frog": {
       "name": "God Frog",
+      "rarity": "RARE",
       "cost": 3,
       "cardType": "UNIT",
       "unit": "God Frog",
@@ -663,6 +716,7 @@
     },
     "Twister": {
       "name": "Twister",
+      "rarity": "RARE",
       "cost": 1,
       "cardType": "EFFECT",
       "zOTag": "Z_PLAYER",
@@ -675,6 +729,7 @@
     },
     "Sad Frog": {
       "name": "Sad Frog",
+      "rarity": "RARE",
       "cost": 1,
       "cardType": "UNIT",
       "unit": "Sad Frog",
@@ -687,6 +742,7 @@
     },
     "Log Supply": {
       "name": "Log Supply",
+      "rarity": "UNCOMMON",
       "cost": 1,
       "cardType": "EFFECT",
       "zOTag": "Z_PLAYER",
@@ -699,6 +755,7 @@
     },
     "Blessing": {
       "name": "Blessing",
+      "rarity": "UNCOMMON",
       "cost": 1,
       "cardType": "EFFECT",
       "zOTag": "Z_PLAYER",
@@ -711,6 +768,7 @@
     },
     "Recycle": {
       "name": "Recycle",
+      "rarity": "UNCOMMON",
       "cost": 1,
       "cardType": "EFFECT",
       "zOTag": "Z_PLAYER",
@@ -723,6 +781,7 @@
     },
     "Heal": {
       "name": "Heal",
+      "rarity": "UNCOMMON",
       "cost": 1,
       "cardType": "EFFECT",
       "zOTag": "Z_PLAYER",
@@ -735,6 +794,7 @@
     },
     "Balance": {
       "name": "Balance",
+      "rarity": "UNCOMMON",
       "cost": 1,
       "cardType": "EFFECT",
       "zOTag": "Z_PLAYER",
@@ -748,7 +808,8 @@
     },
     "Sleep": {
       "name": "Sleep",
-      "cost": 1,
+      "rarity": "UNCOMMON",
+      "cost": 3,
       "cardType": "EFFECT",
       "zOTag": "Z_PLAYER",
       "zTag": "",
@@ -761,7 +822,8 @@
     },
     "Shiny Frog": {
       "name": "Shiny Frog",
-      "cost": 1,
+      "rarity": "RARE",
+      "cost": 2,
       "cardType": "UNIT",
       "unit": "Shiny Frog",
       "zOTag": "Z_PLAYER",
@@ -773,6 +835,7 @@
     },
     "Exile": {
       "name": "Exile",
+      "rarity": "UNCOMMON",
       "cost": 3,
       "cardType": "EFFECT",
       "zOTag": "",
@@ -786,6 +849,7 @@
     },
     "Frog Weights": {
       "name": "Frog Weights",
+      "rarity": "UNCOMMON",
       "cost": 1,
       "cardType": "EFFECT",
       "zOTag": "",
@@ -799,6 +863,7 @@
     },
     "Ghost Frog": {
       "name": "Ghost Frog",
+      "rarity": "UNCOMMON",
       "cost": 1,
       "cardType": "UNIT",
       "unit": "Ghost Frog",
@@ -811,6 +876,7 @@
     },
     "Confusion": {
       "name": "Confusion",
+      "rarity": "RARE",
       "cost": 3,
       "cardType": "EFFECT",
       "zOTag": "Z_PLAYER",
@@ -824,6 +890,7 @@
     },
     "Frog Intel": {
       "name": "Frog Intel",
+      "rarity": "UNCOMMON",
       "cost": 1,
       "cardType": "EFFECT",
       "zOTag": "Z_PLAYER",
@@ -836,6 +903,7 @@
     },
     "Rainbow Frog": {
       "name": "Rainbow Frog",
+      "rarity": "RARE",
       "cost": 2,
       "cardType": "UNIT",
       "unit": "Rainbow Frog",
@@ -847,6 +915,7 @@
     },
     "Command Frog": {
       "name": "Command Frog",
+      "rarity": "RARE",
       "cost": 2,
       "cardType": "UNIT",
       "unit": "Command Frog",
@@ -859,6 +928,7 @@
     },
     "Frog Champ": {
       "name": "Frog Champ",
+      "rarity": "UNCOMMON",
       "cost": 3,
       "cardType": "UNIT",
       "unit": "Frog Champ",
@@ -870,6 +940,7 @@
     },
     "Frog Spawn": {
       "name": "Frog Spawn",
+      "rarity": "SPECIAL",
       "cost": 0,
       "cardType": "UNIT",
       "zOTag": "Z_PLAYER",
@@ -877,7 +948,7 @@
       "AITag": "",
       "unit": "Frog Spawn",
       "effect": "Frog Spawn",
-      "modifiers": ["frog_spawn_modifier"],
+      "modifiers": [ "frog_spawn_modifier" ],
       "level": 0,
       "shaderPath": "Textures/Shaders/Empress.vert"
     }

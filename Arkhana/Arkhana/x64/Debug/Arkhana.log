@@ -11,10 +11,10 @@ C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Unit.h(50,28): warning C
 C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Unit.h(51,27): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\UnitZone.h(31,37): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Player.h(61,45): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Card.cpp(234,50): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Card.cpp(356,38): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Card.cpp(388,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Card.cpp(174,12): warning C4101: 'zone': unreferenced local variable
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Card.cpp(246,50): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Card.cpp(368,38): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Card.cpp(400,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Card.cpp(186,12): warning C4101: 'zone': unreferenced local variable
   CombatScreen.cpp
 C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\GameObject.h(41,21): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Unit.h(50,28): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
@@ -31,14 +31,14 @@ C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\DataBase.cpp(68,22): war
 C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\DataBase.cpp(75,22): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\DataBase.cpp(151,22): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\DataBase.cpp(168,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\DataBase.cpp(188,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\DataBase.cpp(215,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\DataBase.cpp(204,22): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\DataBase.cpp(231,22): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\DataBase.cpp(247,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\DataBase.cpp(307,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\DataBase.cpp(310,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\DataBase.cpp(316,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\DataBase.cpp(345,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\DataBase.cpp(263,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\DataBase.cpp(323,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\DataBase.cpp(326,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\DataBase.cpp(332,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\DataBase.cpp(361,21): warning C4018: '<': signed/unsigned mismatch
   Encounter.cpp
 C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\GameObject.h(41,21): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Unit.h(50,28): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
@@ -158,7 +158,6 @@ C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\MainMenuScreen.cpp(68,43
           [
               T=float
           ]
-  Modifier.cpp
   PathScreen.cpp
 C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\GameObject.h(41,21): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\Unit.h(50,28): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
@@ -249,6 +248,7 @@ C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\UnitZone.cpp(126,73): wa
 C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\UnitZone.cpp(132,29): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\UnitZone.cpp(252,48): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
   Generating Code...
-C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\DataBase.h(223): warning C4715: 'DataBase::GetEncType': not all control paths return a value
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\DataBase.h(125): warning C4715: 'DataBase::GetRandomCard': not all control paths return a value
+C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\DataBase.h(246): warning C4715: 'DataBase::GetEncType': not all control paths return a value
 C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\Arkhana\AIController.cpp(41): warning C4715: 'AIController::GetTarget': not all control paths return a value
   Arkhana.vcxproj -> C:\Users\Joel\Documents\Arkhana\Arkhana\Arkhana\x64\Debug\Forty Frogs.exe

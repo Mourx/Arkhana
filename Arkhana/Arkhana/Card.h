@@ -92,7 +92,7 @@ protected:
     UnitZone* targetZone;
 
     Shader cardShader;
-
+    RARITY rarity;
     vector<Sprite> costIcons;
     Texture texCost;
     vector<Vector2f> costPositions = { Vector2f(139, 12) ,Vector2f(124, 12) ,Vector2f(109, 12),Vector2f(94, 12) };
@@ -117,6 +117,9 @@ protected:
 
     Sprite cardBorder;
     Texture texCardBorder;
+
+    Sprite rarityBorder;
+    Texture texRarityBorder;
 
     Font font;
 

@@ -239,7 +239,7 @@
       "name": "Sleep",
       "type": "MODIFY_ALL",
       "value": 0,
-      "text": "Exhaust all units."
+      "text": "Exhaust all non-boss units."
     },
     "Shiny Frog": {
       "name": "Shiny Frog",

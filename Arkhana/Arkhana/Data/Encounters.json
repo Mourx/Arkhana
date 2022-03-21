@@ -19,15 +19,15 @@
       "actionCount": 2,
       "armour": 0,
       "decklist": [
-        [ "Alpha Wolf", "Wolf" ],
-        [ "Wolf", "Wolf", "Wolf" ],
+        [ "Alpha Wolf", ],
+        [ "Wolf", "Wolf" ],
         [ "Wolf", "Howl" ]
       ],
       "description": "A pack of wolves!\n\nTerrifying when they ready\na large attack.",
       "health": 20,
       "level": 0,
       "name": "wolves",
-      "startingPlay": [ "Wolf", "Wolf", "Wolf" ],
+      "startingPlay": [ "Wolf", "Wolf" ],
       "type": "E_COMBAT"
     },
     "rats": {
@@ -65,7 +65,7 @@
       "armour": 0,
       "decklist": [
         [ "Alpha Wolf", "Wolf" ],
-        [ "Wolf", "Wolf", "Wolf", "Wolf" ],
+        [ "Wolf", "Wolf", "Wolf"],
         [ "Alpha Wolf", "Howl" ]
       ],
       "description": "A large pack of wolves!\n\nTerrifying when they ready\na large attack.",

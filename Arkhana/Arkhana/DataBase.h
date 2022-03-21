@@ -41,6 +41,7 @@ public:
 	int level = 0;
 	vector<Modifier*> modifiers;
 	vector<string> cards;
+	RARITY rarity;
 };
 
 struct EffectData {
@@ -93,6 +94,9 @@ public:
 	map<string, UnitData*> UnitList;
 	map<string, CardData*> CardListRedUnlocked;
 	map<string, CardData*> CardListRedAll;
+	vector<string> cardsCommon;
+	vector<string> cardsUncommon;
+	vector<string> cardsRare;
 	map<string, CardData*> CardListEnemy;
 	map<string, CardData*> CardListAll;
 	map<string, ModifierData*> modList;
@@ -108,6 +112,18 @@ public:
 
 	Font font;
 	Font coolFont;
+
+	string GetRandomCard(RARITY rarity) {
+		switch (rarity) {
+		case COMMON:
+			return cardsCommon[rand() % cardsCommon.size()];
+		case UNCOMMON:
+			return cardsUncommon[rand() % cardsUncommon.size()];
+		case RARE:
+			return cardsRare[rand() % cardsRare.size()];
+		}
+	}
+
 
 	MODIFIER_TYPE GetModEnum(string data) {
 		if (data == "ZONE_MOD") return MODIFIER_TYPE::ZONE_MOD;
@@ -150,6 +166,13 @@ public:
 		if (data == "UNIT") return UNIT;
 		else if (data == "EFFECT") return EFFECT;
 		else return UNIT;
+	}
+
+	RARITY GetRarityEnum(string data) {
+		if (data == "COMMON") return RARITY::COMMON;
+		if (data == "UNCOMMON") return RARITY::UNCOMMON;
+		if (data == "RARE") return RARITY::RARE;
+		else return COMMON;
 	}
 
 	ZONE_TYPE GetZoneEnum(string data) {

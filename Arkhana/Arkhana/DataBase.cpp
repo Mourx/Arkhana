@@ -170,6 +170,22 @@ void DataBase::BuildCardListsRed() {
 			}
 		}
 		if(ListItr->value.HasMember("unit")) card->unit = ListItr->value["unit"].GetString();
+		if (ListItr->value.HasMember("rarity")) {
+			RARITY rarity = GetRarityEnum(ListItr->value["rarity"].GetString());
+			switch (rarity) {
+			case COMMON:
+				cardsCommon.push_back(name);
+				break;
+			case UNCOMMON:
+				cardsUncommon.push_back(name);
+				break;
+			case RARE:
+				cardsRare.push_back(name);
+				break;
+			}
+			card->rarity = rarity;
+		}
+
 		card->zTag = ListItr->value["zTag"].GetString();
 		card->zOTag = GetZoneOwnerEnum(ListItr->value["zOTag"].GetString());
 		card->AITag = GetAITag(ListItr->value["AITag"].GetString());

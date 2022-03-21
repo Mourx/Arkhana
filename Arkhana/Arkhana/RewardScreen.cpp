@@ -25,20 +25,20 @@ RewardScreen::RewardScreen(RenderTexture* w,DataBase* db, Player* p,Enemy* e) {
 
 void RewardScreen::GenerateOptions() {
 	selCard = NULL;
+	
 	map<string, CardData*> cardList = player->GetCardLists();
 
 	vector<int> cIns;
 	for (int i = 0; i < optionsAmount; i++) {
-		int r = rand() % cardList.size();
-		while (!(count(cIns.begin(), cIns.end(), r)==0)) {
-			r = rand() % cardList.size();
+		int random = rand() % 100;
+		RARITY rarity = COMMON;
+		if (random < 10) {
+			rarity = RARE;
 		}
-		cIns.push_back(r);
-	}
-	for (int i = 0; i < cIns.size(); i++) {
-		map<string, CardData*>::iterator it = cardList.begin();
-		advance(it, cIns[i]);
-		CardData* data = it->second;
+		else if (random < 40) {
+			rarity = UNCOMMON;
+		}
+		CardData* data = cardList[database->GetRandomCard(rarity)];
 		Card* c = new Card(*data, database);
 		c->SetPosition(optionPos + Vector2f(i * 160, 0));
 		options.push_back(c);
