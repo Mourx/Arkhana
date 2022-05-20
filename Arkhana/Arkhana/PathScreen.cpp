@@ -28,7 +28,7 @@ void PathScreen::Init() {
 	nextScreen = NONE;
 	InitEncounters();
 	forge = new ForgeScreen(window, database, player);
-	tier = 0;
+	tier = 2;
 }
 
 void PathScreen::ResetDetails(COMBAT_RESULT res) {

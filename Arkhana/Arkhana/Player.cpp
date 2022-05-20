@@ -328,6 +328,9 @@ void Player::DrawCards(int amount) {
 	for (int i = 0; i < amount; i++) {
 		if (deck.size() != 0) {
 			hand.push_back(deck[0]);
+			Card* c = deck[0];
+			hand.push_back(c);
+			c->DrawEffect(this);
 			deck.erase(deck.begin());
 		}
 		else if (deck.size() == 0) {
@@ -337,7 +340,9 @@ void Player::DrawCards(int amount) {
 			discard.clear();
 			random_shuffle(deck.begin(), deck.end());
 			if (deck.size() >= 1) {
-				hand.push_back(deck[0]);
+				Card* c = deck[0];
+				hand.push_back(c);
+				c->DrawEffect(this);
 				deck.erase(deck.begin());
 			}
 		}

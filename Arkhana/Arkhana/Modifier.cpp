@@ -24,6 +24,7 @@ void Modifier::GetData() {
 	duration = data.duration;
 	bDynamic = data.bDynamic;
 	effects = data.effect;
+	except = data.except;
 	texIcon.loadFromFile(data.filePath);
 	icon.setTexture(texIcon);
 	icon.setScale(0.75, 0.75);

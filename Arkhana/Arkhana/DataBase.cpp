@@ -76,6 +76,12 @@ void DataBase::BuildModifierLists() {
 				mod->effect.push_back(arr[i].GetString());
 			}
 		}
+		if (ListItr->value.HasMember("except")) {
+			rapidjson::GenericArray<true, rapidjson::Value> arr = ListItr->value["except"].GetArray();
+			for (int i = 0; i < arr.Size(); i++) {
+				mod->except.push_back(arr[i].GetString());
+			}
+		}
 		if (ListItr->value.HasMember("filepath")) {
 
 			string str = ListItr->value["filepath"].GetString();
@@ -316,29 +322,33 @@ void DataBase::BuildEncounterLists() {
 		EncounterData* encounter = new EncounterData();
 		encounter->name = ListItr->value["name"].GetString();
 
-		encounter->health = ListItr->value["health"].GetInt();
-		encounter->armour = ListItr->value["armour"].GetInt();
+		if (ListItr->value.HasMember("health")) encounter->health = ListItr->value["health"].GetInt();
+		if (ListItr->value.HasMember("armour")) encounter->armour = ListItr->value["armour"].GetInt();
 
-		rapidjson::GenericArray<true,rapidjson::Value> arr = ListItr->value["decklist"].GetArray();
-		for (int i = 0; i < arr.Size(); i++) {
-			rapidjson::GenericArray<true, rapidjson::Value> ar2 = arr[i].GetArray();
-			vector<string> list;
-			for (int j = 0; j < ar2.Size(); j++) {
-				list.push_back(ar2[j].GetString());
+		if (ListItr->value.HasMember("decklist")) {
+			rapidjson::GenericArray<true, rapidjson::Value> arr = ListItr->value["decklist"].GetArray();
+			for (int i = 0; i < arr.Size(); i++) {
+				rapidjson::GenericArray<true, rapidjson::Value> ar2 = arr[i].GetArray();
+				vector<string> list;
+				for (int j = 0; j < ar2.Size(); j++) {
+					list.push_back(ar2[j].GetString());
+				}
+				encounter->decklists.push_back(list);
 			}
-			encounter->decklists.push_back(list);
 		}
-		rapidjson::GenericArray<true, rapidjson::Value> ar = ListItr->value["startingPlay"].GetArray();
-		for (int i = 0; i < ar.Size(); i++) {
-			encounter->startingPlay.push_back(ar[i].GetString());
+		if (ListItr->value.HasMember("startingPlay")) {
+			rapidjson::GenericArray<true, rapidjson::Value> ar = ListItr->value["startingPlay"].GetArray();
+			for (int i = 0; i < ar.Size(); i++) {
+				encounter->startingPlay.push_back(ar[i].GetString());
+			}
 		}
 		encounter->level = ListItr->value["level"].GetInt();
 		int level = encounter->level;
 		encounters[level].insert({ name,encounter });
 
-		encounter->actionCount = ListItr->value["actionCount"].GetInt();
-		encounter->description = ListItr->value["description"].GetString();
-		encounter->type = GetEncType(ListItr->value["type"].GetString());
+		if (ListItr->value.HasMember("actionCount")) encounter->actionCount = ListItr->value["actionCount"].GetInt();
+		if (ListItr->value.HasMember("description")) encounter->description = ListItr->value["description"].GetString();
+		if (ListItr->value.HasMember("type")) encounter->type = GetEncType(ListItr->value["type"].GetString());
 		encounterNames[level].push_back(name);
 	}
 	fclose(fp);

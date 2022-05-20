@@ -63,6 +63,7 @@ public:
     bool IsUndercover() { return bUndercover; }
     bool IsPassive() { return bPassive; }
     void SetCostChange(int change);
+    void DrawEffect(Player* p);
     bool IsUnitTarget();
     void DoEffect(Unit* targUnit,UnitZone* targZone,EffectData* eff = NULL);
 protected:

@@ -61,6 +61,11 @@ public:
 	void SetDamageDealt(int d) { damageDealt = d; }
 	Vector2f GetHealthPos() { return healthPos; }
 	virtual void AddCardToHand(Card* c);
+	void AddCardToDeck(Card* c) {
+		deck.push_back(c);
+		random_shuffle(deck.begin(), deck.end());
+
+	}
 	void DrawCards(int amount);
 	void Discard(int index);
 protected:

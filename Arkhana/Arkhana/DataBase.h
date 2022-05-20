@@ -68,6 +68,7 @@ public:
 	string filePath;
 	bool bDynamic = false;
 	vector<string> effect;
+	vector<string> except;
 };
 
 struct EncounterData {
@@ -234,6 +235,10 @@ public:
 		if (data == "CREATE_UNIT_EXHAUST") return EFFECT_TYPE::CREATE_UNIT_EXHAUST;
 		if (data == "MOVE_ALLIES") return EFFECT_TYPE::MOVE_ALLIES;
 		if (data == "ADD_ZONE_MOD") return EFFECT_TYPE::ADD_ZONE_MOD;
+		if (data == "USE_ONCE") return EFFECT_TYPE::USE_ONCE;
+		if (data == "DAMAGE_ON_DRAW") return EFFECT_TYPE::DAMAGE_ON_DRAW;
+		if (data == "GIVE_CARD_DECK") return EFFECT_TYPE::GIVE_CARD_DECK;
+		if (data == "CREATE_UNIT_OPPOSITE") return EFFECT_TYPE::CREATE_UNIT_OPPOSITE;	
 		else return EFFECT_TYPE::ARMOUR_MOD;
 	}
 

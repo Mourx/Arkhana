@@ -659,6 +659,28 @@
       "duration": 999,
       "mText": "End of turn: Create 2 Rats",
       "filepath": "Textures/Effects/infestation.png"
+    },
+    "trap_debuff": {
+      "name": "Trap Debuff",
+      "value": -1,
+      "multiplier": 0,
+      "sType": "STAMINA",
+      "mType": "UNIT_MOD",
+      "EOTChange": 0,
+      "text": "Trap:\n   -VALUE stamina",
+      "except": [ "Trap" ],
+      "mText": "Other units lose VALUE\nStamina on enter."
+    },
+    "trap_modifier": {
+      "name": "Trap Modifier",
+      "value": -1,
+      "multiplier": 0,
+      "sType": "STAMINA",
+      "mType": "UNIT_ENTER_APPLY_MOD",
+      "EOTChange": 0,
+      "modifier": "lily_pad_buff",
+      "text": "Other units lose VALUE\nStamina on enter.",
+      "mText": "Other units lose VALUE\nStamina on enter."
     }
   }
 }

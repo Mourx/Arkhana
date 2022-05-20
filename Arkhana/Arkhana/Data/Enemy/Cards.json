@@ -149,7 +149,7 @@
       "zOTag": "Z_PLAYER",
       "zTag": "",
       "AITag": "AI_RANDOM",
-      "modifiers":  ["giant_rat_modifier"],
+      "modifiers": [ "giant_rat_modifier" ],
       "shaderPath": "Textures/Shaders/enemyGoblin.vert"
     },
     "Infestation": {
@@ -162,6 +162,50 @@
       "AITag": "AI_RANDOM",
       "modifiers": [ "infestation_modifier" ],
       "filePath": "Textures/Effects/infestation.png",
+      "shaderPath": "Textures/Shaders/enemyGoblin.vert"
+    },
+    "Trapper": {
+      "name": "Trapper",
+      "cost": 1,
+      "cardType": "UNIT",
+      "unit": "Trapper",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "AI_RANDOM",
+      "effect": "Trapper",
+      "shaderPath": "Textures/Shaders/enemyGoblin.vert"
+    },
+    "Trap": {
+      "name": "Trap",
+      "cost": 1,
+      "cardType": "UNIT",
+      "unit": "Trap",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "AI_RANDOM",
+      "modifiers" :  ["trap_modifier"],
+      "shaderPath": "Textures/Shaders/enemyGoblin.vert"
+    },
+    "Bomber": {
+      "name": "Bomber",
+      "cost": 1,
+      "cardType": "UNIT",
+      "unit": "Bomber",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "AI_RANDOM",
+      "effect": "Bomber",
+      "cards": [ "Bomb" ],
+      "shaderPath": "Textures/Shaders/enemyGoblin.vert"
+    },
+    "Bomb": {
+      "name": "Bomb",
+      "cost": 1,
+      "cardType": "EFFECT",
+      "zOTag": "Z_PLAYER",
+      "zTag": "",
+      "AITag": "AI_RANDOM",
+      "effects": [ "Bomb", "Use Once" ],
       "shaderPath": "Textures/Shaders/enemyGoblin.vert"
     }
   }

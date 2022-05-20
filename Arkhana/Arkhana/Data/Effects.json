@@ -311,6 +311,31 @@
       "type": "ADD_ZONE_MOD",
       "value": 0,
       "text": ""
+    },
+    "Trapper": {
+      "name": "Trapper",
+      "type": "CREATE_UNIT_OPPOSITE",
+      "value": 1,
+      "unit": "Trap",
+      "text": "Create a Trap in the\nopposite zone"
+    },
+    "Bomber": {
+      "name": "Bomber",
+      "type": "GIVE_CARD_DECK",
+      "value": 0,
+      "text": "Put a Bomb in the\nenemy's deck."
+    },
+    "Bomb": {
+      "name": "Bomb",
+      "type": "DAMAGE_ON_DRAW",
+      "value": 2,
+      "text": "Take VALUE damage when drawn."
+    },
+    "Use Once": {
+      "name": "Use Once",
+      "type": "USE_ONCE",
+      "value": 0,
+      "text": "Remove this card when played."
     }
   }
 }

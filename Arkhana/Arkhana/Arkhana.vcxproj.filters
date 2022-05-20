@@ -96,9 +96,6 @@
     <ClCompile Include="ForgeScreen.cpp">
       <Filter>Source Files\Screen</Filter>
     </ClCompile>
-    <ClCompile Include="InfoPane.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameOverScreen.cpp">
       <Filter>Source Files\Screen</Filter>
     </ClCompile>
@@ -107,6 +104,15 @@
     </ClCompile>
     <ClCompile Include="FortyFrogs.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GiftScreen.cpp">
+      <Filter>Source Files\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="EventScreen.cpp">
+      <Filter>Source Files\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="InfoPane.cpp">
+      <Filter>Source Files\GameObject\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,14 +173,20 @@
     <ClInclude Include="ForgeScreen.h">
       <Filter>Header Files\Screen</Filter>
     </ClInclude>
-    <ClInclude Include="InfoPane.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameOverScreen.h">
       <Filter>Header Files\Screen</Filter>
     </ClInclude>
     <ClInclude Include="Faction.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GiftScreen.h">
+      <Filter>Header Files\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="EventScreen.h">
+      <Filter>Header Files\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="InfoPane.h">
+      <Filter>Header Files\GameObject\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

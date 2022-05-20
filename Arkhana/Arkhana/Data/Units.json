@@ -335,6 +335,24 @@
       "physPower": 3,
       "stamina": 3,
       "filePath": "Textures/Units/giantRat.png"
+    },
+    "Trapper": {
+      "name": "Trapper",
+      "physPower": 3,
+      "stamina": 1,
+      "filePath": "Textures/Units/trapper.png"
+    },
+    "Trap": {
+      "name": "Trap",
+      "physPower": 0,
+      "stamina": 2,
+      "filePath": "Textures/Units/trap.png"
+    },
+    "Bomber": {
+      "name": "Bomber",
+      "physPower": 3,
+      "stamina": 1,
+      "filePath": "Textures/Units/bomber.png"
     }
   }
 }

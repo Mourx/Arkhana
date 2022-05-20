@@ -19,7 +19,7 @@
       "actionCount": 2,
       "armour": 0,
       "decklist": [
-        [ "Alpha Wolf", ],
+        [ "Alpha Wolf" ],
         [ "Wolf", "Wolf" ],
         [ "Wolf", "Howl" ]
       ],
@@ -34,16 +34,28 @@
       "actionCount": 2,
       "armour": 0,
       "decklist": [
-        [ "Rat", "Rat","Rat" ],
-        [ "Giant Rat", "Rat"],
+        [ "Rat", "Rat", "Rat" ],
+        [ "Giant Rat", "Rat" ],
         [ "Giant Rat", "Infestation" ]
       ],
       "description": "RATS",
       "health": 20,
       "level": 0,
       "name": "rats",
-      "startingPlay": [ "Rat", "Rat", "Rat","Rat" ],
+      "startingPlay": [ "Rat", "Rat", "Rat", "Rat" ],
       "type": "E_COMBAT"
+    },
+    "event_1": {
+      "description": "Event",
+      "level": 0,
+      "name": "Random Event",
+      "type": "E_EVENT"
+    },
+    "gift_1": {
+      "description": "Gift",
+      "level": 0,
+      "name": "Random Gift",
+      "type": "E_GIFT"
     },
     "tough goblins": {
       "actionCount": 2,
@@ -65,7 +77,7 @@
       "armour": 0,
       "decklist": [
         [ "Alpha Wolf", "Wolf" ],
-        [ "Wolf", "Wolf", "Wolf"],
+        [ "Wolf", "Wolf", "Wolf" ],
         [ "Alpha Wolf", "Howl" ]
       ],
       "description": "A large pack of wolves!\n\nTerrifying when they ready\na large attack.",
@@ -73,6 +85,21 @@
       "level": 1,
       "name": "tough wolves",
       "startingPlay": [ "Alpha Wolf", "Wolf", "Wolf" ],
+      "type": "E_COMBAT"
+    },
+    "trappers": {
+      "actionCount": 2,
+      "armour": 10,
+      "decklist": [
+        [ "Trapper", "Trapper", "Big Armour" ],
+        [ "Sap Spirit" ],
+        [ "Big Armour", "Big Armour" ]
+      ],
+      "description": "A gang of trappers!\nBeware their traps!",
+      "health": 20,
+      "level": 1,
+      "name": "trappers",
+      "startingPlay": [ "Trapper", "Trapper" ],
       "type": "E_COMBAT"
     },
     "ogres": {
@@ -103,6 +130,21 @@
       "level": 2,
       "name": "several goblins",
       "startingPlay": [ "Doublin", "Doublin", "Goblin", "Goblin" ],
+      "type": "E_COMBAT"
+    },
+    "bombers": {
+      "actionCount": 2,
+      "armour": 0,
+      "decklist": [
+        [ "Bomber", "Bomber", "Big Armour" ],
+        [ "Bomber", "Sap Spirit"],
+        [ "Big Armour","Big Armour" ]
+      ],
+      "description": "A Bag of Bombers!\nBeware their bombs!",
+      "health": 60,
+      "level": 2,
+      "name": "bombers",
+      "startingPlay": [ "Bomber", "Bomber"],
       "type": "E_COMBAT"
     },
     "troll boss": {

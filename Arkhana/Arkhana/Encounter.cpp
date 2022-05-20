@@ -37,6 +37,11 @@ void Encounter::GenerateEncounter() {
 		typeDesc = "What treasure awaits?";
 		typeTitle = "A Gift of Treasure";
 		break;
+	case E_EVENT:
+		texIcon.loadFromFile("Textures/GUI/event.png");
+		typeDesc = "What is this?";
+		typeTitle = "An Unpredictable\nEvent";
+		break;
 	}
 	
 }

@@ -62,6 +62,7 @@ public:
 		}
 		else return "";
 	}
+	vector<string> GetExcept() { return except; }
 protected:
 	
 	void GetData();
@@ -80,6 +81,7 @@ protected:
 	MODIFIER_TYPE mType = MODIFIER_TYPE::ZONE_MOD;
 	vector<Modifier*> modifiers;
 	vector<string> effects;
+	vector<string> except;
 	Sprite icon;
 	Texture texIcon;
 	Text textDuration;

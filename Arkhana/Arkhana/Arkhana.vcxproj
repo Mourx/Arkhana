@@ -157,6 +157,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AIController.cpp" />
+    <ClCompile Include="EventScreen.cpp" />
     <ClCompile Include="FortyFrogs.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CombatScreen.cpp" />
@@ -167,6 +168,7 @@
     <ClCompile Include="ForgeScreen.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameOverScreen.cpp" />
+    <ClCompile Include="GiftScreen.cpp" />
     <ClCompile Include="InfoPane.cpp" />
     <ClCompile Include="MainMenuScreen.cpp" />
     <ClCompile Include="Modifier.cpp" />
@@ -186,10 +188,12 @@
     <ClInclude Include="EndTurnButton.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="enums.h" />
+    <ClInclude Include="EventScreen.h" />
     <ClInclude Include="Faction.h" />
     <ClInclude Include="ForgeScreen.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameOverScreen.h" />
+    <ClInclude Include="GiftScreen.h" />
     <ClInclude Include="headers.h" />
     <ClInclude Include="InfoPane.h" />
     <ClInclude Include="MainMenuScreen.h" />

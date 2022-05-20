@@ -161,7 +161,9 @@ void Card::Play(UnitZone* zone,Unit* targUnit) {
 
 void Card::ApplyModifier(Unit* u) {
 	for (Modifier* m : modifiers) {
-		u->AddModifier(m);
+		if (count(m->GetExcept().begin(), m->GetExcept().end(), u->GetName()) == 0) {
+			u->AddModifier(m);
+		}
 	}
 }
 
@@ -175,6 +177,18 @@ void Card::UpdatePositions() {
 
 
 	
+}
+
+void Card::DrawEffect(Player* p) {
+	for (EffectData* eff : effect) {
+		switch (eff->effect) {
+		case EFFECT_TYPE::DAMAGE_ON_DRAW:
+			DoEffect(NULL, p->GetZones()[0], eff);
+		default:
+	
+			break;
+		}
+	}
 }
 
 void Card::DoEffect(Unit* targUnit, UnitZone* targZone,EffectData* eff) {
@@ -248,6 +262,17 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone,EffectData* eff) {
 	case EFFECT_TYPE::CREATE_UNIT:
 		for (int i = 0; i < eff->value; i++) {
 			targetZone->AddUnit(new Unit(*database->UnitList[eff->unit], database->CardListAll[eff->unit]->modifiers, new Card(*database->CardListAll[eff->unit], database)), database);
+		}
+		break;
+	case EFFECT_TYPE::CREATE_UNIT_OPPOSITE:
+		if (targetZone->GetOwner() == database->player) {
+			oppZ = database->enemy->GetZones()[(int)targetZone->GetOppositeType()];
+		}
+		else {
+			oppZ = database->player->GetZones()[(int)targetZone->GetOppositeType()];
+		}
+		for (int i = 0; i < eff->value; i++) {
+			oppZ->AddUnit(new Unit(*database->UnitList[eff->unit], database->CardListAll[eff->unit]->modifiers, new Card(*database->CardListAll[eff->unit], database)), database);
 		}
 		break;
 	case EFFECT_TYPE::CREATE_UNIT_EOT:
@@ -361,8 +386,23 @@ void Card::DoEffect(Unit* targUnit, UnitZone* targZone,EffectData* eff) {
 			p->AddCardToHand(new Card(*database->CardListAll[s], database));
 		}
 		break;
+	case EFFECT_TYPE::GIVE_CARD_DECK:
+		for (string s : cards) {
+			p = targetZone->GetOwner();
+			if (p == database->player) {
+				p = database->enemy;
+			}
+			else {
+				p = database->player;
+			}
+			p->AddCardToDeck(new Card(*database->CardListAll[s], database));
+		}
+		break;
 	case EFFECT_TYPE::DAMAGE:
 		targZone->GetOwner()->DamagePhys(eff->value);
+		break;
+	case EFFECT_TYPE::DAMAGE_ON_DRAW:
+		targetZone->GetOwner()->DamagePhys(eff->value);
 		break;
 	case EFFECT_TYPE::CHORUS_CROAK:
 		count = targZone->GetUnits().size();
