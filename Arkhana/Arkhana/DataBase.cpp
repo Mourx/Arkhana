@@ -434,6 +434,76 @@ void DataBase::BuildSharedTextures() {
 	tex = new Texture();
 	tex->loadFromFile("Textures/GUI/damageBlip.png");
 	texList.insert({ "Textures/GUI/damageBlip.png",tex });
+
+	tex = new Texture();
+	tex->loadFromFile("Textures/Tutorials/PathTut.png");
+	GameObject* Obj = new GameObject();
+	Obj->GetIcon()->setTexture(*tex);
+	TexTutorials.push_back(tex);
+	Tutorials.push_back(Obj);
+
+	tex = new Texture();
+	tex->loadFromFile("Textures/Tutorials/CombatTut1.png");
+	Obj = new GameObject();
+	Obj->GetIcon()->setTexture(*tex);
+	TexTutorials.push_back(tex);
+	Tutorials.push_back(Obj);
+
+	tex = new Texture();
+	tex->loadFromFile("Textures/Tutorials/CombatTut2.png");
+	Obj = new GameObject();
+	Obj->GetIcon()->setTexture(*tex);
+	TexTutorials.push_back(tex);
+	Tutorials.push_back(Obj);
+
+	tex = new Texture();
+	tex->loadFromFile("Textures/Tutorials/CombatTut3.png");
+	Obj = new GameObject();
+	Obj->GetIcon()->setTexture(*tex);
+	TexTutorials.push_back(tex);
+	Tutorials.push_back(Obj);
+
+	tex = new Texture();
+	tex->loadFromFile("Textures/Tutorials/RewardTut.png");
+	Obj = new GameObject();
+	Obj->GetIcon()->setTexture(*tex);
+	TexTutorials.push_back(tex);
+	Tutorials.push_back(Obj);
+
+	tex = new Texture();
+	tex->loadFromFile("Textures/Tutorials/ForgeTut.png");
+	Obj = new GameObject();
+	Obj->GetIcon()->setTexture(*tex);
+	TexTutorials.push_back(tex);
+	Tutorials.push_back(Obj);
+
+	tex = new Texture();
+	tex->loadFromFile("Textures/Tutorials/Next.png");
+	nextButton = new GameObject();
+	nextButton->GetIcon()->setTexture(*tex);
+	TexTutorials.push_back(tex);
+	nextButton->SetPosition(Vector2f(1650, 940));
+
+	tex = new Texture();
+	tex->loadFromFile("Textures/Tutorials/Back.png");
+	backButton = new GameObject();
+	backButton->GetIcon()->setTexture(*tex);
+	TexTutorials.push_back(tex);
+	backButton->SetPosition(Vector2f(80, 940));
+
+	tex = new Texture();
+	tex->loadFromFile("Textures/Tutorials/Close.png");
+	closeButton = new GameObject();
+	closeButton->GetIcon()->setTexture(*tex);
+	TexTutorials.push_back(tex);
+	closeButton->SetPosition(Vector2f(1600, 20));
+
+	tex = new Texture();
+	tex->loadFromFile("Textures/Tutorials/Help.png");
+	tutorialButton = new GameObject();
+	tutorialButton->GetIcon()->setTexture(*tex);
+	TexTutorials.push_back(tex);
+	tutorialButton->SetPosition(Vector2f(1600, 20));
 }
 
 

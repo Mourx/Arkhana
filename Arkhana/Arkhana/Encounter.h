@@ -20,6 +20,7 @@ public:
     String GetTypeTitle() { return typeTitle; }
     int GetLevel() { return level; }
     void SetHover(bool b);
+    ENCOUNTER_TYPE GetType() { return eType; }
 protected:
     void GenerateEncounter();
     void SetupCombat();

@@ -28,7 +28,7 @@ void PathScreen::Init() {
 	nextScreen = NONE;
 	InitEncounters();
 	forge = new ForgeScreen(window, database, player);
-	tier = 2;
+	tier = 0;
 }
 
 void PathScreen::ResetDetails(COMBAT_RESULT res) {
@@ -91,7 +91,17 @@ void PathScreen::MouseMoved(Vector2f mousePos) {
 
 void PathScreen::MouseClicked(Vector2f mousePos) {
 	if (currentEncounter != NULL) {
-		nextScreen = COMBAT_SCREEN;
+		switch (currentEncounter->GetType()) {
+		case E_COMBAT:
+		case E_ELITE:
+			nextScreen = COMBAT_SCREEN;
+			break;
+		case E_GIFT:
+			nextScreen = GIFT_SCREEN;
+			break;
+		case E_EVENT:
+			nextScreen = EVENT_SCREEN;
+		}
 		
 	}
 	if (forgeIcon->GetHover()) {

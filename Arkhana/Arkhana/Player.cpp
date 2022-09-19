@@ -548,3 +548,12 @@ void Player::SetEnemy(Player* e) {
 	zones[0]->SetEnemy(e);
 	zones[1]->SetEnemy(e);
 }
+
+void Player::ClearUnits() {
+	for (Unit* u : blockZone->GetUnits()) {
+		blockZone->RemoveUnit(u);
+	}
+	for (Unit* u : attackZone->GetUnits()) {
+		attackZone->RemoveUnit(u);
+	}
+}

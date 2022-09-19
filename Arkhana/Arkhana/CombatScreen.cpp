@@ -352,6 +352,7 @@ void CombatScreen::CheckDeaths() {
 	case WIN:
 		player->EndTurnUpkeep();
 		player->NewTurnUpkeep();
+		player->ClearUnits();
 		nextScreen = REWARD_SCREEN;
 		break;
 	case ONGOING:

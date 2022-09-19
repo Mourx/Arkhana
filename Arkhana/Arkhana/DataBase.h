@@ -11,6 +11,7 @@
 #include <iostream>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
+#include "GameObject.h"
 
 class Modifier;
 class Player;
@@ -266,8 +267,25 @@ public:
 	Sound sound;
 	SoundBuffer rollover;
 
+	vector<GameObject*> Tutorials;
+	vector<Texture*> TexTutorials;
+	GameObject* tutorialButton;
+	GameObject* nextButton;
+	GameObject* backButton;
+	GameObject* closeButton;
+	int tutIndex = 0;
+
+	void GetTut(int dir) {
+		if (tutIndex + dir < 0 || tutIndex + dir >= Tutorials.size()) {
+		}
+		else {
+			tutIndex += dir;
+		}
+	}
+
 	vector<string> retreatPhrases;
 	vector<Faction*> factions;
 };
+
 
 

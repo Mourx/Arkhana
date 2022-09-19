@@ -7,6 +7,7 @@
 #include "PathScreen.h"
 #include "ForgeScreen.h"
 #include "GameOverScreen.h"
+#include "GiftScreen.h"
 #include "DataBase.h"
 #include "InfoPane.h"
 using namespace sf;
@@ -41,6 +42,9 @@ int main() {
 	view.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 	view.setCenter(view.getSize().x / 2, view.getSize().y / 2);
 	view = getLetterboxView(view, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+	GameObject* Tutorial = database->Tutorials[database->tutIndex];
+	bool bTutorial = false;
 
 	SoundBuffer buffer;
 	//buffer.loadFromFile();
@@ -159,6 +163,13 @@ int main() {
 				}
 			}
 
+			window->draw(*database->tutorialButton->GetIcon());
+			if (bTutorial) {
+				window->draw(*Tutorial->GetIcon());
+				window->draw(*database->backButton->GetIcon());
+				window->draw(*database->nextButton->GetIcon());
+				window->draw(*database->closeButton->GetIcon());
+			}
 
 			window->display();
 
@@ -176,6 +187,19 @@ int main() {
 			}
 			if (event.type == Event::MouseButtonReleased) {
 				currentScreen->MouseReleased(m);
+				Vector2f TutMouse = m + Vector2f(0, 180);
+				if (!bTutorial && database->tutorialButton->GetIcon()->getGlobalBounds().contains(TutMouse)) {
+					bTutorial = true;
+				}else if (bTutorial && database->closeButton->GetIcon()->getGlobalBounds().contains(TutMouse)) {
+					bTutorial = false;
+				}
+				if (bTutorial && database->nextButton->GetIcon()->getGlobalBounds().contains(TutMouse)) {
+					database->GetTut(1);
+				}
+				if (bTutorial && database->backButton->GetIcon()->getGlobalBounds().contains(TutMouse)) {
+					database->GetTut(-1);
+				}
+				Tutorial = database->Tutorials[database->tutIndex];
 			}
 			if (event.type == Event::Resized) {
 				view = getLetterboxView(view, event.size.width, event.size.height);
@@ -217,7 +241,8 @@ int main() {
 			break;
 		case PATH_SCREEN:
 			
-			if (currentScreen->GetType() == REWARD_SCREEN) {
+			if (currentScreen->GetType() == REWARD_SCREEN ||
+				currentScreen->GetType() == GIFT_SCREEN) {
 				pathScreen->ResetDetails(WIN);
 			}
 			else if (currentScreen->GetType() == FORGE_SCREEN) {
@@ -237,6 +262,12 @@ int main() {
 			preSlide.update(screenRender->getTexture());
 			tType = LEFT_ENTER;
 			break;
+		case GIFT_SCREEN:
+			currentScreen = new GiftScreen(screenRender, database, player);
+			bTransition = true;
+			shaderEffect.update(*window);
+			preSlide.update(screenRender->getTexture());
+			tType = DOWN_ENTER;
 		case NONE:
 			break;
 		}

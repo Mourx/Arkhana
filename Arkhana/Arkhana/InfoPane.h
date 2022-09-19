@@ -52,7 +52,9 @@ public:
         unitMods = "";
         for (Modifier* mod : unit->GetModifiers()) {
             unitMods += mod->GetShortText() + "\n";
-        }for (Modifier* mod : unit->GetZoneModifiers()) {
+        }
+        unitMods += "\n ZONE MODIFIERS \n";
+        for (Modifier* mod : unit->GetZoneModifiers()) {
             unitMods += mod->GetShortText() + "\n";
         }
         txtUnitMods.setString(unitMods);

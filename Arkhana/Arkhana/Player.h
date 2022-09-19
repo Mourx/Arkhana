@@ -19,7 +19,7 @@ public:
 	void DrawForeground();
 	void DrawPlayerBar();
 	void Update(Time t);
-
+	void ClearUnits();
 	vector<Card*> GetHand() { return hand; }
 	int GetHealth() { return health; }
 	Card* selectedCard = NULL;
@@ -64,7 +64,7 @@ public:
 	void AddCardToDeck(Card* c) {
 		deck.push_back(c);
 		random_shuffle(deck.begin(), deck.end());
-
+		SetCardPositions();
 	}
 	void DrawCards(int amount);
 	void Discard(int index);

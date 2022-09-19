@@ -15,10 +15,12 @@ public:
 protected:
     void SetupGift();
 
-
+    GameObject* nextButton;
+    Player* player;
     DataBase* database;
     Sprite background;
     Texture texBackground;
+    Texture texButton;
 
     int _goldGift = 0;
     Card* _cardGift;
