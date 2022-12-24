@@ -182,7 +182,9 @@ void Player::Update(Time t) {
 			i--;
 		}
 		else if (!damageBlips[i]->IsMoving()) {
-			damageBlips[i]->SetPosition(attackZone->GetUnits()[i % attackZone->GetUnits().size()]->GetIcon()->getPosition() + Vector2f(30, 30));
+			int numAttackingUnits = attackZone->GetUnits().size();
+			int blipIndex = numAttackingUnits > 0 ? i % numAttackingUnits : 0;
+			damageBlips[i]->SetPosition(attackZone->GetUnits()[blipIndex]->GetIcon()->getPosition() + Vector2f(30, 30));
 		}
 	}
 	if (bAttacking) {
