@@ -1,0 +1,341 @@
+{
+  "Effects": {
+    "Frog Armour": {
+      "name": "Frog Armour",
+      "type": "ARMOUR_MOD",
+      "value": 5,
+      "text": "Increases Armour by VALUE"
+
+    },
+    "Froggy Rage": {
+      "name": "Froggy Rage",
+      "type": "FROGGY_RAGE",
+      "value": 5,
+      "text": "Increases Armour by VALUE"
+
+    },
+    "Big Armour": {
+      "name": "Big Armour",
+      "type": "ARMOUR_MOD",
+      "value": 10,
+      "text": "Increases Armour by VALUE",
+      "filePath": "Textures/Units/gnome.png"
+    },
+    "Zone Mod": {
+      "name": "Zone Mod",
+      "type": "ZONE_MOD",
+      "value": 0,
+      "text": ""
+    },
+    "Frog Friends": {
+      "name": "Frog Friends",
+      "type": "FROG_FRIENDS",
+      "value": 0,
+      "text": "Exhaust target ally and\nits closest opposing unit.",
+      "tUnit": "TRUE"
+    },
+    "Target Strongest": {
+      "name": "Target Strongest",
+      "type": "TARGET_STRONGEST",
+      "value": 0,
+      "text": ""
+    },
+    "Power Ribbit": {
+      "name": "Power Ribbit",
+      "type": "POWER_RIBBIT",
+      "value": -1,
+      "text": "Deal damage to enemy equal\nto target ally's attack.\nThat unit loses VALUE stamina.",
+      "tUnit": "TRUE"
+    },
+    "Log Frog": {
+      "name": "Log Frog",
+      "type": "CREATE_UNIT",
+      "value": 2,
+      "unit": "Log",
+      "text": "Create VALUE Logs when played."
+    },
+    "Spawn Frog": {
+      "name": "Spawn Frog",
+      "type": "CREATE_UNIT",
+      "value": 3,
+      "unit": "Frog Spawn",
+      "text": "Create VALUE Frog Spawn\nwhen played."
+    },
+    "Frog Dog": {
+      "name": "Frog Dog",
+      "type": "FROG_DOG",
+      "value": -1,
+      "text": "Start of turn: Enemy\nunits opposite Frog Dog\nlose VALUE attack."
+    },
+    "Frog Fog": {
+      "name": "Frog Fog",
+      "type": "MODIFY_BOTH_BLOCK",
+      "value": 100,
+      "text": ""
+    },
+    "Drizzle": {
+      "name": "Drizzle",
+      "type": "DRIZZLE",
+      "value": -1,
+      "text": ""
+    },
+    "Deluge": {
+      "name": "Deluge",
+      "type": "DRIZZLE",
+      "value": -2,
+      "text": ""
+    },
+    "Flood": {
+      "name": "Flood",
+      "type": "DRIZZLE",
+      "value": -4,
+      "text": ""
+    },
+    "Potion Buff": {
+      "name": "Potion Buff",
+      "type": "POTION_BUFF",
+      "value": 0,
+      "text": ""
+    },
+    "Big Croak": {
+      "name": "Big Croak",
+      "type": "MODIFY_ALL_ATTACK",
+      "value": -1,
+      "text": ""
+    },
+    "Jump Up": {
+      "name": "Jump Up",
+      "type": "APPLY_MOD",
+      "value": 0,
+      "text": "Give target ally EVASIVE",
+      "tUnit": "TRUE"
+    },
+    "Wet Frog": {
+      "name": "Wet Frog",
+      "type": "GAIN_CARD",
+      "value": 2,
+      "text": "Gain VALUE Drizzle cards\nto your hand."
+    },
+    "Sneaky Frog": {
+      "name": "Sneaky Frog",
+      "type": "GIVE_CARD",
+      "value": 2,
+      "text": "Add VALUE Frog bomb cards\nto your enemy's hand."
+    },
+    "Frog Bomb": {
+      "name": "Frog Bomb",
+      "type": "DAMAGE",
+      "value": 3,
+      "text": "Take VALUE damage."
+    },
+    "Chorus Croak": {
+      "name": "Chorus Croak",
+      "type": "CHORUS_CROAK",
+      "value": 2,
+      "text": "Deal VALUE damage per unit in\nselected zone."
+    },
+    "Fear Frog": {
+      "name": "Fear Frog",
+      "type": "FEAR_FROG",
+      "value": -1,
+      "text": "End of turn: Enemy\nunits opposite Frog Dog\nlose VALUE stamina."
+    },
+    "Siege Frog": {
+      "name": "Siege Frog",
+      "type": "MODIFY_ZONE_STAMINA",
+      "value": 1,
+      "text": "On Enter: Allies gain\nVALUE stamina."
+    },
+    "Frogapult": {
+      "name": "Frogapult",
+      "type": "FROGAPULT",
+      "value": 1,
+      "text": "End of turn:\n Exhaust ally to the right.\n Enemy takes unit's attack\n as damage."
+    },
+    "Jungle Frog": {
+      "name": "Jungle Frog",
+      "type": "JUNGLE_FROG",
+      "value": 1,
+      "unit": "Log",
+      "text": "Create VALUE Logs when played.\n+1 Stamina on enter\n per ally log."
+    },
+    "Fire Frog": {
+      "name": "Fire Frog",
+      "type": "FIRE_FROG",
+      "value": 1,
+      "unit": "Log",
+      "text": "Create VALUE Logs when played.\nOn enter burn ally logs.\nDeal attack damage per\nLog to enemy."
+    },
+    "Builder Frog": {
+      "name": "Builder Frog",
+      "type": "CREATE_UNIT",
+      "value": 1,
+      "unit": "Log",
+      "text": "Create VALUE Logs when played."
+    },
+    "Frog Pond": {
+      "name": "Frog Pond",
+      "type": "CREATE_UNIT_EOT",
+      "value": 1,
+      "unit": "Tadpole",
+      "text": "End of turn create VALUE Tadpole."
+    },
+    "Twister": {
+      "name": "Twister",
+      "type": "TWISTER",
+      "value": 0,
+      "text": "Randomly move all units"
+    },
+    "God Frog": {
+      "name": "God Frog",
+      "type": "GOD_FROG",
+      "value": 0,
+      "text": "Create 1 Shrine.\nCreate 2 Frogs.\nHeal 5 Health.\nGain 5 Armour."
+    },
+    "Log Supply": {
+      "name": "Log Supply",
+      "type": "CREATE_UNIT",
+      "value": 3,
+      "unit": "Log",
+      "text": "Create VALUE Logs."
+    },
+    "Blessing Gold": {
+      "name": "Blessing Gold",
+      "type": "MODIFY_GOLD",
+      "value": 5,
+      "text": "Gain VALUE gold."
+    },
+    "Blessing Armour": {
+      "name": "Blessing Armour",
+      "type": "ARMOUR_MOD",
+      "value": 7,
+      "text": "Gain VALUE armour."
+    },
+    "Recycle Discard": {
+      "name": "Recycle Discard",
+      "type": "DISCARD_CARD",
+      "value": 1,
+      "text": "Discard VALUE card at random."
+    },
+    "Recycle Draw": {
+      "name": "Recycle Draw",
+      "type": "DRAW_CARD",
+      "value": 3,
+      "text": "Draw VALUE cards."
+    },
+    "Heal": {
+      "name": "Heal",
+      "type": "MODIFY_HEALTH",
+      "value": 3,
+      "text": "Heal VALUE health."
+    },
+    "Balance": {
+      "name": "Balance",
+      "type": "MODIFY_ALL",
+      "value": 3,
+      "text": "Set all units' attack to VALUE."
+    },
+    "Sleep": {
+      "name": "Sleep",
+      "type": "MODIFY_ALL",
+      "value": 0,
+      "text": "Exhaust all non-boss units."
+    },
+    "Shiny Frog": {
+      "name": "Shiny Frog",
+      "type": "DRAW_CARD",
+      "value": 3,
+      "text": "Draw VALUE cards."
+    },
+    "Exile": {
+      "name": "Exile",
+      "type": "APPLY_MOD",
+      "value": 0,
+      "text": "Exhaust target unit",
+      "tUnit": "TRUE"
+    },
+    "Frog Weights": {
+      "name": "Frog Weights",
+      "type": "APPLY_MOD",
+      "value": 5,
+      "text": "Target unit gains\nVALUE attack.",
+      "tUnit": "TRUE"
+    },
+    "Ghost Frog": {
+      "name": "Ghost Frog",
+      "type": "MODIFY_ZONE_STAMINA",
+      "value": -1,
+      "text": "On enter allies lose\nVALUE stamina."
+    },
+    "Confusion": {
+      "name": "Confusion",
+      "type": "MODIFY_ALL",
+      "value": 0,
+      "text": "Halve all stamina.\nDouble all attack.\nZone modifiers apply\nafter this change."
+    },
+    "Frog Intel": {
+      "name": "Frog intel",
+      "type": "DRAW_CARD",
+      "value": 2,
+      "text": "Draw VALUE cards."
+    },
+    "Frog Spawn": {
+      "name": "Frog Spawn",
+      "type": "CREATE_UNIT_EXHAUST",
+      "unit": "Tadpole",
+      "value": 1,
+      "text": "Create VALUE Tapdole\nwhen exhausted."
+    },
+    "Howl": {
+      "name": "Howl",
+      "type": "MOVE_ALLIES",
+      "value": 0,
+      "text": "Move all allied units to\nthe Attack Zone."
+    },
+    "Giant Rat": {
+      "name": "Giant Rat",
+      "type": "CREATE_UNIT_EOT",
+      "unit": "Rat",
+      "value": 2,
+      "text": "End of turn create 2 Rats."
+    },
+    "Infestation": {
+      "name": "Infestation",
+      "type": "CREATE_UNIT_EOT",
+      "unit": "Rat",
+      "value": 2,
+      "text": "End of turn create 2 Rats."
+    },
+    "Infestation Apply": {
+      "name": "Infestation Apply",
+      "type": "ADD_ZONE_MOD",
+      "value": 0,
+      "text": ""
+    },
+    "Trapper": {
+      "name": "Trapper",
+      "type": "CREATE_UNIT_OPPOSITE",
+      "value": 1,
+      "unit": "Trap",
+      "text": "Create a Trap in the\nopposite zone"
+    },
+    "Bomber": {
+      "name": "Bomber",
+      "type": "GIVE_CARD_DECK",
+      "value": 0,
+      "text": "Put a Bomb in the\nenemy's deck."
+    },
+    "Bomb": {
+      "name": "Bomb",
+      "type": "DAMAGE_ON_DRAW",
+      "value": 2,
+      "text": "Take VALUE damage when drawn."
+    },
+    "Use Once": {
+      "name": "Use Once",
+      "type": "USE_ONCE",
+      "value": 0,
+      "text": "Remove this card when played."
+    }
+  }
+}

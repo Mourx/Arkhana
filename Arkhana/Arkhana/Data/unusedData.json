@@ -1,0 +1,6 @@
+"event_1": {
+      "description": "Event",
+      "level": 0,
+      "name": "Random Event",
+      "type": "E_EVENT"
+    },

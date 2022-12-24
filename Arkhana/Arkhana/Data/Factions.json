@@ -1,0 +1,32 @@
+{
+  "Factions": {
+    "Basic Frog": {
+      "name": "Basic Frog",
+      "decklist": [
+        "Frog",
+        "Frog",
+        "Frog",
+        "Frog",
+        "Shield Frog",
+        "Shield Frog",
+        "Big Frog",
+        "Two Frogs"
+      ],  
+      "filepath": "Textures/Units/frog.png"
+    },
+    "Spear Gang": {
+      "name": "Spear Gang",
+      "decklist": [
+        "Frog",
+        "Frog",
+        "Spear Frog",
+        "Spear Frog",
+        "Spear Frog",
+        "Shield Frog",
+        "Two Frogs",
+        "Power Ribbit"
+      ],
+      "filepath": "Textures/Units/spearFrog.png"
+    }
+  }
+}
