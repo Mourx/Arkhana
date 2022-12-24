@@ -287,5 +287,5 @@ public:
 	vector<Faction*> factions;
 };
 
-
-
+/* Global database */
+extern DataBase* database;

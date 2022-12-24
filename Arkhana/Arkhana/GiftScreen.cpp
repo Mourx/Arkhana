@@ -1,9 +1,9 @@
 #include "GiftScreen.h"
+#include "DataBase.h"
 #include "Player.h"
 
-GiftScreen::GiftScreen(RenderTexture* w, DataBase* db, Player* p) {
+GiftScreen::GiftScreen(RenderTexture* w, Player* p) {
 	window = w;
-	database = db;
 	player = p;
 	SetupGift();
 	nextButton = new GameObject();
@@ -36,6 +36,6 @@ void GiftScreen::MouseClicked(Vector2f mousePos) {
 }
 
 void GiftScreen::SetupGift() {
-	_cardGift = new Card(*database->CardListRedAll[database->GetRandomCard(UNCOMMON)], database);
+	_cardGift = new Card(*database->CardListRedAll[database->GetRandomCard(UNCOMMON)]);
 	_cardGift->SetPosition(Vector2f(300, 300));
 }

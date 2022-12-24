@@ -1,4 +1,5 @@
 #include "Modifier.h"
+#include "DataBase.h"
 
 
 Modifier::Modifier(ModifierData d) {
@@ -28,8 +29,7 @@ void Modifier::GetData() {
 	texIcon.loadFromFile(data.filePath);
 	icon.setTexture(texIcon);
 	icon.setScale(0.75, 0.75);
-	font.loadFromFile("Fonts/ManaSpace/manaspc.ttf");
-	textDuration.setFont(font);
+	textDuration.setFont(database->coolFont);
 	textDuration.setCharacterSize(12);
 	textDuration.setFillColor(Color::Blue);
 	textDuration.setOutlineColor(Color::Black);

@@ -7,7 +7,7 @@ class Encounter :
     public GameObject
 {
 public:
-    Encounter(RenderTexture* w, DataBase* db, int lvl);
+    Encounter(RenderTexture* w, int lvl);
     ~Encounter() {}
     vector<vector<Card*>> GetDecks() { return encounterDecks; }
     vector<Card*> GetStartingPlay() { return startingPlay; }
@@ -24,7 +24,6 @@ public:
 protected:
     void GenerateEncounter();
     void SetupCombat();
-    DataBase* database;
     vector<vector<Card*>> encounterDecks;
     vector<Card*> startingPlay;
     int level = 0;

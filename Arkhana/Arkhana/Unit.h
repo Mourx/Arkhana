@@ -121,8 +121,6 @@ protected:
     Vector2f txtMagPos = Vector2f(60, 100);
     Vector2f txtSpeechPos = Vector2f(40, 20);
 
-    Font font;
-
     vector<Modifier*> unitMods;
     vector<Modifier*> zoneMods;
     vector<Modifier*> auraMods;

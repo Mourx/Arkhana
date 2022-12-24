@@ -11,7 +11,7 @@ class Card :
     public GameObject
 {
 public:
-    Card(CardData data,DataBase* dataB  );
+    Card(CardData data);
     ~Card() {}
 
     Vector2f GetHandPos() { return handPos; }
@@ -71,7 +71,6 @@ protected:
     virtual void ApplyModifier(Unit*);
     void UpdatePositions();
     void UpdateStrings();
-    DataBase* database;
     Vector2f handPos;
     string name;
     string unit;
@@ -121,8 +120,6 @@ protected:
 
     Sprite rarityBorder;
     Texture texRarityBorder;
-
-    Font font;
 
     Vector2f txtNamePos = Vector2f(75, 100);
     Vector2f txtPhysPos = Vector2f(110, 40);

@@ -1,9 +1,9 @@
 #include "PathScreen.h"
+#include "DataBase.h"
 
 
-PathScreen::PathScreen(RenderTexture* w, DataBase* db, Player* p) {
+PathScreen::PathScreen(RenderTexture* w, Player* p) {
 	window = w;
-	database = db;
 	player = p;
 	srand(time(NULL));
 	texBackground.loadFromFile("Textures/GUI/pathBackground.png");
@@ -27,7 +27,7 @@ PathScreen::PathScreen(RenderTexture* w, DataBase* db, Player* p) {
 void PathScreen::Init() {
 	nextScreen = NONE;
 	InitEncounters();
-	forge = new ForgeScreen(window, database, player);
+	forge = new ForgeScreen(window, player);
 	tier = 0;
 }
 
@@ -40,7 +40,7 @@ void PathScreen::ResetDetails(COMBAT_RESULT res) {
 			bForgeVisited = false;
 			tier++;
 			forgeUnlocks = 0;
-			forge = new ForgeScreen(window,database, player);
+			forge = new ForgeScreen(window, player);
 		}
 	}
 	currentEncounter = NULL;
@@ -117,7 +117,7 @@ void PathScreen::InitEncounters() {
 	encounters.clear();
 	for (int j = 0; j < encounterAmounts.size();j++) {
 		for (int i = 0; i<encounterAmounts[j]; i++) {
-			Encounter* e = new Encounter(window,database, j);
+			Encounter* e = new Encounter(window, j);
 			e->SetPosition(encPos[j] + Vector2f(rand() % 150, 250 * i));
 			encounters.push_back(e);
 		}

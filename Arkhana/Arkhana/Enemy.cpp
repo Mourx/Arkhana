@@ -1,17 +1,17 @@
 #include "Enemy.h"
+#include "DataBase.h"
 
 
-Enemy::Enemy(RenderTexture* w,DataBase* data){
-	database = data;
+Enemy::Enemy(RenderTexture* w){
 	window = w;
 
 	attackZonePos = Vector2f(000, 0);
 	blockZonePos = Vector2f(600, 0);
 
-	attackZone = new UnitZone(0,data->player,this, Z_ENEMY,ZONE_TYPE::Z_ATTACK);
+	attackZone = new UnitZone(0,database->player,this, Z_ENEMY,ZONE_TYPE::Z_ATTACK);
 	attackZone->SetPosition(attackZonePos);
 
-	blockZone = new UnitZone(1, data->player,this, Z_ENEMY,ZONE_TYPE::Z_BLOCK);
+	blockZone = new UnitZone(1, database->player,this, Z_ENEMY,ZONE_TYPE::Z_BLOCK);
 	blockZone->SetPosition(blockZonePos);
 
 	zones.push_back(attackZone);
@@ -27,8 +27,8 @@ Enemy::Enemy(RenderTexture* w,DataBase* data){
 
 	cardList = database->CardListEnemy;
 
-	decklist.push_back(new Card(*cardList["Goblin"],database));
-	decklist.push_back(new Card(*cardList["Rage"],database));
+	decklist.push_back(new Card(*cardList["Goblin"]));
+	decklist.push_back(new Card(*cardList["Rage"]));
 
 	InitSprites();
 	UpdateStrings();
@@ -50,11 +50,12 @@ void Enemy::InitSprites() {
 	healthIcon.setScale(1.5, 1.5);
 
 	
+	Font* font = &database->coolFont;
 	txtHealth.setPosition(txtHealthPos);
-	txtHealth.setFont(database->coolFont);
+	txtHealth.setFont(*font);
 
 	txtPhysArm.setPosition(txtPhysArmPos);
-	txtPhysArm.setFont(database->coolFont);
+	txtPhysArm.setFont(*font);
 
 
 
@@ -117,8 +118,8 @@ void Enemy::DrawActions() {
 void Enemy::NewTurnUpkeep() {
 	ResetMana();
 
-	attackZone->NewTurnUpkeep(database);
-	blockZone->NewTurnUpkeep(database);
+	attackZone->NewTurnUpkeep();
+	blockZone->NewTurnUpkeep();
 	bHasAttacked = false;
 	bHasRetreated = false;
 	bRetreating = false;
@@ -126,8 +127,8 @@ void Enemy::NewTurnUpkeep() {
 
 void Enemy::EndTurnUpkeep() {
 	SetNextMove();
-	attackZone->EndTurnUpkeep(database);
-	blockZone->EndTurnUpkeep(database);
+	attackZone->EndTurnUpkeep();
+	blockZone->EndTurnUpkeep();
 }
 
 void Enemy::Update(Time t) {

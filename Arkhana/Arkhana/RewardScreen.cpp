@@ -1,9 +1,9 @@
 #include "RewardScreen.h"
 #include "Player.h"
+#include "DataBase.h"
 
-RewardScreen::RewardScreen(RenderTexture* w,DataBase* db, Player* p,Enemy* e) {
+RewardScreen::RewardScreen(RenderTexture* w, Player* p,Enemy* e) {
 	window = w;
-	database = db;
 	player = p;
 	enemy = e;
 	type = REWARD_SCREEN;
@@ -15,8 +15,7 @@ RewardScreen::RewardScreen(RenderTexture* w,DataBase* db, Player* p,Enemy* e) {
 	goldIcon.setTexture(texGoldIcon);
 	goldIcon.setPosition(goldIconPos);
 
-	font.loadFromFile("Fonts/ManaSpace/manaspc.ttf");
-	txtGold.setFont(font);
+	txtGold.setFont(database->coolFont);
 	txtGold.setPosition(goldTxtPos);
 
 	GenerateOptions();
@@ -39,7 +38,7 @@ void RewardScreen::GenerateOptions() {
 			rarity = UNCOMMON;
 		}
 		CardData* data = cardList[database->GetRandomCard(rarity)];
-		Card* c = new Card(*data, database);
+		Card* c = new Card(*data);
 		c->SetPosition(optionPos + Vector2f(i * 160, 0));
 		options.push_back(c);
 	}

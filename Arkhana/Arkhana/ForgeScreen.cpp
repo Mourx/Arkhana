@@ -1,14 +1,15 @@
 #include "ForgeScreen.h"
+#include "DataBase.h"
 
 
-ForgeScreen::ForgeScreen(RenderTexture* w, DataBase* db, Player* p) {
+ForgeScreen::ForgeScreen(RenderTexture* w, Player* p) {
+	font = &database->font;
+
 	player = p;
-	database = db;
 	window = w;
 	GenerateOptions();
 	texBackground.loadFromFile("Textures/GUI/forgeBackground.png");
 	background.setTexture(texBackground);
-	font.loadFromFile("Fonts/Arial/arial.ttf");
 
 	texPathIcon.loadFromFile("Textures/GUI/backArrow.png");
 	pathIcon = new GameObject();
@@ -41,13 +42,13 @@ ForgeScreen::ForgeScreen(RenderTexture* w, DataBase* db, Player* p) {
 	upgStamina->GetIcon()->setTexture(texUpgStamina);
 	upgStamina->GetIcon()->setPosition(upgStaminaPos);
 
-	txtUpgradeCost.setFont(font);
+	txtUpgradeCost.setFont(*font);
 	txtUpgradeCost.setPosition(txtUpgradeCostPos);
 	txtUpgradeCost.setString(to_string(upgradeCost));
 	FloatRect tR = txtUpgradeCost.getLocalBounds();
 	txtUpgradeCost.setOrigin(tR.left + tR.width / 2.0f, tR.top + tR.height / 2.0f);
 
-	txtRemoveCost.setFont(font);
+	txtRemoveCost.setFont(*font);
 	txtRemoveCost.setPosition(txtRemoveCostPos);
 	txtRemoveCost.setString(to_string(removeCost));
 	tR = txtUpgradeCost.getLocalBounds();
@@ -248,11 +249,11 @@ void ForgeScreen::GenerateOptions() {
 		map<string, CardData*>::iterator it = cardList.begin();
 		advance(it, cIns[i]);
 		CardData* data = it->second;
-		Card* c = new Card(*data, database);
+		Card* c = new Card(*data);
 		c->SetPosition(optionsPos[i]);
 
 		Text t;
-		t.setFont(font);
+		t.setFont(*font);
 		t.setString(to_string(c->GetGoldCost()));
 		
 		t.setPosition(optionsPos[i] + Vector2f(75, 220));

@@ -11,7 +11,7 @@ class CombatScreen :
     public Screen
 {
 public:
-    CombatScreen(RenderTexture* w, DataBase* data,Player* p,Encounter* enc);
+    CombatScreen(RenderTexture* w,Player* p,Encounter* enc);
     ~CombatScreen() {}
     void Draw();
     void Update(Time t);
@@ -27,7 +27,6 @@ protected:
     Enemy* enemy;
     Encounter* encounter;
     AIController* AI;
-    DataBase* database;
     void AdvanceTurn(COMBAT_TURN turn);
     void CalculateCombat();
     void SetNextEnemyMove();

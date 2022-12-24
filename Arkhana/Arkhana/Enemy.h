@@ -7,7 +7,7 @@ class Enemy :
 {
 public:
     Enemy() {}
-    Enemy(RenderTexture* w,DataBase* data);
+    Enemy(RenderTexture* w);
     ~Enemy(){}
     Card* GetNext() { return decklist[cardIndex]; }
     Card* PlayNext();

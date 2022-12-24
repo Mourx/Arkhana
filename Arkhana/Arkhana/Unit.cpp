@@ -1,4 +1,5 @@
 #include "Unit.h"
+#include "DataBase.h"
 #include "Card.h"
 
 using namespace std;
@@ -42,10 +43,10 @@ Unit::Unit(UnitData data,vector<Modifier*> mods,Card* c) {
 	texSpeech.loadFromFile("Textures/GUI/speechBubble.png");
 	speechIcon.setTexture(texSpeech);
 
-	font.loadFromFile("Fonts/Arial/arial.ttf");
-	txtPhys.setFont(font);
-	txtMag.setFont(font);
-	txtSpeech.setFont(font);
+	Font* font = &database->font;
+	txtPhys.setFont(*font);
+	txtMag.setFont(*font);
+	txtSpeech.setFont(*font);
 	
 	icon.setScale(2, 2);
 	unitBackground.setScale(2, 2);

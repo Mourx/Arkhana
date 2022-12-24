@@ -8,7 +8,7 @@ class PathScreen :
     public Screen
 {       
 public:
-    PathScreen(RenderTexture* w, DataBase* db,Player* p);
+    PathScreen(RenderTexture* w, Player* p);
     PathScreen() {}
     ~PathScreen() {}
     void Draw();
@@ -29,7 +29,6 @@ protected:
 
 
     RenderTexture* window;
-    DataBase* database;
     Player* player;
     
     ForgeScreen* forge;
@@ -40,7 +39,6 @@ protected:
     string forgeVisitedPrompt;
 
     Text txtForgeUnlocks;
-    Font font;
 
     Vector2f forgeIconPos = Vector2f(15, 420);
 

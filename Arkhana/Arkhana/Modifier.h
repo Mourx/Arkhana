@@ -85,7 +85,6 @@ protected:
 	Sprite icon;
 	Texture texIcon;
 	Text textDuration;
-	Font font;
 
 };
 

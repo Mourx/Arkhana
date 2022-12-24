@@ -63,7 +63,6 @@ protected:
     
     Vector2f pos = Vector2f(1600, 180);
 
-    Font font;
     String description;
     Text txtDescription;
 

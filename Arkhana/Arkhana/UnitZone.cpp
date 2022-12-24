@@ -1,4 +1,5 @@
 #include "UnitZone.h"
+#include "DataBase.h"
 #include "Player.h"
 
 UnitZone::UnitZone(int zoneType,Player* p,Player* e, ZONE_OWNER zPlayer, ZONE_TYPE t) {
@@ -128,7 +129,7 @@ void UnitZone::UpdatePositions() {
 
 }
 
-void UnitZone::AddUnit(Unit* u, DataBase* database) {
+void UnitZone::AddUnit(Unit* u) {
 	int count = unitList.size();
 	vector<Modifier*> mods = u->GetModifiers();
 	if (ownerType == ENEMY) {
@@ -301,7 +302,7 @@ void UnitZone::UpdateStatMods() {
 	}
 }
 
-void UnitZone::EndTurnUpkeep(DataBase* database) {
+void UnitZone::EndTurnUpkeep() {
 	bool bPotioned = false; 
 	vector<Unit*> unitsUpdate = unitList;
 	for (Modifier* mod : zoneMods) {
@@ -312,7 +313,7 @@ void UnitZone::EndTurnUpkeep(DataBase* database) {
 			mod->ModifyDuration(-1);
 		}
 		if (mod->GetModType() == MODIFIER_TYPE::EOT_EFFECT) {
-			(new Card(*database->CardListAll["Goblin"], database))->DoEffect(NULL, this, database->effectList[mod->GetEffect()]);
+			(new Card(*database->CardListAll["Goblin"]))->DoEffect(NULL, this, database->effectList[mod->GetEffect()]);
 			mod->ModifyDuration(-1);
 		}
 	}
@@ -365,7 +366,7 @@ void UnitZone::EndTurnUpkeep(DataBase* database) {
 	UpdatePositions();
 }
 
-void UnitZone::NewTurnUpkeep(DataBase* database) {
+void UnitZone::NewTurnUpkeep() {
 	bool bPotioned = false;
 	if (type == ZONE_TYPE::Z_BLOCK) {
 		for (Modifier* mod : zoneMods) {

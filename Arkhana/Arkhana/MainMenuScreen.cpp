@@ -1,4 +1,5 @@
 #include "MainMenuScreen.h"
+#include "DataBase.h"
 #include "Player.h"
 
 MainMenuScreen::MainMenuScreen(RenderTexture* w,Player* p) {
@@ -6,10 +7,9 @@ MainMenuScreen::MainMenuScreen(RenderTexture* w,Player* p) {
 	player = p;
 	
 	type = MAIN_MENU;
-	database = player->GetDatabase();
 	int count = 0;
 	for (FactionData* data : database->factionList) {
-		Faction* faction = new Faction(player->GetDatabase(),data);
+		Faction* faction = new Faction(data);
 		faction->SetPosition(factionPosStart + Vector2f(140 * count++, 0));
 		factions.push_back(faction);
 	}
@@ -64,7 +64,7 @@ void MainMenuScreen::ShowAllCards() {
 	map<string, CardData*>::iterator it;
 
 	for (it = database->CardListRedAll.begin(); it != database->CardListRedAll.end();it++) {
-		Card* card = new Card(*it->second, database);
+		Card* card = new Card(*it->second);
 		card->SetPosition(Vector2f((count % 11) * 145, (count / 11) * 120));
 		cardGrid.push_back(card);
 		count++;
