@@ -6,7 +6,7 @@ class GiftScreen :
     public Screen
 {
 public:
-    GiftScreen(RenderTexture* w, DataBase* db, Player* p);
+    GiftScreen(RenderTexture* w, Player* p);
     ~GiftScreen() {}
     void Draw();
     void MouseMoved(Vector2f mousePos);
@@ -17,7 +17,6 @@ protected:
 
     GameObject* nextButton;
     Player* player;
-    DataBase* database;
     Sprite background;
     Texture texBackground;
     Texture texButton;

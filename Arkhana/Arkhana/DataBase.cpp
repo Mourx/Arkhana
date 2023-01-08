@@ -536,7 +536,11 @@ void DataBase::Init() {
 	BuildAllCardList();
 	BuildSharedTextures();
 
-	font.loadFromFile("Fonts/Arial/arial.ttf");
-	coolFont.loadFromFile("Fonts/ManaSpace/manaspc.ttf");
+	if (!font.loadFromFile("Fonts/Arial/arial.ttf"))
+		throw std::runtime_error("Could not load font Fonts/Arial/arial.ttf");
+	if (!coolFont.loadFromFile("Fonts/ManaSpace/manaspc.ttf"))
+		throw std::runtime_error("Could not load font Fonts/ManaSpace/manaspc.ttf");
 	rollover.loadFromFile("Sound/UI/rollover1.wav");
 }
+
+DataBase* database;

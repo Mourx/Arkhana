@@ -5,7 +5,7 @@ class ForgeScreen :
     public Screen
 {
 public:
-    ForgeScreen(RenderTexture* w, DataBase* db, Player* p);
+    ForgeScreen(RenderTexture* w, Player* p);
     ~ForgeScreen() {};
     void Draw();
     void MouseMoved(Vector2f mousePos);
@@ -24,7 +24,6 @@ protected:
     Card* selCard;
     
     Player* player;
-    DataBase* database;
 
     vector<Card*> options;
     int optionsAmount = 6;
@@ -35,7 +34,7 @@ protected:
         Vector2f(150,560), Vector2f(400,560),
     };
     vector<Text> optionCostsTxt;
-    Font font;
+    Font* font;
 
     GameObject* pathIcon;
     Texture texPathIcon;

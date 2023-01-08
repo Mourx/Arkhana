@@ -1,19 +1,20 @@
 #include "Player.h"
+#include "DataBase.h"
 #include "Faction.h"
+
 Player::Player() {
 
 }
 
-Player::Player(RenderTexture* w, DataBase* data) {
-	database = data;
+Player::Player(RenderTexture* w) {
 	window = w;
 	cardList = database->CardListRedUnlocked;
 	
 
-	attackZone = new UnitZone(0,this,data->enemy,Z_PLAYER,ZONE_TYPE::Z_ATTACK);
+	attackZone = new UnitZone(0,this,database->enemy,Z_PLAYER,ZONE_TYPE::Z_ATTACK);
 	attackZone->SetPosition(attackZonePos);
 
-	blockZone = new UnitZone(1,this,data->enemy,Z_PLAYER,ZONE_TYPE::Z_BLOCK);
+	blockZone = new UnitZone(1,this,database->enemy,Z_PLAYER,ZONE_TYPE::Z_BLOCK);
 	blockZone->SetPosition(blockZonePos);
 
 	zones.push_back(attackZone);
@@ -182,7 +183,9 @@ void Player::Update(Time t) {
 			i--;
 		}
 		else if (!damageBlips[i]->IsMoving()) {
-			damageBlips[i]->SetPosition(attackZone->GetUnits()[i % attackZone->GetUnits().size()]->GetIcon()->getPosition() + Vector2f(30, 30));
+			int numAttackingUnits = attackZone->GetUnits().size();
+			int blipIndex = numAttackingUnits > 0 ? i % numAttackingUnits : 0;
+			damageBlips[i]->SetPosition(attackZone->GetUnits()[blipIndex]->GetIcon()->getPosition() + Vector2f(30, 30));
 		}
 	}
 	if (bAttacking) {
@@ -305,8 +308,8 @@ void Player::NewTurnUpkeep() {
 	bHasAttacked = false;
 	bHasRetreated = false;
 	UpdateCosts();
-	attackZone->NewTurnUpkeep(database);
-	blockZone->NewTurnUpkeep(database);
+	attackZone->NewTurnUpkeep();
+	blockZone->NewTurnUpkeep();
 }
 
 void Player::EndTurnUpkeep() {
@@ -317,8 +320,8 @@ void Player::EndTurnUpkeep() {
 			}
 		}
 	}
-	attackZone->EndTurnUpkeep(database);
-	blockZone->EndTurnUpkeep(database);
+	attackZone->EndTurnUpkeep();
+	blockZone->EndTurnUpkeep();
 	SwapUnits();
 	DiscardHand();
 	
@@ -381,11 +384,11 @@ void Player::SwapUnits() {
 		Unit* u = get<1>(tuple);
 		if (start == ZONE_TYPE::Z_ATTACK) {
 			attackZone->RemoveUnit(u);
-			blockZone->AddUnit(u,database);
+			blockZone->AddUnit(u);
 		}
 		else {
 			blockZone->RemoveUnit(u);
-			attackZone->AddUnit(u, database);
+			attackZone->AddUnit(u);
 		}
 	}
 }

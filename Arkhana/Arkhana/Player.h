@@ -4,7 +4,6 @@
 #include <vector>
 #include <algorithm>
 #include <random>
-#include "DataBase.h"
 
 using namespace std;
 class Faction;
@@ -12,7 +11,7 @@ class Player
 {
 public:
 	Player();
-	Player(RenderTexture* w,DataBase* data);
+	Player(RenderTexture* w);
 	~Player() {}
 	void Setup();
 	virtual void DrawBackground();
@@ -56,7 +55,6 @@ public:
 	void RemoveFromDeck(Card* card);
 	void UpdateCosts();
 	void SwapUnits();
-	DataBase* GetDatabase() { return database; }
 	void SetEnemy(Player* enemy);
 	void SetDamageDealt(int d) { damageDealt = d; }
 	Vector2f GetHealthPos() { return healthPos; }
@@ -77,7 +75,6 @@ protected:
 	void SetCardPositions();
 	virtual void InitSprites();
 	virtual void UpdateStrings();
-	DataBase* database;
 	vector<Card*> decklist;
 	vector<Card*> deck;
 	vector<Card*> hand;

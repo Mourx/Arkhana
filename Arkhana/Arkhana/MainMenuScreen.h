@@ -1,7 +1,6 @@
 #pragma once
 #include "Screen.h"
 #include "Faction.h"
-#include "DataBase.h"
 class Player;
 class MainMenuScreen :
     public Screen
@@ -18,7 +17,6 @@ public:
 protected:
     void ShowAllCards();
     vector<Faction*> factions;
-    DataBase* database;
     Sprite background;
     Texture texBackground;
 

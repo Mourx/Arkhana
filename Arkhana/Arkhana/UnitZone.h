@@ -18,7 +18,7 @@ public:
     void DrawUnits(RenderTexture* w);
     void Update(Time t);
     int GetCombinedPhysicalPower();
-    void AddUnit(Unit* u,DataBase* database);
+    void AddUnit(Unit* u);
     void ClearUnits() { unitList.clear(); }
     ZONE_OWNER GetOwnerType() { return ownerType; }
     Player* GetOwner() { return owner; }
@@ -43,8 +43,8 @@ public:
         }
     }
     Vector2f GetAnimationPoint() { return icon.getPosition() + animationPos; }
-    void EndTurnUpkeep(DataBase* database);
-    void NewTurnUpkeep(DataBase* database);
+    void EndTurnUpkeep();
+    void NewTurnUpkeep();
     int GetEffectCostChange();
     int GetUnitCostChange();
     void RemoveUnit(Unit* u);

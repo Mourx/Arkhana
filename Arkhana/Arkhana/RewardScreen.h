@@ -6,7 +6,7 @@ class RewardScreen :
     public Screen
 {
 public:
-    RewardScreen(RenderTexture* w,DataBase* db, Player* p,Enemy* e);
+    RewardScreen(RenderTexture* w, Player* p,Enemy* e);
     ~RewardScreen(){}
     void Draw();
     void MouseMoved(Vector2f mousePos);
@@ -20,7 +20,6 @@ protected:
 
     Card* selCard;
 
-    DataBase* database;
     vector<Card*> options;
     int moneyReward = 0;
     int optionsAmount = 3;
@@ -33,7 +32,6 @@ protected:
     Vector2f goldIconPos = Vector2f(700, 450);
 
     Text txtGold;
-    Font font;
     Vector2f goldTxtPos = Vector2f(820, 465);
 };
 

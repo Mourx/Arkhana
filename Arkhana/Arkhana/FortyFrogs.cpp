@@ -16,7 +16,7 @@ View getLetterboxView(sf::View view, int windowWidth, int windowHeight);
 
 
 int main() {
-	DataBase* database = new DataBase();
+	database = new DataBase();
 	database->Init();
 	
 	RenderWindow* window = new RenderWindow(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Frog Frog Frog Frog",Style::Fullscreen);
@@ -28,7 +28,7 @@ int main() {
 	windowRender->clear();
 	screenRender->create(SCREEN_WIDTH-(320.0/1920.0)*SCREEN_WIDTH, SCREEN_HEIGHT-(180.0/1080)*SCREEN_HEIGHT);
 	screenRender->clear();
-	Player* player = new Player(screenRender, database);
+	Player* player = new Player(screenRender);
 	player->SetBarWindow(windowRender);
 	database->player = player;
 
@@ -55,7 +55,7 @@ int main() {
 	music.setLoop(true);
 	music.play();
 	
-	pathScreen = new PathScreen(screenRender, database, player);
+	pathScreen = new PathScreen(screenRender, player);
 	//
 	Sprite tempScreen;
 	TRANSITION_TYPE tType = LEFT_ENTER;
@@ -220,7 +220,7 @@ int main() {
 			preSlide.update(screenRender->getTexture());
 			break;
 		case COMBAT_SCREEN:
-			combat = new CombatScreen(screenRender, database, player, pathScreen->GetEncounter());
+			combat = new CombatScreen(screenRender, player, pathScreen->GetEncounter());
 			enemy = combat->GetEnemy();
 			currentScreen = combat;
 			bTransition = true;
@@ -230,10 +230,10 @@ int main() {
 		case GAME_OVER:
 			tType = DOWN_ENTER;
 
-			currentScreen = new GameOverScreen(screenRender, database, player);
+			currentScreen = new GameOverScreen(screenRender, player);
 			break;
 		case REWARD_SCREEN:
-			currentScreen = new RewardScreen(screenRender,database,player,enemy);
+			currentScreen = new RewardScreen(screenRender,player,enemy);
 			bTransition = true;
 			shaderEffect.update(*window);
 			preSlide.update(screenRender->getTexture());
@@ -263,7 +263,7 @@ int main() {
 			tType = LEFT_ENTER;
 			break;
 		case GIFT_SCREEN:
-			currentScreen = new GiftScreen(screenRender, database, player);
+			currentScreen = new GiftScreen(screenRender, player);
 			bTransition = true;
 			shaderEffect.update(*window);
 			preSlide.update(screenRender->getTexture());
@@ -276,6 +276,8 @@ int main() {
 
 		
 	}
+	delete database;
+
 	return 0;
 }
 

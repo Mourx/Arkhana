@@ -1,8 +1,8 @@
 #include "Encounter.h"
+#include "DataBase.h"
 
 
-Encounter::Encounter(RenderTexture* w, DataBase* db, int lvl) {
-	database = db;
+Encounter::Encounter(RenderTexture* w, int lvl) {
 	level = lvl;
 	window = w;
 	GenerateEncounter();
@@ -56,16 +56,16 @@ void Encounter::SetHover(bool b) {
 
 void Encounter::SetupCombat() {
 	cardList = database->CardListEnemy;
-	enemy = new Enemy(window, database);
+	enemy = new Enemy(window);
 
 	combatDesc = encData->description;
 	for (string s : encData->startingPlay) {
-		startingPlay.push_back(new Card(*cardList[s], database));
+		startingPlay.push_back(new Card(*cardList[s]));
 	}
 	for (vector<string> v : encData->decklists) {
 		vector<Card*> deck;
 		for (string s : v) {
-			deck.push_back(new Card(*cardList[s], database));
+			deck.push_back(new Card(*cardList[s]));
 		}
 		encounterDecks.push_back(deck);
 	}

@@ -1,8 +1,8 @@
 #include "GameOverScreen.h"
+#include "DataBase.h"
 
-GameOverScreen::GameOverScreen(RenderTexture* w, DataBase* db, Player* p) {
+GameOverScreen::GameOverScreen(RenderTexture* w, Player* p) {
 	window = w;
-	database = db;
 	player = p;
 	texBackground.loadFromFile("Textures/GUI/pathBackground.png");
 	background.setTexture(texBackground);

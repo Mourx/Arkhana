@@ -1,8 +1,8 @@
 #include "CombatScreen.h"
+#include "DataBase.h"
 
 
-CombatScreen::CombatScreen(RenderTexture* w,DataBase* data,Player* p,Encounter* enc) {
-	database = data;
+CombatScreen::CombatScreen(RenderTexture* w,Player* p,Encounter* enc) {
 	window = w;
 	player = p;
 	encounter = enc;
@@ -35,14 +35,14 @@ CombatScreen::CombatScreen(RenderTexture* w,DataBase* data,Player* p,Encounter* 
 	playerDamageSign.setPosition(pdsPos);
 	enemyDamageSign.setPosition(edsPos);
 	
+	Font* font = &database->coolFont;
+	textPBlock.setFont(*font);
+	textPAttack.setFont(*font);
+	textEBlock.setFont(*font);
+	textEAttack.setFont(*font);
 
-	textPBlock.setFont(database->coolFont);
-	textPAttack.setFont(database->coolFont);
-	textEBlock.setFont(database->coolFont);
-	textEAttack.setFont(database->coolFont);
-
-	textEstDamagePlayer.setFont(database->coolFont);
-	textEstDamageEnemy.setFont(database->coolFont);
+	textEstDamagePlayer.setFont(*font);
+	textEstDamageEnemy.setFont(*font);
 
 
 	textPBlock.setCharacterSize(100);

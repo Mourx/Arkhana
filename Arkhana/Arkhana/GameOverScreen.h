@@ -4,7 +4,7 @@ class GameOverScreen :
     public Screen
 {
 public:
-    GameOverScreen(RenderTexture* w, DataBase* db, Player* p);
+    GameOverScreen(RenderTexture* w, Player* p);
     ~GameOverScreen() {}
     void Draw();
     void MouseMoved(Vector2f mousePos);
@@ -13,7 +13,6 @@ public:
     void Update(Time t);
 
 protected:
-    DataBase* database;
     Player* player;
 
     GameObject* mainMenuButton;
